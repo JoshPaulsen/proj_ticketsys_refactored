@@ -1,4 +1,7 @@
 ProjTicketsysRefactored::Application.routes.draw do
+  resources :users
+  resources :tickets
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
