@@ -4,9 +4,8 @@
     = "Ticket ID: #{@ticket.id}"  
   
   %div{:align=>"left"}
-    %ul= "Ticket ID: #{@ticket.id}"
-    %ul= "creator: #{User.find(@ticket.creator).name}"
-    %ul= "Service Provider: #{@ticket.provider_id}"
+    %ul= "Ticket ID: #{@ticket.id}"    
+    %ul= link_to "Service Provider: #{@ticket.provider.name}", @ticket.provider
     %ul= "Opened At: #{@ticket.opened_on}"
     %ul= "Closed At: #{@ticket.closed_on}"
     %ul= "Title: #{@ticket.title}"
