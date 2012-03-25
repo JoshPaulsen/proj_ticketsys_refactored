@@ -49,6 +49,7 @@ class TicketsController < ApplicationController
 
   def show     
     @ticket = Ticket.find_by_id(params[:id])
+    @notes = @ticket.notes
     if @ticket.nil?
       flash[:error] = "That ticket does not exist"
       redirect_to tickets_path    

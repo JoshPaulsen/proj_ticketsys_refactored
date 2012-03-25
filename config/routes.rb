@@ -1,8 +1,10 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
+  
   resources :users
   resources :tickets
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :notes
   
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
