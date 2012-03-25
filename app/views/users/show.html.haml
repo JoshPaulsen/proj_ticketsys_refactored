@@ -3,10 +3,10 @@
   %h3{:align=>"center"}
     = "User ID: #{@user.id}" 
   
-  %div{:align => "left"}
-    %ul= "User ID: #{@user.id}"
-    %ul= "User: #{@user.name}" 
-    %ul= "Privilege: #{@user.privilege}"
+  %ul{:align => "left"}
+    %p= "User ID: #{@user.id}"
+    %p= "User: #{@user.name}" 
+    %p= "Privilege: #{@user.privilege}"
     
-  %p= link_to 'Edit', edit_user_path(@user)
-  %p= button_to "Delete", @user, :method => :delete, :confirm => "Are you sure you want to delete this user?"
+  %ul= link_to 'Edit', edit_user_path(@user)
+  %ul= button_to "Delete", @user, :method => :delete, :confirm => "Are you sure you want to delete this user?"

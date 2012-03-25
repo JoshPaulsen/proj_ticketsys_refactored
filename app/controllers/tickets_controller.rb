@@ -44,12 +44,19 @@ class TicketsController < ApplicationController
   end
 
   def index    
-    @my_tickets = current_user.tickets    
+    @tickets = current_user.tickets    
   end
 
   def show     
     @ticket = Ticket.find_by_id(params[:id])
     @notes = @ticket.notes
+    if @notes.nil?
+      flash[:error] = "Notes are NIL"
+      redirect_to tickets_path    
+    else
+      flash[:notice] = "Notes are good"
+    end
+    
     if @ticket.nil?
       flash[:error] = "That ticket does not exist"
       redirect_to tickets_path    
