@@ -1,6 +1,8 @@
 class Issue < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :ticket
+  # user_id:integer
+  # ticket_id:integer
   
+  belongs_to :user
+  belongs_to :ticket  
   
 end

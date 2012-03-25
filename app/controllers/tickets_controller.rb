@@ -3,13 +3,10 @@ class TicketsController < ApplicationController
   before_filter :check_if_signed_in
   
   def new    
-  end
+  end 
   
-  
-  
-  def create
+  def create    
     
-    check_for_signed_in         
     @ticket = Ticket.new(params[:ticket])
     @ticket.opened_on = Time.now
     @ticket.add_creator(current_user)     
@@ -20,9 +17,7 @@ class TicketsController < ApplicationController
     else
       flash.now[:error] = "Ticket could not be created"
       render "new"
-    end      
-    
-        
+    end
   end
 
   def update
@@ -48,21 +43,16 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
-  def index
-    
-    check_for_signed_in
-    @my_tickets = current_user.tickets
-    
+  def index    
+    @my_tickets = current_user.tickets    
   end
 
-  def show   
-    check_for_signed_in 
+  def show     
     @ticket = Ticket.find_by_id(params[:id])
     if @ticket.nil?
       flash[:error] = "That ticket does not exist"
       redirect_to tickets_path    
-    end    
-    
+    end      
   end
   
 end

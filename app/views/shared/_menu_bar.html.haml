@@ -1,7 +1,6 @@
 %center
 
   - if current_user.admin?
-
     |
     = link_to "Home", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
@@ -10,8 +9,7 @@
     = link_to "New Ticket", new_ticket_path, {:style=>'color:#000000;', :class=>"css_class"}
     | 
     
-  - elsif current_user.service_provider?
-  
+  - elsif current_user.service_provider?  
     |
     = link_to "Home", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
@@ -30,6 +28,6 @@
     
   - else
     |
-    MENU - there isn't a current user!
+    MENU - There isn't a current user!
     | 
     

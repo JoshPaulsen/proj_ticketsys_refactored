@@ -1,4 +1,12 @@
-class Ticket < ActiveRecord::Base
+class Ticket < ActiveRecord::Base  
+  # title:string
+  # description:text
+  # location:string
+  # creator_id:integer
+  # provider_id:integer
+  # opened_on:datetime
+  # closed_on:datetime  
+  
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
   has_many :issues
