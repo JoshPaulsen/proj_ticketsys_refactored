@@ -1,6 +1,15 @@
 ProjTicketsysRefactored::Application.routes.draw do
+  
   resources :users
   resources :tickets
+  resources :sessions, :only => [:new, :create, :destroy]
+  
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+  match '/', :to => 'sessions#new'  
+  
+  
+  root :to  => 'sessions#new', :format => false
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,17 @@
+%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}   
+  
+  %h3{:align=>"center"}
+    = "Ticket ID: #{@ticket.id}"  
+  
+  %div{:align=>"left"}
+    %ul= "Ticket ID: #{@ticket.id}"
+    %ul= "creator: #{User.find(@ticket.creator).name}"
+    %ul= "Service Provider: #{@ticket.provider_id}"
+    %ul= "Opened At: #{@ticket.opened_on}"
+    %ul= "Closed At: #{@ticket.closed_on}"
+    %ul= "Title: #{@ticket.title}"
+    %ul= "Description: #{@ticket.description}"
+    
+  %p= link_to 'Edit', edit_ticket_path(@ticket)
+  %p= button_to "Delete", @ticket, :method => :delete, :confirm => "Are you sure you want to delete this ticket?"
+

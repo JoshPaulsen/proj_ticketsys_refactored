@@ -1,0 +1,9 @@
+%tr
+  %td= link_to "#{ticket.id}", ticket
+  %td= ticket.opened_on
+  %td= ticket.closed_on
+  %td= ticket.creator_id
+  %td= ticket.provider_id
+  %td= ticket.title
+  %td= ticket.description.ljust(50)
+  %td= link_to "View Ticket", ticket_path(ticket)
