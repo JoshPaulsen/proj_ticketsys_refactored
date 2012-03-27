@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to user_path @user
     else
+      @user.destroy
       flash.now[:error] = "Error: User could not be created!"
       render "new"
     end      

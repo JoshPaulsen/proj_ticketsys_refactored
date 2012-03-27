@@ -2,7 +2,14 @@
   %div{:align=>"left"}
     %ul= "Ticket ID: #{@ticket.id}"
     %ul= "Deparment: #{@ticket.department}"
-    %ul= link_to "Service Provider: #{@ticket.provider.name}", @ticket.provider
+    %ul
+      Creator: 
+      - if !@ticket.creator.nil?
+        = link_to "#{@ticket.creator.name}", @ticket.creator
+    %ul
+      Provider: 
+      - if !@ticket.provider.nil?
+        = link_to "#{@ticket.provider.name}", @ticket.provider
     %ul
       Opened:
       = readable_date(@ticket.opened_on)

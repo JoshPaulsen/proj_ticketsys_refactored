@@ -1,6 +1,6 @@
 %div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}  
   = form_tag tickets_path, :method => :post do
     = render "ticket_form_fields"
-    = hidden_field_tag :creator_id , current_user.id
-    .actions{:align=>"center"}
+    -#= hidden_field_tag :creator_id , current_user.id
+    .actions{:align=>"left"}
       = submit_tag "Submit Ticket"

@@ -2,34 +2,30 @@ class TicketsController < ApplicationController
   
   before_filter :check_if_signed_in
   
-  def test
-  end
-  
   def new    
   end 
   
   def create     
     @ticket = Ticket.new(params[:ticket])
-    @ticket.opened_on = Time.now
-    prov = User.next_provider
+    @ticket.opened_on = Time.now    
+    @ticket.add_creator current_user    
+    prov = User.next_provider(params[:ticket][:department])
     
-    if prov.nil?
-      flash.now[:error] = "Error: Provider is nil"
-      render "new"
-      return
-    end
-        
-    if !@ticket.add_provider(prov)  
-      flash.now[:error] = "Error: Couldn't add provider. Ticket could not be created"
-      render "new"
-      return
-    end
+    if prov.nil? or !@ticket.add_provider prov
+      @ticket.destroy
+      flash.now[:error] = "Error: No Provider could be located for this ticket."
+      @tickets = current_user.tickets
+      render "mytickets"
+      return    
+    end    
       
     if @ticket.save
       redirect_to ticket_path @ticket
     else
-      flash.now[:error] = "Error: Ticket could not be created"
-      render "new"
+      @ticket.destroy
+      flash.now[:error] = "Error: Ticket could not be created."
+      @tickets = current_user.tickets
+      render "mytickets"
     end
   end
 
@@ -56,17 +52,14 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
-  def index    
-    
+  def index
     if current_user.admin?
       @tickets = Ticket.all
     elsif current_user.service_provider?
       @tickets = Ticket.all
     else
       redirect_to mytickets_path
-    end
-    
-    
+    end    
   end
   
   def mytickets    

@@ -15,10 +15,10 @@ class Ticket < ActiveRecord::Base
   
   validates :title, :presence => true
   validates :creator_id, :presence => true
-  validates :provider_id, :presence => true
+  #validates :provider_id, :presence => true
   
   
-  def add_creator(c)
+  def add_creator(c)        
     self.creator_id = c.id
     if self.save
       issues.create!(:user => c) 
@@ -36,11 +36,8 @@ class Ticket < ActiveRecord::Base
     #issues.create!(:user => p)  
     self.provider_id = p.id
     if self.save
-      #issues.create!(:user => p, :ticket => self)    
-      puts "WORKED"
       issues.create!(:user => p)  
     else
-      puts "WHAT THE FUCK"
       false    
     end   
   end
