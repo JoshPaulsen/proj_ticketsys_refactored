@@ -1,6 +1,10 @@
+.select{:align => "left"}
+  = label :user, :department, "Department: "
+  = select :user, :department, get_departments
 .field{:align=>"left"}
   = label :ticket, :title, "Title: "
   = text_field :ticket, :title
-.field{:align=>"left", :width=>"50%"}
+.field{:align=>"left"}
   = label :ticket, :description, "Description: "
-  = text_field :ticket, :description, {:size=>"180%", :placeholder=>"Please describe your issue."}
+  %br
+  = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}

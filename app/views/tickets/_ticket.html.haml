@@ -1,9 +1,10 @@
 %tbody
   %tr
     %td= ticket.id
-    %td= ticket.opened_on
-    %td= ticket.closed_on
+    %td= ticket.title
+    %td= ticket.department
     %td= link_to "#{ticket.creator.name}", ticket.creator
     %td= link_to "#{ticket.provider.name}", ticket.provider
-    %td= ticket.title
+    %td= readable_date ticket.opened_on
+    %td= readable_date ticket.closed_on
     %td= link_to "View Ticket", ticket

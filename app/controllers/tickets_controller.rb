@@ -11,8 +11,19 @@ class TicketsController < ApplicationController
   def create     
     @ticket = Ticket.new(params[:ticket])
     @ticket.opened_on = Time.now
-    @ticket.add_creator(current_user)     
-    @ticket.add_provider(User.next_provider)  
+    prov = User.next_provider
+    
+    if prov.nil?
+      flash.now[:error] = "Error: Provider is nil"
+      render "new"
+      return
+    end
+        
+    if !@ticket.add_provider(prov)  
+      flash.now[:error] = "Error: Couldn't add provider. Ticket could not be created"
+      render "new"
+      return
+    end
       
     if @ticket.save
       redirect_to ticket_path @ticket
