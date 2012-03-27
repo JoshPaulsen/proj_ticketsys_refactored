@@ -5,9 +5,10 @@ module TicketsHelper
     if current_user.admin?
       return
     elsif current_user.service_provider?
-      tickets = Ticket.where :department => current_user.department, :id => params[:id]
+      tickets = Ticket.where :department => current_user.department
+      tickets << current_user.tickets.where(:id => params[:id])
     else
-      tickets = current_user.tickets.where :id => params[:id]
+      tickets = current_user.tickets.where(:id => params[:id])
     end    
     
     if tickets.empty?
