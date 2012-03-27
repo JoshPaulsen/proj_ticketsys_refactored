@@ -1,8 +1,8 @@
-%tbody 
+%tbody
   %tr
     %td= ticket.id
     %td= ticket.opened_on
-    %td= ticket.closed_on    
+    %td= ticket.closed_on
     %td= link_to "#{ticket.provider.name}", ticket.provider
-    %td= ticket.title    
+    %td= ticket.title
     %td= link_to "View Ticket", ticket

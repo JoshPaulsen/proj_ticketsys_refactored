@@ -1,17 +1,14 @@
-%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}      
- 
+%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
+
   %h2 All Users
-  
+
   %center
   %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
     %thead
       %tr
         %th User ID
         %th Username
-        %th Privilege        
-        %th View User         
+        %th Privilege
+        %th View User
     %tbody
       = render @users
-      
-            
- 

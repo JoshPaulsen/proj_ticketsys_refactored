@@ -7,36 +7,36 @@
     = link_to "My Tickets", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
     = link_to "New Ticket", new_ticket_path, {:style=>'color:#000000;', :class=>"css_class"}
-    | 
+    |
     = link_to "All Users", users_path, {:style=>'color:#000000;', :class=>"css_class"}
-    | 
+    |
     = link_to "New User", new_user_path, {:style=>'color:#000000;', :class=>"css_class"}
-    | 
+    |
     = link_to "My Profile", current_user, {:style=>'color:#000000;', :class=>"css_class"}
     |
-    
-  - elsif current_user.service_provider?  
+
+  - elsif current_user.service_provider?
     |
     = link_to "All Tickets", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
     = link_to "My Tickets", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
     = link_to "New Ticket", new_ticket_path, {:style=>'color:#000000;', :class=>"css_class"}
-    | 
+    |
     = link_to "My Profile", current_user, {:style=>'color:#000000;', :class=>"css_class"}
     |
-    
-  - elsif current_user.user?  
+
+  - elsif current_user.user?
     |
-    = link_to "My Tickets", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}     
+    = link_to "My Tickets", tickets_path, {:style=>'color:#000000;', :class=>"css_class"}
     |
     = link_to "New Ticket", new_ticket_path, {:style=>'color:#000000;', :class=>"css_class"}
-    |    
+    |
     = link_to "My Profile", current_user, {:style=>'color:#000000;', :class=>"css_class"}
     |
-    
+
   - else
     |
     MENU - There isn't a current user!
-    | 
+    |
     

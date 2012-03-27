@@ -1,14 +1,13 @@
-%div{:align => "center"} 	
+%div{:align => "center"}
   
 = form_tag sessions_path, :method => :post do
 	.field{:align => "center"}
-		= label_tag :name, "Name: " 
-		= text_field_tag :name, nil, :placeholder=>"Enter your name" 
-    
-	.field{:align => "center"}
-		= label_tag :password, "Password: " 
-		= text_field_tag :password, nil, :type=>"password", :placeholder=>"Enter your password"
-    
-	.field{:align => "center"}  
-		= submit_tag "Sign in"
+		= label_tag :name, "Name: "
+		= text_field_tag :name, nil, :placeholder=>"Enter your name"
 
+	.field{:align => "center"}
+		= label_tag :password, "Password: "
+		= text_field_tag :password, nil, :type=>"password", :placeholder=>"Enter your password"
+
+	.field{:align => "center"}
+		= submit_tag "Sign in"
