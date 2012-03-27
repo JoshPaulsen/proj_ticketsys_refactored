@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :privilege, :presence => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
-  attr_accessible :name, :password, :location, :email, :privilege
+  attr_accessible :name, :password, :location, :email, :privilege, :department
   
   
   def admin?
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   def service_provider?
-    privilege == "service_provider"
+    privilege == "service provider"
   end
   
   def user?
@@ -29,8 +29,13 @@ class User < ActiveRecord::Base
   end
   
   def self.next_provider    
-   provider = User.where(:privilege => "service_provider").limit(1).first   
-   provider
+   provider = User.where(:privilege => "service provider").limit(1).first   
+   provider   
+  end
+  
+  def self.next_provider(depart)
+    provider = User.where(:privilege => "service provider", :department => depart).limit(1).first
+    provider
   end
   
 end

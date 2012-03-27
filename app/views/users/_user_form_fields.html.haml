@@ -3,10 +3,13 @@
   = text_field :user, :name
 .field{:align=>"left"}
   = label :user, :password, "Password"
-  = text_field :user, :password ,{:type => "password", :size=>"51%"}
+  = text_field :user, :password ,{:type => "password"}
 .field{:align=>"left"}
   = label :user, :location, "Location"
   = text_field :user, :location
-.select{:align => "left", :width => "50%"}
-  = label :user, :privilege, "Level: "
-  = select :user, :privilege, ["user", "service provider", "admin"]
+.select{:align => "left"}
+  = label :user, :department, "Department: "
+  = select :user, :department, get_departments
+.select{:align => "left"}
+  = label :user, :privilege, "Privileges: "
+  = select :user, :privilege, get_privileges

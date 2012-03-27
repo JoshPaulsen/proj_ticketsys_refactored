@@ -2,11 +2,5 @@
   %h2 All Users
   %center
     %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
-      %thead
-        %tr
-          %th ID
-          %th Name
-          %th Privilege
-          %th View User
-      %tbody
-        = render @users
+      = render "user_header"
+      = render @users

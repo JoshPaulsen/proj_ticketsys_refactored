@@ -15,26 +15,30 @@ class Ticket < ActiveRecord::Base
   
   validates :title, :presence => true
   validates :creator_id, :presence => true
+  #validates :provider_id, :presence => true
   
   
-  def add_creator(c)
-    if update_attributes! :creator_id => c.id
-      issues.create!(:user => c)    
+  def add_creator(c)        
+    self.creator_id = c.id
+    if self.save
+      issues.create!(:user => c) 
+    else
+      false
     end
-    #creator = c
-    
-     
   end
   
   def add_provider(p)
+    #self.provider_id = p.id
+    #issues.create!(:user => p)
     #update_attributes! :provider => p
     #provider = p
     #save
     #issues.create!(:user => p)  
-    
-    if update_attributes! :provider => p
-      #issues.create!(:user => p, :ticket => self)    
-      issues.create!(:user => p)      
+    self.provider_id = p.id
+    if self.save
+      issues.create!(:user => p)  
+    else
+      false    
     end   
   end
   
