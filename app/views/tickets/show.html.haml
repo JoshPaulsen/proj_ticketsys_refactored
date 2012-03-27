@@ -1,9 +1,20 @@
 %div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
   %div{:align=>"left"}
     %ul= "Ticket ID: #{@ticket.id}"
-    %ul= link_to "Service Provider: #{@ticket.provider.name}", @ticket.provider
-    %ul= "Opened At: #{@ticket.opened_on}"
-    %ul= "Closed At: #{@ticket.closed_on}"
+    %ul
+      Creator: 
+      - if !@ticket.creator.nil?
+        = link_to "#{@ticket.creator.name}", @ticket.creator
+    %ul
+      Service Provider: 
+      - if !@ticket.provider.nil?
+        = link_to "#{@ticket.provider.name}", @ticket.provider
+    %ul
+      Opened At: 
+      = readable_date(@ticket.opened_on)
+    %ul
+      Closed At: 
+      = readable_date(@ticket.closed_on)
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"    
   = render @notes
