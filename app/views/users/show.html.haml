@@ -2,6 +2,7 @@
   %ul{:align => "left"}
     %p= "User ID: #{@user.id}"
     %p= "Name: #{@user.name}"
+    %p= "Locaton: #{@user.location}"
     %p= "Department: #{@user.department}"
     %p= "Privilege: #{@user.privilege}"
   %ul= link_to 'Edit', edit_user_path(@user)

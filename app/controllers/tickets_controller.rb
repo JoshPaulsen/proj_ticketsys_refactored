@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   
   before_filter :check_if_signed_in
+  before_filter :check_ticket_access_rights, :only => [:destroy, :edit, :show, :update]
   
   def new    
   end 
@@ -56,7 +57,7 @@ class TicketsController < ApplicationController
     if current_user.admin?
       @tickets = Ticket.all
     elsif current_user.service_provider?
-      @tickets = Ticket.all
+      @tickets = Ticket.where :department => current_user.department
     else
       redirect_to mytickets_path
     end    
