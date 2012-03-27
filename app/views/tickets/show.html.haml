@@ -1,9 +1,6 @@
 %div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
   %div{:align=>"left"}
     %ul= "Ticket ID: #{@ticket.id}"
-    %ul= "Deparment: #{@ticket.department}"
-    %ul= "Title: #{@ticket.title}"
-    %ul= "Description: #{@ticket.description}"    
     %ul
       Creator: 
       - if !@ticket.creator.nil?
@@ -17,7 +14,11 @@
       = readable_date(@ticket.opened_on)
     %ul
       Closed:
-      = readable_date(@ticket.closed_on)   
+      = readable_date(@ticket.closed_on)
+    %ul= "Deparment: #{@ticket.department}"
+    %ul= "Title: #{@ticket.title}"
+    %ul= "Description: #{@ticket.description}"    
+    
   = render @notes
   %br
   %br
