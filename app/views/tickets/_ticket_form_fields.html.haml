@@ -1,0 +1,6 @@
+.field{:align=>"left"}
+  = label :ticket, :title, "Title: "
+  = text_field :ticket, :title
+.field{:align=>"left", :width=>"50%"}
+  = label :ticket, :description, "Description: "
+  = text_field :ticket, :description, {:size=>"180%", :placeholder=>"Please describe your issue."}

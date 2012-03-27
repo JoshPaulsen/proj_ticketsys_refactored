@@ -8,5 +8,7 @@ class Note < ActiveRecord::Base
   belongs_to :ticket
   
   validates :body, :presence => true
+  validates :user_id, :presence => true
+  validates :ticket_id, :presence => true
   
 end

@@ -14,6 +14,7 @@ class Ticket < ActiveRecord::Base
   has_many :notes
   
   validates :title, :presence => true
+  validates :creator_id, :presence => true
   
   
   def add_creator(c)

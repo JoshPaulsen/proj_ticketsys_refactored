@@ -2,11 +2,13 @@ class TicketsController < ApplicationController
   
   before_filter :check_if_signed_in
   
+  def test
+  end
+  
   def new    
   end 
   
-  def create    
-    
+  def create     
     @ticket = Ticket.new(params[:ticket])
     @ticket.opened_on = Time.now
     @ticket.add_creator(current_user)     
@@ -15,7 +17,7 @@ class TicketsController < ApplicationController
     if @ticket.save
       redirect_to ticket_path @ticket
     else
-      flash.now[:error] = "Ticket could not be created"
+      flash.now[:error] = "Error: Ticket could not be created"
       render "new"
     end
   end
@@ -44,22 +46,29 @@ class TicketsController < ApplicationController
   end
 
   def index    
-    @tickets = current_user.tickets    
-  end
-
-  def show     
-    @ticket = Ticket.find_by_id(params[:id])
-    @notes = @ticket.notes
-    if @notes.nil?
-      flash[:error] = "Notes are NIL"
-      redirect_to tickets_path    
+    
+    if current_user.admin?
+      @tickets = Ticket.all
+    elsif current_user.service_provider?
+      @tickets = Ticket.all
     else
-      flash[:notice] = "Notes are good"
+      redirect_to mytickets_path
     end
     
+    
+  end
+  
+  def mytickets    
+    @tickets = current_user.tickets
+  end
+
+  def show  
+    @ticket = Ticket.find_by_id(params[:id])    
     if @ticket.nil?
-      flash[:error] = "That ticket does not exist"
-      redirect_to tickets_path    
+      flash[:error] = "That ticket does not exist: " + params[:id]
+      redirect_to tickets_path   
+    else
+      @notes = @ticket.notes  
     end      
   end
   
