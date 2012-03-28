@@ -1,6 +1,6 @@
 = form_tag addwatcher_path(@ticket), :method => :put do
-  .field{:align => "left"}
+  .field
     = label :user, :email, "Email"
     = text_field :user, :email
-  .actions{:align => "left"}
+  .actions
     = submit_tag "Add Watcher"

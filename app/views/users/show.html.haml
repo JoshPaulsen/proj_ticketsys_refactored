@@ -1,5 +1,6 @@
 %div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
-  = render "user_menu"
+  - if current_user.admin? or current_user.id == @user.id
+    = render "user_menu"
   %ul
     %p= "User ID: #{@user.id}"
     %p= "Name: #{@user.name}"
@@ -7,6 +8,3 @@
     %p= "Locaton: #{@user.location}"
     %p= "Department: #{@user.department}"
     %p= "Privilege: #{@user.privilege}"
-    %p
-      Associates IDs: 
-      = get_accessible_user_ids(@user)

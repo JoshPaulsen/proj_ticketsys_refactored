@@ -1,5 +1,5 @@
 = form_tag notes_path, :method => :post do
-  .field{:align=>"left"}
+  .field
     = hidden_field_tag :ticket_id , @ticket.id
     = hidden_field_tag :user_id , current_user.id
     %ul= label :note, :body, "Add a New Note"

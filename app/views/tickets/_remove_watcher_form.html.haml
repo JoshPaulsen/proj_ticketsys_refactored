@@ -2,6 +2,6 @@
   .select
     = label :user, :user_id, "Watchers: "
     = select :user, :user_id, get_watchers_for(@ticket)
-  .actions{:align => "left"}
+  .actions
     = submit_tag "Remove Watcher"
   

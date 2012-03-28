@@ -1,18 +1,19 @@
-.field{:align => "left"}
+.field
   = label :user, :name, "Name"
   = text_field :user, :name
-.field{:align => "left"}
+.field
   = label :user, :email, "Email"
   = text_field :user, :email
-.field{:align => "left"}
+.field
   = label :user, :password, "Password"
   = text_field :user, :password ,{:type => "password"}
-.field{:align => "left"}
+.field
   = label :user, :location, "Location"
   = text_field :user, :location
-.select{:align => "left"}
-  = label :user, :department, "Department: "
-  = select :user, :department, get_departments
-.select{:align => "left"}
-  = label :user, :privilege, "Privileges: "
-  = select :user, :privilege, get_privileges
+- if current_user.admin?
+  .select
+    = label :user, :department, "Department: "
+    = select :user, :department, get_departments
+  .select
+    = label :user, :privilege, "Privileges: "
+    = select :user, :privilege, get_privileges
