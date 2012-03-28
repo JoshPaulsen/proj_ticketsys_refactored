@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   
   before_filter :check_if_signed_in
   
+  # Some of these can be removed along with the routes...
   def new
   end
 
