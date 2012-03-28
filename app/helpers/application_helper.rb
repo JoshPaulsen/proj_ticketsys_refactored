@@ -15,5 +15,19 @@ module ApplicationHelper
     end
   end
   
+  def get_providers_in(department)
+    p = User.where(:department => department, :privilege => "service provider").collect do |prov|
+      [prov.name, prov.id]
+    end
+  end
+  
+  def get_watchers_for(ticket)
+    u = ticket.just_watchers.collect do |user|
+      [user.name, user.id]
+    end
+  end
+  
+  
+  
   
 end

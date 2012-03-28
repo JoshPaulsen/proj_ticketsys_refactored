@@ -1,10 +1,13 @@
-.field{:align=>"left"}
+.field{:align => "left"}
   = label :user, :name, "Name"
   = text_field :user, :name
-.field{:align=>"left"}
+.field{:align => "left"}
+  = label :user, :email, "Email"
+  = text_field :user, :email
+.field{:align => "left"}
   = label :user, :password, "Password"
   = text_field :user, :password ,{:type => "password"}
-.field{:align=>"left"}
+.field{:align => "left"}
   = label :user, :location, "Location"
   = text_field :user, :location
 .select{:align => "left"}

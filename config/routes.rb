@@ -2,6 +2,9 @@ ProjTicketsysRefactored::Application.routes.draw do
   
   get 'tickets/mytickets', :as => 'mytickets'
   
+  put 'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
+  delete 'tickets/:id/removewatcher', :to => 'tickets#removewatcher',:as => 'removewatcher'
+  
   resources :tickets
   resources :users
   resources :notes

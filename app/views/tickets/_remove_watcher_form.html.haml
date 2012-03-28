@@ -1,0 +1,7 @@
+= form_tag removewatcher_path(@ticket), :method => :delete do
+  .select
+    = label :user, :user_id, "Watchers: "
+    = select :user, :user_id, get_watchers_for(@ticket)
+  .actions{:align => "left"}
+    = submit_tag "Remove Watcher"
+  

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   
-  before_filter :check_if_signed_in  
+  before_filter :check_if_signed_in
+  before_filter :check_if_admin, :only => [:new, :create, :destroy]
+  before_filter :check_if_admin_or_self, :only => [:edit, :update]
+  #before_filter :check_if_admin_or_accessible, :only => [:index, :show]
   
   def new
   end

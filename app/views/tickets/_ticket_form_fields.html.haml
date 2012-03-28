@@ -8,3 +8,7 @@
   = label :ticket, :description, "Description: "
   %br
   = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
+- if !@ticket.nil?
+  .select
+    = label :ticket, :provider_id, "Service Providers in #{@ticket.department}: "
+    = select :ticket, :provider_id, get_providers_in(@ticket.department)
