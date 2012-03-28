@@ -65,15 +65,15 @@ module SessionsHelper
   def check_if_admin_or_accessible
     if current_user.admin?
       return
-    else
-      puts "THIS IS PARAMS_ID:"
-      puts params[:id]
-      ids = get_accessible_user_ids(current_user)
-      puts "this is all ids"
-      puts ids
+    else      
+      ids = get_accessible_user_ids(current_user)      
       if !ids.include?(params[:id])
         flash[:error] = "Error: You don't have permission to access that admin_or_accessible."
-        redirect_to tickets_path
+        if current_user.user?
+          redirect_to mytickets_path
+        else
+          redirect_to tickets_path
+        end
       end
     end
   end
@@ -82,9 +82,6 @@ module SessionsHelper
     ids = []
     ids << user.id.to_s
     tickets = user.tickets
-    
-    
-   
     
     tickets.each do |t|      
       t.users.each do |u|        

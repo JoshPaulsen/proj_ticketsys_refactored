@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
-  attr_accessible :name, :password, :location, :email, :privilege, :department
+  attr_accessible :name, :password, :location, :email, :department, :privilege
   
   
   def admin?
