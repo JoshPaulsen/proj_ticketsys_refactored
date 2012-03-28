@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :user do
-    name "MyString"
-    email "MyString"
-    privilege "MyString"
-    password "MyString"
-    location "MyString"
+    name "name"
+    email "me@me.com"
+    privilege "user"
+    password "password"
+    location "office"
   end
 end

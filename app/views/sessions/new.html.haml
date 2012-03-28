@@ -1,7 +1,7 @@
 %div{:align => "center"}
   = form_tag sessions_path, :method => :post do
     .field
-      = label_tag :name, "Name: "
+      = label_tag :name, "Username: "
       = text_field_tag :name, nil, :placeholder=>"Enter your name"
     .field
       = label_tag :password, "Password: "
