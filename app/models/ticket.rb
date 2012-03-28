@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
   # title:string
   # description:text
   # location:string
+  # department:string
   # creator_id:integer
   # provider_id:integer
   # opened_on:datetime
@@ -14,9 +15,6 @@ class Ticket < ActiveRecord::Base
   has_many :notes
   
   validates :title, :presence => true
-  #validates :creator_id, :presence => true
-  #validates :provider_id, :presence => true
-  
   
   def set_creator(c)
     if !self.creator_id.nil?  

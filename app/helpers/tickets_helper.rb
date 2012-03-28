@@ -1,6 +1,7 @@
 module TicketsHelper
   
   # Checks if the ticket matching :id is a ticket associated with the current user
+  # This code needs to be cleaned up bad.
   def check_ticket_access_rights
     
     if current_user.admin?

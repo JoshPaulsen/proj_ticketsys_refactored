@@ -1,5 +1,8 @@
 module SessionsHelper
   
+  # These functions are used to keep track of the current user and to do 
+  # various forms of validation
+  
   def sign_in (user)    
     session[:user_id] = user.id
     self.current_user = user    
@@ -35,40 +38,37 @@ module SessionsHelper
   
   def check_if_admin
     if !current_user.admin?   
-      flash[:error] = "Error: You don't have permission to access that. check_if_admin"
+      flash[:error] = "Error: You don't have permission to access that."
       redirect_to mytickets_path
     end    
   end
   
   def deny_user
     if current_user.user?   
-      flash[:error] = "Error: You don't have permission to access that. deny_user"
+      flash[:error] = "Error: You don't have permission to access that."
       redirect_to mytickets_path
     end
   end
   
+  # Redirects if current user is not an admin or trying to access other than self
   def check_if_admin_or_self
-    if current_user.admin?    
-      flash.now[:notice] = "Passed admin_or_self."  
+    if current_user.admin?
       return
-    else
-      if current_user.id.to_s != params[:id]
-        flash[:error] = "Error: You don't have permission to access that admin_or_self.admin_or_self"
-        redirect_to user_path params[:id]
-        return
-      else
-        flash.now[:notice] = "Passed admin_or_self."
-      end
+    elsif current_user.id.to_s != params[:id]
+      flash[:error] = "Error: You don't have permission to access that."
+      redirect_to user_path params[:id]
+      return
     end
   end
   
+  # Redirects if current user is not an admin or has access to the resource
   def check_if_admin_or_accessible
     if current_user.admin?
       return
     else      
       ids = get_accessible_user_ids(current_user)      
       if !ids.include?(params[:id])
-        flash[:error] = "Error: You don't have permission to access that admin_or_accessible."
+        flash[:error] = "Error: You don't have permission to access that."
         if current_user.user?
           redirect_to mytickets_path
         else
@@ -78,6 +78,7 @@ module SessionsHelper
     end
   end
   
+  # Returns a list of IDs of users that user can view
   def get_accessible_user_ids(user)    
     ids = []
     ids << user.id.to_s

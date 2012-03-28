@@ -8,6 +8,8 @@ class TicketsController < ApplicationController
   def new    
   end 
   
+  # Used to add a person who has access to the ticket but is not the 
+  # creator or main service provider  
   def addwatcher
     @ticket = Ticket.find_by_id(params[:id])
     watcher = User.find_by_email(params[:user][:email])
@@ -30,6 +32,7 @@ class TicketsController < ApplicationController
     end    
   end
   
+  # Used to remove a watcher
   def removewatcher
     @ticket = Ticket.find_by_id(params[:id])
     watcher = User.find_by_id(params[:user][:user_id])    
@@ -80,10 +83,8 @@ class TicketsController < ApplicationController
     if !provider_id.nil? and provider_id != @ticket.provider_id
       @ticket.set_provider(User.find_by_id(provider_id))
     end
-    #old_provider = @ticket.provider
-    #@ticket.update_attributes(params[:ticket])    
+    
     if @ticket.save
-      #@ticket.set_provider(@ticket.provider)
       flash[:success] = "Ticket Updated"
       redirect_to @ticket
     else
@@ -103,6 +104,7 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
+  # service provider code could be cleaned up
   def index
     if current_user.admin?
       @tickets = Ticket.all

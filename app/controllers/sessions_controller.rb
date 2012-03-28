@@ -15,12 +15,9 @@ class SessionsController < ApplicationController
         redirect_to tickets_path
         return
       else
-        flash.now[:error] = "Invalid Password"
+        flash.now[:error] = "Invalid Name/Password"
         render 'new'   
-      end      
-    else 
-      flash.now[:error] = "Invalid UserName"
-      render 'new'      
+      end
     end   
   end
 

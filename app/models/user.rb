@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   # privilege:string
   # password:string
   # location:string
+  # department:string
   
   has_many :issues
   has_many :tickets, :through => :issues, :uniq => true
@@ -14,8 +15,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
-  attr_accessible :name, :password, :location, :email, :department, :privilege
-  
+  attr_accessible :name, :password, :location, :email, :department, :privilege  
   
   def admin?
     privilege == "admin"

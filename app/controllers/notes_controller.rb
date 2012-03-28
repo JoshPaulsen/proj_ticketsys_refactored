@@ -6,7 +6,6 @@ class NotesController < ApplicationController
   end
 
   def create
-    
     @note = Note.new(params[:note])
     @note.user_id = params[:user_id]
     @note.ticket_id = params[:ticket_id]
