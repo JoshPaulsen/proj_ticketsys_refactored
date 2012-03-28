@@ -16,6 +16,14 @@ class Ticket < ActiveRecord::Base
   
   validates :title, :presence => true
   
+  def closed?
+    !closed_on.blank?
+  end
+  
+  def open?
+    closed_on.blank?
+  end
+  
   def set_creator(c)
     if !self.creator_id.nil?  
       remove_watcher_by_id(self.creator_id)

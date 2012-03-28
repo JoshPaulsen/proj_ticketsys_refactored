@@ -8,6 +8,33 @@ class TicketsController < ApplicationController
   def new    
   end 
   
+  def close    
+    @ticket = Ticket.find_by_id(params[:id])
+    if @ticket.closed?
+      flash[:error] = "Error: That ticket is already closed."
+      redirect_to @ticket
+      return      
+    end
+    @ticket.closed_on = Time.now
+    @ticket.save
+    flash[:success] = "Ticket successfully closed."
+    redirect_to @ticket
+  end
+  
+  def open
+    @ticket = Ticket.find_by_id(params[:id])
+    if @ticket.open?
+      flash[:error] = "Error: That ticket is already open."
+      redirect_to @ticket
+      return      
+    end
+    @ticket.closed_on = ""
+    @ticket.save
+    flash[:success] = "Ticket successfully reopened."
+    redirect_to @ticket
+  end
+  
+  
   # Used to add a person who has access to the ticket but is not the 
   # creator or main service provider  
   def addwatcher
