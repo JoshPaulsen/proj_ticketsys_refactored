@@ -38,14 +38,14 @@ module SessionsHelper
   
   def check_if_admin
     if !current_user.admin?   
-      flash[:error] = "Error: You don't have permission to access that."
+      flash[:error] = "Error: You don't have permission to access that"
       redirect_to mytickets_path
     end    
   end
   
   def deny_user
     if current_user.user?   
-      flash[:error] = "Error: You don't have permission to access that."
+      flash[:error] = "Error: You don't have permission to access that"
       redirect_to mytickets_path
     end
   end
@@ -55,7 +55,7 @@ module SessionsHelper
     if current_user.admin?
       return
     elsif current_user.id.to_s != params[:id]
-      flash[:error] = "Error: You don't have permission to access that."
+      flash[:error] = "Error: You don't have permission to access that"
       redirect_to user_path params[:id]
       return
     end
@@ -68,7 +68,7 @@ module SessionsHelper
     else      
       ids = get_accessible_user_ids(current_user)      
       if !ids.include?(params[:id])
-        flash[:error] = "Error: You don't have permission to access that."
+        flash[:error] = "Error: You don't have permission to access that"
         if current_user.user?
           redirect_to mytickets_path
         else

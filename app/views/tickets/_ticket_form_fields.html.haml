@@ -1,7 +1,9 @@
-- if current_user.admin?
+- if current_user.admin? or current_page?(new_ticket_path)
   .select
-    = label :ticket, :department, "Department: "
+    = label :ticket, :department, "Departments: "
     = select :ticket, :department, get_departments
+
+
 .field
   = label :ticket, :title, "Title: "
   = text_field :ticket, :title

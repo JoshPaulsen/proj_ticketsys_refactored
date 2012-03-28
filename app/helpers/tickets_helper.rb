@@ -12,13 +12,13 @@ module TicketsHelper
       tickets << current_user.tickets
       ids += current_user.tickets.map{|t| t.id.to_s}
       if !ids.include?(params[:id])
-        flash[:error] = "Error: You don't have permission to access that."
+        flash[:error] = "Error: You don't have permission to access that"
         redirect_to tickets_path
       end
     else
       tickets = current_user.tickets.where(:id => params[:id])
       if tickets.empty?
-        flash[:error] = "Error: You don't have permission to access that."
+        flash[:error] = "Error: You don't have permission to access that"
         redirect_to mytickets_path
       end    
     end  
