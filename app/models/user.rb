@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :uniqueness => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
+  # At some point privilege and possibly department should be removed from this.
+  # That will require changing how we create and update users.
   attr_accessible :name, :password, :location, :email, :department, :privilege  
   
   def admin?

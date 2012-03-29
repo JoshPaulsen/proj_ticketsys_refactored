@@ -12,8 +12,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_id(params[:id])
     if @ticket.closed?
       flash[:error] = "Error: That ticket is already closed."
-      redirect_to @ticket
-      return      
+      redirect_to @ticket and return      
     end
     @ticket.closed_on = Time.now
     @ticket.save
@@ -25,8 +24,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_id(params[:id])
     if @ticket.open?
       flash[:error] = "Error: That ticket is already open."
-      redirect_to @ticket
-      return      
+      redirect_to @ticket and return      
     end
     @ticket.closed_on = ""
     @ticket.save
@@ -44,34 +42,34 @@ class TicketsController < ApplicationController
       
       if @ticket.users.include?(watcher)
         flash[:error] = "Error: That person is already watching this ticket"
-        redirect_to @ticket and return
+        redirect_to @ticket
       elsif @ticket.add_watcher(watcher)
         flash[:success] = "Watcher Added to Ticket"
-        redirect_to @ticket and return
-      else
+        redirect_to @ticket
+      else # Do we need this?  I don't see a way adding a watcher would fail
         flash[:error] = "Error: Couldn't add watcher."         
-        redirect_to @ticket and return
+        redirect_to @ticket
       end  
       
     else
       flash[:error] = "Error: No user with that email exists."       
-      redirect_to @ticket and return
+      redirect_to @ticket
     end    
   end
   
   # Used to remove a watcher
+  # Do we need to check if the watcher is nil?  The watchers come from a form
+  # That is populated with valid watchers.
   def removewatcher
     @ticket = Ticket.find_by_id(params[:id])
     watcher = User.find_by_id(params[:user][:user_id])    
     if watcher.nil?
       flash[:error] = "Error: That watcher does not exist."       
       redirect_to @ticket
-      return
     else
       @ticket.remove_watcher(watcher)
       flash[:success] = "Watcher Removed from Ticket"
       redirect_to @ticket
-      return
     end
   end
   
@@ -79,8 +77,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(params[:ticket])
     if @ticket.title.blank?
       flash[:error] = "Error: Incomplete Ticket"      
-      redirect_to new_ticket_path
-      return
+      redirect_to new_ticket_path and return
     end
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
@@ -88,8 +85,7 @@ class TicketsController < ApplicationController
     
     if prov.nil? or !@ticket.set_provider prov
       @ticket.destroy
-      flash[:error] = "Error: No Provider could be located for this ticket."
-      #@tickets = current_user.tickets
+      flash[:error] = "Error: No Provider could be located for this ticket."      
       redirect_to mytickets_path and return          
     end 
       
@@ -99,7 +95,6 @@ class TicketsController < ApplicationController
       @ticket.destroy
       flash[:error] = "Error: Ticket could not be created."
       redirect_to new_ticket_path
-      return
     end
   end
 

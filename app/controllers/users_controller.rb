@@ -14,8 +14,8 @@ class UsersController < ApplicationController
       redirect_to user_path @user
     else
       @user.destroy
-      flash.now[:error] = "Error: User could not be created!"
-      render "new"
+      flash[:error] = "Error: User could not be created!"
+      redirect_to new_user_path
     end      
   end
 
@@ -23,12 +23,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     if @user.save
-      flash[:success] = "User Profile Updated"
-      redirect_to @user
+      flash[:success] = "User Profile Updated"  
     else
-      flash.now[:error] = "User Profile could not be updated" 
-      render "show"
+      flash[:error] = "User Profile could not be updated"      
     end 
+    redirect_to @user
   end
 
   def edit

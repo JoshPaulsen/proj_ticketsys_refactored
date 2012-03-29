@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   def new
     if signed_in?
       redirect_to tickets_path
-      return
     end
   end
 
@@ -13,18 +12,16 @@ class SessionsController < ApplicationController
     if user and user.password == params[:password]      
         sign_in(user)        
         redirect_to tickets_path
-        return
     else
       flash[:error] = "Invalid Username/Password"
       redirect_to signin_path
-      return
     end   
   end
 
   def destroy
     sign_out
-    redirect_to root_path
-    return
+    flash[:notice] = "Successfully signed out"
+    redirect_to signin_path
   end
   
 end

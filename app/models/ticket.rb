@@ -14,7 +14,11 @@ class Ticket < ActiveRecord::Base
   has_many :users, :through => :issues, :uniq => true
   has_many :notes
   
+  # Is there anything else a ticket must have?  Department?
+  # Requiring a creator and a provider could be tricky if we allow
+  # Users to be deleted.
   validates :title, :presence => true
+  validates :opened_on, :presence => true
   
   def closed?
     !closed_on.blank?
@@ -24,8 +28,11 @@ class Ticket < ActiveRecord::Base
     closed_on.blank?
   end
   
+  # Both setters here can probably be cleaned up to remove the check for saving.
+  # I can't think of a reason that the save would fail if we are only changing the IDs.
+  
   def set_creator(c)
-    if !self.creator_id.nil?  
+    if self.creator_id  
       remove_watcher_by_id(self.creator_id)
     end          
     self.creator_id = c.id
@@ -37,7 +44,7 @@ class Ticket < ActiveRecord::Base
   end
   
   def set_provider(p)
-    if !self.provider_id.nil?
+    if self.provider_id
       remove_watcher_by_id(self.provider_id)
     end
     self.provider_id = p.id

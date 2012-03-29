@@ -7,5 +7,6 @@ FactoryGirl.define do
     privilege "user"
     password "password"
     location "office"
+    department "IT"
   end
 end

@@ -20,22 +20,22 @@ module NavigationHelpers
       '/tickets'    
     
       
-    when /^the New Ticket page$/
+    when /^the new ticket page$/i
       new_ticket_path
       
-    when /^the Login page$/
+    when /^the login page$/i
       signin_path
       
-    when /^the Sign in page$/
+    when /^the sign in page$/i
       signin_path      
       
-    when /^the admin home page$/
+    when /^the admin home page$/i
       tickets_path
       
-    when /^the New Ticket page$/
+    when /^the new ticket page$/i
       new_ticket_path
       
-    when /^the My Tickets page$/
+    when /^the my tickets page$/i
       mytickets_path
       
     #when /^\/tickets\/(.*)$/
