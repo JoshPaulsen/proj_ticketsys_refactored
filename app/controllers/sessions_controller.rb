@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   def new
     if signed_in?
       redirect_to tickets_path
@@ -25,4 +26,5 @@ class SessionsController < ApplicationController
     redirect_to root_path
     return
   end
+  
 end

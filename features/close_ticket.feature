@@ -5,7 +5,7 @@ Feature: Closing a ticket
 
 Background: there is an admin account
   Given I am logged on as an "admin"
-  And a ticket with the title "Broken Stapler" exists
+  And I have a ticket with the title "Broken Stapler"
   And I am viewing the "Broken Stapler" ticket
 
 Scenario: close the ticket

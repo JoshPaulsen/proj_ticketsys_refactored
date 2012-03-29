@@ -40,22 +40,22 @@ class TicketsController < ApplicationController
   def addwatcher
     @ticket = Ticket.find_by_id(params[:id])
     watcher = User.find_by_email(params[:user][:email])
-    if !watcher.nil?
+    if watcher
       
-      if @ticket.add_watcher(watcher)
+      if @ticket.users.include?(watcher)
+        flash[:error] = "Error: That person is already watching this ticket"
+        redirect_to @ticket and return
+      elsif @ticket.add_watcher(watcher)
         flash[:success] = "Watcher Added to Ticket"
-        redirect_to @ticket
-        return
+        redirect_to @ticket and return
       else
         flash[:error] = "Error: Couldn't add watcher."         
-        redirect_to @ticket
-        return
+        redirect_to @ticket and return
       end  
       
     else
       flash[:error] = "Error: No user with that email exists."       
-      redirect_to @ticket
-      return
+      redirect_to @ticket and return
     end    
   end
   

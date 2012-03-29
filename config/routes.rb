@@ -9,7 +9,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   
   resources :tickets
   resources :users
-  resources :notes
+  resources :notes, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
   
   match '/signin', :to => 'sessions#new'

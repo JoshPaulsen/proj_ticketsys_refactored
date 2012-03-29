@@ -8,7 +8,7 @@ Background: tickets in system
   And I am logged on as an "admin"
   And I am viewing the user page for "Josh"  
   
-Scenario: add ticket
+Scenario: edit the department
   Then I should see "Edit User"
   And I should see "Department: HR"
   When I follow "Edit User"  
@@ -16,4 +16,12 @@ Scenario: add ticket
   And I press "Update User"
   Then I should see "User Profile Updated"
   And I should see "Department: IT"  
-  
+
+Scenario: edit the privilege
+  Then I should see "Edit User"  
+  And I should see "Privilege: user"
+  When I follow "Edit User"  
+  And I select "admin" from "Privilege"
+  And I press "Update User"
+  Then I should see "User Profile Updated"
+  And I should see "Privilege: admin"  

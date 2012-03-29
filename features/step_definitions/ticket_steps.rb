@@ -8,21 +8,27 @@
 #end
 # Will we evere care about a name?
 When /(.*) is logged on as "(.*)"/ do |name, privilege|
-  user = User.new(:name => name, :privilege => privilege, :password => "123")
-  user.save
+  User.create!(:name => name, :privilege => privilege, :password => "123")  
   visit path_to "the home page"
   fill_in("Username:", :with => user.name)
   fill_in("Password:", :with => user.password)
-  click_button("Sign in")
-  #session[:uid] = user.id
+  click_button("Sign in")  
 end
 
 Given /^a[n]? "([^"]*)" named "([^"]*)" in the "([^"]*)" department exists$/ do |privilege,name,dep|
   User.create!:name=>name,:password=>name,:privilege=>privilege,:email=>privilege,:department=>dep
 end
 
-When /^a[n]? "([^"]*)" user with the password "(.*)" exists$/ do |privilege, password|
+When /^a[n]? "([^"]*)" with the password "(.*)" exists$/ do |privilege, password|
   User.create!:name=>privilege,:password=>password,:privilege=>privilege,:email=>privilege  
+end
+
+When /^a[n]? "([^"]*)" with the email "(.*)" exists$/ do |privilege, email|
+  User.create!:name=>email,:password=>email,:privilege=>privilege,:email=>email  
+end
+
+When /^a[n]? "([^"]*)" named "([^"]*)" with the email "(.*)" exists$/ do |privilege,name, email|
+  User.create!:name=>name,:password=>email,:privilege=>privilege,:email=>email  
 end
 
 When /^the user "(.*)" does not exist$/ do |name|
@@ -30,10 +36,7 @@ When /^the user "(.*)" does not exist$/ do |name|
   assert user.nil?
 end
 
-#When /I am not logged in/ do
-#end
-
-When /^I am logged on as a[n]? "(.*)"$/ do |privilege|
+When /^I am (logged|signed) (o|i)n as a[n]? "(.*)"$/ do |x,y,privilege|
   User.create!(:name => privilege, :privilege => privilege, :password => "123", :email=>"email")
   visit signin_path
   step "I fill in \"Username\" with \"#{privilege}\""
@@ -49,8 +52,7 @@ When /^I have a.* "([^"]*)" ticket with the title "([^"]*)"$/ do |department,tit
   step "I press \"Submit Ticket\""   
 end
 
-
-When /^a ticket with the title "([^"]*)" exists$/ do |title|
+When /^I have a ticket with the title "([^"]*)"$/ do |title|
   step "an \"IT\" service provider exists"
   visit new_ticket_path  
   step "I fill in \"Title\" with \"#{title}\""
@@ -58,8 +60,30 @@ When /^a ticket with the title "([^"]*)" exists$/ do |title|
   step "I press \"Submit Ticket\""   
 end
 
-When /^a closed ticket with the title "([^"]*)" exists$/ do |title|
-  step "a ticket with the title \"#{title}\" exists"
+Given /^a "([^"]*)" named "([^"]*)" with an email "([^"]*)" is watching a ticket with the title "([^"]*)"$/ do |priv, name, email, title|
+  User.create!(:name => name, :privilege => priv, :password => "123", :email=>email)
+  t = Ticket.find_by_title title
+  visit ticket_path t
+  step "I fill in \"Email\" with \"#{email}\""
+  step "I press \"Add Watcher\""  
+end
+
+#When /^a ticket with the title "([^"]*)" exists$/ do |title|
+#  step "an \"IT\" service provider exists"
+#  visit new_ticket_path  
+#  step "I fill in \"Title\" with \"#{title}\""
+#  step "I select \"IT\" from \"Department\""
+#  step "I press \"Submit Ticket\""   
+#end
+
+#When /^a closed ticket with the title "([^"]*)" exists$/ do |title|
+#  step "a ticket with the title \"#{title}\" exists"
+#  step "I am viewing the \"#{title}\" ticket"
+#  step "I press \"Close This Ticket\""
+#end
+
+When /^I have a closed ticket with the title "([^"]*)"$/ do |title|
+  step "I have a ticket with the title \"#{title}\""
   step "I am viewing the \"#{title}\" ticket"
   step "I press \"Close This Ticket\""
 end
@@ -69,8 +93,8 @@ When /^I am not logged in$/ do
 end
 
 When /^a.* "(.*)" service provider exists$/ do |sp|
-  servicep = User.create!(:name => sp, :privilege => "service provider",
-                       :password => "123", :email=>"1234", :department => sp)  
+  User.create!(:name => sp, :privilege => "service provider",:password => "123",
+               :email=>"1234", :department => sp)  
 end
 
 When /^I am viewing the "(.*)" ticket$/ do |title|

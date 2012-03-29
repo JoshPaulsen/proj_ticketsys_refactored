@@ -29,14 +29,11 @@ class User < ActiveRecord::Base
     privilege == "user"
   end
   
-  def self.next_provider    
-   provider = User.where(:privilege => "service provider").limit(1).first   
-   provider   
-  end
-  
+  # Currently this just returns the first service provider for a department
+  # It will need to be fixed to return the appropriate service provider possibly
+  # Using some sort of round robin scheduling.
   def self.next_provider(depart)
-    provider = User.where(:privilege => "service provider", :department => depart).limit(1).first
-    provider
+    User.where(:privilege => "service provider", :department => depart).limit(1).first
   end
   
 end

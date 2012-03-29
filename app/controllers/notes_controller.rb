@@ -2,7 +2,6 @@ class NotesController < ApplicationController
   
   before_filter :check_if_signed_in
   
-  # Some of these can be removed along with the routes...
   def new
   end
 
@@ -22,20 +21,5 @@ class NotesController < ApplicationController
       redirect_to ticket_path ticket
     end
   end
-
-  def update
-  end
-
-  def edit
-  end
-
-  def destroy
-  end
-
-  def index
-  end
-
-  def show
-    @note = Note.find_by_id(params[:id])
-  end
+  
 end
