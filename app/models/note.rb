@@ -11,4 +11,8 @@ class Note < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :ticket_id, :presence => true
   
+  def hidden?
+    hidden
+  end
+  
 end

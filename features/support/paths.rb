@@ -17,23 +17,29 @@ module NavigationHelpers
       '/'
     
     when /^the Ticket View page$/
-      '/tickets'
+      '/tickets'    
     
-    when/^the My Tickets View page$/
-      '/tickets/mytickets'
       
     when /^the New Ticket page$/
-      '/tickets/new'
+      new_ticket_path
       
     when /^the Login page$/
-      '/signin'
+      signin_path
       
     when /^the Sign in page$/
-      '/signin'  
-    
+      signin_path      
       
     when /^the admin home page$/
-      '/tickets'
+      tickets_path
+      
+    when /^the New Ticket page$/
+      new_ticket_path
+      
+    when /^the My Tickets page$/
+      mytickets_path
+      
+    #when /^\/tickets\/(.*)$/
+      #tickets_path(1)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -1,26 +1,31 @@
-When /the following tickets exist/ do |tickets_table|
-  tickets_table.hashes.each do |ticket|
-    Ticket.create!(ticket)
-  end
-end
 
+# This won't work anymore.  Other related models are affected when a ticket is created.
+# If we need to load a bunch of tickets we are going to have to write a more complicated step. 
+#When /the following tickets exist/ do |tickets_table|
+  #tickets_table.hashes.each do |ticket|
+    #Ticket.create!(ticket)
+  #end
+#end
+# Will we evere care about a name?
 When /(.*) is logged on as "(.*)"/ do |name, privilege|
   user = User.new(:name => name, :privilege => privilege, :password => "123")
   user.save
   visit path_to "the home page"
-  fill_in("Username:", :with => user.username)
+  fill_in("Username:", :with => user.name)
   fill_in("Password:", :with => user.password)
-  click_button("Login")
+  click_button("Sign in")
   #session[:uid] = user.id
 end
 
-When /a "(.*)" user exists with the password "(.*)"/ do |privilege, password|
-  user = User.create!:name=>privilege,:password=>password,:privilege=>privilege,:email=>privilege
-  #user = User.new(:name => name, :password => password)
-  #user.save
+Given /^a[n]? "([^"]*)" named "([^"]*)" in the "([^"]*)" department exists$/ do |privilege,name,dep|
+  User.create!:name=>name,:password=>name,:privilege=>privilege,:email=>privilege,:department=>dep
 end
 
-When /the user "(.*)" does not exist/ do |name|
+When /^a[n]? "([^"]*)" user with the password "(.*)" exists$/ do |privilege, password|
+  User.create!:name=>privilege,:password=>password,:privilege=>privilege,:email=>privilege  
+end
+
+When /^the user "(.*)" does not exist$/ do |name|
   user = User.find_by_username(name)
   assert user.nil?
 end
@@ -28,33 +33,63 @@ end
 #When /I am not logged in/ do
 #end
 
-When /I am logged on as "(.*)"/ do |privilege|
-  user = User.new(:name => privilege, :privilege => privilege, :password => "123")
-  user.save
-  visit path_to "the home page"
-  fill_in("Username:", :with => user.username)
-  fill_in("Password:", :with => user.password)
-  click_button("Login")
+When /^I am logged on as a[n]? "(.*)"$/ do |privilege|
+  User.create!(:name => privilege, :privilege => privilege, :password => "123", :email=>"email")
+  visit signin_path
+  step "I fill in \"Username\" with \"#{privilege}\""
+  step "I fill in \"Password\" with \"123\""
+  step "I press \"Sign in\""
 end
 
-#should probably DRY out the following three step definitions at some point!
-
-
-When /a ticket with the description "(.*)" exists/ do |des|
-  t = Ticket.new(:user_id=> 1, :description => des, :opened_on => Time.now)
-  t.save
+When /^I have a.* "([^"]*)" ticket with the title "([^"]*)"$/ do |department,title|
+  step "an \"#{department}\" service provider exists"
+  visit new_ticket_path  
+  step "I fill in \"Title\" with \"#{title}\""
+  step "I select \"#{department}\" from \"Department\""
+  step "I press \"Submit Ticket\""   
 end
 
-When /opened ticket with the description "(.*)" exists/ do |des|
-  t = Ticket.new(:user_id=> 1, :description => des, :opened_on => Time.now, :closed_on => nil)
-  t.save
+
+When /^a ticket with the title "([^"]*)" exists$/ do |title|
+  step "an \"IT\" service provider exists"
+  visit new_ticket_path  
+  step "I fill in \"Title\" with \"#{title}\""
+  step "I select \"IT\" from \"Department\""
+  step "I press \"Submit Ticket\""   
 end
 
-When /closed ticket with the description "(.*)" exists/ do |des|
-  t = Ticket.new(:user_id=> 1, :description => des, :opened_on => Time.now)
-  t.save
+When /^a closed ticket with the title "([^"]*)" exists$/ do |title|
+  step "a ticket with the title \"#{title}\" exists"
+  step "I am viewing the \"#{title}\" ticket"
+  step "I press \"Close This Ticket\""
 end
 
-When /I am not logged in/ do
-  assert session[:uid].nil?
+When /^I am not logged in$/ do
+  assert current_user.nil?
 end
+
+When /^a.* "(.*)" service provider exists$/ do |sp|
+  servicep = User.create!(:name => sp, :privilege => "service provider",
+                       :password => "123", :email=>"1234", :department => sp)  
+end
+
+When /^I am viewing the "(.*)" ticket$/ do |title|
+  t = Ticket.find_by_title title
+  visit ticket_path(t)
+end
+
+Given /^I am viewing the user page for "([^"]*)"$/ do |name|
+  u = User.find_by_name name
+  visit user_path(u)
+end
+
+Then /^(?:|I )should be viewing the "(.+)" ticket$/ do |title|
+  t = Ticket.find_by_title title
+  current_path = URI.parse(current_url).path
+  if current_path.respond_to? :should
+    current_path.should == ticket_path(t)
+  else
+    assert_equal ticket_path(t), current_path
+  end
+end
+

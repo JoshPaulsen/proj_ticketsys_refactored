@@ -4,22 +4,33 @@ Feature: Closing a ticket
   So that I can indicate that the problem has been taken care of
 
 Background: there is an admin account
-  Given I am logged on as "admin"
-  And a ticket with the description "Broken stapler" exists
-  And I am on the My Tickets View page
+  Given I am logged on as an "admin"
+  And a ticket with the title "Broken Stapler" exists
+  And I am viewing the "Broken Stapler" ticket
 
 Scenario: close the ticket
-  Then I should see "Broken stapler"
-  When I press "Close Ticket"
-  Then I should see "Are you sure"
-  And I press "OK"
-  Then I should be on the home page
-  And I should not see "Broken stapler"  
+  Then I should see "Broken Stapler"
+  When I press "Close This Ticket"
+  #Then I should see "Are you sure"
+  #And I press "OK"
+  Then I should be on the My Tickets page
+  And I should see "Ticket successfully closed"
+  And I should see "Broken Stapler"  
+  
 
-Scenario: start to close the ticket and then change my mind
-  When I press "Close Ticket"
-  Then I should see "Are you sure"
-  And I press "Cancel"
-  Then I should be on the home page
-  And I should see "Broken stapler"  
+#Scenario: start to close the ticket and then change my mind
+  #When I press "Close Ticket"
+  #Then I should see "Are you sure"
+  #And I press "Cancel"
+  #Then I should be on the home page
+  #And I should see "Broken Stapler" 
 
+
+Scenario: closing the ticket should disable adding a note
+  Then I should see "Add a New Note"
+  When I press "Close This Ticket"
+  Then I should be on the My Tickets page
+  And I should see "Broken Stapler"
+  When I follow "View Ticket"
+  Then I should be viewing the "Broken Stapler" ticket
+  And I should not see "Add a New Note"

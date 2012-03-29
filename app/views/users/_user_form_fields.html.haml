@@ -4,9 +4,10 @@
 .field
   = label :user, :email, "Email"
   = text_field :user, :email
-.field
-  = label :user, :password, "Password"
-  = text_field :user, :password ,{:type => "password"}
+- if (@user == current_user and current_page?(edit_user_path)) or current_page?(new_user_path)
+  .field
+    = label :user, :password, "Password"
+    = text_field :user, :password ,{:type => "password"}
 .field
   = label :user, :location, "Location"
   = text_field :user, :location

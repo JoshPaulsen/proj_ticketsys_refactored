@@ -4,7 +4,7 @@ Feature: logging in
   So that I can see tickets and administrate the app.
 
 Background: there is an admin account
-  Given a "admin" user exists with the password "password"
+  Given an "admin" user with the password "password" exists
   And I am on the Login page
   #And I am not logged in
 

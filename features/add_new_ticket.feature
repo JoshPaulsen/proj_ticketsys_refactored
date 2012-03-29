@@ -4,16 +4,18 @@ Feature: Add a new ticket
   So that I can request a needed service
 
 Background: tickets in system
-  Given "Joe" is logged on as "admin"
-  And I am on the Ticket View page   
+  Given I am logged on as an "admin"
+  And I am on the admin home page  
+  And an "IT" service provider exists 
 
 Scenario: add ticket
   Then I should see "New Ticket"  
   When I follow "New Ticket"
   Then I should be on the New Ticket page
-  When I fill in "Description" with "Broken Computer"
+  When I select "IT" from "Department"
+  And I fill in "Title" with "Broken Computer"
   And I press "Submit Ticket"
-  Then I should be on the home page
+  #Then I should be on the admin home page
   And I should see "Broken Computer"
 
 Scenario: add ticket without a description

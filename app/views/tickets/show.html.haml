@@ -16,7 +16,7 @@
         = link_to "#{user.name}", user_path(user)
         = " "
     %ul
-      All Watchers (This can will be removed): 
+      All Watchers (This is here for test purposes): 
       - @ticket.users.each do |user|
         = link_to "#{user.name}", user_path(user)
         = " "
@@ -24,10 +24,12 @@
       Opened: 
       = readable_date(@ticket.opened_on)
     %ul
-      Closed: 
-      = readable_date(@ticket.closed_on)
+      - if @ticket.closed?
+        Closed: 
+        = readable_date(@ticket.closed_on)
     %ul= "Deparment: #{@ticket.department}"
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"
   = render @notes
-  = render "shared/new_note_form"
+  - if @ticket.open?
+    = render "shared/new_note_form"

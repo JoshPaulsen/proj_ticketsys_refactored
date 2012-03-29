@@ -18,7 +18,7 @@ class TicketsController < ApplicationController
     @ticket.closed_on = Time.now
     @ticket.save
     flash[:success] = "Ticket successfully closed."
-    redirect_to @ticket
+    redirect_to mytickets_path
   end
   
   def open
@@ -77,25 +77,29 @@ class TicketsController < ApplicationController
   
   def create     
     @ticket = Ticket.new(params[:ticket])
+    if @ticket.title.blank?
+      flash[:error] = "Error: Incomplete Ticket"      
+      redirect_to new_ticket_path
+      return
+    end
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
     prov = User.next_provider(params[:ticket][:department])
     
     if prov.nil? or !@ticket.set_provider prov
       @ticket.destroy
-      flash.now[:error] = "Error: No Provider could be located for this ticket."
-      @tickets = current_user.tickets
-      render "mytickets"
-      return    
+      flash[:error] = "Error: No Provider could be located for this ticket."
+      #@tickets = current_user.tickets
+      redirect_to mytickets_path and return          
     end 
       
     if @ticket.save
       redirect_to ticket_path @ticket
     else
       @ticket.destroy
-      flash.now[:error] = "Error: Ticket could not be created."
-      @tickets = current_user.tickets
-      render "mytickets"
+      flash[:error] = "Error: Ticket could not be created."
+      redirect_to new_ticket_path
+      return
     end
   end
 
@@ -115,8 +119,8 @@ class TicketsController < ApplicationController
       flash[:success] = "Ticket Updated"
       redirect_to @ticket
     else
-      flash.now[:error] = "Error: Ticket could not be updated" 
-      render "show"
+      flash[:error] = "Error: Ticket could not be updated" 
+      redirect_to @ticket
     end 
   end  
   
