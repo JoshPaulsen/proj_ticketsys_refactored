@@ -11,17 +11,23 @@ describe Note do
   end
   
   it "should require a body" do
-    user = Note.new(@attr.merge(:body =>""))
-    user.should_not be_valid
+    note = Note.new(@attr.merge(:body =>""))
+    note.should_not be_valid
   end
   
   it "should require a user ID" do
-    user = Note.new(@attr.merge(:user_id => nil))
-    user.should_not be_valid
+    note = Note.new(@attr.merge(:user_id => nil))
+    note.should_not be_valid
   end
   
   it "should require a ticket ID" do
-    user = Note.new(@attr.merge(:ticket_id => nil))
-    user.should_not be_valid
+    note = Note.new(@attr.merge(:ticket_id => nil))
+    note.should_not be_valid
   end
+  
+  it "should respond to hidden?" do
+    note = Note.create!(@attr.merge(:hidden => true))
+    note.hidden?.should be_true
+  end
+  
 end

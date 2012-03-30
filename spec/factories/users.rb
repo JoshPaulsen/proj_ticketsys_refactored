@@ -2,11 +2,13 @@
 
 FactoryGirl.define do
   factory :user do
-    name "name"
-    email "me@me.com"
+    sequence(:name) {|n| "name_#{n}"}
+    sequence(:email) {|n| "name_#{n}@test.com"}    
     privilege "user"
     password "password"
     location "office"
     department "IT"
   end
 end
+
+

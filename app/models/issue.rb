@@ -3,6 +3,6 @@ class Issue < ActiveRecord::Base
   # ticket_id:integer
   
   belongs_to :user
-  belongs_to :ticket  
+  belongs_to :ticket
   
 end
