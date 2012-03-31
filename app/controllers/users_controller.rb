@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create    
     @user = User.new(params[:user])        
     if @user.save
+      flash[:notice] = "New user successfully created"
       redirect_to user_path @user
     else
       @user.destroy
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     if @user.save
-      flash[:success] = "User Profile Updated"  
+      flash[:notice] = "User Profile Updated"  
     else
       flash[:error] = "User Profile could not be updated"      
     end 
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by_id(params[:id])
     @user.destroy
-    flash[:success] = "User was deleted"
+    flash[:notice] = "User was deleted"
     redirect_to users_path
   end
 
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
 
   def show    
     @user = User.find_by_id(params[:id])
-    if @user.nil?
+    if !@user
       flash[:error] = "That user does not exist"
       redirect_to users_path    
     end    

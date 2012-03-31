@@ -26,8 +26,8 @@ describe Note do
   end
   
   it "should respond to hidden?" do
-    note = Note.create!(@attr.merge(:hidden => true))
-    note.hidden?.should be_true
+    note = Note.create!(@attr)
+    note.should respond_to(:hidden?)
   end
   
 end

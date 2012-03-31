@@ -28,19 +28,15 @@ class Ticket < ActiveRecord::Base
     closed_on.blank?
   end
   
-  # Both setters here can probably be cleaned up to remove the check for saving.
-  # I can't think of a reason that the save would fail if we are only changing the IDs.
+  # Removed check for valid save in setters.
   
   def set_creator(c)
     if self.creator_id  
       remove_watcher_by_id(self.creator_id)
     end          
     self.creator_id = c.id
-    if self.save
-      add_watcher(c)
-    else
-      false
-    end
+    self.save
+    add_watcher(c)    
   end
   
   def set_provider(p)
@@ -48,11 +44,8 @@ class Ticket < ActiveRecord::Base
       remove_watcher_by_id(self.provider_id)
     end
     self.provider_id = p.id
-    if self.save
-      add_watcher(p)
-    else
-      false    
-    end   
+    self.save
+    add_watcher(p)
   end
   
   def add_watcher(w)
@@ -69,11 +62,11 @@ class Ticket < ActiveRecord::Base
   
   def remove_watcher_by_id(wid)    
     issue = issues.find_by_user_id(wid)
-    if issue.nil?
-      false
-    else
+    if issue
       issue.destroy   
-      true
+      true      
+    else
+      false
     end
   end
   

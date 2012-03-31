@@ -10,9 +10,9 @@ module ApplicationHelper
     ["user", "service provider", "admin"]
   end
   
-  def readable_date(date)
-    if !date.nil?
-      date.strftime("%a, %b %d, %Y at %I:%M%p")
+  def readable_date(time)
+    if time.class == Time
+      time.strftime("%a, %b %d, %Y at %I:%M%p")
     else
       nil
     end

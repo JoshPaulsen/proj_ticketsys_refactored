@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_name(params[:name])
-    @count = User.count
     if user and user.password == params[:password]      
         sign_in(user)        
         redirect_to tickets_path

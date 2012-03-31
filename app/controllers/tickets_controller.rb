@@ -63,14 +63,13 @@ class TicketsController < ApplicationController
   def removewatcher
     @ticket = Ticket.find_by_id(params[:id])
     watcher = User.find_by_id(params[:user][:user_id])    
-    if watcher.nil?
-      flash[:error] = "Error: That watcher does not exist."       
-      redirect_to @ticket
-    else
+    if watcher
       @ticket.remove_watcher(watcher)
-      flash[:success] = "Watcher Removed from Ticket"
-      redirect_to @ticket
+      flash[:success] = "Watcher Removed from Ticket"      
+    else      
+      flash[:error] = "Error: That watcher does not exist."
     end
+    redirect_to @ticket
   end
   
   def create     
@@ -79,16 +78,18 @@ class TicketsController < ApplicationController
       flash[:error] = "Error: Incomplete Ticket"      
       redirect_to new_ticket_path and return
     end
+    
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
     prov = User.next_provider(params[:ticket][:department])
     
-    if prov.nil? or !@ticket.set_provider prov
+    if !prov
       @ticket.destroy
       flash[:error] = "Error: No Provider could be located for this ticket."      
       redirect_to mytickets_path and return          
     end 
       
+    @ticket.set_provider prov  
     if @ticket.save
       redirect_to ticket_path @ticket
     else

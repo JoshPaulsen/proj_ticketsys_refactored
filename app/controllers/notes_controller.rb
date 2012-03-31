@@ -4,7 +4,8 @@ class NotesController < ApplicationController
   
   def new
   end
-
+  
+  
   def create
     ticket = Ticket.find_by_id(params[:ticket_id])
     if ticket.closed?
@@ -17,7 +18,7 @@ class NotesController < ApplicationController
     if @note.save
       redirect_to ticket_path ticket
     else
-      flash[:error] = "Error: Note could not be created"
+      flash[:error] = "Error: Note cannot be blank"
       redirect_to ticket_path ticket
     end
   end

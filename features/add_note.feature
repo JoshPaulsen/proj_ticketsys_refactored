@@ -8,11 +8,15 @@ Background: tickets in system
   And I have a "Facilities" ticket with the title "Test"
   And I am viewing the "Test" ticket
   
-Scenario: add ticket
+Scenario: add note
   Then I should see "Add a New Note"  
   When I fill in "Add a New Note" with "1-2-3-4-5"
   And I press "New Note"
   Then I should be viewing the "Test" ticket
   And I should see "1-2-3-4-5"
   
-
+Scenario: add ticket
+  Then I should see "Add a New Note"    
+  When I press "New Note"
+  Then I should be viewing the "Test" ticket
+  And I should see "Error: Note cannot be blank"
