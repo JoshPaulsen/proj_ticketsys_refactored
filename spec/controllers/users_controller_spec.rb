@@ -73,6 +73,7 @@ describe UsersController do
       @user = Factory :user
       User.stub(:find_by_id).and_return @user
     end
+    
     it "should destroy the user" do       
       @user.should_receive(:destroy) 
       delete :destroy, :id => @user.id     
@@ -86,8 +87,7 @@ describe UsersController do
     it "should display a message" do
       delete :destroy, :id => @user.id
       flash[:notice].should eq "User was deleted"
-    end
-    
+    end 
   end  
   
   describe "showing a user" do
@@ -105,16 +105,5 @@ describe UsersController do
       flash[:error].should eq "That user does not exist"
       response.should redirect_to users_path    
     end
-    
-    
   end
-  
-  def show    
-    @user = User.find_by_id(params[:id])
-    if @user.nil?
-      flash[:error] = "That user does not exist"
-      redirect_to users_path    
-    end    
-  end  
-  
 end
