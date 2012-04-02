@@ -11,7 +11,9 @@ module ApplicationHelper
   end
   
   def readable_date(time)
-    if time.class == Time
+    if time
+      #time_ago_in_words(time)
+      #distance_of_time_in_words_to_now(time)
       time.strftime("%a, %b %d, %Y at %I:%M%p")
     else
       nil
