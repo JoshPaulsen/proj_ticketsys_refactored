@@ -32,7 +32,7 @@ When /^a[n]? "([^"]*)" named "([^"]*)" with the email "(.*)" exists$/ do |privil
 end
 
 When /^the user "(.*)" does not exist$/ do |name|
-  user = User.find_by_username(name)
+  user = User.find_by_name(name)
   assert user.nil?
 end
 
