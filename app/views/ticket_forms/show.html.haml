@@ -1,0 +1,8 @@
+%div
+  -#= render "ticket_form_menu"
+  %div
+    %ul= "Deparment: #{@ticket_form.department}"
+    %ul= "Category: #{@ticket_form.category}"
+  %div 
+    Add a new Field to this Form
+    %ul= link_to "Add a check box field", new_checkbox_path(@ticket)

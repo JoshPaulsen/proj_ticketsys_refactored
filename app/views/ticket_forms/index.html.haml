@@ -1,0 +1,18 @@
+%div
+  %h3 Create a New Blank Form
+  = form_for(@ticket_form) do |f|
+    - if current_user.admin?
+      = f.label :department, "Select a department"
+      = f.select :department, get_departments
+    - else
+      = f.hidden_field :department
+      = hidden_field_tag :department, current_user.department
+    .field
+      = f.label :category, "Enter a category name for this form (e.g. 'Software Upgrade Issue')"
+      %p
+      = f.text_field :category
+    .actions
+      = f.submit "Create"
+  %h3 All Ticket Forms
+  = render @ticket_forms
+  

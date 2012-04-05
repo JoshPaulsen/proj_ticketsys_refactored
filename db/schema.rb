@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327045213) do
+ActiveRecord::Schema.define(:version => 20120405082313) do
+
+  create_table "form_fields", :force => true do |t|
+    t.string   "description"
+    t.string   "field_type"
+    t.integer  "ticket_form_id"
+    t.text     "options"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "issues", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +36,14 @@ ActiveRecord::Schema.define(:version => 20120327045213) do
     t.boolean  "hidden"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "ticket_forms", :force => true do |t|
+    t.string   "department"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "category"
   end
 
   create_table "tickets", :force => true do |t|

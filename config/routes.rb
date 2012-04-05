@@ -1,5 +1,10 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
+  get "settings/index", :as => 'settings'
+
+  get 'ticket_forms/:id/newcheckbox', :to => 'ticket_forms#newcheckbox', :as => 'new_checkbox'
+  post 'ticket_forms/createcheckbox', :as => 'create_checkbox'
+  #get 'ticket_forms/addcheckbox', :as => 'add_checkbox_field'
   get 'tickets/mytickets', :as => 'mytickets'
   
   put 'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
@@ -11,6 +16,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   resources :users
   resources :notes, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :ticket_forms
   
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

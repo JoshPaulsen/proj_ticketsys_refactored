@@ -1,0 +1,8 @@
+%div
+  %h3= "New Form for #{@name}" 
+  
+  = form_tag checkbox_field_path, :method => :get do
+    .field
+      
+    .actions
+      = submit_tag "Add CheckBox Field"

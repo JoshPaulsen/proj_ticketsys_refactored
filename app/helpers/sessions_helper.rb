@@ -4,7 +4,7 @@ module SessionsHelper
   # various forms of validation
   
   def sign_in (user)    
-    session[:user_id] = user.id
+    session[:signed_in_user_id] = user.id
     self.current_user = user    
   end
   
@@ -22,11 +22,11 @@ module SessionsHelper
   
   def sign_out    
     self.current_user = nil    
-    session[:user_id] = nil
+    session[:signed_in_user_id] = nil
   end
   
   def user_from_session   
-    User.find_by_id(session[:user_id])
+    User.find_by_id(session[:signed_in_user_id])
   end 
   
   def check_if_signed_in

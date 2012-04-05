@@ -1,0 +1,11 @@
+%div
+  = form_tag create_checkbox_path, :method => :post do
+    .field
+      = label :form_field, :description, "Enter a description: "
+      = text_field :form_field, :description
+    .field      
+      = text_field :options, :option_1
+      = text_field :options, :option_2
+    .actions
+      = submit_tag "Create User"
+
