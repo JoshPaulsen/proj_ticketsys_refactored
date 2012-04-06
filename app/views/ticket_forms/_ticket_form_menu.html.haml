@@ -1,0 +1,9 @@
+%div
+  %ul= link_to "Add a new field to this form", new_form_field_path(@ticket_form)
+  - if !@ticket_form.form_fields.blank?
+    - @ticket_form.form_fields.each do |f|
+      %ul= button_to "Delete '#{truncate(f.description, :length => 20)}' Field", remove_field_path(f), :method => :delete , :confirm => "Are you sure you want to delete this field?"
+  - if current_user.admin?
+    %div
+      %ul= button_to "Delete Entire Form", @ticket_form, :method => :delete , :confirm => "Are you sure you want to delete this form?"
+%hr

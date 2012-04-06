@@ -1,42 +1,62 @@
-class TicketFormsController < ApplicationController
+class TicketFormsController < ApplicationController  
   
-  def new    
-    s_name = params[:selected_name]
-    name = params[:name]
-    if !s_name.blank? and !name.blank?
-      flash[:error] = "Error: Please select an name OR enter a name not both."
-      redirect_to ticket_forms_path
-    elsif !name.blank?
-      session[:form_name] = name  
-      @name = name    
-    elsif !s_name.blank?
-      session[:form_name] = s_name
-      @name = s_name
-    elsif session[:form_name]
-      @name = session[:form_name]
+  def remove_field
+    field_id = params[:id]    
+    field = FormField.find_by_id field_id
+    if field
+      form = field.ticket_form
+      field.destroy
+      form.write_form
+      flash[:notice] = "Field Removed"
+      redirect_to form
     else
-      flash[:error] = "Error: Please select or enter name."
+      flash[:error] = "Error: That field does not exist."
       redirect_to ticket_forms_path
-    end    
+    end
   end
+  
+  #def new    
+   # s_name = params[:selected_name]
+    #name = params[:name]
+    #if !s_name.blank? and !name.blank?
+     # flash[:error] = "Error: Please select an name OR enter a name not both."
+      #redirect_to ticket_forms_path
+    #elsif !name.blank?
+     # session[:form_name] = name  
+     # @name = name    
+    #elsif !s_name.blank?
+    #  session[:form_name] = s_name
+    #  @name = s_name
+    #elsif session[:form_name]
+    #  @name = session[:form_name]
+    #else
+    #  flash[:error] = "Error: Please select or enter name."
+    #  redirect_to ticket_forms_path
+    #end    
+  #end
   
   def create
     @ticket_form = TicketForm.create!(params[:ticket_form])
+    @ticket_form.write_form
     redirect_to @ticket_form
   end
   
   def new_field
-
     @ticket_form = TicketForm.find_by_id params[:id]
     @description = session[:field_description]
-
-    if @ticket_form
-
-    else
-
+    if !@ticket_form
+      flash[:error] = "Error: That form does not exit."
+      redirect_to ticket_forms_path 
     end
   end
   
+  def destroy
+    @tf = TicketForm.find_by_id(params[:id])
+    @tf.delete_file
+    @tf.destroy
+    flash[:notice] = "Form was deleted"
+    redirect_to ticket_forms_path    
+  end
   
   def index
     @ticket_form = TicketForm.new
@@ -58,31 +78,27 @@ class TicketFormsController < ApplicationController
       flash[:error] = "Error: All forms fields need a description"      
       redirect_to new_form_field_path and return        
     end
-    
-    
+        
+    options_list = parse_options(params[:options])
     type = params[:field_type]
-    options_list = []
-    
-    params[:options].each do |o|
-      if !o[1].blank?
-        options_list << o[1]
-      end
-    end
-    
-    puts "this is the option list: " 
-    puts options_list.to_s
-    puts
-    
     if type == "text"
       add_text_field(ticket_form, description, options_list)
     elsif type == "radio"
       add_radio_field(ticket_form, description, options_list)
-    elsif type == "select"
-      
     end
   end
   
   private
+  
+    def parse_options(options)      
+      options_list = []    
+      options.each do |o|
+        if !o[1].blank?
+          options_list << o[1]
+        end
+      end  
+      options_list    
+    end
   
     def add_text_field(ticket_form, description, options)
       if options.empty?

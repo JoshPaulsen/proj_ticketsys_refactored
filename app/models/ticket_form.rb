@@ -1,20 +1,21 @@
 class TicketForm < ActiveRecord::Base
   
-  has_many :form_fields
+  has_many :form_fields, :dependent => :destroy
   
   def write_form
-    
     fields = ""    
     if !form_fields.empty?
       form_fields.each do |f|
-        fields += render_field f
-      end      
-    else
-      return false
+        fields += f.render
+      end
     end
-    
     write_form_to_file fields
-    
+  end
+  
+  def delete_file
+    if File.exist?(form_name_path)
+      File.delete(form_name_path)
+    end
   end
   
   private
@@ -27,44 +28,15 @@ class TicketForm < ActiveRecord::Base
     "_ticket_form_#{self.id}.html.haml"
   end
   
+  def form_name_path
+    forms_directory + form_name
+  end
+  
   def write_form_to_file(form)
-    write_out = File.new(forms_directory + form_name, "w")
+    write_out = File.new(form_name_path, "w")
     bytes = write_out.write(form)
     write_out.close    
     bytes != 0
   end
-  
-  def render_field(field)
-    
-    if field.field_type == "text"
-      render_text(field)
-    elsif field.field_type == "radio"
-      render_radio(field)
-    end
-    
-    
-  end
-  
-  def render_text(field)
-    text =  ".form-field-text\n"
-    text += "  = label :answers, :field_#{field.id}, '#{field.description}'\n"
-    text += "  %br\n"
-    text += "  = text_field :answers, :field_#{field.id}\n"
-    text    
-  end
-  
-  def render_radio(field)
-    i = 0
-    text =  ".form-field-radio\n"
-    text += "  = label :answers, :field_#{field.id}, '#{field.description}'\n"
-    field.options.each do |option|
-      text += "  = radio_button :answers, :field_#{field.id}_option_#{i}\n"
-      text += "  = label :answers, :field_#{field.id}_option_#{i}, '#{option}'\n"
-      i += 1
-    end
-   
-    text
-  end
-  
   
 end

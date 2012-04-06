@@ -10,10 +10,10 @@ class Ticket < ActiveRecord::Base
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
-  has_many :issues
+  has_many :issues, :dependent => :destroy
   has_many :users, :through => :issues, :uniq => true
-  has_many :notes
-  has_many :questions
+  has_many :notes, :dependent => :destroy
+  has_many :questions, :dependent => :destroy
   
   # Is there anything else a ticket must have?  Department?
   # Requiring a creator and a provider could be tricky if we allow
@@ -74,6 +74,17 @@ class Ticket < ActiveRecord::Base
   def just_watchers
     watchers = self.users.where('user_id != ?', self.creator_id)
     watchers.where('user_id != ?', self.provider_id)    
+  end
+  
+  def add_answers(answers)
+    if !answers.blank?
+      answers.each do |field, answer|      
+        field_id = field.delete("field_").to_i        
+        field = FormField.find_by_id field_id
+        questions.create :question => field.description, :answer => answer
+      end
+      self.save
+    end
   end
   
 end

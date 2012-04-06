@@ -1,25 +1,25 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
-  get "settings/index", :as => 'settings'
   
-  post 'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
-  post 'ticket_forms/:id/create_field', :to => 'ticket_forms#create_field', :as => 'create_form_field'
-  get 'ticket_forms/:id/new_field', :to => 'ticket_forms#new_field', :as => 'new_form_field'
-  #get 'ticket_forms/:id/newcheckbox', :to => 'ticket_forms#newcheckbox', :as => 'new_checkbox'
-  #post 'ticket_forms/createcheckbox', :as => 'create_checkbox'
-  #get 'ticket_forms/addcheckbox', :as => 'add_checkbox_field'
-  get 'tickets/mytickets', :as => 'mytickets'
-  post 'tickets/new_ticket_form', :as => 'new_ticket_form'
-  put 'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
-  delete 'tickets/:id/removewatcher', :to => 'tickets#removewatcher',:as => 'removewatcher'
-  put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
-  put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
+  delete  'ticket_forms/remove_field/:id', :to => 'ticket_forms#remove_field', :as => 'remove_field'  
+  post    'ticket_forms/:id/create_field', :to => 'ticket_forms#create_field', :as => 'create_form_field'
+  get     'ticket_forms/:id/new_field', :to => 'ticket_forms#new_field', :as => 'new_form_field'  
+  
+  post    'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
+  get     'tickets/mytickets', :as => 'mytickets'
+  post    'tickets/new_ticket_form', :as => 'new_ticket_form'
+  put     'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
+  delete  'tickets/:id/removewatcher', :to => 'tickets#removewatcher',:as => 'removewatcher'
+  put     'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
+  put     'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   
   resources :tickets
   resources :users
   resources :notes, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
   resources :ticket_forms
+  
+  get "settings/index", :as => 'settings'
   
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'

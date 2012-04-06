@@ -6,8 +6,7 @@ class TicketsController < ApplicationController
   before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :mytickets ]    
    
   
-  def new
-    
+  def new 
   end
   
   def close    
@@ -91,18 +90,10 @@ class TicketsController < ApplicationController
       flash[:error] = "Error: No Provider could be located for this ticket."      
       redirect_to mytickets_path and return          
     end
-    
       
     @ticket.set_provider prov  
     if @ticket.save
-      
-      answers = params[:answers]
-    
-      if answers    
-        parse_answers(answers, @ticket)
-      end
-      
-      
+      @ticket.add_answers(params[:answers])
       redirect_to ticket_path @ticket
     else
       @ticket.destroy
@@ -110,48 +101,6 @@ class TicketsController < ApplicationController
       redirect_to new_ticket_path
     end
   end
-  
-  def parse_answers(answers, ticket)
-    
-    ans_with_option = Regexp.new(/field_(\d+)_option_(\d+)/)
-    ans = Regexp.new(/field_(\d+)/)
-    
-    answers.each do |key, value|      
-      a = key.scan(ans)        
-      if !a.empty?
-        field_id = a[0][0]
-        field = FormField.find_by_id field_id
-        ticket.questions.create :question => field.description, :answer => value
-      end     
-    
-      #a = key.scan(ans_with_option)
-      #if !a.empty?
-        #ticket.question.new parse_with_options(a)
-      #else
-        
-      #end
-      
-    end
-    
-  end
-  
-  
-  def parse_with_options(answers)
-    field_id = answers[0][0]
-    option_index = answers[0][1].to_i    
-    field = FormField.find_by_id field_id
-    if field
-      question = field.description
-      answer = field.options[option_index]
-      {:question => question, :answer => answer}
-    end
-  end
-  
-  def parse_without_options(answers)
-    ans = Regexp.new(/field_(\d+)/)
-  end
-  
-  
   
   def new_ticket
     @category_id = params[:ticket][:category]    
