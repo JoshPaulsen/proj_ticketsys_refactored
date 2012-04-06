@@ -1,0 +1,9 @@
+%div
+  = form_tag tickets_path, :method => :post do
+    %p Please answer the following questions: 
+    = render "ticket_forms/area_ticket_forms/ticket_form_#{@category_id}"
+    %p Please fill in a title and a descripton for the ticket: 
+    = render "ticket_form_fields"
+    .action
+      = submit_tag "Create Ticket"
+    

@@ -1,5 +1,10 @@
-%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
-  = form_tag tickets_path, :method => :post do
-    = render "ticket_form_fields"
+%div
+  = form_tag new_ticket_form_path, :method => :post do
+    .select
+      = label :ticket, :service_area, "Please Choose a Service Area: "
+      = select :ticket, :service_area, get_service_areas
+    .select
+      = label :ticket, :category, "Please Choose a Category: "
+      = select :ticket, :category, get_categories_for("IT")
     .actions
-      = submit_tag "Submit Ticket"
+      = submit_tag "Next"

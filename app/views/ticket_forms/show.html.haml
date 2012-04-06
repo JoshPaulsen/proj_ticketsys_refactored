@@ -3,6 +3,14 @@
   %div
     %ul= "Deparment: #{@ticket_form.department}"
     %ul= "Category: #{@ticket_form.category}"
-  %div 
-    Add a new Field to this Form
-    %ul= link_to "Add a check box field", new_checkbox_path(@ticket)
+    - if !@ticket_form.form_fields.blank?
+      %div
+        Fields for this Form
+        - @ticket_form.form_fields.each do |f|
+          %ul= "Description: #{f.description}"
+          %ul= "Field Type: #{f.field_type}"
+          %ul= "Options: #{f.options}"
+    - else
+      %ul= "This Form Has no Fields yet."
+  %div     
+    %ul= link_to "Add a new field to this form", new_form_field_path(@ticket_form)

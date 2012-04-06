@@ -14,5 +14,6 @@
     .actions
       = f.submit "Create"
   %h3 All Ticket Forms
-  = render @ticket_forms
-  
+  %table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden"}
+    = render "ticket_forms_header"
+    = render @ticket_forms

@@ -6,8 +6,20 @@ module ApplicationHelper
     ["IT", "HR", "Facilities"]
   end
   
+  def get_service_areas    
+    service_areas = ServiceArea.all.collect do |sa|
+      [sa.name, sa.id]
+    end    
+  end
+  
   def get_privileges
     ["user", "service provider", "admin"]
+  end
+  
+  def get_categories_for(department)
+    categories = TicketForm.where(:department => department).collect do |tf|
+      [tf.category, tf.id]
+    end
   end
   
   def readable_date(time)

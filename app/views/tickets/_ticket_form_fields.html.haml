@@ -1,7 +1,7 @@
-- if current_user.admin? or current_page?(new_ticket_path)
-  .select
-    = label :ticket, :department, "Department: "
-    = select :ticket, :department, get_departments
+-#- if current_user.admin? or current_page?(new_ticket_path)
+  -#.select
+    -#= label :ticket, :department, "Department: "
+    -#= select :ticket, :department, get_departments
 .field
   = label :ticket, :title, "Title: "
   = text_field :ticket, :title
@@ -13,3 +13,6 @@
   .select
     = label :ticket, :provider_id, "Service Providers in #{@ticket.department}: "
     = select :ticket, :provider_id, get_providers_in(@ticket.department)
+.field
+  = hidden_field_tag :provider_id, @provider_id
+  = hidden_field_tag :department, @department

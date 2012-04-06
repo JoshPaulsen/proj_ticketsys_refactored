@@ -72,22 +72,27 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
   
-  def create     
+  def create
     @ticket = Ticket.new(params[:ticket])
+    @ticket.department = params[:department]
     if @ticket.title.blank?
       flash[:error] = "Error: Incomplete Ticket"      
       redirect_to new_ticket_path and return
-    end
+    end    
     
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
-    prov = User.next_provider(params[:ticket][:department])
+    prov = User.find_by_id params[:provider_id]
     
     if !prov
       @ticket.destroy
       flash[:error] = "Error: No Provider could be located for this ticket."      
       redirect_to mytickets_path and return          
     end 
+    
+    answers = params[:answers]
+    puts "answers:"
+    puts answers.to_s
       
     @ticket.set_provider prov  
     if @ticket.save
@@ -97,6 +102,24 @@ class TicketsController < ApplicationController
       flash[:error] = "Error: Ticket could not be created."
       redirect_to new_ticket_path
     end
+  end
+  
+  def new_ticket_form
+    @category_id = params[:ticket][:category]    
+    service_area = ServiceArea.find_by_id params[:ticket][:service_area]
+    
+    if !service_area
+      flash[:error] = "Error: That service area seems to be invalid"      
+      redirect_to mytickets_path and return          
+    end 
+    
+    service_provider = User.next_provider service_area.name    
+    if !service_provider
+      flash[:error] = "Error: No Provider could be located for this ticket."      
+      redirect_to mytickets_path and return          
+    end
+    @provider_id = service_provider.id
+    @department = service_area.name
   end
 
   def update

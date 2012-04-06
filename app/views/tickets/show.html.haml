@@ -27,7 +27,7 @@
       - if @ticket.closed?
         Closed: 
         = readable_date(@ticket.closed_on)
-    %ul= "Deparment: #{@ticket.department}"
+    %ul= "Service Area: #{@ticket.department}"
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"
   = render @notes

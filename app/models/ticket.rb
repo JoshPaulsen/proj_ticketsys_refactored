@@ -13,6 +13,7 @@ class Ticket < ActiveRecord::Base
   has_many :issues
   has_many :users, :through => :issues, :uniq => true
   has_many :notes
+  has_many :questions
   
   # Is there anything else a ticket must have?  Department?
   # Requiring a creator and a provider could be tricky if we allow

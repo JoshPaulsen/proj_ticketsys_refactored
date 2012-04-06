@@ -1,12 +1,15 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
   get "settings/index", :as => 'settings'
-
-  get 'ticket_forms/:id/newcheckbox', :to => 'ticket_forms#newcheckbox', :as => 'new_checkbox'
-  post 'ticket_forms/createcheckbox', :as => 'create_checkbox'
+  
+  
+  post 'ticket_forms/:id/create_field', :to => 'ticket_forms#create_field', :as => 'create_form_field'
+  get 'ticket_forms/:id/new_field', :to => 'ticket_forms#new_field', :as => 'new_form_field'
+  #get 'ticket_forms/:id/newcheckbox', :to => 'ticket_forms#newcheckbox', :as => 'new_checkbox'
+  #post 'ticket_forms/createcheckbox', :as => 'create_checkbox'
   #get 'ticket_forms/addcheckbox', :as => 'add_checkbox_field'
   get 'tickets/mytickets', :as => 'mytickets'
-  
+  post 'tickets/new_ticket_form', :as => 'new_ticket_form'
   put 'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
   delete 'tickets/:id/removewatcher', :to => 'tickets#removewatcher',:as => 'removewatcher'
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'

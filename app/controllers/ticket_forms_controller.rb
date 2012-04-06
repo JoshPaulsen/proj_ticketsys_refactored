@@ -58,9 +58,87 @@ class TicketFormsController < ApplicationController
   
   def createcheckbox
     @formfield = FormField.new(params[:form_field])
-    @options = params[:options]
-    
+    @options = params[:options]    
+  end
+  
+  def new_field
+    @ticket_form = TicketForm.find_by_id params[:id]
+    @description = session[:field_description]
+    if @ticket_form
+      
+    else
+      
+    end
     
   end
   
+  def create_field
+    
+    ticket_form = TicketForm.find_by_id params[:id]
+    description = params[:description]
+    if !ticket_form
+      flash[:error] = "Error: That Ticket Form does not exist"      
+      redirect_to new_form_field_path and return
+    elsif description.blank?
+      flash[:error] = "Error: All forms fields need a description"      
+      redirect_to new_form_field_path and return        
+    end
+    
+    
+    type = params[:field_type]
+    options_list = []
+    
+    params[:options].each do |o|
+      if !o[1].blank?
+        options_list << o[1]
+      end
+    end
+    
+    puts "this is the option list: " 
+    puts options_list.to_s
+    puts
+    
+    if type == "text"
+      add_text_field(ticket_form, description, options_list)
+    elsif type == "radio"
+      add_radio_field(ticket_form, description, options_list)
+    elsif type == "select"
+      
+    end
+  end
+  
+  private
+  
+    def add_text_field(ticket_form, description, options)
+      if options.empty?
+        session[:field_description] = nil  
+        ticket_form.form_fields.create! :description => description, :field_type => "text"
+        ticket_form.write_form
+        flash[:notice] = "New Field Added"
+        redirect_to ticket_form
+      else
+        flash[:error] = "Error: A text field does not need options"    
+        session[:field_description] = description  
+        redirect_to new_form_field_path
+      end      
+    end
+    
+    def add_radio_field(ticket_form, description, options)
+      if options.length < 2
+        flash[:error] = "Error: A radio field needs at least two options."    
+        session[:field_description] = description  
+        redirect_to new_form_field_path
+      else
+        session[:field_description] = nil  
+        ticket_form.form_fields.create! :description => description, :field_type => "text", :options => options
+        if ticket_form.write_form
+          flash[:notice] = "New Field Added"        
+          redirect_to ticket_form
+        else
+          flash[:error] = "Error: Unable to write form to file."    
+          session[:field_description] = description  
+          redirect_to new_form_field_path      
+        end
+      end
+    end
 end
