@@ -25,22 +25,6 @@ class TicketFormsController < ApplicationController
     redirect_to @ticket_form
   end
   
-  def checkbox
-    
-    number_of_options = params[:checkbox]
-    
-    if number_of_options.blank?
-      flash[:error] = "Error: Please the number of checkbox options you want."       
-      redirect_to new_ticket_form_path and return
-    elsif number_of_options.to_i == 0
-      flash[:error] = "Error: The number of checkbox options needs to be a positive number."      
-      redirect_to new_ticket_form_path and return      
-    else
-      flash.now[:error] = "Looks good"      
-    end
-    
-    
-  end
   
   def index
     @ticket_form = TicketForm.new
@@ -48,29 +32,8 @@ class TicketFormsController < ApplicationController
   end
   
   def show
-    @ticket_form = TicketForm.find_by_id params[:id]
-    
-  end
-  
-  def newcheckbox
-    
-  end
-  
-  def createcheckbox
-    @formfield = FormField.new(params[:form_field])
-    @options = params[:options]    
-  end
-  
-  def new_field
-    @ticket_form = TicketForm.find_by_id params[:id]
-    @description = session[:field_description]
-    if @ticket_form
-      
-    else
-      
-    end
-    
-  end
+    @ticket_form = TicketForm.find_by_id params[:id]    
+  end  
   
   def create_field
     

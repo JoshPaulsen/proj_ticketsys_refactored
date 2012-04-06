@@ -2,7 +2,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   
   get "settings/index", :as => 'settings'
   
-  
+  post 'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
   post 'ticket_forms/:id/create_field', :to => 'ticket_forms#create_field', :as => 'create_form_field'
   get 'ticket_forms/:id/new_field', :to => 'ticket_forms#new_field', :as => 'new_form_field'
   #get 'ticket_forms/:id/newcheckbox', :to => 'ticket_forms#newcheckbox', :as => 'new_checkbox'

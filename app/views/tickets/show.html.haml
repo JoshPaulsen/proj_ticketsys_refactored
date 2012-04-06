@@ -30,6 +30,10 @@
     %ul= "Service Area: #{@ticket.department}"
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"
+    %ul
+      Questions
+      - @ticket.questions.each do |q|
+        %p= "#{q.question}: #{q.answer}"
   = render @notes
   - if @ticket.open?
     = render "shared/new_note_form"
