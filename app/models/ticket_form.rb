@@ -48,7 +48,7 @@ class TicketForm < ActiveRecord::Base
   def render_text(field)
     text =  ".form-field-text\n"
     text += "  = label :answers, :field_#{field.id}, '#{field.description}'\n"
-    text += "%br\n"
+    text += "  %br\n"
     text += "  = text_field :answers, :field_#{field.id}\n"
     text    
   end

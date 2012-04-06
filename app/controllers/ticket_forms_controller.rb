@@ -25,6 +25,18 @@ class TicketFormsController < ApplicationController
     redirect_to @ticket_form
   end
   
+  def new_field
+
+    @ticket_form = TicketForm.find_by_id params[:id]
+    @description = session[:field_description]
+
+    if @ticket_form
+
+    else
+
+    end
+  end
+  
   
   def index
     @ticket_form = TicketForm.new
@@ -93,7 +105,8 @@ class TicketFormsController < ApplicationController
         redirect_to new_form_field_path
       else
         session[:field_description] = nil  
-        ticket_form.form_fields.create! :description => description, :field_type => "text", :options => options
+        ticket_form.form_fields.create! :description => description,
+                                       :field_type => "radio", :options => options
         if ticket_form.write_form
           flash[:notice] = "New Field Added"        
           redirect_to ticket_form
