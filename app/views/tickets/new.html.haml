@@ -1,10 +1,12 @@
 %div
   = form_tag continue_new_ticket_path, :method => :post do
-    .select
+    .select1
       = label :ticket, :service_area, "Please Choose a Service Area: "
-      = select :ticket, :service_area, get_service_areas
+      = select :ticket, :service_area, get_service_areas, :remote => true
     .select
       = label :ticket, :category, "Please Choose a Category: "
       = select :ticket, :category, get_categories_for("IT")
     .actions
       = submit_tag "Next"
+      
+  
