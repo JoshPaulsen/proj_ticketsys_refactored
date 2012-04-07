@@ -1,5 +1,7 @@
 class TicketFormsController < ApplicationController  
   
+  before_filter :check_if_signed_in
+  
   def remove_field
     field_id = params[:id]    
     field = FormField.find_by_id field_id
@@ -14,26 +16,6 @@ class TicketFormsController < ApplicationController
       redirect_to ticket_forms_path
     end
   end
-  
-  #def new    
-   # s_name = params[:selected_name]
-    #name = params[:name]
-    #if !s_name.blank? and !name.blank?
-     # flash[:error] = "Error: Please select an name OR enter a name not both."
-      #redirect_to ticket_forms_path
-    #elsif !name.blank?
-     # session[:form_name] = name  
-     # @name = name    
-    #elsif !s_name.blank?
-    #  session[:form_name] = s_name
-    #  @name = s_name
-    #elsif session[:form_name]
-    #  @name = session[:form_name]
-    #else
-    #  flash[:error] = "Error: Please select or enter name."
-    #  redirect_to ticket_forms_path
-    #end    
-  #end
   
   def create
     @ticket_form = TicketForm.create!(params[:ticket_form])
