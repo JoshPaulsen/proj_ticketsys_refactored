@@ -107,9 +107,14 @@ class TicketsController < ApplicationController
     service_area = ServiceArea.find_by_id params[:ticket][:service_area]
     
     if !service_area
-      flash[:error] = "Error: That service area seems to be invalid"      
-      redirect_to mytickets_path and return          
+      flash[:error] = "Error: Please choose a Service Area"      
+      redirect_to new_ticket_path and return          
     end 
+    
+    if @category_id.blank? or @category_id.nil?
+      flash[:error] = "Error: Please choose a Category"      
+      redirect_to new_ticket_path and return     
+    end
     
     service_provider = User.next_provider service_area.name    
     if !service_provider

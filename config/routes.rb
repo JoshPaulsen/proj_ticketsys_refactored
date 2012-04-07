@@ -5,7 +5,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   post    'ticket_forms/:id/create_field', :to => 'ticket_forms#create_field', :as => 'create_form_field'
   get     'ticket_forms/:id/new_field', :to => 'ticket_forms#new_field', :as => 'new_form_field'  
   
-  post    'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
+  get    'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
   get     'tickets/mytickets', :as => 'mytickets'
   post    'tickets/new_ticket_form', :as => 'new_ticket_form'
   put     'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
