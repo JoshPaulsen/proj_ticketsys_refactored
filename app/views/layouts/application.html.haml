@@ -12,7 +12,7 @@
       %div{:align => "right"}
         - if signed_in?
           Sign out 
-          = link_to "#{current_user.name}", signout_path, :method => :delete
+          = link_to "#{current_user.name}", signout_path, :method => :delete, :id => "signout"
         - else
           = Time.now
     %hr

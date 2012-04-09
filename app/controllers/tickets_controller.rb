@@ -101,8 +101,14 @@ class TicketsController < ApplicationController
 
   def update
     
-    @ticket = Ticket.find_by_id(params[:id])   
-    @ticket.description = params[:ticket][:title]
+    @ticket = Ticket.find_by_id(params[:id])
+    
+    if params[:ticket][:title].blank?
+      flash[:error] = "Error: The title cannot be blank" 
+      redirect_to edit_ticket_path @ticket and return
+    end
+    
+    @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
     @ticket.department = params[:ticket][:department] 
     
