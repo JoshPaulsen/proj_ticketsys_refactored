@@ -18,7 +18,7 @@ class Ticket < ActiveRecord::Base
   # Requiring a creator and a provider could be tricky if we allow
   # Users to be deleted.
   validates :title, :presence => true
-  validates :opened_on, :presence => true
+  validates :opened_on, :presence => true  
   
   def closed?
     !closed_on.blank?
@@ -108,11 +108,15 @@ class Ticket < ActiveRecord::Base
   end
   
   def additional_users
-    add_users = self.users.where('provider == false')    
+    add_users = self.user_tickets.users.where('user_id != ?', self.creator_id).collect do |u|     
+      u.user     
+    end
   end
   
   def additional_providers
-    
+    add_users = self.user_tickets.providers.where('user_id != ?', self.provider_id).collect do |u|     
+      u.user     
+    end
   end
   
 end

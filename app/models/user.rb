@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   
   # At some point privilege and possibly department should be removed from this.
   # That will require changing how we create and update users.
-  attr_accessible :name, :password, :location, :email, :privilege  
+  attr_accessible :name, :password, :location, :email, :privilege , :department 
   
   def admin?
     privilege == "admin"

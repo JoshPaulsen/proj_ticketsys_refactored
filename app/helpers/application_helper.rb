@@ -34,6 +34,12 @@ module ApplicationHelper
     end
   end
   
+  def get_all_users
+    User.all.collect do |user|
+      [user.name, user.id]
+    end
+  end
+  
   
   
   

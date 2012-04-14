@@ -55,9 +55,8 @@ ActiveRecord::Schema.define(:version => 20120414004250) do
   create_table "user_tickets", :force => true do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.boolean  "service_provider"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.boolean  "provider"
   end
 

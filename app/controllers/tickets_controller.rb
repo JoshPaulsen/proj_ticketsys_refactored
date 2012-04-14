@@ -72,6 +72,40 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
   
+  
+  def add_user
+    @ticket = Ticket.find_by_id(params[:id])
+    user = User.find_by_email(params[:user][:email])
+    if user
+      if @ticket.users.include?(user)
+        flash[:error] = "Error: That person is already attached to this ticket"
+        redirect_to @ticket
+      elsif @ticket.add_additional_user(user)
+        flash[:success] = "Additional user Added to Ticket"
+        redirect_to @ticket
+      else # Do we need this?  I don't see a way adding a watcher would fail
+        flash[:error] = "Error: Couldn't add user."         
+        redirect_to @ticket
+      end  
+      
+    else
+      flash[:error] = "Error: No user with that email exists."       
+      redirect_to @ticket
+    end    
+  end
+  
+  def remove_user
+    @ticket = Ticket.find_by_id(params[:id])
+    user = User.find_by_id(params[:user][:user_id])    
+    if user
+      @ticket.remove_additional_user(user)
+      flash[:success] = "User Removed from Ticket"      
+    else      
+      flash[:error] = "Error: That user does not exist."
+    end
+    redirect_to @ticket
+  end
+  
   def create     
     @ticket = Ticket.new(params[:ticket])
     if @ticket.title.blank?

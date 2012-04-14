@@ -11,8 +11,8 @@
       - if !@ticket.provider.nil?
         = link_to "#{@ticket.provider.name}", @ticket.provider
     %ul
-      Watchers: 
-      - @ticket.just_watchers.each do |user|
+      Additional Users: 
+      - @ticket.additional_users.each do |user|
         = link_to "#{user.name}", user_path(user)
         = " "
     %ul
