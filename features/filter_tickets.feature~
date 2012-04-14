@@ -68,4 +68,11 @@ Scenario: filter by status
   And I should see "Microwave on fire"
   And I should not see "Broken Printer"
   
+Scenario: filter by status
+  When I fill in "Search" with "closed"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "Broken Printer"
+  And I should not see "Microwave on fire"
+  And I should not see "No Paper Towels"
 
