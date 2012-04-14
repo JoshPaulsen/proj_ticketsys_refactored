@@ -32,20 +32,20 @@ class Ticket < ActiveRecord::Base
   
   def set_creator(c)
     if self.creator_id  
-      remove_watcher_by_id(self.creator_id)
+      remove_user_by_id(self.creator_id)
     end          
     self.creator_id = c.id
     self.save
-    add_watcher(c)    
+    add_additional_user(c)    
   end
   
   def set_provider(p)
     if self.provider_id
-      remove_watcher_by_id(self.provider_id)
+      remove_user_by_id(self.provider_id)
     end
     self.provider_id = p.id
     self.save
-    add_watcher(p)
+    add_additional_provider(p)
   end
   
   def add_watcher(w)
@@ -61,14 +61,29 @@ class Ticket < ActiveRecord::Base
   end
   
   def remove_watcher_by_id(wid)    
-    users = user_tickets.find_by_user_id(wid)
-    if users
-      users.destroy   
+    user = user_tickets.find_by_user_id(wid)
+    if user
+      user.destroy   
       true      
     else
       false
     end
   end
+  
+  def remove_user(user)
+    remove_user_by_id user.id
+  end
+  
+  def remove_user_by_id(user_id)
+    user = user_tickets.find_by_user_id(user_id)
+    if user
+      user.destroy   
+      true      
+    else
+      false
+    end
+  end
+  
   
   def add_additional_user(user)
     user_tickets.create!(:user => user, :provider => false)
@@ -78,10 +93,26 @@ class Ticket < ActiveRecord::Base
     user_tickets.create!(:user_id => user_id, :provider => false)
   end
   
+  def add_additional_provider(provider)
+    user_tickets.create!(:user => provider, :provider => true)
+  end
+  
+  def add_additional_provider_by_id(provider_id)
+    user_tickets.create!(:user_id => provider_id, :provider => true)
+  end
+  
   
   def just_watchers
     watchers = self.users.where('user_id != ?', self.creator_id)
     watchers.where('user_id != ?', self.provider_id)    
+  end
+  
+  def additional_users
+    add_users = self.users.where('provider == false')    
+  end
+  
+  def additional_providers
+    
   end
   
 end
