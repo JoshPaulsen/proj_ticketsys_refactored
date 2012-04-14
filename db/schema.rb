@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327045213) do
-
-  create_table "issues", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "ticket_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120413235855) do
 
   create_table "notes", :force => true do |t|
     t.text     "body"
@@ -40,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20120327045213) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "department"
+  end
+
+  create_table "user_tickets", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "ticket_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.boolean  "service_provider"
   end
 
   create_table "users", :force => true do |t|
