@@ -38,3 +38,41 @@ Scenario: filter by date, no matching dates
   Then I should be on the "Ticket View" page
   And I should see "No tickets found."
 
+Scenario: filter by title
+  When I fill in "Search" with "Broken Printer"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "Broken Printer"
+  And I should not see "No Paper Towels"
+  And I should not see "Microwave on fire"
+
+Scenario: filter by title, no matching
+  When I fill in "Search" with "z"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "No tickets found."
+
+Scenario: filter by creator
+  When I fill in "Search" with "Josh"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "Broken Printer"
+  And I should see "No Paper Towels"
+  And I should see "Microwave on fire"
+
+Scenario: filter by status
+  When I fill in "Search" with "open"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "No Paper Towels"
+  And I should see "Microwave on fire"
+  And I should not see "Broken Printer"
+  
+Scenario: filter by status
+  When I fill in "Search" with "closed"
+  And I press "Update"
+  Then I should be on the "Ticket View" page
+  And I should see "Broken Printer"
+  And I should not see "Microwave on fire"
+  And I should not see "No Paper Towels"
+
