@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120414004250) do
+ActiveRecord::Schema.define(:version => 20120414083845) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "notes", :force => true do |t|
     t.text     "body"
@@ -37,10 +44,13 @@ ActiveRecord::Schema.define(:version => 20120414004250) do
     t.datetime "closed_on"
     t.integer  "creator_id"
     t.integer  "provider_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "department"
+    t.integer  "service_area_id"
   end
+
+  add_index "tickets", ["service_area_id"], :name => "index_tickets_on_service_area_id"
 
   create_table "user_service_areas", :force => true do |t|
     t.integer  "user_id"

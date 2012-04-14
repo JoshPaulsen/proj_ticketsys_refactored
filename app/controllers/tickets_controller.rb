@@ -32,50 +32,9 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
   
-  
-  # Used to add a person who has access to the ticket but is not the 
-  # creator or main service provider  
-  def addwatcher
-    @ticket = Ticket.find_by_id(params[:id])
-    watcher = User.find_by_email(params[:user][:email])
-    if watcher
-      
-      if @ticket.users.include?(watcher)
-        flash[:error] = "Error: That person is already watching this ticket"
-        redirect_to @ticket
-      elsif @ticket.add_watcher(watcher)
-        flash[:success] = "Watcher Added to Ticket"
-        redirect_to @ticket
-      else # Do we need this?  I don't see a way adding a watcher would fail
-        flash[:error] = "Error: Couldn't add watcher."         
-        redirect_to @ticket
-      end  
-      
-    else
-      flash[:error] = "Error: No user with that email exists."       
-      redirect_to @ticket
-    end    
-  end
-  
-  # Used to remove a watcher
-  # Do we need to check if the watcher is nil?  The watchers come from a form
-  # That is populated with valid watchers.
-  def removewatcher
-    @ticket = Ticket.find_by_id(params[:id])
-    watcher = User.find_by_id(params[:user][:user_id])    
-    if watcher
-      @ticket.remove_watcher(watcher)
-      flash[:success] = "Watcher Removed from Ticket"      
-    else      
-      flash[:error] = "Error: That watcher does not exist."
-    end
-    redirect_to @ticket
-  end
-  
-  
   def add_user
     @ticket = Ticket.find_by_id(params[:id])
-    user = User.find_by_email(params[:user][:email])
+    user = User.find_by_id(params[:user][:user_id])
     if user
       if @ticket.users.include?(user)
         flash[:error] = "Error: That person is already attached to this ticket"
@@ -89,19 +48,41 @@ class TicketsController < ApplicationController
       end  
       
     else
-      flash[:error] = "Error: No user with that email exists."       
+      flash[:error] = "Error: Please select a user."       
       redirect_to @ticket
     end    
   end
+  
+  def add_provider
+    @ticket = Ticket.find_by_id(params[:id])
+    provider = User.find_by_id(params[:user][:user_id])
+    if provider
+      if @ticket.users.include?(provider)
+        flash[:error] = "Error: That person is already attached to this ticket"
+        redirect_to @ticket
+      elsif @ticket.add_additional_provider(provider)
+        flash[:success] = "Additional user Added to Ticket"
+        redirect_to @ticket
+      else # Do we need this?  I don't see a way adding a watcher would fail
+        flash[:error] = "Error: Couldn't add user."         
+        redirect_to @ticket
+      end  
+      
+    else
+      flash[:error] = "Error: Please select a user."       
+      redirect_to @ticket
+    end    
+  end
+  
   
   def remove_user
     @ticket = Ticket.find_by_id(params[:id])
     user = User.find_by_id(params[:user][:user_id])    
     if user
-      @ticket.remove_additional_user(user)
-      flash[:success] = "User Removed from Ticket"      
+      @ticket.remove_user(user)
+      flash[:success] = "#{user.name} was removed from the ticket"      
     else      
-      flash[:error] = "Error: That user does not exist."
+      flash[:error] = "Error: Plese select a user first."
     end
     redirect_to @ticket
   end

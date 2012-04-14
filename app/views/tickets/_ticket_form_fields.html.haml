@@ -1,7 +1,7 @@
 - if current_user.admin? or current_page?(new_ticket_path)
   .select
-    = label :ticket, :department, "Department: "
-    = select :ticket, :department, get_departments
+    = label :ticket, :service_area_id, "Service Area: "
+    = select :ticket, :service_area_id, get_service_areas
 .field
   = label :ticket, :title, "Title: "
   = text_field :ticket, :title
@@ -11,5 +11,5 @@
   = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
 - if !@ticket.nil? and current_user.admin?
   .select
-    = label :ticket, :provider_id, "Service Providers in #{@ticket.department}: "
+    = label :ticket, :provider_id, "Please select a primary service provider: "
     = select :ticket, :provider_id, get_providers_in(@ticket.department)

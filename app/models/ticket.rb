@@ -10,6 +10,7 @@ class Ticket < ActiveRecord::Base
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
+  belongs_to :service_area
   has_many :user_tickets
   has_many :users, :through => :user_tickets, :uniq => true
   has_many :notes
@@ -48,28 +49,6 @@ class Ticket < ActiveRecord::Base
     add_additional_provider(p)
   end
   
-  def add_watcher(w)
-    user_tickets.create!(:user => w) 
-  end
-  
-  def add_watcher_by_id(wid)
-    user_tickets.create!(:user_id => wid) 
-  end
-  
-  def remove_watcher(w)   
-    remove_watcher_by_id(w.id)
-  end
-  
-  def remove_watcher_by_id(wid)    
-    user = user_tickets.find_by_user_id(wid)
-    if user
-      user.destroy   
-      true      
-    else
-      false
-    end
-  end
-  
   def remove_user(user)
     remove_user_by_id user.id
   end
@@ -99,12 +78,6 @@ class Ticket < ActiveRecord::Base
   
   def add_additional_provider_by_id(provider_id)
     user_tickets.create!(:user_id => provider_id, :provider => true)
-  end
-  
-  
-  def just_watchers
-    watchers = self.users.where('user_id != ?', self.creator_id)
-    watchers.where('user_id != ?', self.provider_id)    
   end
   
   def additional_users

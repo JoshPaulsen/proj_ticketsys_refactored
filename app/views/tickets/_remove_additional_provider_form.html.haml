@@ -1,0 +1,7 @@
+= form_tag remove_additional_user_path(@ticket), :method => :delete do
+  .select
+    = label :user, :user_id, "Additional Providers: "
+    = select :user, :user_id, get_additional_providers_for(@ticket), :include_blank => true
+  .actions
+    = submit_tag "Remove Provider"
+  

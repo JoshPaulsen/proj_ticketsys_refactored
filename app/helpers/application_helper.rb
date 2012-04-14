@@ -6,6 +6,12 @@ module ApplicationHelper
     ["IT", "HR", "Facilities"]
   end
   
+  def get_service_areas
+    sa = ServiceArea.all.collect do |s|
+      [s.name, s.id]
+    end
+  end
+  
   def get_privileges
     ["user", "service provider", "admin"]
   end
@@ -39,6 +45,13 @@ module ApplicationHelper
       [user.name, user.id]
     end
   end
+  
+  def get_additional_users_for(ticket)
+    u = ticket.additional_users.collect do |user|
+      [user.name, user.id]
+    end
+  end
+    
   
   
   

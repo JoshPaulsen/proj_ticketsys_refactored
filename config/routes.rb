@@ -1,10 +1,17 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
+  get "settings/index", :to => 'settings#index', :as => 'settings'
+  get 'settings/service_areas', :to => 'settings#service_areas', :as => 'service_areas'
+  get 'settings/new_service_area', :to => 'settings#new_service_area', :as => 'new_service_area'
+  post 'settings/create_service_area', :to => 'settings#create_service_area', :as => 'create_service_area'
+  get 'settings/locations', :to => 'settings#locations', :as => 'locations'
+  get 'settings/new_location', :to => 'settings#new_location', :as => 'new_location'
+  post 'settings/create_location', :to => 'settings#create_location', :as => 'create_location'
   get 'tickets/mytickets', :as => 'mytickets'
   put 'tickets/:id/add_additional_user', :to => 'tickets#add_user',:as => 'add_additional_user'
-  put 'tickets/:id/addwatcher', :to => 'tickets#addwatcher',:as => 'addwatcher'
+  put 'tickets/:id/add_additional_provider', :to => 'tickets#add_provider',:as => 'add_additional_provider'
   delete 'tickets/:id/remove_additional_user', :to => 'tickets#remove_user',:as => 'remove_additional_user'
-  delete 'tickets/:id/removewatcher', :to => 'tickets#removewatcher',:as => 'removewatcher'
+  
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   

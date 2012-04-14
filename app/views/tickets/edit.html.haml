@@ -1,5 +1,11 @@
-%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
+%div
   = form_tag ticket_path(@ticket), :method => :put do
     = render "ticket_form_fields"
     .actions
       = submit_tag "Update Ticket"
+%div
+  = render "add_additional_provider_form"
+%div
+  - if !@ticket.additional_providers.empty?
+    = "Remove an additional user from this ticket"
+    = render "remove_additional_provider_form"
