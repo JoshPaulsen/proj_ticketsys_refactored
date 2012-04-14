@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   # location:string
   # department:string
   
-  has_many :issues
-  has_many :tickets, :through => :issues, :uniq => true
+  has_many :user_tickets
+  has_many :tickets, :through => :user_tickets, :uniq => true
   
   validates :name, :presence => true, :uniqueness => true
   validates :password, :presence => true
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   
   # At some point privilege and possibly department should be removed from this.
   # That will require changing how we create and update users.
-  attr_accessible :name, :password, :location, :email, :department, :privilege  
+  attr_accessible :name, :password, :location, :email, :privilege  
   
   def admin?
     privilege == "admin"

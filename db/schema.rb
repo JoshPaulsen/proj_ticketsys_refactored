@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413235855) do
+ActiveRecord::Schema.define(:version => 20120414004250) do
 
   create_table "notes", :force => true do |t|
     t.text     "body"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20120413235855) do
     t.boolean  "hidden"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "service_areas", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tickets", :force => true do |t|
@@ -35,12 +42,23 @@ ActiveRecord::Schema.define(:version => 20120413235855) do
     t.string   "department"
   end
 
+  create_table "user_service_areas", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "service_area_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "user_service_areas", ["service_area_id"], :name => "index_user_service_areas_on_service_area_id"
+  add_index "user_service_areas", ["user_id"], :name => "index_user_service_areas_on_user_id"
+
   create_table "user_tickets", :force => true do |t|
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.boolean  "service_provider"
+    t.boolean  "provider"
   end
 
   create_table "users", :force => true do |t|

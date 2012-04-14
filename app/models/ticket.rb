@@ -10,8 +10,8 @@ class Ticket < ActiveRecord::Base
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
-  has_many :issues
-  has_many :users, :through => :issues, :uniq => true
+  has_many :user_tickets
+  has_many :users, :through => :user_tickets, :uniq => true
   has_many :notes
   
   # Is there anything else a ticket must have?  Department?
@@ -49,11 +49,11 @@ class Ticket < ActiveRecord::Base
   end
   
   def add_watcher(w)
-    issues.create!(:user => w) 
+    user_tickets.create!(:user => w) 
   end
   
   def add_watcher_by_id(wid)
-    issues.create!(:user_id => wid) 
+    user_tickets.create!(:user_id => wid) 
   end
   
   def remove_watcher(w)   
@@ -61,14 +61,23 @@ class Ticket < ActiveRecord::Base
   end
   
   def remove_watcher_by_id(wid)    
-    issue = issues.find_by_user_id(wid)
-    if issue
-      issue.destroy   
+    users = user_tickets.find_by_user_id(wid)
+    if users
+      users.destroy   
       true      
     else
       false
     end
   end
+  
+  def add_additional_user(user)
+    user_tickets.create!(:user => user, :provider => false)
+  end
+  
+  def add_additional_user_by_id(user_id)
+    user_tickets.create!(:user_id => user_id, :provider => false)
+  end
+  
   
   def just_watchers
     watchers = self.users.where('user_id != ?', self.creator_id)
