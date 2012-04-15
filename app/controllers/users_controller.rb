@@ -6,10 +6,18 @@ class UsersController < ApplicationController
   before_filter :check_if_admin_or_accessible, :only => [:index, :show]
   
   def new
+    @user = User.new
+    @service_areas = ServiceArea.all
   end
 
   def create    
-    @user = User.new(params[:user])        
+    @user = User.new(params[:user])
+    params[:service_area].each do |sa_id, checked|
+      if checked == "1"        
+        @user.add_service_area_by_id sa_id      
+      end
+    end
+    
     if @user.save
       flash[:notice] = "New user successfully created"
       redirect_to user_path @user
@@ -23,6 +31,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
+    
+    params[:service_area].each do |sa_id, checked|
+      if checked == "1"        
+        @user.add_service_area_by_id sa_id
+      else        
+        @user.remove_service_area_by_id sa_id
+      end
+    end
+    
     if @user.save
       flash[:notice] = "User Profile Updated"  
     else
@@ -33,6 +50,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by_id(params[:id])
+    @service_areas = ServiceArea.all
   end
 
   def destroy

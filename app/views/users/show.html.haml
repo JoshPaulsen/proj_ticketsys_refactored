@@ -1,10 +1,14 @@
-%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
+%div
   - if current_user.admin? or current_user.id == @user.id
     = render "user_menu"
   %ul
     %p= "User ID: #{@user.id}"
     %p= "Name: #{@user.name}"
     %p= "Email: #{@user.email}"
-    %p= "Location: #{@user.location}"
-    %p= "Department: #{@user.department}"
+    %p= "Location: #{@user.location}"    
     %p= "Privilege: #{@user.privilege}"
+    %p
+      Service Areas: 
+      - @user.service_areas.each do |sa|
+        = "#{sa.name}"
+        = " "

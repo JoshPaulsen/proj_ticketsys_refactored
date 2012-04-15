@@ -32,42 +32,57 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
   
-  
-  # Used to add a person who has access to the ticket but is not the 
-  # creator or main service provider  
-  def addwatcher
+  def add_user
     @ticket = Ticket.find_by_id(params[:id])
-    watcher = User.find_by_email(params[:user][:email])
-    if watcher
-      
-      if @ticket.users.include?(watcher)
-        flash[:error] = "Error: That person is already watching this ticket"
+    user = User.find_by_id(params[:user][:user_id])
+    if user
+      if @ticket.users.include?(user)
+        flash[:error] = "Error: That person is already attached to this ticket"
         redirect_to @ticket
-      elsif @ticket.add_watcher(watcher)
-        flash[:success] = "Watcher Added to Ticket"
+      elsif @ticket.add_additional_user(user)
+        flash[:success] = "Additional user Added to Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
-        flash[:error] = "Error: Couldn't add watcher."         
+        flash[:error] = "Error: Couldn't add user."         
         redirect_to @ticket
       end  
       
     else
-      flash[:error] = "Error: No user with that email exists."       
+      flash[:error] = "Error: Please select a user."       
       redirect_to @ticket
     end    
   end
   
-  # Used to remove a watcher
-  # Do we need to check if the watcher is nil?  The watchers come from a form
-  # That is populated with valid watchers.
-  def removewatcher
+  def add_provider
     @ticket = Ticket.find_by_id(params[:id])
-    watcher = User.find_by_id(params[:user][:user_id])    
-    if watcher
-      @ticket.remove_watcher(watcher)
-      flash[:success] = "Watcher Removed from Ticket"      
+    provider = User.find_by_id(params[:user][:user_id])
+    if provider
+      if @ticket.users.include?(provider)
+        flash[:error] = "Error: That person is already attached to this ticket"
+        redirect_to @ticket
+      elsif @ticket.add_additional_provider(provider)
+        flash[:success] = "Additional user Added to Ticket"
+        redirect_to @ticket
+      else # Do we need this?  I don't see a way adding a watcher would fail
+        flash[:error] = "Error: Couldn't add user."         
+        redirect_to @ticket
+      end  
+      
+    else
+      flash[:error] = "Error: Please select a user."       
+      redirect_to @ticket
+    end    
+  end
+  
+  
+  def remove_user
+    @ticket = Ticket.find_by_id(params[:id])
+    user = User.find_by_id(params[:user][:user_id])    
+    if user
+      @ticket.remove_user(user)
+      flash[:success] = "#{user.name} was removed from the ticket"      
     else      
-      flash[:error] = "Error: That watcher does not exist."
+      flash[:error] = "Error: Plese select a user first."
     end
     redirect_to @ticket
   end
@@ -81,7 +96,7 @@ class TicketsController < ApplicationController
     
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
-    prov = User.next_provider(params[:ticket][:department])
+    prov = User.next_provider()
     
     if !prov
       @ticket.destroy
@@ -110,7 +125,7 @@ class TicketsController < ApplicationController
     
     @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
-    @ticket.department = params[:ticket][:department] 
+    @ticket.service_area_id = params[:ticket][:service_area_id] 
     
     provider_id = params[:ticket][:provider_id]
     if !provider_id.nil? and provider_id != @ticket.provider_id
@@ -137,17 +152,17 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
-  # service provider code could be cleaned up
+  # service provider code probably returns duplicate tickets now
   def index
     if current_user.admin?
       @tickets = Ticket.all
-    elsif current_user.service_provider?      
-      @tickets = Ticket.where :department => current_user.department      
-      current_user.tickets.each do |tic|
-        if !@tickets.include?(tic)
-          @tickets << tic
-        end
+    elsif current_user.service_provider?
+      
+      @tickets = current_user.tickets
+      current_user.service_areas.each do |sa|
+        @tickets << sa.tickets
       end
+      
     else
       redirect_to mytickets_path
     end    

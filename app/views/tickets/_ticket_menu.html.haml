@@ -3,13 +3,13 @@
     = link_to 'Edit This Ticket', edit_ticket_path(@ticket)
 %br
 %div
-  Add a watcher to this ticket
-  = render "add_watcher_form"
+  Add a additional user to this ticket
+  = render "add_additional_user_form"
 %br
 %div
-  - if !@ticket.just_watchers.empty?
-    = "Remove a watcher from this ticket"
-    = render "remove_watcher_form"
+  - if !@ticket.additional_users.empty?
+    = "Remove an additional user from this ticket"
+    = render "remove_additional_user_form"
 %br
   %div
     - if @ticket.open?
