@@ -4,6 +4,7 @@ class Ticket < ActiveRecord::Base
   # location:string  
   # creator_id:integer
   # provider_id:integer
+  # service_area_id:integer
   # opened_on:datetime
   # closed_on:datetime  
   

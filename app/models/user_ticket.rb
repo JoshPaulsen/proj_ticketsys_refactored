@@ -1,6 +1,7 @@
 class UserTicket < ActiveRecord::Base
   # user_id:integer
   # ticket_id:integer
+  # provider:boolean
   
   belongs_to :user
   belongs_to :ticket
