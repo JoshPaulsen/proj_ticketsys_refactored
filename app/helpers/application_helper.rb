@@ -2,9 +2,6 @@ module ApplicationHelper
   
   # Most of these functions are used in forms
   
-  def get_departments
-    ["IT", "HR", "Facilities"]
-  end
   
   def get_service_areas
     sa = ServiceArea.all.collect do |s|
@@ -26,19 +23,12 @@ module ApplicationHelper
     end
   end
   
-  # Returns a list of lists of the providers and their ids in the given department  
-  def get_providers_in(department)
-    p = User.where(:department => department, :privilege => "service provider").collect do |prov|
+  # Returns a list of lists of the providers and their ids in the given service area  
+  def get_providers_in(service_area)
+    p = service_area.users.collect do |prov|
       [prov.name, prov.id]
     end
-  end
-  
-  # Returns a list of lists of all of the watchers of a ticket  
-  def get_watchers_for(ticket)
-    u = ticket.just_watchers.collect do |user|
-      [user.name, user.id]
-    end
-  end
+  end 
   
   def get_all_users
     User.all.collect do |user|
@@ -52,7 +42,11 @@ module ApplicationHelper
     end
   end
     
-  
+  def get_additional_providers_for(ticket)
+    u = ticket.additional_providers.collect do |user|
+      [user.name, user.id]
+    end
+  end
   
   
   

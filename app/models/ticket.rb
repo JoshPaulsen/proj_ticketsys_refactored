@@ -1,8 +1,7 @@
 class Ticket < ActiveRecord::Base  
   # title:string
   # description:text
-  # location:string
-  # department:string
+  # location:string  
   # creator_id:integer
   # provider_id:integer
   # opened_on:datetime
@@ -15,11 +14,9 @@ class Ticket < ActiveRecord::Base
   has_many :users, :through => :user_tickets, :uniq => true
   has_many :notes
   
-  # Is there anything else a ticket must have?  Department?
-  # Requiring a creator and a provider could be tricky if we allow
-  # Users to be deleted.
   validates :title, :presence => true
   validates :opened_on, :presence => true  
+  validates :service_area_id, :presence => true
   
   def closed?
     !closed_on.blank?

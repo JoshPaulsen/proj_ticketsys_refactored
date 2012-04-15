@@ -96,7 +96,7 @@ class TicketsController < ApplicationController
     
     @ticket.opened_on = Time.now    
     @ticket.set_creator current_user    
-    prov = User.next_provider(params[:ticket][:department])
+    prov = User.next_provider()
     
     if !prov
       @ticket.destroy
@@ -125,7 +125,7 @@ class TicketsController < ApplicationController
     
     @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
-    @ticket.department = params[:ticket][:department] 
+    @ticket.service_area_id = params[:ticket][:service_area_id] 
     
     provider_id = params[:ticket][:provider_id]
     if !provider_id.nil? and provider_id != @ticket.provider_id
@@ -152,17 +152,17 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
-  # service provider code could be cleaned up
+  # service provider code probably returns duplicate tickets now
   def index
     if current_user.admin?
       @tickets = Ticket.all
-    elsif current_user.service_provider?      
-      @tickets = Ticket.where :department => current_user.department      
-      current_user.tickets.each do |tic|
-        if !@tickets.include?(tic)
-          @tickets << tic
-        end
+    elsif current_user.service_provider?
+      
+      @tickets = current_user.tickets
+      current_user.service_areas.each do |sa|
+        @tickets << sa.tickets
       end
+      
     else
       redirect_to mytickets_path
     end    

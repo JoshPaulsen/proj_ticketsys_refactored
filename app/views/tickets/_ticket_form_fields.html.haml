@@ -12,4 +12,4 @@
 - if !@ticket.nil? and current_user.admin?
   .select
     = label :ticket, :provider_id, "Please select a primary service provider: "
-    = select :ticket, :provider_id, get_providers_in(@ticket.department)
+    = select :ticket, :provider_id, get_providers_in(@ticket.service_area)

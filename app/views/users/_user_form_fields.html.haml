@@ -13,8 +13,7 @@
   = text_field :user, :location
 - if current_user.admin?
   .select
-    = label :user, :department, "Department: "
-    = select :user, :department, get_departments
-  .select
     = label :user, :privilege, "Privileges: "
     = select :user, :privilege, get_privileges
+  = render "service_area_fields"
+      

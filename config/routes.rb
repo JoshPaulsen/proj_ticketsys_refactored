@@ -7,11 +7,11 @@ ProjTicketsysRefactored::Application.routes.draw do
   get 'settings/locations', :to => 'settings#locations', :as => 'locations'
   get 'settings/new_location', :to => 'settings#new_location', :as => 'new_location'
   post 'settings/create_location', :to => 'settings#create_location', :as => 'create_location'
+  
   get 'tickets/mytickets', :as => 'mytickets'
   put 'tickets/:id/add_additional_user', :to => 'tickets#add_user',:as => 'add_additional_user'
   put 'tickets/:id/add_additional_provider', :to => 'tickets#add_provider',:as => 'add_additional_provider'
-  delete 'tickets/:id/remove_additional_user', :to => 'tickets#remove_user',:as => 'remove_additional_user'
-  
+  delete 'tickets/:id/remove_additional_user', :to => 'tickets#remove_user',:as => 'remove_additional_user'  
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   
@@ -20,9 +20,9 @@ ProjTicketsysRefactored::Application.routes.draw do
   resources :notes, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match '/signin', :to => 'sessions#new'
-  match '/signout', :to => 'sessions#destroy'
-  match '/', :to => 'sessions#new'
+  get 'signin', :to => 'sessions#new', :as => 'signin'
+  delete 'signout', :to => 'sessions#destroy', :as => 'signout'
+  #match '/', :to => 'sessions#new'
   root :to  => 'sessions#new'
   
   
