@@ -27,7 +27,8 @@
       - if @ticket.closed?
         Closed: 
         = readable_date(@ticket.closed_on)
-    %ul= "Service Area: #{@ticket.service_area.name}"
+    - if @ticket.service_area
+      %ul= "Service Area: #{@ticket.service_area.name}"
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"
     - if !@ticket.questions.blank?

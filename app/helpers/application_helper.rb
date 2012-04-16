@@ -39,8 +39,18 @@ module ApplicationHelper
   
   # Returns a list of lists of the providers and their ids in the given service area  
   def get_providers_in(service_area)
-    p = service_area.users.collect do |prov|
-      [prov.name, prov.id]
+    if !service_area.blank?
+      p = service_area.users.collect do |prov|
+        [prov.name, prov.id]
+      end
+    end
+  end 
+  
+  def get_providers_for(ticket)
+    if !ticket.service_area.blank?
+      p = ticket.service_area.users.collect do |prov|
+        [prov.name, prov.id]
+      end
     end
   end 
   

@@ -6,6 +6,7 @@ class ServiceAreaForm < ActiveRecord::Base
   belongs_to :service_area
   belongs_to :default_provider, :class_name => "User"
   has_many :fields, :foreign_key => "form_id", :dependent => :destroy  
+  has_many :rules, :foreign_key => "form_id", :dependent => :destroy, :uniq => true
   
   def write_form
     all_fields = ""    

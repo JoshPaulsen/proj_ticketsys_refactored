@@ -1,0 +1,11 @@
+%div
+  = form_tag set_providers_path, :method => :post do
+    = label :default_provider, :id, "Select a default Service Provider: "
+    = select :default_provider, :id, get_providers_in(@service_area), :include_blank => true
+    %br
+    Select a provider for each location
+    - @locations.each do |location|
+      .select
+        = label :location, "#{location.id}", "#{location.name}: "
+        = select :location, "#{location.id}", get_providers_in(@service_area), :selected => "#{@sp_id_for_loc[location.id-1]}", :include_blank => true
+    = submit_tag "Set Providers"

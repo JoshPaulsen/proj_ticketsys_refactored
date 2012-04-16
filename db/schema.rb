@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415231108) do
+ActiveRecord::Schema.define(:version => 20120416022054) do
 
   create_table "fields", :force => true do |t|
     t.integer  "form_id"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(:version => 20120415231108) do
   end
 
   add_index "questions", ["ticket_id"], :name => "index_questions_on_ticket_id"
+
+  create_table "rules", :force => true do |t|
+    t.integer  "provider_id"
+    t.integer  "form_id"
+    t.integer  "location_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "service_area_forms", :force => true do |t|
     t.integer  "default_provider_id"

@@ -1,7 +1,10 @@
 %div
+  %p= "Create a new #{@service_area_name} ticket at #{@location_name}: #{@ticket_type}"
   = form_tag tickets_path, :method => :post do
     %p Please answer the following questions: 
     = render "service_area_forms/area_forms/ticket_form_#{@form_id}"
     = render "ticket_form_fields"
+    = hidden_field_tag :provider_id, @provider_id
+    = hidden_field :ticket, :service_area_id, :value => @service_area_id
     .action
       = submit_tag "Create Ticket"

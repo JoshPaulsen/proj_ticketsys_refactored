@@ -48,7 +48,7 @@ class TicketsController < ApplicationController
       end  
       
     else
-      flash[:error] = "Error: Please select a user."       
+      flash[:error] = "Error: Please select a user first."       
       redirect_to @ticket
     end    
   end
@@ -61,7 +61,7 @@ class TicketsController < ApplicationController
         flash[:error] = "Error: That person is already attached to this ticket"
         redirect_to @ticket
       elsif @ticket.add_additional_provider(provider)
-        flash[:success] = "Additional user Added to Ticket"
+        flash[:success] = "Additional provider Added to Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
         flash[:error] = "Error: Couldn't add user."         
@@ -69,8 +69,8 @@ class TicketsController < ApplicationController
       end  
       
     else
-      flash[:error] = "Error: Please select a user."       
-      redirect_to @ticket
+      flash[:error] = "Error: Please select a provider first."       
+      redirect_to edit_ticket_path @ticket
     end    
   end
   
@@ -89,26 +89,38 @@ class TicketsController < ApplicationController
 
   # This was added and not tested yet
   def new_ticket
-    sa_form = ServiceAreaForm.find_by_id[:ticket][:form_id]
-    service_area = ServiceArea.find_by_id params[:ticket][:service_area_id]
+    
     location = Location.find_by_id params[:ticket][:location_id]
+    if location.nil?
+      flash[:error] = "Error: Please choose a Location"
+      redirect_to new_ticket_path and return
+    end
+    
+    service_area = ServiceArea.find_by_id params[:ticket][:service_area_id]
     if !service_area
       flash[:error] = "Error: Please choose a Service Area"
       redirect_to new_ticket_path and return
     end
 
-    if @form_id.blank? or @form_id.nil?
-      flash[:error] = "Error: Please choose a Category"
+    sa_form = ServiceAreaForm.find_by_id params[:ticket][:form_id]
+    if sa_form.nil?
+      flash[:error] = "Error: Please choose a Ticket Type"
       redirect_to new_ticket_path and return
     end
+
+    rule = sa_form.rules.where(:location_id => location.id).first
     
-    service_provider = User.next_provider
-    if !service_provider
-      flash[:error] = "Error: No Provider could be located for this ticket."
-      redirect_to mytickets_path and return
+    if rule
+      @provider_id = rule.provider_id
+    else
+      @provider_id = sa_form.default_provider_id
     end
-    @provider_id = service_provider.id
+    
+    @form_id = sa_form.id
+    @ticket_type = sa_form.title
+    @service_area_id = service_area.id
     @service_area_name = service_area.name
+    @location_name = location.name
   end
 
   def create     
@@ -125,17 +137,12 @@ class TicketsController < ApplicationController
       flash[:error] = "Error: Could not set creator."      
       redirect_to mytickets_path and return          
     end
-     
-   
-    prov = User.next_provider()
     
-    if !prov
-      @ticket.destroy
-      flash[:error] = "Error: No Provider could be located for this ticket."      
-      redirect_to mytickets_path and return          
-    end 
-      
-    @ticket.set_provider prov  
+    provider_id = params[:provider_id]
+    if provider_id
+      @ticket.set_provider_by_id provider_id
+    end
+    
     if @ticket.save
       @ticket.add_answers(params[:answers])
       redirect_to ticket_path @ticket
@@ -160,8 +167,11 @@ class TicketsController < ApplicationController
     @ticket.service_area_id = params[:ticket][:service_area_id] 
     
     provider_id = params[:ticket][:provider_id]
-    if !provider_id.nil? and provider_id != @ticket.provider_id
+    if !provider_id.blank? and provider_id != @ticket.provider_id
       @ticket.set_provider(User.find_by_id(provider_id))
+    elsif provider_id.blank? and !@ticket.provider_id.blank?      
+      @ticket.remove_user_by_id @ticket.provider_id
+      @ticket.provider_id = ""
     end
     
     if @ticket.save
@@ -175,6 +185,9 @@ class TicketsController < ApplicationController
   
   def edit
     @ticket = Ticket.find(params[:id])
+    if @ticket.service_area
+      @service_area_name = @ticket.service_area.name
+    end
   end
 
   def destroy

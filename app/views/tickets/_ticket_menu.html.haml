@@ -7,7 +7,7 @@
   = render "add_additional_user_form"
 %br
 %div
-  - if !@ticket.additional_users.empty?
+  - if !@ticket.additional_users.blank?
     = "Remove an additional user from this ticket"
     = render "remove_additional_user_form"
 %br

@@ -6,6 +6,6 @@
 %div
   = render "add_additional_provider_form"
 %div
-  - if !@ticket.additional_providers.empty?
+  - if !@ticket.additional_providers.blank?
     = "Remove a provider form this ticket"
     = render "remove_additional_provider_form"

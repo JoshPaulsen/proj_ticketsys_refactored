@@ -17,6 +17,25 @@ class ServiceAreaFormsController < ApplicationController
     end
   end
   
+  def set_providers
+    @form = ServiceAreaForm.find_by_id params[:id]
+    @form.rules.destroy_all
+    locations = params[:location]
+    default_provider_id = params[:default_provider][:id]
+    locations.each do |location_id, provider_id|
+      if !provider_id.blank?
+        @form.rules.build(:location_id => location_id, :provider_id => provider_id)
+      end
+    end
+    @form.default_provider_id = default_provider_id
+    if !@form.save
+      flash[:error] = "Error: Couldn't set providers."
+      redirect_to @form and return
+    end
+    flash[:notice] = "Updated Providers."
+    redirect_to @form
+  end
+  
   def create
     @ticket_form = ServiceAreaForm.create!(params[:service_area_form])
     @ticket_form.write_form
@@ -46,7 +65,26 @@ class ServiceAreaFormsController < ApplicationController
   end
   
   def show
-    @ticket_form = ServiceAreaForm.find_by_id params[:id]    
+    @ticket_form = ServiceAreaForm.find_by_id params[:id]
+    @locations = Location.all
+    @service_area = @ticket_form.service_area
+    @default_provider = @ticket_form.default_provider
+    @rules = @ticket_form.rules
+    
+    @sp_for_location = []
+    @sp_id_for_loc = []
+    @locations.each do |l|      
+      rule = @rules.where(:location_id => l.id).first      
+      if rule
+        #@sp_for_location << rule.provider.name
+        @sp_id_for_loc << rule.provider_id
+      else
+        #@sp_for_location << nil
+        @sp_id_for_loc << nil
+      end
+    end
+    puts "here"
+    puts @sp_for_location.to_s
   end  
   
   def create_field

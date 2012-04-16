@@ -44,13 +44,24 @@ class Ticket < ActiveRecord::Base
   end
   
   def set_provider(p)
+    set_provider_by_id p.id
+    #if self.provider_id
+    #  remove_user_by_id(self.provider_id)
+    #end
+    #self.provider_id = p.id
+    #self.save
+    #add_additional_provider(p)
+  end
+  
+  def set_provider_by_id(prov_id)
     if self.provider_id
       remove_user_by_id(self.provider_id)
     end
-    self.provider_id = p.id
+    self.provider_id = prov_id
     self.save
-    add_additional_provider(p)
+    add_additional_provider_by_id(prov_id)
   end
+  
   
   def remove_user(user)
     remove_user_by_id user.id
@@ -90,8 +101,14 @@ class Ticket < ActiveRecord::Base
   end
   
   def additional_providers
-    add_users = self.user_tickets.providers.where('user_id != ?', self.provider_id).collect do |u|     
-      u.user     
+    if self.provider_id
+      add_users = self.user_tickets.providers.where('user_id != ?', self.provider_id).collect do |u|     
+        u.user
+      end
+    else
+      add_users = self.user_tickets.providers.collect do |u|
+        u.user
+      end
     end
   end
   
