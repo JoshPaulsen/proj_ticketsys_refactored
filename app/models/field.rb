@@ -18,7 +18,7 @@ class Field < ActiveRecord::Base
   
   def render_text
     text =  ".form-field-text\n"
-    text += "  = label :answers, :field_#{self.id}, '#{self.description}'\n"
+    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"
     text += "  %br\n"
     text += "  = text_field :answers, :field_#{self.id}\n"
     text    
@@ -26,7 +26,7 @@ class Field < ActiveRecord::Base
   
   def render_radio    
     text =  ".form-field-radio\n"
-    text += "  = label :answers, :field_#{self.id}, '#{self.description}'\n"
+    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"
     self.options.each do |option|
       text += ".form-field-radio-options\n"
       text += "  = radio_button :answers, :field_#{self.id}, '#{option}'\n"

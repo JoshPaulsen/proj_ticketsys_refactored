@@ -5,16 +5,16 @@ class ServiceAreaForm < ActiveRecord::Base
   
   belongs_to :service_area
   belongs_to :default_provider, :class_name => "User"
-  has_many :fields, :dependent => :destroy  
+  has_many :fields, :foreign_key => "form_id", :dependent => :destroy  
   
   def write_form
-    fields = ""    
-    if !form_fields.empty?
-      form_fields.each do |f|
-        fields += f.render
+    all_fields = ""    
+    if !fields.empty?
+      fields.each do |f|
+        all_fields += f.render
       end
     end
-    write_form_to_file fields
+    write_form_to_file all_fields
   end
   
   def delete_file
@@ -26,7 +26,7 @@ class ServiceAreaForm < ActiveRecord::Base
   private
   
   def forms_directory 
-    "app/views/ticket_forms/area_ticket_forms/"
+    "app/views/service_area_forms/area_forms/"
   end
   
   def form_name
@@ -42,8 +42,5 @@ class ServiceAreaForm < ActiveRecord::Base
     bytes = write_out.write(form)
     write_out.close    
     bytes != 0
-  end
-  
-end
-  
+  end  
 end

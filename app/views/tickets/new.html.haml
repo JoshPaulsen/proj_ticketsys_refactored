@@ -1,5 +1,14 @@
 %div
-  = form_tag tickets_path, :method => :post do
-    = render "ticket_form_fields"
+  = form_tag continue_new_ticket_path, :method => :get do
+    .select
+      = label :ticket, :location_id, "Please Choose a location: "
+      = select :ticket, :location_id, get_locations, :prompt => "-- Other --"
+    .select
+      = label :ticket, :service_area_id, "Please Choose a Service Area: "
+      = select :ticket, :service_area_id, get_service_areas, :prompt => "-- Service Area --"    
+    .select
+      = label :ticket, :form_id, "Please Choose a Ticket Type: "
+      = select :ticket, :form_id, get_all_types, :prompt => "   -- Type --"    
     .actions
-      = submit_tag "Submit Ticket"
+      = submit_tag "Next"
+= render "chained_hack"

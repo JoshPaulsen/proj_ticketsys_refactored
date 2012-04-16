@@ -1,9 +1,9 @@
 %div
-  %h3= "Add a new Field for the '#{@ticket_form.category}' Form in '#{@ticket_form.department}'"
+  %h3= "Add a new Field for the '#{@ticket_form.title}' Form in '#{@ticket_form.service_area.name}'"
   = form_tag create_form_field_path, :method => :post do
     .field
-      = label_tag :description, "Please enter your question: "
-      = text_field_tag :description, @description
+      = label_tag :question, "Please enter your question: "
+      = text_field_tag :question, @question
     %h4 Please Select the Type of Field you want to create
     .field      
       = radio_button_tag :field_type, :text, :checked

@@ -1,0 +1,5 @@
+%div
+  = form_tag tickets_path, :method => :post do
+    = render "ticket_form_fields"
+    .actions
+      = submit_tag "Submit Ticket"

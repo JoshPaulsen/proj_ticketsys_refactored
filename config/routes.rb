@@ -13,6 +13,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   get 'settings/new_location', :to => 'settings#new_location', :as => 'new_location'
   post 'settings/create_location', :to => 'settings#create_location', :as => 'create_location'
   
+  get 'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
   get 'tickets/mytickets', :as => 'mytickets'
   put 'tickets/:id/add_additional_user', :to => 'tickets#add_user',:as => 'add_additional_user'
   put 'tickets/:id/add_additional_provider', :to => 'tickets#add_provider',:as => 'add_additional_provider'

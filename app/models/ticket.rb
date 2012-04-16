@@ -18,7 +18,7 @@ class Ticket < ActiveRecord::Base
   
   validates :title, :presence => true
   validates :opened_on, :presence => true  
-  validates :service_area_id, :presence => true
+  #validates :service_area_id, :presence => true
   
   def closed?
     !closed_on.blank?
@@ -35,8 +35,12 @@ class Ticket < ActiveRecord::Base
       remove_user_by_id(self.creator_id)
     end          
     self.creator_id = c.id
-    self.save
-    add_additional_user(c)    
+    if self.save
+      add_additional_user(c) 
+      true
+    else
+      false
+    end   
   end
   
   def set_provider(p)
@@ -96,7 +100,7 @@ class Ticket < ActiveRecord::Base
       answers.each do |field, answer|      
         field_id = field.delete("field_").to_i        
         field = Field.find_by_id field_id
-        questions.create :question => field.description, :answer => answer
+        questions.create :question => field.question, :answer => answer
       end
       self.save
     end

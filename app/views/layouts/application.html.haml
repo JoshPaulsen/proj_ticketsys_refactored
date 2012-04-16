@@ -3,8 +3,9 @@
   %head
     %title
       TSS
-    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
     = javascript_include_tag "application"
+    = stylesheet_link_tag    "application", :media => "all"    
     = csrf_meta_tags
   %body
     = link_to image_tag("tss-small.png", :alt => "Title Image"), tickets_path

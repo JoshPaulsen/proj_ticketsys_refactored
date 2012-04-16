@@ -89,37 +89,44 @@ class TicketsController < ApplicationController
 
   # This was added and not tested yet
   def new_ticket
-    @category_id = params[:ticket][:category]    
-    service_area = ServiceArea.find_by_id params[:ticket][:service_area]
-    
+    sa_form = ServiceAreaForm.find_by_id[:ticket][:form_id]
+    service_area = ServiceArea.find_by_id params[:ticket][:service_area_id]
+    location = Location.find_by_id params[:ticket][:location_id]
     if !service_area
-      flash[:error] = "Error: Please choose a Service Area"      
-      redirect_to new_ticket_path and return          
-    end 
-    
-    if @category_id.blank? or @category_id.nil?
-      flash[:error] = "Error: Please choose a Category"      
-      redirect_to new_ticket_path and return     
+      flash[:error] = "Error: Please choose a Service Area"
+      redirect_to new_ticket_path and return
     end
-    
-    service_provider = User.next_provider service_area.name    
-    if !service_provider
-      flash[:error] = "Error: No Provider could be located for this ticket."      
-      redirect_to mytickets_path and return          
-    end
-    @provider_id = service_provider.id
-    @department = service_area.name
-  end
-  
-  def create     
-    @ticket = Ticket.new(params[:ticket])
-    if @ticket.title.blank?
-      flash[:error] = "Error: Incomplete Ticket"      
+
+    if @form_id.blank? or @form_id.nil?
+      flash[:error] = "Error: Please choose a Category"
       redirect_to new_ticket_path and return
     end
     
-    @ticket.opened_on = Time.now    
-    @ticket.set_creator current_user    
+    service_provider = User.next_provider
+    if !service_provider
+      flash[:error] = "Error: No Provider could be located for this ticket."
+      redirect_to mytickets_path and return
+    end
+    @provider_id = service_provider.id
+    @service_area_name = service_area.name
+  end
+
+  def create     
+    @ticket = Ticket.new(params[:ticket])
+    if @ticket.title.blank?
+      flash[:error] = "Error: Incomplete Ticket"
+      redirect_to new_ticket_path and return
+    end
+
+    @ticket.opened_on = Time.now
+    
+    if !@ticket.set_creator current_user    
+      @ticket.destroy
+      flash[:error] = "Error: Could not set creator."      
+      redirect_to mytickets_path and return          
+    end
+     
+   
     prov = User.next_provider()
     
     if !prov

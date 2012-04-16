@@ -1,9 +1,9 @@
 %div
-  = render "ticket_form_menu"
+  = render "service_area_form_menu"
   %div
-    %ul= "Deparment: #{@ticket_form.department}"
-    %ul= "Category: #{@ticket_form.category}"
-    - if !@ticket_form.form_fields.blank?
-      %ul= render "ticket_forms/area_ticket_forms/ticket_form_#{@ticket_form.id}"
+    %ul= "Service Area: #{@ticket_form.service_area.name}"
+    %ul= "Ticket Type: #{@ticket_form.title}"
+    - if !@ticket_form.fields.blank?
+      %ul= render "service_area_forms/area_forms/ticket_form_#{@ticket_form.id}"
     - else
       %ul= "This Form Has no Fields yet."

@@ -1,7 +1,15 @@
 module ApplicationHelper  
   
   # Most of these functions are used in forms
+  #def get_departments
+  #  ["IT", "HR", "Facilities"]
+  #end
   
+  def get_locations
+    loc = Location.all.collect do |l|
+      [l.name, l.id]
+    end
+  end
   
   def get_service_areas
     sa = ServiceArea.all.collect do |s|
@@ -13,10 +21,9 @@ module ApplicationHelper
     ["user", "service provider", "admin"]
   end
   
-  def get_all_categories
-    categories = ServiceAreaForm.all.collect do |tf|  
-      c = ServiceArea.find_by_name tf.department    
-      [tf.category, tf.id,{:class => c.id}]
+  def get_all_types
+    types = ServiceAreaForm.all.collect do |saf|
+      [saf.title, saf.id,{:class => saf.service_area_id}]
     end
   end
   

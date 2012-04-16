@@ -1,7 +1,7 @@
 %div
   = form_tag tickets_path, :method => :post do
     %p Please answer the following questions: 
-    = render "ticket_forms/area_forms/ticket_form_#{@category_id}"
+    = render "service_area_forms/area_forms/ticket_form_#{@form_id}"
     = render "ticket_form_fields"
     .action
       = submit_tag "Create Ticket"
