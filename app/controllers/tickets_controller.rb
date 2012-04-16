@@ -125,6 +125,8 @@ class TicketsController < ApplicationController
 
   def create     
     @ticket = Ticket.new(params[:ticket])
+    puts "IM here"
+    puts params
     if @ticket.title.blank?
       flash[:error] = "Error: Incomplete Ticket"
       redirect_to new_ticket_path and return
