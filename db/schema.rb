@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415012053) do
+ActiveRecord::Schema.define(:version => 20120415231108) do
+
+  create_table "fields", :force => true do |t|
+    t.integer  "form_id"
+    t.string   "question"
+    t.string   "field_type"
+    t.text     "options"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "fields", ["form_id"], :name => "index_fields_on_form_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
@@ -27,6 +38,24 @@ ActiveRecord::Schema.define(:version => 20120415012053) do
     t.boolean  "hidden"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "questions", :force => true do |t|
+    t.integer  "ticket_id"
+    t.string   "question"
+    t.text     "answer"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "questions", ["ticket_id"], :name => "index_questions_on_ticket_id"
+
+  create_table "service_area_forms", :force => true do |t|
+    t.integer  "default_provider_id"
+    t.integer  "service_area_id"
+    t.string   "title"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "service_areas", :force => true do |t|

@@ -1,5 +1,10 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
+  
+  delete 'service_area_forms/remove_field/:id', :to => 'service_area_forms#remove_field', :as => 'remove_field'  
+  post 'service_area_forms/:id/create_field', :to => 'service_area_forms#create_field', :as => 'create_form_field'
+  get 'service_area_forms/:id/new_field', :to => 'service_area_forms#new_field', :as => 'new_form_field'  
+  
   get "settings/index", :to => 'settings#index', :as => 'settings'
   get 'settings/service_areas', :to => 'settings#service_areas', :as => 'service_areas'
   get 'settings/new_service_area', :to => 'settings#new_service_area', :as => 'new_service_area'
@@ -15,6 +20,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   
+  resources :service_area_forms
   resources :tickets
   resources :users
   resources :notes, :only => [:new, :create]

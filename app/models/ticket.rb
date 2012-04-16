@@ -11,9 +11,10 @@ class Ticket < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
   belongs_to :service_area
-  has_many :user_tickets
+  has_many :user_tickets, :dependent => :destroy
   has_many :users, :through => :user_tickets, :uniq => true
-  has_many :notes
+  has_many :notes, :dependent => :destroy 
+  has_many :questions, :dependent => :destroy
   
   validates :title, :presence => true
   validates :opened_on, :presence => true  
@@ -87,6 +88,17 @@ class Ticket < ActiveRecord::Base
   def additional_providers
     add_users = self.user_tickets.providers.where('user_id != ?', self.provider_id).collect do |u|     
       u.user     
+    end
+  end
+  
+   def add_answers(answers)
+    if !answers.blank?
+      answers.each do |field, answer|      
+        field_id = field.delete("field_").to_i        
+        field = Field.find_by_id field_id
+        questions.create :question => field.description, :answer => answer
+      end
+      self.save
     end
   end
   

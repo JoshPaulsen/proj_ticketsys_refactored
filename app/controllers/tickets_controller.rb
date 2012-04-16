@@ -86,6 +86,30 @@ class TicketsController < ApplicationController
     end
     redirect_to @ticket
   end
+
+  # This was added and not tested yet
+  def new_ticket
+    @category_id = params[:ticket][:category]    
+    service_area = ServiceArea.find_by_id params[:ticket][:service_area]
+    
+    if !service_area
+      flash[:error] = "Error: Please choose a Service Area"      
+      redirect_to new_ticket_path and return          
+    end 
+    
+    if @category_id.blank? or @category_id.nil?
+      flash[:error] = "Error: Please choose a Category"      
+      redirect_to new_ticket_path and return     
+    end
+    
+    service_provider = User.next_provider service_area.name    
+    if !service_provider
+      flash[:error] = "Error: No Provider could be located for this ticket."      
+      redirect_to mytickets_path and return          
+    end
+    @provider_id = service_provider.id
+    @department = service_area.name
+  end
   
   def create     
     @ticket = Ticket.new(params[:ticket])
@@ -106,6 +130,7 @@ class TicketsController < ApplicationController
       
     @ticket.set_provider prov  
     if @ticket.save
+      @ticket.add_answers(params[:answers])
       redirect_to ticket_path @ticket
     else
       @ticket.destroy

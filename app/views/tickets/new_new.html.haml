@@ -1,0 +1,11 @@
+%div
+  = form_tag continue_new_ticket_path, :method => :get do
+    .select
+      = label :ticket, :service_area, "Please Choose a Service Area: "
+      = select :ticket, :service_area, get_service_areas, :prompt => "-- Service Area --"
+    .select
+      = label :ticket, :category, "Please Choose a Category: "
+      = select :ticket, :category, get_all_categories, :prompt => "   -- Category --"
+    .actions
+      = submit_tag "Next"
+= render "chained_hack"

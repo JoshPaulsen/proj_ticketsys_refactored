@@ -13,6 +13,13 @@ module ApplicationHelper
     ["user", "service provider", "admin"]
   end
   
+  def get_all_categories
+    categories = ServiceAreaForm.all.collect do |tf|  
+      c = ServiceArea.find_by_name tf.department    
+      [tf.category, tf.id,{:class => c.id}]
+    end
+  end
+  
   def readable_date(time)
     if time
       #time_ago_in_words(time)
