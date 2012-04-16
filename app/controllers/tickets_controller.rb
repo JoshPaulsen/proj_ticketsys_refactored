@@ -89,7 +89,7 @@ class TicketsController < ApplicationController
 
   # This was added and not tested yet
   def new_ticket
-    
+    @params_hash = params
     location = Location.find_by_id params[:ticket][:location_id]
     if location.nil?
       flash[:error] = "Error: Please choose a Location"
@@ -125,8 +125,6 @@ class TicketsController < ApplicationController
 
   def create     
     @ticket = Ticket.new(params[:ticket])
-    puts "IM here"
-    puts params
     if @ticket.title.blank?
       flash[:error] = "Error: Incomplete Ticket"
       redirect_to new_ticket_path and return

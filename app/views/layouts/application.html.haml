@@ -2,7 +2,7 @@
 %html
   %head
     %title
-      TSS
+      TSS - New
     -#= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
     = javascript_include_tag "application"
     = stylesheet_link_tag    "application", :media => "all"    
@@ -23,3 +23,7 @@
     = render "shared/the_flash"
     = yield
     = debug(params) if Rails.env.development?
+    %div
+      Params hash:
+    %div
+      = @params_hash    
