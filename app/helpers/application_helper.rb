@@ -1,10 +1,6 @@
 module ApplicationHelper  
   
-  # Most of these functions are used in forms
-  #def get_departments
-  #  ["IT", "HR", "Facilities"]
-  #end
-  
+  # Most of these functions are used in forms 
   def get_locations
     loc = Location.all.collect do |l|
       [l.name, l.id]

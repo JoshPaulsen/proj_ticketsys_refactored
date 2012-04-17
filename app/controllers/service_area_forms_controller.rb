@@ -3,12 +3,10 @@ class ServiceAreaFormsController < ApplicationController
   before_filter :check_if_signed_in
   
   def remove_field
-    field_id = params[:id]    
-    field = Field.find_by_id field_id
+    field = Field.find_by_id params[:id]
     if field
       form = field.form
       field.destroy
-      form.write_form
       flash[:notice] = "Field Removed"
       redirect_to form
     else
@@ -32,13 +30,12 @@ class ServiceAreaFormsController < ApplicationController
       flash[:error] = "Error: Couldn't set providers."
       redirect_to @form and return
     end
-    flash[:notice] = "Updated Providers."
+    flash[:notice] = "Providers Updated"
     redirect_to @form
   end
   
   def create
     @ticket_form = ServiceAreaForm.create!(params[:service_area_form])
-    attempt_write(@ticket_form)
     redirect_to @ticket_form
   end
   
@@ -46,7 +43,7 @@ class ServiceAreaFormsController < ApplicationController
     @ticket_form = ServiceAreaForm.find_by_id params[:id]
     @question = session[:field_question]
     if !@ticket_form
-      flash[:error] = "Error: That form does not exit."
+      flash[:error] = "Error: That form does not exist"
       redirect_to service_area_forms_path 
     end
   end
@@ -71,20 +68,19 @@ class ServiceAreaFormsController < ApplicationController
     @default_provider = @ticket_form.default_provider
     @rules = @ticket_form.rules
     
-    @sp_for_location = []
+    @form_engine = @ticket_form.get_form_engine
+    @tag_helper = get_tag_helper
+    
+    #@sp_for_location = []
     @sp_id_for_loc = []
     @locations.each do |l|      
       rule = @rules.where(:location_id => l.id).first      
       if rule
-        #@sp_for_location << rule.provider.name
         @sp_id_for_loc << rule.provider_id
       else
-        #@sp_for_location << nil
         @sp_id_for_loc << nil
       end
     end
-    puts "here"
-    puts @sp_for_location.to_s
   end  
   
   def create_field
@@ -124,7 +120,7 @@ class ServiceAreaFormsController < ApplicationController
       if options.empty?
         session[:field_question] = nil  
         ticket_form.fields.create! :question => question, :field_type => "text"
-        attempt_write(ticket_form)
+        #attempt_write(ticket_form)
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
@@ -143,25 +139,16 @@ class ServiceAreaFormsController < ApplicationController
         session[:field_question] = nil  
         ticket_form.fields.create! :question => question,
                                    :field_type => "radio", :options => options
-        if ticket_form.write_form
-          flash[:notice] = "New Field Added"        
-          redirect_to ticket_form
-        else
-          flash[:error] = "Error: Unable to write form to file."    
-          session[:field_question] = question  
-          redirect_to new_form_field_path      
-        end
+        flash[:notice] = "New Field Added"        
+        redirect_to ticket_form
+        #if ticket_form.write_form
+        #  flash[:notice] = "New Field Added"        
+        #  redirect_to ticket_form
+        #else
+        #  flash[:error] = "Error: Unable to write form to file."    
+        #  session[:field_question] = question  
+        #  redirect_to new_form_field_path      
+        #end
       end
     end
-    
-    def attempt_write(form)
-      if !form.write_form
-        if !form.write_form
-          flash[:error] = "Error: Could not write form to file."
-          form.destroy
-          redirect_to service_area_forms_path and return
-        end
-      end
-    end
-    
 end

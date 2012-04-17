@@ -87,6 +87,9 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
 
+  
+
+  #puts Haml::Engine.new('= image_tag("golfer.png")').render(TagHelper.instance)
 
   def new_ticket
     @debug_value = params
@@ -115,21 +118,16 @@ class TicketsController < ApplicationController
       @provider_id = sa_form.default_provider_id
     end
     
-    if !sa_form.file_exist?
-      if sa_form.write_form
-        @form_id = sa_form.id
-      else
-        @form_id = nil
-      end
-    else  
-       @form_id = sa_form.id
-    end
-
+    @form_engine = sa_form.get_form_engine
+    @tag_helper = get_tag_helper
+    
     @ticket_type = sa_form.title
     @service_area_id = service_area.id
     @service_area_name = service_area.name
     @location_name = location.name
   end
+  
+  
     
 
   def create     
@@ -148,7 +146,7 @@ class TicketsController < ApplicationController
     end
     
     provider_id = params[:provider_id]
-    if provider_id
+    if provider_id and provider_id != current_user.id.to_s
       @ticket.set_provider_by_id provider_id
     end
     

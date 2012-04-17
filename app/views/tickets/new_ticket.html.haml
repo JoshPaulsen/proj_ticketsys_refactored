@@ -4,8 +4,7 @@
     .field
       = label :ticket, :title, "Title: "
       = text_field :ticket, :title
-    = render "service_area_forms/area_forms/ticket_form_#{@form_id}"
-    -#= render "ticket_form_fields"
+    = @form_engine.render(@tag_helper)
     .field
       = label :ticket, :description, "Description: "
       %br

@@ -1,0 +1,11 @@
+%div
+  = render "service_area_form_menu"
+  %div
+    %ul= "Service Area: #{@ticket_form.service_area.name}"
+    %ul= "Ticket Type: #{@ticket_form.title}"
+    - if !@ticket_form.fields.blank?
+      -#%ul= render "service_area_forms/area_forms/ticket_form_#{@ticket_form.id}"
+      %ul= @form_engine.render(@tag_helper)
+    - else
+      %ul= "This Form Has no Fields yet."
+  = render "locations_form"

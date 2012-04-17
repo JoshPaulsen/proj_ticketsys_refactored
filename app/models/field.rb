@@ -35,4 +35,8 @@ class Field < ActiveRecord::Base
     text
   end
   
+  def engine
+    Haml::Engine.new(render)
+  end
+  
 end

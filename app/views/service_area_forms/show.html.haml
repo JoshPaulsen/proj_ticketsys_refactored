@@ -4,7 +4,13 @@
     %ul= "Service Area: #{@ticket_form.service_area.name}"
     %ul= "Ticket Type: #{@ticket_form.title}"
     - if !@ticket_form.fields.blank?
-      %ul= render "service_area_forms/area_forms/ticket_form_#{@ticket_form.id}"
+      %ul
+        %table{:border=> "0", :cellpadding=>"10", :cellspacing=>"1", :overflow=>"hidden"}
+          - @ticket_form.fields.each do |f|
+            %tr
+              %td= f.engine.render(@tag_helper)
+              %td=button_to "Delete Field", remove_field_path(f), :method => :delete , |
+                              :confirm => "Are you sure you want to delete this field?" 
     - else
       %ul= "This Form Has no Fields yet."
   = render "locations_form"
