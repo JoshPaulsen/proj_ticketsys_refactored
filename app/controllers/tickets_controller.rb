@@ -130,6 +130,7 @@ class TicketsController < ApplicationController
     @service_area_name = service_area.name
     @location_name = location.name
   end
+    
 
   def create     
     @ticket = Ticket.new(params[:ticket])
@@ -160,6 +161,28 @@ class TicketsController < ApplicationController
       redirect_to new_ticket_path
     end
   end
+  
+  def set_primary_provider
+    @ticket = Ticket.find_by_id(params[:id])
+    provider_id = params[:ticket][:provider_id]
+    
+    if provider_id.blank?
+      flash[:error] = "Error: Provider cannot be blank."
+      redirect_to edit_ticket_path @ticket and return
+    end
+    
+    if provider_id == @ticket.creator_id.to_s
+      flash[:error] = "Error: The provider and the creator cannot be the same person."
+      redirect_to edit_ticket_path @ticket and return
+    end
+    
+    if provider_id != @ticket.provider_id.to_s
+      @ticket.set_provider_by_id provider_id
+      flash[:notice] = "Provider Updated"
+    end
+    redirect_to edit_ticket_path @ticket
+    
+  end
 
   def update
     
@@ -172,15 +195,7 @@ class TicketsController < ApplicationController
     
     @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
-    @ticket.service_area_id = params[:ticket][:service_area_id] 
-    
-    provider_id = params[:ticket][:provider_id]
-    if !provider_id.blank? and provider_id != @ticket.provider_id
-      @ticket.set_provider(User.find_by_id(provider_id))
-    elsif provider_id.blank? and !@ticket.provider_id.blank?      
-      @ticket.remove_user_by_id @ticket.provider_id
-      @ticket.provider_id = ""
-    end
+    #@ticket.service_area_id = params[:ticket][:service_area_id]
     
     if @ticket.save
       flash[:success] = "Ticket Updated"

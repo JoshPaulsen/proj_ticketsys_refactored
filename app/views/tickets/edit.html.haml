@@ -1,11 +1,15 @@
 %div
+  = render "set_primary_provider"
+%br
+%div
   = form_tag ticket_path(@ticket), :method => :put do
     = render "ticket_form_fields"
     .actions
       = submit_tag "Update Ticket"
-%div
-  = render "add_additional_provider_form"
-%div
-  - if !@ticket.additional_providers.blank?
-    = "Remove a provider form this ticket"
-    = render "remove_additional_provider_form"
+
+-#%div
+-#  = render "add_additional_provider_form"
+-#%div
+-#  - if !@ticket.additional_providers.blank?
+-#    = "Remove a provider form this ticket"
+-#    = render "remove_additional_provider_form"

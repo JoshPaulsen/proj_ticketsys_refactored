@@ -9,7 +9,8 @@
     = csrf_meta_tags
   %body
     = link_to image_tag("tss-small.png", :alt => "Title Image"), tickets_path
-    Due to the Heroku filesystem, Service Area Forms only work intermittently.  A fix is coming...
+    %div{:align => "center"}
+      Due to the Heroku filesystem, Service Area Forms only works intermittently.  A fix is coming...
     %div
       %div{:align => "right"}
         - if signed_in?

@@ -2,17 +2,14 @@
   -#.select
   -#  = label :ticket, :service_area_id, "Service Area: "
   -#  = select :ticket, :service_area_id, get_service_areas
-- if @ticket
-  .field
-    = hidden_field :ticket, :service_area_id, :value => @ticket.service_area_id
+-#- if @ticket
+-#  .field
+-#    = hidden_field :ticket, :service_area_id, :value => @ticket.service_area_id
 .field
   = label :ticket, :title, "Title: "
   = text_field :ticket, :title
+
 .field
   = label :ticket, :description, "Description: "
   %br
   = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
-- if @ticket and current_user.admin?
-  .select
-    = label :ticket, :provider_id, "Please select a primary service provider: "
-    = select :ticket, :provider_id, get_providers_for(@ticket), :include_blank => true

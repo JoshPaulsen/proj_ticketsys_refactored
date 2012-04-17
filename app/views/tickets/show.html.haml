@@ -1,7 +1,16 @@
 %div
   = render "ticket_menu"
   %div
-    %ul= "Ticket ID: #{@ticket.id}"
+    %ul= "Ticket Number: #{@ticket.id}"
+    %ul= "Service Area: #{@service_area_name}"
+    %ul= "Title: #{@ticket.title}"
+    %ul
+      Opened: 
+      = readable_date(@ticket.opened_on)
+    %ul
+      - if @ticket.closed?
+        Closed: 
+        = readable_date(@ticket.closed_on)
     %ul
       Creator: 
       - if !@ticket.creator.blank?
@@ -21,19 +30,14 @@
         = link_to "#{user.name}", user_path(user)
         = " "
     %ul
-      Opened: 
-      = readable_date(@ticket.opened_on)
-    %ul
-      - if @ticket.closed?
-        Closed: 
-        = readable_date(@ticket.closed_on)
-    %ul= "Service Area: #{@service_area_name}"
-    %ul= "Title: #{@ticket.title}"
-    %ul= "Description: #{@ticket.description}"
+      Everyone (debug only):
+      - @ticket.users.each do |user|
+        = link_to "#{user.name}", user_path(user)
+        = " "
     - if !@ticket.questions.blank?
-      %ul= "Questions"
       - @ticket.questions.each do |q|
         %ul= "#{q.question}: #{q.answer}"
+    %ul= "Description: #{@ticket.description}"
   = render @notes
   - if @ticket.open?
     = render "shared/new_note_form"

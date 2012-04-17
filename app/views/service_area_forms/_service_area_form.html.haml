@@ -2,5 +2,10 @@
   %tr
     %td= service_area_form.id
     %td= service_area_form.title
-    %td= service_area_form.default_provider_id
+    %td= service_area_form.service_area.name
+    - if service_area_form.default_provider_id
+      %td
+        = link_to "#{service_area_form.default_provider.name}", service_area_form.default_provider
+    - else
+      %td= "No Default Provider"
     %td= link_to "View or Edit", service_area_form
