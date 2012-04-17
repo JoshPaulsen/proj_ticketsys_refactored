@@ -4,11 +4,11 @@
     %ul= "Ticket ID: #{@ticket.id}"
     %ul
       Creator: 
-      - if !@ticket.creator.nil?
+      - if !@ticket.creator.blank?
         = link_to "#{@ticket.creator.name}", @ticket.creator
     %ul
       Service Provider: 
-      - if !@ticket.provider.nil?
+      - if !@ticket.provider.blank?
         = link_to "#{@ticket.provider.name}", @ticket.provider
     %ul
       Additional Users: 
@@ -27,8 +27,7 @@
       - if @ticket.closed?
         Closed: 
         = readable_date(@ticket.closed_on)
-    - if @ticket.service_area
-      %ul= "Service Area: #{@ticket.service_area.name}"
+    %ul= "Service Area: #{@service_area_name}"
     %ul= "Title: #{@ticket.title}"
     %ul= "Description: #{@ticket.description}"
     - if !@ticket.questions.blank?

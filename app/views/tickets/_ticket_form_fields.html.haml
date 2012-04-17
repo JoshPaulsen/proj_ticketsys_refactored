@@ -12,7 +12,7 @@
   = label :ticket, :description, "Description: "
   %br
   = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
-- if !@ticket.nil? and current_user.admin?
+- if @ticket and current_user.admin?
   .select
     = label :ticket, :provider_id, "Please select a primary service provider: "
     = select :ticket, :provider_id, get_providers_for(@ticket), :include_blank => true

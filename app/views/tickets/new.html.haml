@@ -8,7 +8,7 @@
       = select :ticket, :service_area_id, get_service_areas, :prompt => "-- Service Area --"    
     .select
       = label :ticket, :form_id, "Please Choose a Ticket Type: "
-      = select :ticket, :form_id, get_all_types, :prompt => "   -- Type --"    
+      = select :ticket, :form_id, get_all_types, :prompt => "-- Type --"    
     .actions
       = submit_tag "Next"
 = render "chained_hack"

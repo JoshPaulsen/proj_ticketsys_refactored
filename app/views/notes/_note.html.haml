@@ -1,7 +1,7 @@
 %ul
   .user
     .note-date= readable_date(note.created_at)
-    - if !note.user.nil?
+    - if !note.user.blank?
       .note-name
         Added by
         = link_to "#{note.user.name}", user_path(note.user)

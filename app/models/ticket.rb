@@ -18,7 +18,7 @@ class Ticket < ActiveRecord::Base
   
   validates :title, :presence => true
   validates :opened_on, :presence => true  
-  #validates :service_area_id, :presence => true
+  validates :service_area_id, :presence => true
   
   def closed?
     !closed_on.blank?

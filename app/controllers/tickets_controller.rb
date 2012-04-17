@@ -87,11 +87,11 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
 
-  # This was added and not tested yet
+
   def new_ticket
-    @params_hash = params
+    @debug_value = params
     location = Location.find_by_id params[:ticket][:location_id]
-    if location.nil?
+    if !location
       flash[:error] = "Error: Please choose a Location"
       redirect_to new_ticket_path and return
     end
@@ -103,13 +103,12 @@ class TicketsController < ApplicationController
     end
 
     sa_form = ServiceAreaForm.find_by_id params[:ticket][:form_id]
-    if sa_form.nil?
+    if !sa_form
       flash[:error] = "Error: Please choose a Ticket Type"
       redirect_to new_ticket_path and return
     end
 
     rule = sa_form.rules.where(:location_id => location.id).first
-    
     if rule
       @provider_id = rule.provider_id
     else
@@ -145,7 +144,7 @@ class TicketsController < ApplicationController
     
     if @ticket.save
       @ticket.add_answers(params[:answers])
-      redirect_to ticket_path @ticket
+      redirect_to @ticket
     else
       @ticket.destroy
       flash[:error] = "Error: Ticket could not be created."
@@ -219,11 +218,15 @@ class TicketsController < ApplicationController
 
   def show  
     @ticket = Ticket.find_by_id(params[:id])    
-    if @ticket.nil?
+    if !@ticket
       flash[:error] = "That ticket does not exist: " + params[:id]
       redirect_to tickets_path   
-    else
-      @notes = @ticket.notes  
+    else      
+      @notes = @ticket.notes
+      if @ticket.service_area
+        @service_area_name = @ticket.service_area.name
+      end
+      
     end      
   end
   

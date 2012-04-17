@@ -1,16 +1,15 @@
 %tbody
   %tr
     %td= ticket.id
-    %td= ticket.title
-    -if ticket.service_area
-      %td= ticket.service_area.name
-    -else
-      %td= "No Service Area"
+    %td= ticket.title    
     %td
-      - if !ticket.creator.nil?
+    - if !ticket.service_area.blank?
+      = "#{ticket.service_area.name}"   
+    %td
+      - if !ticket.creator.blank?
         = link_to "#{ticket.creator.name}", ticket.creator
     %td
-      - if !ticket.provider.nil?
+      - if !ticket.provider.blank?
         = link_to "#{ticket.provider.name}", ticket.provider
     %td= readable_date ticket.opened_on
     %td= readable_date ticket.closed_on

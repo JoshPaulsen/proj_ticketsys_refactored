@@ -9,6 +9,7 @@
     = csrf_meta_tags
   %body
     = link_to image_tag("tss-small.png", :alt => "Title Image"), tickets_path
+    Due to the Heroku filesystem, Service Area Forms only work intermittently.  A fix is coming...
     %div
       %div{:align => "right"}
         - if signed_in?
@@ -24,6 +25,6 @@
     = yield
     = debug(params) if Rails.env.development?
     %div
-      Params hash:
+      set @debug_value in any controller and see the value here:
     %div
-      = @params_hash    
+      = @debug_value    
