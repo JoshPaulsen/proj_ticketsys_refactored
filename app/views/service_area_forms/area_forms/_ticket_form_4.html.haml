@@ -2,3 +2,18 @@
   = label :answers, :field_5, 'favorite color?'
   %br
   = text_field :answers, :field_5
+.form-field-radio
+  = label :answers, :field_6, 'test '
+.form-field-radio-options
+  = radio_button :answers, :field_6, '1'
+  = label :answers, :field_6, '1'
+.form-field-radio-options
+  = radio_button :answers, :field_6, 'three'
+  = label :answers, :field_6, 'three'
+.form-field-radio-options
+  = radio_button :answers, :field_6, '3'
+  = label :answers, :field_6, '3'
+.form-field-text
+  = label :answers, :field_7, 'one more test'
+  %br
+  = text_field :answers, :field_7

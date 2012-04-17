@@ -2,9 +2,10 @@
   %tr
     %td= ticket.id
     %td= ticket.title    
-    %td
-    - if !ticket.service_area.blank?
-      = "#{ticket.service_area.name}"   
+    -if ticket.service_area
+      %td= ticket.service_area.name
+    -else
+      %td= "No Service Area"
     %td
       - if !ticket.creator.blank?
         = link_to "#{ticket.creator.name}", ticket.creator

@@ -115,7 +115,16 @@ class TicketsController < ApplicationController
       @provider_id = sa_form.default_provider_id
     end
     
-    @form_id = sa_form.id
+    if !sa_form.file_exist?
+      if sa_form.write_form
+        @form_id = sa_form.id
+      else
+        @form_id = nil
+      end
+    else  
+       @form_id = sa_form.id
+    end
+
     @ticket_type = sa_form.title
     @service_area_id = service_area.id
     @service_area_name = service_area.name

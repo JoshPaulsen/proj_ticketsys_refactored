@@ -24,8 +24,6 @@ class ServiceAreaForm < ActiveRecord::Base
     end
   end
   
-  private
-  
   def forms_directory 
     "app/views/service_area_forms/area_forms/"
   end
@@ -39,9 +37,17 @@ class ServiceAreaForm < ActiveRecord::Base
   end
   
   def write_form_to_file(form)
+    if file_exist?
+      delete_file
+    end
     write_out = File.new(form_name_path, "w")
-    bytes = write_out.write(form)
+    write_out.write(form)
     write_out.close    
-    bytes != 0
+    file_exist?
   end  
+  
+  def file_exist?
+    File.exist?(form_name_path)
+  end
+  
 end

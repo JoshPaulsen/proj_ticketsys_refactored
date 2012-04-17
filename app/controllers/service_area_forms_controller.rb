@@ -38,7 +38,7 @@ class ServiceAreaFormsController < ApplicationController
   
   def create
     @ticket_form = ServiceAreaForm.create!(params[:service_area_form])
-    @ticket_form.write_form
+    attempt_write(@ticket_form)
     redirect_to @ticket_form
   end
   
@@ -124,7 +124,7 @@ class ServiceAreaFormsController < ApplicationController
       if options.empty?
         session[:field_question] = nil  
         ticket_form.fields.create! :question => question, :field_type => "text"
-        ticket_form.write_form
+        attempt_write(ticket_form)
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
@@ -153,4 +153,15 @@ class ServiceAreaFormsController < ApplicationController
         end
       end
     end
+    
+    def attempt_write(form)
+      if !form.write_form
+        if !form.write_form
+          flash[:error] = "Error: Could not write form to file."
+          form.destroy
+          redirect_to service_area_forms_path and return
+        end
+      end
+    end
+    
 end
