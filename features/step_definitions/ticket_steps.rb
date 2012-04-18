@@ -40,8 +40,9 @@ When /^a[n]? "([^"]*)" named "([^"]*)" with the email "(.*)" exists$/ do |privil
 end
 
 When /^a.* "(.*)" service provider exists$/ do |sp|
-  User.create!(:name => sp+"098", :privilege => "service provider",:password => "098",
-               :email=> sp+"098", :department => sp)  
+  u = User.create!(:name => sp+"098", :privilege => "service provider",:password => "098",
+               :email=> sp+"098") #, :department => sp)  
+  u.department = sp
 end
 
 When /^the user "(.*)" does not exist$/ do |name|
