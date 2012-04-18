@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417222524) do
+ActiveRecord::Schema.define(:version => 20120418190114) do
 
   create_table "fields", :force => true do |t|
     t.integer  "form_id"
@@ -37,8 +37,12 @@ ActiveRecord::Schema.define(:version => 20120417222524) do
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.boolean  "hidden"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "questions", :force => true do |t|
