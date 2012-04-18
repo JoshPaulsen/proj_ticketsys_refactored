@@ -8,9 +8,6 @@
   .field
     = label :user, :password, "Password"
     = text_field :user, :password ,{:type => "password"}
-.field
-  = label :user, :location, "Location"
-  = text_field :user, :location
 - if current_user.admin?
   .select
     = label :user, :privilege, "Privileges: "

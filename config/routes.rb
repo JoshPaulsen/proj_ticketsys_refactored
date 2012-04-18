@@ -1,5 +1,7 @@
 ProjTicketsysRefactored::Application.routes.draw do
   
+  put 'service_area_forms/:id/move_up', :to => 'service_area_forms#move_up', :as => 'move_up'
+  put 'service_area_forms/:id/move_down', :to => 'service_area_forms#move_down', :as => 'move_down'
   post 'service_area_forms/:id/set_providers', :to => 'service_area_forms#set_providers', :as => 'set_providers'
   delete 'service_area_forms/remove_field/:id', :to => 'service_area_forms#remove_field', :as => 'remove_field'  
   post 'service_area_forms/:id/create_field', :to => 'service_area_forms#create_field', :as => 'create_form_field'

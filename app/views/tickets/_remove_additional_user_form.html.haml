@@ -1,7 +1,5 @@
 = form_tag remove_additional_user_path(@ticket), :method => :delete do
-  .select
-    = label :user, :user_id, "Remove a User: "
-    = select :user, :user_id, get_additional_users_for(@ticket), :include_blank => true
   .actions
-    = submit_tag "Remove User"
+    = submit_tag "Remove Additional User"
+    = select :user, :user_id, get_additional_users_for(@ticket), :include_blank => true
   

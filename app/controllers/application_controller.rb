@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   class TagHelper
     include Singleton
     include ActionView::Helpers::FormHelper
-    #include ActionView::Helpers::TagHelper
+    #include ActionView::Helpers::UrlHelper
+    include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::FormTagHelper
     include ActionView::Helpers::AssetTagHelper
   end
   

@@ -87,10 +87,6 @@ class TicketsController < ApplicationController
     redirect_to @ticket
   end
 
-  
-
-  #puts Haml::Engine.new('= image_tag("golfer.png")').render(TagHelper.instance)
-
   def new_ticket
     @debug_value = params
     location = Location.find_by_id params[:ticket][:location_id]

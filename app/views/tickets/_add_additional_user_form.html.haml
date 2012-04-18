@@ -1,6 +1,4 @@
 = form_tag add_additional_user_path(@ticket), :method => :put do
-  .select
-    = label :user, :user_id, "Add an Additional User: "
-    = select :user, :user_id, get_all_users, :include_blank => true
   .actions
     = submit_tag "Add Additional User"
+    = select :user, :user_id, get_all_users, :include_blank => true

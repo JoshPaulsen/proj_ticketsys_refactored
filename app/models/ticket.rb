@@ -57,6 +57,11 @@ class Ticket < ActiveRecord::Base
     if self.provider_id
       remove_user_by_id(self.provider_id)
     end
+    
+    user_tickets.where(:user_id => prov_id).each do |u_t|
+      u_t.destroy
+    end
+    
     self.provider_id = prov_id
     self.save
     add_additional_provider_by_id(prov_id)

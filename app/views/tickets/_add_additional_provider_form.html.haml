@@ -1,6 +1,4 @@
 = form_tag add_additional_provider_path(@ticket), :method => :put do
-  .select
-    = label :user, :user_id, "Add Additional Service Provider: "
-    = select :user, :user_id, get_providers_in(@ticket.service_area), :include_blank => true
   .actions
     = submit_tag "Add Additional Provider"
+    = select :user, :user_id, get_providers_in(@ticket.service_area), :include_blank => true

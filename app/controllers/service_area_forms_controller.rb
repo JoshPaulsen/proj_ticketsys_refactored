@@ -2,11 +2,61 @@ class ServiceAreaFormsController < ApplicationController
   
   before_filter :check_if_signed_in
   
+  def move_up
+    form = ServiceAreaForm.find_by_id params[:id]
+    field = Field.find_by_id params[:field_id]
+    
+    if !form
+      flash[:error] = "Error: That form does not exist"
+      redirect_to service_area_forms_path
+    end
+    
+    if !field
+      flash[:error] = "Error: A field that does not exist cannot be moved up"
+      redirect_to form
+    end
+    
+    if form.move_up field
+      flash[:notice] = "Field moved up"
+      redirect_to form
+    else
+      flash[:error] = "Error: Couldn't move field"
+      redirect_to form
+    end
+    
+    
+  end
+    
+  def move_down
+    form = ServiceAreaForm.find_by_id params[:id]
+    field = Field.find_by_id params[:field_id]
+    
+    if !form
+      flash[:error] = "Error: That form does not exist"
+      redirect_to service_area_forms_path
+    end
+    
+    if !field
+      flash[:error] = "Error: A field that does not exist cannot be moved up"
+      redirect_to form
+    end
+    
+    if form.move_down field
+      flash[:notice] = "Field moved down"
+      redirect_to form
+    else
+      flash[:error] = "Error: Couldn't move field"
+      redirect_to form
+    end
+  end  
+  
+  
   def remove_field
     field = Field.find_by_id params[:id]
     if field
       form = field.form
       field.destroy
+      form.update_field_order field.position
       flash[:notice] = "Field Removed"
       redirect_to form
     else
@@ -49,9 +99,8 @@ class ServiceAreaFormsController < ApplicationController
   end
   
   def destroy
-    @tf = ServiceAreaForm.find_by_id(params[:id])
-    @tf.delete_file
-    @tf.destroy
+    form = ServiceAreaForm.find_by_id(params[:id])
+    form.destroy
     flash[:notice] = "Form was deleted"
     redirect_to service_area_forms_path    
   end
@@ -119,7 +168,8 @@ class ServiceAreaFormsController < ApplicationController
     def add_text_field(ticket_form, question, options)
       if options.empty?
         session[:field_question] = nil  
-        ticket_form.fields.create! :question => question, :field_type => "text"
+        ticket_form.fields.create! :question => question, :field_type => "text",
+                                   :position => ticket_form.fields.count + 1 
         #attempt_write(ticket_form)
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
@@ -137,7 +187,7 @@ class ServiceAreaFormsController < ApplicationController
         redirect_to new_form_field_path
       else
         session[:field_question] = nil  
-        ticket_form.fields.create! :question => question,
+        ticket_form.fields.create! :question => question, :position => ticket_form.fields.count + 1, 
                                    :field_type => "radio", :options => options
         flash[:notice] = "New Field Added"        
         redirect_to ticket_form

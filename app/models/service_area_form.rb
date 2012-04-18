@@ -5,7 +5,7 @@ class ServiceAreaForm < ActiveRecord::Base
   
   belongs_to :service_area
   belongs_to :default_provider, :class_name => "User"
-  has_many :fields, :foreign_key => "form_id", :dependent => :destroy  
+  has_many :fields, :foreign_key => "form_id", :dependent => :destroy, :order => 'position ASC'
   has_many :rules, :foreign_key => "form_id", :dependent => :destroy, :uniq => true
   
   def get_form_engine
@@ -16,6 +16,36 @@ class ServiceAreaForm < ActiveRecord::Base
       end
     end
     Haml::Engine.new(all_fields)
+  end
+  
+  def move_up(field)
+    if field.position != 1
+      other_field = fields.where(:position => field.position-1).first
+      field.position -= 1
+      other_field.position += 1
+      field.save and other_field.save
+    end    
+  end
+  
+  def move_down(field)
+    if field.position != fields.count
+      other_field = fields.where(:position => field.position+1).first
+      field.position += 1
+      other_field.position -= 1
+      field.save and other_field.save
+    end
+  end
+  
+  def update_field_order(del_pos)
+    puts "here"
+    puts del_pos
+    update_fields = fields.where("position > ?", del_pos)
+    puts "here--------------------------------------------"
+    puts update_fields.count
+    update_fields.each do |f|
+      f.position -= 1
+      f.save
+    end
   end
   
 end

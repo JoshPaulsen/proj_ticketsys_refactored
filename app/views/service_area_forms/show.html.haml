@@ -8,9 +8,21 @@
         %table{:border=> "0", :cellpadding=>"10", :cellspacing=>"1", :overflow=>"hidden"}
           - @ticket_form.fields.each do |f|
             %tr
+              %td= "#{f.position}"
               %td= f.engine.render(@tag_helper)
-              %td=button_to "Delete Field", remove_field_path(f), :method => :delete , |
+              %td= button_to "Delete Field", remove_field_path(f), :method => :delete , |
                               :confirm => "Are you sure you want to delete this field?" 
-    - else
+              %td
+                - if f.need_up?
+                  = form_tag move_up_path, :method => :put do
+                    .up-button
+                      = hidden_field_tag :field_id, f.id
+                      = submit_tag 'Up'
+                - if f.need_down?
+                  = form_tag move_down_path, :method => :put do
+                    .down-button
+                      = hidden_field_tag :field_id, f.id
+                      = submit_tag 'Down'
+    - else      
       %ul= "This Form Has no Fields yet."
   = render "locations_form"

@@ -3,8 +3,10 @@ class Field < ActiveRecord::Base
   # question:string
   # field_type:string
   # options:text
+  # position:integer  
+  
   serialize :options
-  belongs_to :form, :class_name => "ServiceAreaForm"  
+  belongs_to :form, :class_name => "ServiceAreaForm"
   
   def render 
     
@@ -33,6 +35,32 @@ class Field < ActiveRecord::Base
       text += "  = label :answers, :field_#{self.id}, '#{option}'\n"
     end
     text
+  end
+  
+  def need_up?
+    count = self.form.fields.count
+    if count > 1
+      if position == 1
+        false
+      else
+        true
+      end
+    else
+      false
+    end
+  end
+  
+  def need_down?
+    count = self.form.fields.count
+    if count > 1
+      if position == count
+        false
+      else
+        true
+      end
+    else
+      false
+    end
   end
   
   def engine

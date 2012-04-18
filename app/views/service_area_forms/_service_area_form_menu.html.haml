@@ -1,7 +1,7 @@
 %div
   %table
     %tr
-      %td=  button_to "Add a new field to this form", new_form_field_path(@ticket_form), :method => :get
+      %td=  button_to "Add New Field", new_form_field_path(@ticket_form), :method => :get
       %td
         - if current_user.admin?
           = button_to "Delete Entire Form", @ticket_form, :method => :delete , |
