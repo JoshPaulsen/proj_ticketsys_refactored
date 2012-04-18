@@ -30,13 +30,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update_attributes(params[:user])
+    @user.update_attributes(params[:user])    
+    service_areas = params[:service_area]
     
-    params[:service_area].each do |sa_id, checked|
-      if checked == "1"        
-        @user.add_service_area_by_id sa_id
-      else        
-        @user.remove_service_area_by_id sa_id
+    if service_areas
+      params[:service_area].each do |sa_id, checked|
+        if checked == "1"        
+          @user.add_service_area_by_id sa_id
+        else        
+          @user.remove_service_area_by_id sa_id
+        end
       end
     end
     
