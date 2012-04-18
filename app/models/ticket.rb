@@ -57,7 +57,7 @@ class Ticket < ActiveRecord::Base
     if self.provider_id
       remove_user_by_id(self.provider_id)
     end
-    
+    # look at this again....
     user_tickets.where(:user_id => prov_id).each do |u_t|
       u_t.destroy
     end

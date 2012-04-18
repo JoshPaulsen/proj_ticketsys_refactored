@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     service_areas = params[:service_area]
     
     if service_areas
-      params[:service_area].each do |sa_id, checked|
+      service_areas.each do |sa_id, checked|
         if checked == "1"        
           @user.add_service_area_by_id sa_id
         else        

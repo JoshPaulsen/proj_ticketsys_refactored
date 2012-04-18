@@ -142,7 +142,7 @@ class TicketsController < ApplicationController
     end
     
     provider_id = params[:provider_id]
-    if provider_id and provider_id != current_user.id.to_s
+    if !provider_id.blank? and provider_id != current_user.id.to_s
       @ticket.set_provider_by_id provider_id
     end
     
