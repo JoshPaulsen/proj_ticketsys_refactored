@@ -14,6 +14,8 @@ class Field < ActiveRecord::Base
       render_text
     elsif self.field_type == "radio"  
       render_radio
+    elsif self.field_type == "select"
+      render_select
     end
     
   end
@@ -37,6 +39,13 @@ class Field < ActiveRecord::Base
     text
   end
   
+  def render_select    
+    text =  ".form-field-select\n"
+    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"    
+    text += "  = select :answers, :field_#{self.id}, ['one', 'two']\n"
+    text
+  end
+      
   def need_up?
     count = self.form.fields.count
     if count > 1
