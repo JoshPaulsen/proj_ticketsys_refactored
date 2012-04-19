@@ -7,8 +7,20 @@ module ApplicationHelper
     end
   end
   
+  def get_active_locations
+    loc = Location.active.collect do |l|
+      [l.name, l.id]
+    end
+  end
+  
   def get_service_areas
     sa = ServiceArea.all.collect do |s|
+      [s.name, s.id]
+    end
+  end
+  
+  def get_active_service_areas
+    sa = ServiceArea.active.collect do |s|
       [s.name, s.id]
     end
   end

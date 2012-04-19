@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   # privilege:string
   # password:string
   # location:string  
+  # active:boolean
+  
+  scope :active, where(:active => true)
+  scope :inactive, where(:active => false)
   
   has_many :user_tickets
   has_many :tickets, :through => :user_tickets, :uniq => true
@@ -30,6 +34,10 @@ class User < ActiveRecord::Base
   
   def user?
     privilege == "user"
+  end
+  
+  def inactive?
+    active == false
   end
   
   def list_service_areas

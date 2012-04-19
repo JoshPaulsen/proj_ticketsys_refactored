@@ -2,9 +2,16 @@
   %table
     %tr
       %td
-        = button_to 'Edit User', edit_user_path(@user), :method => :get
+        - if @user.active?
+          = button_to 'Edit User', edit_user_path(@user), :method => :get
       %td
         - if current_user.admin?
-          = button_to "Delete User", @user, :method => :delete , |
-                                          :confirm => "Are you sure you want to delete this user?"
+          - if @user.active?
+            = button_to "Deactivate User", deactivate_user_path, :method => :put , |
+                                          :confirm => "Are you sure you want to deactivate this user?"
+          - else
+            = button_to "Reactivate User", reactivate_user_path, :method => :put , |
+                                          :confirm => "Are you sure you want to reactivate this user?"
+      %td
+        = button_to 'Delete User (Debug Only)', @user, :method => :delete
 %hr

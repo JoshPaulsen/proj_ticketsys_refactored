@@ -7,16 +7,8 @@ ProjTicketsysRefactored::Application.routes.draw do
   post 'service_area_forms/:id/create_field', :to => 'service_area_forms#create_field', :as => 'create_form_field'
   get 'service_area_forms/:id/new_field', :to => 'service_area_forms#new_field', :as => 'new_form_field'  
   
-  get "settings/index", :to => 'settings#index', :as => 'settings'
-  get 'settings/service_areas', :to => 'settings#service_areas', :as => 'service_areas'
-  get 'settings/new_service_area', :to => 'settings#new_service_area', :as => 'new_service_area'
-  post 'settings/create_service_area', :to => 'settings#create_service_area', :as => 'create_service_area'
-  get 'settings/locations', :to => 'settings#locations', :as => 'locations'
-  get 'settings/new_location', :to => 'settings#new_location', :as => 'new_location'
-  post 'settings/create_location', :to => 'settings#create_location', :as => 'create_location'
-  
   get 'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
-  get 'tickets/mytickets', :as => 'mytickets'
+  get 'tickets/my_tickets', :as => 'my_tickets'
   put 'tickets/:id/set_primary_provider', :to => 'tickets#set_primary_provider',:as => 'set_primary_provider'
   put 'tickets/:id/add_additional_user', :to => 'tickets#add_user',:as => 'add_additional_user'
   put 'tickets/:id/add_additional_provider', :to => 'tickets#add_provider',:as => 'add_additional_provider'
@@ -24,11 +16,24 @@ ProjTicketsysRefactored::Application.routes.draw do
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   
+  put 'users/:id/deactivate', :to => 'users#deactivate', :as => 'deactivate_user'
+  put 'users/:id/reactivate', :to => 'users#reactivate', :as => 'reactivate_user'  
+  
+  put 'locations/:id/deactivate', :to => 'locations#deactivate', :as => 'deactivate_location'
+  put 'locations/:id/reactivate', :to => 'locations#reactivate', :as => 'reactivate_location'
+  
+  put 'service_areas/:id/deactivate', :to => 'service_areas#deactivate', :as => 'deactivate_service_area'
+  put 'service_areas/:id/reactivate', :to => 'service_areas#reactivate', :as => 'reactivate_service_area'
+  
+  resources :service_areas, :except => [:new, :show]
+  resources :locations, :except => [:new, :show]
   resources :service_area_forms
   resources :tickets
   resources :users
   resources :notes, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
+  
+  get "settings/index", :as => 'settings'
   
   get 'signin', :to => 'sessions#new', :as => 'signin'
   delete 'signout', :to => 'sessions#destroy', :as => 'signout'

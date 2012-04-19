@@ -6,4 +6,9 @@
     %td= user.location
     %td= user.list_service_areas
     %td= user.privilege  
+    %td
+      - if user.active?
+        Yes
+      - else
+        No
     %td= link_to "View User", user

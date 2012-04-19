@@ -1,13 +1,11 @@
 %div
   %h4 Add a new Service Area
   %div
-    = form_tag create_service_area_path, :method => :post do
-      .field
-        = label :service_area, :name, "Name: "
-        = text_field :service_area, :name
+    = form_tag locations_path, :method => :post do
+      = render "service_area_form_fields"
       .actions
         = submit_tag "Create Service Area"
   %h4 All Service Areas
   %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
-    = render "service_areas/service_area_header"
+    = render "service_area_header"
     = render @service_areas

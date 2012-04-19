@@ -226,11 +226,11 @@ class TicketsController < ApplicationController
       end
       
     else
-      redirect_to mytickets_path
+      redirect_to my_tickets_path
     end    
   end
   
-  def mytickets    
+  def my_tickets    
     @tickets = current_user.tickets
   end
 

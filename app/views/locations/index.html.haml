@@ -1,10 +1,8 @@
 %div
   %h4 Add a new Location
   %div
-    = form_tag create_location_path, :method => :post do
-      .field
-        = label :location, :name, "Name: "
-        = text_field :location, :name
+    = form_tag locations_path, :method => :post do
+      = render "location_form_fields"
       .actions
         = submit_tag "Create Location"
   %h4 All Locations

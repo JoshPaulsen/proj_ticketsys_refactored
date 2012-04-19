@@ -1,14 +1,19 @@
 %div
   - if current_user.admin? or current_user.id == @user.id
     = render "user_menu"
+  - if !@user.active?
+    %h3= "Deactivated User"
   %ul
     %p= "User ID: #{@user.id}"
     %p= "Name: #{@user.name}"
     %p= "Email: #{@user.email}"
-    %p= "Location: #{@user.location}"    
+    %p= "Location: #{@user.location}"  
+    %p= "Active: #{@user.active?}"  
     %p= "Privilege: #{@user.privilege}"
     %p
       Service Areas: 
       - @user.service_areas.each do |sa|
-        = "#{sa.name}"
-        = " "
+        - if sa.inactive?
+          = "#{sa.name}(Deactivated) "
+        - else
+          = "#{sa.name} "

@@ -3,3 +3,20 @@
     %td= service_area.id
     %td= service_area.name
     %td= service_area.description
+    %td
+      - if service_area.active?
+        Yes
+      - else
+        No
+    %td
+      - if service_area.active? and current_user.admin?
+        = button_to "Edit", edit_service_area_path(service_area), :method => :get
+    %td
+      - if current_user.admin?
+        - if service_area.active?
+          = button_to "Deactivate", deactivate_service_area_path(service_area), :method => :put , |
+                                        :confirm => "Are you sure you want to deactivate this service area?"
+        - else
+          = button_to "Reactivate", reactivate_service_area_path(service_area), :method => :put , |
+                                        :confirm => "Are you sure you want to reactivate this Service Area?"
+

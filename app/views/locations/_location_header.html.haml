@@ -3,3 +3,7 @@
     %th ID
     %th Name
     %th Address
+    %th Active
+    %th Edit
+    - if current_user.admin?
+      %th
