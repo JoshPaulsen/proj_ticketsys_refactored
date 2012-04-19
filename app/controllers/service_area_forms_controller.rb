@@ -150,8 +150,8 @@ class ServiceAreaFormsController < ApplicationController
       add_text_field(ticket_form, question, options_list)
     elsif type == "radio"
       add_radio_field(ticket_form, question, options_list)
-    elsif type == "select"
-      add_select_field(ticket_form, question, options_list)
+    #elsif type == "select"
+      #add_select_field(ticket_form, question, options_list)
     end
   end
   
@@ -203,29 +203,5 @@ class ServiceAreaFormsController < ApplicationController
         #end
       end
     end
-    
-    def add_select_field(ticket_form, question, options)
-      if options.length < 2
-        flash[:error] = "Error: A select field needs at least two options."    
-        session[:field_question] = question  
-        redirect_to new_form_field_path
-      else
-        session[:field_question] = nil  
-        ticket_form.fields.create! :question => question, :position => ticket_form.fields.count + 1, 
-                                   :field_type => "select", :options => options
-        flash[:notice] = "New Field Added"        
-        redirect_to ticket_form
-        #if ticket_form.write_form
-        #  flash[:notice] = "New Field Added"        
-        #  redirect_to ticket_form
-        #else
-        #  flash[:error] = "Error: Unable to write form to file."    
-        #  session[:field_question] = question  
-        #  redirect_to new_form_field_path      
-        #end
-      end
-    end
-    
-    
     
 end
