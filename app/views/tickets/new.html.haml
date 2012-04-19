@@ -9,6 +9,11 @@
     .select
       = label :ticket, :form_id, "Please Choose a Ticket Type: "
       = select :ticket, :form_id, get_all_types, :prompt => "-- Type --"    
+      
+    .form-field-select
+      = label :answers, :field_33, 'SELCT'
+      = select :answers, :field_33, ['one', 'two']
+
     .actions
       = submit_tag "Next"
 = render "chained_hack"
