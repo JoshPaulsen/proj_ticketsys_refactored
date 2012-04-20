@@ -1,5 +1,8 @@
 class LocationsController < ApplicationController
   
+  before_filter :check_if_signed_in
+  before_filter :check_if_admin
+  
   def destroy
     @locations = Location.find_by_id(params[:id])
     @locations.destroy

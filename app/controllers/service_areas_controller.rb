@@ -1,5 +1,7 @@
 class ServiceAreasController < ApplicationController
   
+  before_filter :check_if_signed_in
+  before_filter :check_if_admin
   
   def destroy
     @service_areas = ServiceArea.find_by_id(params[:id])

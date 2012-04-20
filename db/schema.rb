@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420061711) do
+ActiveRecord::Schema.define(:version => 20120420083250) do
 
   create_table "fields", :force => true do |t|
     t.integer  "form_id"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(:version => 20120420061711) do
   create_table "tickets", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "location"
     t.datetime "opened_on"
     t.datetime "closed_on"
     t.integer  "creator_id"
@@ -88,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120420061711) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "service_area_id"
+    t.integer  "location_id"
   end
 
   add_index "tickets", ["service_area_id"], :name => "index_tickets_on_service_area_id"

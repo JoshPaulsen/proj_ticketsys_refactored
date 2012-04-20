@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   before_filter :check_if_signed_in
   before_filter :check_if_admin, :only => :destroy
   before_filter :deny_user, :only => [:update, :edit]
-  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :mytickets ]  
+  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket ]  
   
   def new    
   end 
@@ -122,6 +122,7 @@ class TicketsController < ApplicationController
     @service_area_id = service_area.id
     @service_area_name = service_area.name
     @location_name = location.name
+    @location_id = location.id
   end
   
   
@@ -190,8 +191,6 @@ class TicketsController < ApplicationController
     
     @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
-    puts "IN CONTROLLER---------------------"
-    puts params[:answers]
     @ticket.update_answers params[:answers]
     
     if @ticket.save
@@ -222,12 +221,11 @@ class TicketsController < ApplicationController
     if current_user.admin?
       @tickets = Ticket.all
     elsif current_user.service_provider?
-      
       @tickets = current_user.tickets
       current_user.service_areas.each do |sa|
-        @tickets << sa.tickets
+        @tickets += sa.tickets
       end
-      
+      @tickets = @tickets.uniq
     else
       redirect_to my_tickets_path
     end    
@@ -246,6 +244,10 @@ class TicketsController < ApplicationController
       @notes = @ticket.notes
       if @ticket.service_area
         @service_area_name = @ticket.service_area.name
+      end
+      
+      if @ticket.location
+        @location_name = @ticket.location.name
       end
       
     end      

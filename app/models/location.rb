@@ -6,6 +6,7 @@ class Location < ActiveRecord::Base
   scope :active, where(:active => true)
   scope :inactive, where(:active => false)
   
+  #has_many :tickets
   has_many :rules, :dependent => :destroy
   validates :name, :presence => true, :uniqueness => true
   

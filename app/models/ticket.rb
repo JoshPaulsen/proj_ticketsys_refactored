@@ -1,16 +1,18 @@
 class Ticket < ActiveRecord::Base  
   # title:string
   # description:text
-  # location:string  
+  # location_id:integer  
   # creator_id:integer
   # provider_id:integer
   # service_area_id:integer
   # opened_on:datetime
   # closed_on:datetime  
+  default_scope :order => 'created_at ASC'
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"
   belongs_to :service_area
+  belongs_to :location
   has_many :user_tickets, :dependent => :destroy
   has_many :users, :through => :user_tickets, :uniq => true
   has_many :notes, :dependent => :destroy, :order => 'created_at ASC'

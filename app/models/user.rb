@@ -60,10 +60,12 @@ class User < ActiveRecord::Base
     if sa
       sa.destroy
     end
-  end  
+  end
   
-  def self.next_provider
-    User.where(:privilege => "service provider").limit(1).first
+  def service_area_ids
+    service_areas.collect do |sa|
+      sa.id
+    end
   end
   
 end

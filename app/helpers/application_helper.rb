@@ -19,6 +19,12 @@ module ApplicationHelper
     end
   end
   
+  def get_service_areas_for(provider)
+    sa = ServiceArea.where(:service_area_id => provider.service_area_ids).collect do |s|
+      [s.name, s.id]
+    end
+  end
+  
   def get_active_service_areas
     sa = ServiceArea.active.collect do |s|
       [s.name, s.id]

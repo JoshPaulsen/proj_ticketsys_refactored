@@ -1,6 +1,7 @@
 class ServiceAreaFormsController < ApplicationController
   
   before_filter :check_if_signed_in
+  before_filter :deny_user
   
   def move_up
     form = ServiceAreaForm.find_by_id params[:id]
@@ -99,7 +100,11 @@ class ServiceAreaFormsController < ApplicationController
   
   def index
     @ticket_form = ServiceAreaForm.new
-    @ticket_forms = ServiceAreaForm.all
+    if current_user.admin?
+      @ticket_forms = ServiceAreaForm.all
+    else
+      @ticket_forms = ServiceAreaForm.where :service_area_id => current_user.service_area_ids 
+    end
   end
   
   def show

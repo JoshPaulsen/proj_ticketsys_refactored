@@ -11,5 +11,6 @@
       = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
     = hidden_field_tag :provider_id, @provider_id
     = hidden_field :ticket, :service_area_id, :value => @service_area_id
+    = hidden_field :ticket, :location_id, :value => @location_id
     .action
       = submit_tag "Create Ticket"
