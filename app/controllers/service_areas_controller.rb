@@ -15,7 +15,8 @@ class ServiceAreasController < ApplicationController
   end  
   
   def create
-    
+    puts "here -----------------------------------"
+    puts params[:service_area]
     @service_area = ServiceArea.new(params[:service_area])
     @service_area.active = true
     if @service_area.save
