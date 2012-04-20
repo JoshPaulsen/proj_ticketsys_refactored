@@ -39,7 +39,12 @@ describe NotesController do
         response.should redirect_to ticket_path(ticket)
       end
     end
-         
+    
+    describe "for a note with an attached file" do
+      it "should attach the file and redirect to the ticket the note was for and there should not be an error" do
+        pending
+      end
+    end
   end
 end
 
