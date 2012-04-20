@@ -190,7 +190,9 @@ class TicketsController < ApplicationController
     
     @ticket.title = params[:ticket][:title]
     @ticket.description = params[:ticket][:description]
-    #@ticket.service_area_id = params[:ticket][:service_area_id]
+    puts "IN CONTROLLER---------------------"
+    puts params[:answers]
+    @ticket.update_answers params[:answers]
     
     if @ticket.save
       flash[:success] = "Ticket Updated"

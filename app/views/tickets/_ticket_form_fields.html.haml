@@ -5,11 +5,10 @@
 -#- if @ticket
 -#  .field
 -#    = hidden_field :ticket, :service_area_id, :value => @ticket.service_area_id
-.field
-  = label :ticket, :title, "Title: "
-  = text_field :ticket, :title
-
-.field
-  = label :ticket, :description, "Description: "
-  %br
-  = text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}
+%tr.field
+  %td= label :ticket, :title, "Title: "
+  %td= text_field :ticket, :title
+= render "questions_fields"
+%tr.field
+  %td= label :ticket, :description, "Description: "
+  %td= text_area :ticket, :description, {:placeholder=>"Please describe your issue.", :size=>"50x5"}

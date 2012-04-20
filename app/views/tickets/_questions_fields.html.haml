@@ -1,0 +1,4 @@
+- @ticket.questions.each do |question|
+  %tr.field
+    %td= label :answers, "#{question.position}", "#{question.question} "
+    %td= text_field :answers, "#{question.position}", :value => question.answer

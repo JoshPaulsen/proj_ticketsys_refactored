@@ -13,8 +13,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :service_area
   has_many :user_tickets, :dependent => :destroy
   has_many :users, :through => :user_tickets, :uniq => true
-  has_many :notes, :dependent => :destroy 
-  has_many :questions, :dependent => :destroy
+  has_many :notes, :dependent => :destroy, :order => 'created_at ASC'
+  has_many :questions, :dependent => :destroy, :order => 'position ASC'
   
   validates :title, :presence => true
   validates :opened_on, :presence => true  
@@ -117,7 +117,7 @@ class Ticket < ActiveRecord::Base
     end
   end
   
-   def add_answers(answers)
+  def add_answers(answers)
     if !answers.blank?
       answers.each do |field, answer|      
         field_id = field.delete("field_").to_i        
@@ -129,9 +129,18 @@ class Ticket < ActiveRecord::Base
             answer = "No"
           end
         end        
-        questions.create :question => field.question, :answer => answer
+        questions.create :question => field.question, :answer => answer, :position => field.position
       end
       self.save
+    end
+  end
+  
+  def update_answers(answers)
+    if !answers.blank?
+      self.questions.each do |question|
+        question.answer = answers[question.position.to_s]
+        question.save
+      end
     end
   end
   
