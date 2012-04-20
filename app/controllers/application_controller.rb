@@ -10,9 +10,10 @@ class ApplicationController < ActionController::Base
     include ActionView::Helpers::TagHelper
     include ActionView::Helpers::FormTagHelper
     include ActionView::Helpers::AssetTagHelper
+    include ActionView::Helpers::FormOptionsHelper
   end
   
-  def get_tag_helper
+  def get_form_helper
     TagHelper.instance
   end
   

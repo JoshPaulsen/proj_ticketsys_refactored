@@ -8,27 +8,16 @@
     .field      
       = radio_button_tag :field_type, :text, :checked
       = label_tag :field_type, "Text Field"
+    .field
+      = radio_button_tag :field_type, :check_box
+      = label_tag :field_type, "Check Box Field"
     .field      
       = radio_button_tag :field_type, :radio
       = label_tag :field_type, "Radio Button Field"
     .field      
       = radio_button_tag :field_type, :select
       = label_tag :field_type, "Select Field"
-    %h4 If you are making a new Radio Button or Select Field please enter in up to 5 options
-    .field
-      = label_tag :options , "1"
-      = text_field :options, :option_1
-    .field
-      = label_tag :options, "2"
-      = text_field :options, :option_2
-    .field
-      = label_tag :options, "3"
-      = text_field :options, :option_3
-    .field
-      = label_tag :options, "4"
-      = text_field :options, :option_4
-    .field
-      = label_tag :options, "5"
-      = text_field :options, :option_5
+    %h4 If you are making a new Radio Button or Select Field please enter in up to 10 options
+    = render "options"
     .actions
       = submit_tag "Add New Field"
