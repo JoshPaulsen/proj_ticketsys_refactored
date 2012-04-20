@@ -12,8 +12,9 @@
     %p= "Privilege: #{@user.privilege}"
     %p
       Service Areas: 
-      - @user.service_areas.each do |sa|
-        - if sa.inactive?
-          = "#{sa.name}(Deactivated) "
-        - else
-          = "#{sa.name} "
+      - if !@service_areas.blank?
+        - @service_areas.each do |sa|
+          - if sa.inactive?
+            = "#{sa.name}(Deactivated) "
+          - else
+            = "#{sa.name} "

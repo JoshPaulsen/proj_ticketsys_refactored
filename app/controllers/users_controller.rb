@@ -12,9 +12,12 @@ class UsersController < ApplicationController
 
   def create    
     @user = User.new(params[:user])
-    params[:service_area].each do |sa_id, checked|
-      if checked == "1"        
-        @user.add_service_area_by_id sa_id      
+    service_areas = params[:service_area]
+    if service_areas
+      service_areas.each do |sa_id, checked|
+        if checked == "1"        
+          @user.add_service_area_by_id sa_id      
+        end
       end
     end
     @user.active = true
@@ -106,11 +109,12 @@ class UsersController < ApplicationController
   end
 
   def show    
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by_id(params[:id])    
     if !@user
       flash[:error] = "That user does not exist"
       redirect_to users_path    
-    end    
+    end  
+    @service_areas = @user.service_areas  
   end  
   
 end
