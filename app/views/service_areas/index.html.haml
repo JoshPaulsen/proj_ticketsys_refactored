@@ -1,7 +1,7 @@
 %div
   %h4 Add a new Service Area
   %div
-    = form_tag locations_path, :method => :post do
+    = form_tag service_areas_path, :method => :post do
       = render "service_area_form_fields"
       .actions
         = submit_tag "Create Service Area"

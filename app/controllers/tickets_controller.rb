@@ -10,18 +10,18 @@ class TicketsController < ApplicationController
     ticket_id = params[:ticket_id]
     title = params[:title]
     description = params[:description]
-    service_areas = params[:service_areas]
+    #service_areas = params[:service_areas]
     
     
     
-    @service_areas = ServiceArea.all
+    #@service_areas = ServiceArea.all
     puts "____________________________________"
     puts type
     puts ticket_id
     puts title
     puts description
-    puts service_areas
-    puts service_area_id_list(service_areas)
+    #puts service_areas
+    #puts service_area_id_list(service_areas)
     
     if type == "all"
       @tickets = Ticket.search_all
@@ -43,11 +43,11 @@ class TicketsController < ApplicationController
       @tickets = @tickets.where("description like ?", "%"+description+"%")
     end
     
-    if !service_areas.blank?
-      sa_list = service_area_id_list(service_areas)
-      @tickets = @tickets.where("service_area_id = ?", sa_list )
-    end
-    
+    #if !service_areas.blank?
+    #  sa_list = service_area_id_list(service_areas)
+    #  @tickets = @tickets.where("service_area_id = ?", sa_list )
+   # end
+    #@tickets =  Ticket.all
   end
   
   def service_area_id_list(service_areas)
