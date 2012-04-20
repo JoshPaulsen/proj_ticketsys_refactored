@@ -78,6 +78,19 @@ class ServiceAreaFormsController < ApplicationController
   end
   
   def create
+    service_area_id = params[:service_area_form][:service_area_id]
+    title = params[:service_area_form][:title]
+    
+    if service_area_id.blank?
+      flash[:error] = "Please choose a Service Area"
+      redirect_to service_area_forms_path and return
+    end
+    
+    if title.blank?
+      flash[:error] = "All forms need a type"
+      redirect_to service_area_forms_path and return
+    end
+    
     @ticket_form = ServiceAreaForm.create!(params[:service_area_form])
     redirect_to @ticket_form
   end
