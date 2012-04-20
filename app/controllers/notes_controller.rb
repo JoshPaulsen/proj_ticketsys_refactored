@@ -15,6 +15,7 @@ class NotesController < ApplicationController
     @note = Note.new(params[:note])
     @note.user_id = params[:user_id]
     @note.ticket_id = params[:ticket_id]    
+    #@note.attachment = params[:]
     if @note.save
       redirect_to ticket_path ticket
     else
