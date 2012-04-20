@@ -8,6 +8,21 @@ class ServiceAreaForm < ActiveRecord::Base
   has_many :fields, :foreign_key => "form_id", :dependent => :destroy, :order => 'position ASC'
   has_many :rules, :foreign_key => "form_id", :dependent => :destroy, :uniq => true
   
+  
+  class HHelper
+    include Singleton
+    include ActionView::Helpers::FormHelper
+    #include ActionView::Helpers::UrlHelper
+    #include ActionView::Helpers::TagHelper
+    #include ActionView::Helpers::FormTagHelper
+    #include ActionView::Helpers::AssetTagHelper
+    #include ActionView::Helpers::FormOptionsHelper
+  end
+  
+  def get_helper
+    HHelper.instance
+  end
+  
   def get_form_engine
     all_fields = ""    
     if !fields.empty?
@@ -16,6 +31,27 @@ class ServiceAreaForm < ActiveRecord::Base
       end
     end
     Haml::Engine.new(all_fields)
+  end
+  
+  def get_all
+    all_fields = ""    
+    if !fields.empty?
+      fields.each do |f|
+        all_fields += f.render
+      end
+    end
+   all_fields
+  end
+  
+  def get_select_options
+    options = {}
+    fields.each do |f|
+      if f.select?
+        key = "options_#{f.id}".to_sym
+        options[key] = f.options
+      end
+    end
+    options
   end
   
   def move_up(field)
@@ -37,11 +73,7 @@ class ServiceAreaForm < ActiveRecord::Base
   end
   
   def update_field_order(del_pos)
-    puts "here"
-    puts del_pos
     update_fields = fields.where("position > ?", del_pos)
-    puts "here--------------------------------------------"
-    puts update_fields.count
     update_fields.each do |f|
       f.position -= 1
       f.save

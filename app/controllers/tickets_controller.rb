@@ -115,7 +115,8 @@ class TicketsController < ApplicationController
     end
     
     @form_engine = sa_form.get_form_engine
-    @tag_helper = get_tag_helper
+    @form_helper = get_form_helper
+    @options = sa_form.get_select_options
     
     @ticket_type = sa_form.title
     @service_area_id = service_area.id

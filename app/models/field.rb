@@ -8,14 +8,42 @@ class Field < ActiveRecord::Base
   serialize :options
   belongs_to :form, :class_name => "ServiceAreaForm"
   
+  def text?
+    field_type == "text"
+  end
+  
+  def radio?
+    field_type == "radio"
+  end
+  
+  def select?
+    field_type == "select"
+  end
+  
+  def check_box?
+    field_type == "check box"
+  end
+  
+  def render_options
+    options = {}
+    if self.select?
+      key = "options_#{self.id}".to_sym
+      options[key] = self.options
+    end
+    options
+  end
+  
+  
   def render 
-    
-    if self.field_type == "text"
+    type = self.field_type
+    if type == "text"
       render_text
-    elsif self.field_type == "radio"  
+    elsif type == "radio"  
       render_radio
-    elsif self.field_type == "select"
+    elsif type == "select"
       render_select
+    elsif type == "check box"
+      render_check_box
     end
     
   end
@@ -38,11 +66,18 @@ class Field < ActiveRecord::Base
     end
     text
   end
-  
+  # = select :test, :id, options_38"
   def render_select    
     text =  ".form-field-select\n"
     text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"    
-    text += "  = select :answers, :field_#{self.id}, ['one', 'two']\n"
+    text += "  = select :answers, :field_#{self.id}, options_#{self.id}, :include_blank => true\n"
+    text
+  end
+  
+  def render_check_box
+    text =  ".form-field-check-box\n"    
+    text += "  = check_box :answers, :field_#{self.id}\n"
+    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"    
     text
   end
       

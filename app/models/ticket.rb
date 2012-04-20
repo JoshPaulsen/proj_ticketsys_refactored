@@ -122,6 +122,13 @@ class Ticket < ActiveRecord::Base
       answers.each do |field, answer|      
         field_id = field.delete("field_").to_i        
         field = Field.find_by_id field_id
+        if field.field_type == "check box"
+          if answer == "1"
+            answer = "Yes"
+          else
+            answer = "No"
+          end
+        end        
         questions.create :question => field.question, :answer => answer
       end
       self.save

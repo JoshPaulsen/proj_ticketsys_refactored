@@ -1,10 +1,10 @@
 %div
-  %p= "New '#{@service_area_name}' ticket at '#{@location_name}': '#{@ticket_type}'"
+  %p= "New #{@service_area_name} Ticket at #{@location_name} - #{@ticket_type}"
   = form_tag tickets_path, :method => :post do
     .field
       = label :ticket, :title, "Title: "
       = text_field :ticket, :title
-    = @form_engine.render(@tag_helper)
+    = @form_engine.render(@form_helper, @options)
     .field
       = label :ticket, :description, "Description: "
       %br
