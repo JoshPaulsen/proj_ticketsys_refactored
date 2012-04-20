@@ -5,6 +5,61 @@ class TicketsController < ApplicationController
   before_filter :deny_user, :only => [:update, :edit]
   before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket ]  
   
+  def search
+    type = params[:open_closed]
+    ticket_id = params[:ticket_id]
+    title = params[:title]
+    description = params[:description]
+    service_areas = params[:service_areas]
+    
+    
+    
+    @service_areas = ServiceArea.all
+    puts "____________________________________"
+    puts type
+    puts ticket_id
+    puts title
+    puts description
+    puts service_areas
+    puts service_area_id_list(service_areas)
+    
+    if type == "all"
+      @tickets = Ticket.search_all
+    elsif type == "open"
+      @tickets = Ticket.open
+    else
+      @tickets = Ticket.closed
+    end
+    
+    if !ticket_id.blank?
+      @tickets = @tickets.where(:id => ticket_id)
+    end
+    
+    if !title.blank?
+      @tickets = @tickets.where("title like ?", "%"+title+"%")
+    end
+    
+    if !description.blank?
+      @tickets = @tickets.where("description like ?", "%"+description+"%")
+    end
+    
+    if !service_areas.blank?
+      sa_list = service_area_id_list(service_areas)
+      @tickets = @tickets.where("service_area_id = ?", sa_list )
+    end
+    
+  end
+  
+  def service_area_id_list(service_areas)
+    list = []
+    service_areas.each do |sa_id, value|
+      if value == "1"
+        list << sa_id
+      end
+    end
+    list
+  end
+  
   def new    
   end 
   
@@ -17,7 +72,7 @@ class TicketsController < ApplicationController
     @ticket.closed_on = Time.now
     @ticket.save
     flash[:success] = "Ticket successfully closed."
-    redirect_to mytickets_path
+    redirect_to my_tickets_path
   end
   
   def open
@@ -26,7 +81,7 @@ class TicketsController < ApplicationController
       flash[:error] = "Error: That ticket is already open."
       redirect_to @ticket and return      
     end
-    @ticket.closed_on = ""
+    @ticket.closed_on = nil
     @ticket.save
     flash[:success] = "Ticket successfully reopened."
     redirect_to @ticket
@@ -140,7 +195,7 @@ class TicketsController < ApplicationController
     if !@ticket.set_creator current_user    
       @ticket.destroy
       flash[:error] = "Error: Could not set creator."      
-      redirect_to mytickets_path and return          
+      redirect_to my_tickets_path and return          
     end
     
     provider_id = params[:provider_id]
@@ -218,6 +273,7 @@ class TicketsController < ApplicationController
 
   # service provider code probably returns duplicate tickets now
   def index
+    @service_areas = ServiceArea.all
     if current_user.admin?
       @tickets = Ticket.all
     elsif current_user.service_provider?

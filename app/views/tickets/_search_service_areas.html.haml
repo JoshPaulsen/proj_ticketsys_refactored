@@ -1,0 +1,3 @@
+- @service_areas.each do |sa|
+  = check_box :service_areas, sa.id, :checked => true
+  = label :service_areas, :id, "#{sa.name}"

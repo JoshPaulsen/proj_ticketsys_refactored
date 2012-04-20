@@ -7,6 +7,8 @@ ProjTicketsysRefactored::Application.routes.draw do
   post 'service_area_forms/:id/create_field', :to => 'service_area_forms#create_field', :as => 'create_form_field'
   get 'service_area_forms/:id/new_field', :to => 'service_area_forms#new_field', :as => 'new_form_field'  
   
+  
+  get 'tickets/search', :as => 'search'
   get 'tickets/new_ticket', :to => 'tickets#new_ticket', :as => 'continue_new_ticket'
   get 'tickets/my_tickets', :as => 'my_tickets'
   put 'tickets/:id/set_primary_provider', :to => 'tickets#set_primary_provider',:as => 'set_primary_provider'
