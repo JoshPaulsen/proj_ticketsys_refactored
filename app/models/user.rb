@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
   # name:string
   # email:string
   # privilege:string
-  # password:string
-  # location:string  
+  # password:string  
   # active:boolean
   
   scope :active, where(:active => true)
@@ -22,7 +21,7 @@ class User < ActiveRecord::Base
   
   # At some point privilege should be removed from this.
   # That will require changing how we create and update users.
-  attr_accessible :name, :password, :location, :email, :privilege
+  attr_accessible :name, :password, :email, :privilege
   
   def admin?
     privilege == "admin"
