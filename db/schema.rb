@@ -38,8 +38,12 @@ ActiveRecord::Schema.define(:version => 20120420083250) do
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.boolean  "hidden"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "questions", :force => true do |t|
