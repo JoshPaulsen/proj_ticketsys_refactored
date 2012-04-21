@@ -39,3 +39,13 @@ Scenario: log in and then log out
   When I follow "Moose"
   Then I should see "Successfully signed out"
   And I should be on the Sign In page
+  
+Scenario: deactivated user try to log in with the right password
+  Given a deactivated "user" named "Junebug" with the password "123" exists
+  And I am on the Login page
+  When I fill in "Username" with "Junebug"
+  And I fill in "Password" with "123"
+  And I press "Sign in"
+  Then I should be on the Sign in page
+  And I should see "Deactivated Account"
+

@@ -149,7 +149,7 @@ class ServiceAreaFormsController < ApplicationController
       flash[:error] = "Error: That Ticket Form does not exist"      
       redirect_to new_form_field_path and return
     elsif question.blank?
-      flash[:error] = "Error: All forms fields need a description"      
+      flash[:error] = "Error: All forms fields need a question"      
       redirect_to new_form_field_path and return        
     end
         
@@ -197,7 +197,7 @@ class ServiceAreaFormsController < ApplicationController
     
     def add_radio_field(ticket_form, question, options)
       if options.length < 2
-        flash[:error] = "Error: A radio field needs at least two options."    
+        flash[:error] = "Error: A radio button field needs at least two options."    
         session[:field_question] = question  
         redirect_to new_form_field_path
       else

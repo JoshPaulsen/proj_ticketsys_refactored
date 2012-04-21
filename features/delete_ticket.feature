@@ -10,12 +10,12 @@ Scenario: user cannot delete a ticket
   Given I am signed in as a "user"
   And I have a ticket with the title "Fix me"
   When I am viewing the "Fix me" ticket
-  Then I should not see "Delete This Ticket"
+  Then I should not see "Delete Ticket"
   
 Scenario: admin can delete a ticket
   Given I am signed in as a "admin"
   And I have a ticket with the title "Fix me"
   When I am viewing the "Fix me" ticket  
-  When I press "Delete This Ticket"
+  When I press "Delete Ticket"
   Then I should see "Ticket was deleted"
   

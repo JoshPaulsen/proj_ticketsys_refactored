@@ -36,8 +36,19 @@ module NavigationHelpers
       new_ticket_path
       
     when /^the my tickets page$/i
-      mytickets_path
+      my_tickets_path
       
+    when /^the continue new ticket page$/i
+      continue_new_ticket_path    
+    
+    when /^the service areas page$/i
+      service_areas_path  
+      
+    when /^the service area forms page$/i
+      service_area_forms_path  
+      
+    when /^the locations page$/i
+      locations_path  
     #when /^\/tickets\/(.*)$/
       #tickets_path(1)
 

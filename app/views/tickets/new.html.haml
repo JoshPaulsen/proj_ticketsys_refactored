@@ -1,13 +1,13 @@
 %div
   = form_tag continue_new_ticket_path, :method => :get do
     .select
-      = label :ticket, :location_id, "Please Choose a Location: "
+      = label :ticket, :location_id, "Select a Location: "
       = select :ticket, :location_id, get_active_locations, :prompt => "-- Other --"
     .select
-      = label :ticket, :service_area_id, "Please Choose a Service Area: "
+      = label :ticket, :service_area_id, "Select a Service Area: "
       = select :ticket, :service_area_id, get_active_service_areas, :prompt => "-- Service Area --"    
     .select
-      = label :ticket, :form_id, "Please Choose a Ticket Type: "
+      = label :ticket, :form_id, "Select a Ticket Type: "
       = select :ticket, :form_id, get_all_types, :prompt => "-- Type --" 
     .actions
       = submit_tag "Next"

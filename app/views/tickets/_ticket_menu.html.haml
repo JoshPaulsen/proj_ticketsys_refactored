@@ -21,7 +21,7 @@
         = button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
     %td
       - if @ticket.open?
-        = button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
+        = button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put, :confirm => "Are you sure?"
       - else
         = button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
     %td

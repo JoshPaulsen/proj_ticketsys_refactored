@@ -8,6 +8,12 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_name(params[:name])
+    
+    if user and user.inactive?
+      flash[:error] = "Deactivated Account"
+      redirect_to signin_path and return
+    end
+    
     if user and user.password == params[:password]      
         sign_in(user)        
         redirect_to tickets_path

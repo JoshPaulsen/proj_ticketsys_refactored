@@ -89,13 +89,13 @@ class TicketsController < ApplicationController
   
   def add_user
     @ticket = Ticket.find_by_id(params[:id])
-    user = User.find_by_id(params[:user][:user_id])
+    user = User.find_by_id(params[:add_user][:id])
     if user
       if @ticket.users.include?(user)
         flash[:error] = "Error: That person is already attached to this ticket"
         redirect_to @ticket
       elsif @ticket.add_additional_user(user)
-        flash[:success] = "Additional user Added to Ticket"
+        flash[:success] = "Additional User Added to Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
         flash[:error] = "Error: Couldn't add user."         
@@ -110,13 +110,13 @@ class TicketsController < ApplicationController
   
   def add_provider
     @ticket = Ticket.find_by_id(params[:id])
-    provider = User.find_by_id(params[:user][:user_id])
+    provider = User.find_by_id(params[:add_prov][:id])
     if provider
       if @ticket.users.include?(provider)
         flash[:error] = "Error: That person is already attached to this ticket"
         redirect_to @ticket
       elsif @ticket.add_additional_provider(provider)
-        flash[:success] = "Additional provider Added to Ticket"
+        flash[:success] = "Additional Provider Added to Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
         flash[:error] = "Error: Couldn't add user."         
@@ -131,8 +131,8 @@ class TicketsController < ApplicationController
   
   
   def remove_user
-    @ticket = Ticket.find_by_id(params[:id])
-    user = User.find_by_id(params[:user][:user_id])    
+    @ticket = Ticket.find_by_id(params[:id])    
+    user = User.find_by_id(params[:rm_user][:id])
     if user
       @ticket.remove_user(user)
       flash[:success] = "#{user.name} was removed from the ticket"      
@@ -141,24 +141,37 @@ class TicketsController < ApplicationController
     end
     redirect_to @ticket
   end
+  
+  def remove_provider
+    @ticket = Ticket.find_by_id(params[:id])
+    prov = User.find_by_id(params[:rm_prov][:id])
+    if prov
+      @ticket.remove_user(prov)
+      flash[:success] = "#{prov.name} was removed from the ticket"      
+    else      
+      flash[:error] = "Error: Plese select a user first."
+    end
+    redirect_to @ticket
+  end
+  
 
   def new_ticket
     @debug_value = params
     location = Location.find_by_id params[:ticket][:location_id]
     if !location
-      flash[:error] = "Error: Please choose a Location"
+      flash[:error] = "Please select a Location"
       redirect_to new_ticket_path and return
     end
     
     service_area = ServiceArea.find_by_id params[:ticket][:service_area_id]
     if !service_area
-      flash[:error] = "Error: Please choose a Service Area"
+      flash[:error] = "Please select a Service Area"
       redirect_to new_ticket_path and return
     end
 
     sa_form = ServiceAreaForm.find_by_id params[:ticket][:form_id]
     if !sa_form
-      flash[:error] = "Error: Please choose a Ticket Type"
+      flash[:error] = "Please select a Ticket Type"
       redirect_to new_ticket_path and return
     end
 

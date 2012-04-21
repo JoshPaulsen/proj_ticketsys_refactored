@@ -15,6 +15,7 @@ ProjTicketsysRefactored::Application.routes.draw do
   put 'tickets/:id/add_additional_user', :to => 'tickets#add_user',:as => 'add_additional_user'
   put 'tickets/:id/add_additional_provider', :to => 'tickets#add_provider',:as => 'add_additional_provider'
   delete 'tickets/:id/remove_additional_user', :to => 'tickets#remove_user',:as => 'remove_additional_user'  
+  delete 'tickets/:id/remove_additional_provider', :to => 'tickets#remove_provider',:as => 'remove_additional_provider'  
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   

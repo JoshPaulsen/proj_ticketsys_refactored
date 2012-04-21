@@ -1,5 +1,6 @@
-= form_tag remove_additional_user_path(@ticket), :method => :delete do
-  .actions
-    = submit_tag "Remove Additional Provider"
-    = select :user, :user_id, get_additional_providers_for(@ticket), :include_blank => true
+- if !current_user.user?
+  = form_tag remove_additional_provider_path(@ticket), :method => :delete do
+    .actions
+      = submit_tag "Remove Additional Provider"
+      = select :rm_prov, :id, get_remove_providers_for(@ticket), :include_blank => true
   
