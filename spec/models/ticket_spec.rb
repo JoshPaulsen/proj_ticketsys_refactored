@@ -70,7 +70,7 @@ describe Ticket do
     end    
   end
   
-  describe "adding a watcher to a ticket" do
+  describe "adding an additional user to a ticket" do
     
     before(:each) do
       @ticket = Ticket.create!(@attr.merge(:closed_on => nil))
@@ -80,7 +80,7 @@ describe Ticket do
     describe "by user" do
       
       it "should return the user" do
-        @ticket.add_watcher @user 
+        @ticket.add_additional_user @user 
         @ticket.users.should include @user
       end      
     end
@@ -88,23 +88,23 @@ describe Ticket do
     describe "by user ID" do
       
       it "should return the user" do
-        @ticket.add_watcher_by_id @user.id
+        @ticket.add_additional_user_by_id @user.id
         @ticket.users.should include @user
       end            
     end    
   end
   
-  describe "removing a watcher from a ticket" do
+  describe "removing an additonal user from a ticket" do
     before(:each) do
       @ticket = Ticket.create!(@attr) 
       @user = Factory(:user)
-      @ticket.add_watcher @user
+      @ticket.add_additional_user @user
     end
     
     describe "by user" do
       
       it "should not return the user" do
-        @ticket.remove_watcher @user 
+        @ticket.remove_user @user 
         @ticket.users.should_not include @user
       end      
     end
@@ -112,7 +112,7 @@ describe Ticket do
     describe "by user ID" do
       
       it "should not return the user" do
-        @ticket.remove_watcher_by_id @user.id 
+        @ticket.remove_user_by_id @user.id 
         @ticket.users.should_not include @user
       end            
     end  
@@ -204,7 +204,7 @@ describe Ticket do
     end
   end
   
-  describe "returning just the watchers and not the creator or provider" do
+  describe "returning just the additional users and not the creator" do
     before(:each) do
       @c = Factory(:user)
       @p = Factory(:user)  
@@ -216,24 +216,22 @@ describe Ticket do
     end
     
     it "should return nothing if there are no users attached except the creator and provider" do
-      @ticket.just_watchers.should be_blank
+      @ticket.additional_users.should be_blank
     end
     
     it "should only return the watchers and not the creator or provider" do
-      @ticket.add_watcher @w1
-      @ticket.just_watchers.should include @w1
-      @ticket.just_watchers.should_not include @c
-      @ticket.just_watchers.should_not include @p      
+      @ticket.add_additional_user @w1
+      @ticket.additional_users.should include @w1
+      @ticket.additional_users.should_not include @c
+      @ticket.additional_users.should_not include @p      
     end
     
     it "should return all watchers" do
-      @ticket.add_watcher @w1
-      @ticket.add_watcher @w2
-      @ticket.just_watchers.should include @w1      
-      @ticket.just_watchers.should include @w2
+      @ticket.add_additional_user @w1
+      @ticket.add_additional_user @w2
+      @ticket.additional_users.should include @w1      
+      @ticket.additional_users.should include @w2
     end
-    
-    
     
   end
   

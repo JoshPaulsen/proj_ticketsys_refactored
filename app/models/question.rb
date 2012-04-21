@@ -4,7 +4,5 @@ class Question < ActiveRecord::Base
   # answer:text
   # position:integer
   
-  
-  
   belongs_to :ticket
 end

@@ -112,7 +112,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])    
     if !@user
       flash[:error] = "That user does not exist"
-      redirect_to users_path    
+      redirect_to users_path and return
     end  
     @service_areas = @user.service_areas  
   end  

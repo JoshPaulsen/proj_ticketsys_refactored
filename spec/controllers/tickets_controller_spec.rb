@@ -24,7 +24,7 @@ describe TicketsController do
       it "should display a success message and redirect to the my tickets path" do
         put :close, :id => @ticket.id
         flash[:success].should == "Ticket successfully closed."
-        response.should redirect_to mytickets_path
+        response.should redirect_to my_tickets_path
       end    
     end
     
@@ -110,7 +110,7 @@ describe TicketsController do
       user = Factory(:user, :privilege=>"user")
       test_sign_in(user)        
       get :index   
-      response.should redirect_to mytickets_path   
+      response.should redirect_to my_tickets_path   
     end    
   end
   
