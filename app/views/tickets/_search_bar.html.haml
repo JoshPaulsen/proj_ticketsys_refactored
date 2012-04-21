@@ -1,22 +1,22 @@
 = form_tag search_path, :method => :get do
   .field
     = label_tag :ticket_id, "Ticket Number: "
-    = text_field_tag :ticket_id
+    = text_field_tag :ticket_id, @ticket_id
   .field
     = label_tag :title, "Title: "
-    = text_field_tag :title  
+    = text_field_tag :title, @title
   .field
     = label_tag :description, "Description: "
-    = text_field_tag :description  
+    = text_field_tag :description, @description
   .field      
     = radio_button_tag :open_closed, :open, :checked
     = label_tag :open_closed, "Open Tickets"
   .field
-    = radio_button_tag :open_closed, :closed
+    = radio_button_tag :open_closed, :closed,  checked?("closed")
     = label_tag :open_closed, "Closed Tickets"
   .field      
-    = radio_button_tag :open_closed, :all
-    = label_tag :open_closed, "All Tickets"
+    = radio_button_tag :open_closed, :all 
+    = label_tag :open_closed, "All Tickets", checked?("all")
   -#= render "search_service_areas"
   .action
     = submit_tag "Search"

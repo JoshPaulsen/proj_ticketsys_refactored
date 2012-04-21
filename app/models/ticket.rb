@@ -8,9 +8,9 @@ class Ticket < ActiveRecord::Base
   # opened_on:datetime
   # closed_on:datetime  
   default_scope :order => 'created_at ASC'
-  scope :closed, where("closed_on != 'nil'")
-  scope :open, where(:closed_on => nil)
-  scope :search_all, where("id != 'nil'")
+  scope :closed, where("closed_on != ?", "NULL")
+  scope :opened, where(:closed_on => nil)
+  scope :search_all, where("id != ?", "NULL")
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"

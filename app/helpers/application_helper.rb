@@ -86,6 +86,12 @@ module ApplicationHelper
     end
   end
   
+  def checked?(value)
+    if @type == value
+      :checked
+    end
+  end
+  
   
   
 end

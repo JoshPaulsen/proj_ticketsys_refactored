@@ -6,41 +6,41 @@ class TicketsController < ApplicationController
   before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket ]  
   
   def search
-    type = params[:open_closed]
-    ticket_id = params[:ticket_id]
-    title = params[:title]
-    description = params[:description]
+    @type = params[:open_closed]
+    @ticket_id = params[:ticket_id]
+    @title = params[:title]
+    @description = params[:description]
     #service_areas = params[:service_areas]
     
     
     
     #@service_areas = ServiceArea.all
     puts "____________________________________"
-    puts type
-    puts ticket_id
-    puts title
-    puts description
+    puts @type
+    puts @ticket_id
+    puts @title
+    puts @description
     #puts service_areas
     #puts service_area_id_list(service_areas)
     
-    if type == "all"
+    if @type == "all"
       @tickets = Ticket.search_all
-    elsif type == "open"
-      @tickets = Ticket.open
+    elsif @type == "open"
+      @tickets = Ticket.opened
     else
       @tickets = Ticket.closed
     end
     
-    if !ticket_id.blank?
-      @tickets = @tickets.where(:id => ticket_id)
+    if !@ticket_id.blank?
+      @tickets = @tickets.where(:id => @ticket_id)
     end
     
-    if !title.blank?
-      @tickets = @tickets.where("title like ?", "%"+title+"%")
+    if !@title.blank?
+      @tickets = @tickets.where("title like ?", "%"+@title+"%")
     end
     
-    if !description.blank?
-      @tickets = @tickets.where("description like ?", "%"+description+"%")
+    if !@description.blank?
+      @tickets = @tickets.where("description like ?", "%"+@description+"%")
     end
     
     #if !service_areas.blank?
