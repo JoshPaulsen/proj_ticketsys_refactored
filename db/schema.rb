@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120420083250) do
+=======
+ActiveRecord::Schema.define(:version => 20120418190114) do
+>>>>>>> a41e64fdf6a1ca06c65240d626d2949b154f1de8
 
   create_table "fields", :force => true do |t|
     t.integer  "form_id"
