@@ -4,7 +4,7 @@ describe User do
   
   before(:each) do
     @attr = {:name => "Josh", :password => "pw", :privilege => "admin",
-              :email => "j@j.com", :location => "home", :department => "IT"}    
+              :email => "j@j.com"  }  
   end
   
   it "should create a new user" do
@@ -103,22 +103,6 @@ describe User do
         @a.admin?.should be_true
       end
       
-    end
-    
-  end
-  
-  describe "returning the next service provider" do    
-    
-    it "should return an IT provider if the department is IT" do
-      User.create!(@attr.merge(:privilege => "service provider", :department=>"IT"))
-      sp = User.next_provider("IT")
-      sp.department.should == "IT"
-    end
-    
-    it "should return an HR provider if the department is HR" do
-      User.create!(@attr.merge(:privilege => "service provider", :department=>"HR"))
-      sp = User.next_provider("HR")
-      sp.department.should == "HR"
     end
     
   end

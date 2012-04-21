@@ -6,8 +6,7 @@ FactoryGirl.define do
     sequence(:email) {|n| "name_#{n}@test.com"}    
     privilege "user"
     password "password"
-    location "office"
-    department "IT"
+    active true
   end
 end
 

@@ -4,8 +4,7 @@ describe Ticket do
   
   before(:each) do
     @attr = {:creator_id => 1, :provider_id => 2, :title=> "Test", :description => "fix me",
-             :location => "office", :department => "IT", :opened_on => Time.now, 
-             :closed_on => Time.now}
+             :opened_on => Time.now, :closed_on => Time.now, :service_area_id => 1}
   end
   
   it "should create an new Ticket" do

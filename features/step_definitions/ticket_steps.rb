@@ -64,20 +64,20 @@ When /^I am (logged|signed) (o|i)n as a[n]? "(.*)" in the "([^"]*)" service area
   step "I fill in \"Password\" with \"#{user.password}\""
   step "I press \"Sign in\""
 end
-
-When /^I have a.* "([^"]*)" ticket with the title "([^"]*)"$/ do |department,title|
-  step "an \"#{department}\" service provider exists"
-  visit new_ticket_path  
-  step "I fill in \"Title\" with \"#{title}\""
-  step "I select \"#{department}\" from \"Department\""
-  step "I press \"Submit Ticket\""   
-end
+#
+#When /^I have a.* "([^"]*)" ticket with the title "([^"]*)"$/ do |department,title|
+#  step "an \"#{department}\" service provider exists"
+#  visit new_ticket_path  
+#  step "I fill in \"Title\" with \"#{title}\""
+#  step "I select \"#{department}\" from \"Department\""
+#  step "I press \"Submit Ticket\""   
+#end
 
 When /^I have a ticket with the title "([^"]*)"$/ do |title|
   step "an \"IT\" service provider exists"
   visit new_ticket_path  
   step "I fill in \"Title\" with \"#{title}\""
-  step "I select \"IT\" from \"Department\""
+  step "I select \"IT\" from \"Service Area\""
   step "I press \"Submit Ticket\""   
 end
 
@@ -125,7 +125,7 @@ end
 When /^I have a closed ticket with the title "([^"]*)"$/ do |title|
   step "I have a ticket with the title \"#{title}\""
   step "I am viewing the \"#{title}\" ticket"
-  step "I press \"Close This Ticket\""
+  step "I press \"Close Ticket\""
 end
 
 When /^I am not logged in$/ do

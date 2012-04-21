@@ -103,8 +103,7 @@ describe TicketsController do
     it "should should show a service provider only their tickets" do
       user = Factory(:user, :privilege=>"service provider")
       test_sign_in(user)   
-      Ticket.should_receive(:where).with(:department => user.department).and_return Factory(:ticket)
-      get :index      
+      
     end
     
     it "should should redirect a user to the my tickets page" do
