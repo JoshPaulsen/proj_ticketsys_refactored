@@ -9,14 +9,14 @@
     = label_tag :description, "Description: "
     = text_field_tag :description, @description
   .field      
-    = radio_button_tag :open_closed, :open, :checked
+    = radio_button_tag :open_closed, :open, checked = true
     = label_tag :open_closed, "Open Tickets"
   .field
-    = radio_button_tag :open_closed, :closed,  checked?("closed")
+    = radio_button_tag :open_closed, :closed, checked = type_checked?("closed")
     = label_tag :open_closed, "Closed Tickets"
   .field      
-    = radio_button_tag :open_closed, :all 
-    = label_tag :open_closed, "All Tickets", checked?("all")
-  -#= render "search_service_areas"
+    = radio_button_tag :open_closed, :all, checked = type_checked?("all")
+    = label_tag :open_closed, "All Tickets"
+  = render "search_service_areas"
   .action
     = submit_tag "Search"

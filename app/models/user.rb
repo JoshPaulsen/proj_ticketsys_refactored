@@ -67,4 +67,21 @@ class User < ActiveRecord::Base
     end
   end
   
+  def accessible_tickets
+    if admin?
+      Ticket.search_all
+    elsif service_provider?
+      sa_ids = get_str(service_area_ids)
+      Ticket.joins(:user_tickets).where("user_tickets.user_id = ? OR service_area_id IN  #{sa_ids}", self.id).uniq
+    else
+      tickets
+    end
+  end
+  
+  def get_str(list)
+    s = list.to_s
+    s = s.sub("[","(")
+    s = s.sub("]",")")
+  end
+  
 end

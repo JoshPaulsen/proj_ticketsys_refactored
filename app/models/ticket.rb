@@ -11,6 +11,11 @@ class Ticket < ActiveRecord::Base
   scope :closed, where("closed_on != ?", "NULL")
   scope :opened, where(:closed_on => nil)
   scope :search_all, where("id != ?", "NULL")
+  scope :for_service_areas, lambda {|sa_list| where(:service_area_id => sa_list)}
+  scope :for_user, lambda {|user| joins(:user_tickets).where("user_tickets.user_id = ?", user)}
+  #scope :test, lambda { joins(:user_tickets).where("user_tickets.user_id = ?", 5)}
+  #scope :acc, lambda {|list, user| for_service_areas(list).for_user(user)}
+  
   
   belongs_to :creator, :class_name => "User"
   belongs_to :provider, :class_name => "User"

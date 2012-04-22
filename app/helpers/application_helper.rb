@@ -113,12 +113,16 @@ module ApplicationHelper
     end
   end
   
-  def checked?(value)
-    if @type == value
-      :checked
-    end
+  def type_checked?(value)
+    @type == value
   end
   
-  
+  def service_area_checked?(id)
+    if @service_areas_list
+      @service_areas_list.include? id
+    else
+      true
+    end
+  end
   
 end

@@ -3,33 +3,41 @@ class TicketsController < ApplicationController
   before_filter :check_if_signed_in
   before_filter :check_if_admin, :only => :destroy
   before_filter :deny_user, :only => [:update, :edit]
-  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket ]  
+  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket, :search ]  
   
   def search
     @type = params[:open_closed]
     @ticket_id = params[:ticket_id]
     @title = params[:title]
     @description = params[:description]
-    #service_areas = params[:service_areas]
+    @service_areas_list = service_area_id_list(params[:service_areas])
+    
+    if @service_areas_list.empty?
+      @tickets = []
+      flash.now[:error] = "No Search Results Found" 
+      return
+    end
     
     
-    
-    #@service_areas = ServiceArea.all
-    puts "____________________________________"
-    puts @type
-    puts @ticket_id
-    puts @title
-    puts @description
-    #puts service_areas
-    #puts service_area_id_list(service_areas)
     
     if @type == "all"
-      @tickets = Ticket.search_all
+      @tickets = current_user.accessible_tickets
     elsif @type == "open"
-      @tickets = Ticket.opened
+      @tickets = current_user.accessible_tickets.opened
     else
-      @tickets = Ticket.closed
+      @tickets = current_user.accessible_tickets.closed
     end
+    
+    
+    #if @type == "all"
+    #  @tickets = Ticket.search_all
+    #elsif @type == "open"
+    #  @tickets = Ticket.opened
+    #else
+    #  @tickets = Ticket.closed
+    #end
+    
+    @tickets = @tickets.where(:service_area_id => @service_areas_list )
     
     if !@ticket_id.blank?
       @tickets = @tickets.where(:id => @ticket_id)
@@ -43,18 +51,17 @@ class TicketsController < ApplicationController
       @tickets = @tickets.where("description like ?", "%"+@description+"%")
     end
     
-    #if !service_areas.blank?
-    #  sa_list = service_area_id_list(service_areas)
-    #  @tickets = @tickets.where("service_area_id = ?", sa_list )
-   # end
-    #@tickets =  Ticket.all
+    if @tickets.count == 0
+      flash.now[:error] = "No Search Results Found"  
+    end
+
   end
   
   def service_area_id_list(service_areas)
     list = []
     service_areas.each do |sa_id, value|
       if value == "1"
-        list << sa_id
+        list << sa_id.to_i
       end
     end
     list
@@ -284,10 +291,19 @@ class TicketsController < ApplicationController
     redirect_to tickets_path
   end
 
-  # service provider code probably returns duplicate tickets now
+  
   def index
-    @service_areas = ServiceArea.all
-    if current_user.admin?
+    
+    if current_user.user?
+      redirect_to my_tickets_path and return
+    else
+      @tickets = current_user.accessible_tickets
+      return
+    end
+    
+    
+    #@service_areas = ServiceArea.all
+    if current_user.admin?      
       @tickets = Ticket.all
     elsif current_user.service_provider?
       @tickets = current_user.tickets
