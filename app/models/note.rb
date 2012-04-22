@@ -3,7 +3,6 @@ class Note < ActiveRecord::Base
   # user_id:integer
   # ticket_id:integer
   # hidden:boolean
-  attr_accessible :attachment, :body
   
   belongs_to :user
   belongs_to :ticket
