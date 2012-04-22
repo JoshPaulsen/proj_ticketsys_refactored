@@ -17,9 +17,7 @@ class TicketsController < ApplicationController
       flash.now[:error] = "No Search Results Found" 
       return
     end
-    
-    
-    
+        
     if @type == "all"
       @tickets = current_user.accessible_tickets
     elsif @type == "open"
@@ -27,7 +25,6 @@ class TicketsController < ApplicationController
     else
       @tickets = current_user.accessible_tickets.closed
     end
-    
     
     #if @type == "all"
     #  @tickets = Ticket.search_all
