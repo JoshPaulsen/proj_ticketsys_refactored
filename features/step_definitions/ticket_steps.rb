@@ -8,7 +8,6 @@
 #end
 # Will we evere care about a name?
 
-<<<<<<< HEAD
 #
 When /^I have a[n]? "([^"]*)" ticket with the title "([^"]*)"$/ do |s_area,title|
   step "an active location named \"Main Office\" exists"
