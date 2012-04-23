@@ -8,9 +8,11 @@ class Ticket < ActiveRecord::Base
   # opened_on:datetime
   # closed_on:datetime  
   default_scope :order => 'created_at ASC'
-  scope :closed, where("closed_on != ?", "NULL")
+  #scope :closed, where("closed_on != ?", "NULL")
+  scope :closed, where("closed_on IS NOT NULL")
   scope :opened, where(:closed_on => nil)
-  scope :search_all, where("id != ?", "NULL")
+  #scope :search_all, where("id != ?", "NULL")
+  scope :search_all, where("id IS NOT NULL")
   scope :for_service_areas, lambda {|sa_list| where(:service_area_id => sa_list)}
   scope :for_user, lambda {|user| joins(:user_tickets).where("user_tickets.user_id = ?", user)}
   #scope :test, lambda { joins(:user_tickets).where("user_tickets.user_id = ?", 5)}
