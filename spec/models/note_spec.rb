@@ -30,4 +30,10 @@ describe Note do
     note.should respond_to(:hidden?)
   end
   
+  it 'should allow an attached file' do
+    note = Note.create! @attr
+    note.attachment = File.new(Rails.root + 'spec/models/note_spec.rb')
+    note.should be_valid
+  end
+
 end

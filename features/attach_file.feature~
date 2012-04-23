@@ -4,13 +4,13 @@ Feature: Attaching files to a note
   So that I can better illustrate my problem
 
 Background: there's a ticket
-  Given a ticket with the title "Fix me" exists
-  And I am logged in as "admin"
-  And I am viewing the ticket "Fix me"
+  Given "admin" is logged in as an "admin"
+  And I have a ticket with the title "Fix me"
+  And I am viewing "Fix me" ticket
 
 Scenario: try to attach a file
   When I fill in "Filename" with "crash.log"
   And I press "Attach file"
   And I fill in the note body with "Log attached:"
-  And I press "Add note"
+  And I press "New Note"
   Then the file "crash.log" should be attached to a note of the ticket "Fix me"

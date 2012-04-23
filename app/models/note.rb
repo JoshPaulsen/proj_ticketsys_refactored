@@ -11,4 +11,6 @@ class Note < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :ticket_id, :presence => true
   
+  has_attached_file :attachment
+  
 end

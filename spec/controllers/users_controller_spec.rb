@@ -106,4 +106,61 @@ describe UsersController do
       response.should redirect_to users_path    
     end
   end
+  
+  describe "deactivating a user" do
+    it "should return error if no user can be found" do
+      User.stub(:find_by_id).and_return nil
+      post :deactivate, :id => '1'
+      flash[:error].should == "That user does not exist"
+      response.should redirect_to users_path
+    end
+    
+    it "should leave a user deactivated if user is already deactivated" do
+      user = Factory :user
+      User.stub(:find_by_id).and_return user
+      user.stub(:inactive?).and_return true
+      post :deactivate, :id => user.id
+      flash[:error].should == "That user was already deactivated"
+      response.should redirect_to users_path
+    end
+    
+    it "should deactivate a user if it is active" do
+      user = Factory :user
+      User.stub(:find_by_id).and_return user
+      user.stub(:inactive?).and_return false
+      post :deactivate, :id => user.id
+      flash[:notice].should == "User Deactivated"
+      response.should redirect_to users_path
+    end
+  end
+  
+    describe "reactivating a user" do
+    it "should return error if no user can be found" do
+      User.stub(:find_by_id).and_return nil
+      post :reactivate, :id => '1'
+      flash[:error].should == "That user does not exist"
+      response.should redirect_to users_path
+    end
+    
+    it "should leave a user active if user is already activated" do
+      user = Factory :user
+      User.stub(:find_by_id).and_return user
+      user.stub(:active?).and_return true
+      post :reactivate, :id => user.id
+      flash[:error].should == "That user is currently active"
+      response.should redirect_to user
+    end
+    
+    it "should reactivate a user if it is deactive" do
+      user = Factory :user
+      User.stub(:find_by_id).and_return user
+      user.stub(:active?).and_return false
+      post :reactivate, :id => user.id
+      flash[:notice].should == "User Reactivated"
+      response.should redirect_to user
+    end
+  end 
 end
+
+
+
