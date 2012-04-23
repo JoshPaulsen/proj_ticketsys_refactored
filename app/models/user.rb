@@ -72,15 +72,12 @@ class User < ActiveRecord::Base
       Ticket.search_all
     elsif service_provider?
       if service_areas.blank?
-        puts "blank?"
         tickets
-      else
-        puts "sas"
+      else        
         sa_ids = get_str(service_area_ids)
-        Ticket.joins(:user_tickets).where("user_tickets.user_id = ? OR service_area_id IN  #{sa_ids}", self.id).uniq
-        #sa_ids = get_str(service_area_ids)
-        #Ticket.joins(:user_tickets).where("user_tickets.user_id = ? OR service_area_id IN  #{sa_ids}", self.id).uniq
+        Ticket.joins(:user_tickets).where("user_tickets.user_id = ? OR service_area_id IN  #{sa_ids}", self.id).uniq 
       end
+    else
       tickets
     end
   end
