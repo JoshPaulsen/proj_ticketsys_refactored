@@ -96,7 +96,8 @@ describe TicketsController do
     it "should should show an admin all of the tickets" do
       user = Factory(:user, :privilege=>"admin")
       test_sign_in(user)   
-      Ticket.should_receive(:all).and_return Factory(:ticket)
+      user.should_receive(:accessible_tickets).and_return Factory(:ticket)
+      #Ticket.should_receive(:all).and_return Factory(:ticket)
       #Ticket.should_receive(:search_all).and_return Factory(:ticket) # This line makes it pass, but why?
       get :index      
     end
