@@ -117,6 +117,10 @@ module ApplicationHelper
     @type == value
   end
   
+  def all_mine_checked?(value)
+    @all_mine == value
+  end
+  
   def service_area_checked?(id)
     if @service_areas_list
       @service_areas_list.include? id

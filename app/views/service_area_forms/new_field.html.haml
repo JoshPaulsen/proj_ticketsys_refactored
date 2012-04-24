@@ -10,13 +10,13 @@
         = radio_button_tag :field_type, :text, :checked
         = label_tag :field_type, "Text Field"
       .field
-        = radio_button_tag :field_type, :check_box
+        = radio_button_tag :field_type, :check_box, type_checked?("check_box")
         = label_tag :field_type, "Check Box Field"
       .field      
-        = radio_button_tag :field_type, :radio
+        = radio_button_tag :field_type, :radio, type_checked?("radio")
         = label_tag :field_type, "Radio Button Field"
       .field      
-        = radio_button_tag :field_type, :select
+        = radio_button_tag :field_type, :select, type_checked?("select")
         = label_tag :field_type, "Select Field"
     %h4 If you are making a new Radio Button or Select Field please enter in up to 10 options
     = render "options"

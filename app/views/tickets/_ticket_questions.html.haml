@@ -1,0 +1,6 @@
+%table  
+  - if !@ticket.questions.blank?
+    - @ticket.questions.each do |q|
+      %tr
+        %td= "#{q.question}: #{q.answer}"
+      

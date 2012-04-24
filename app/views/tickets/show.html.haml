@@ -1,44 +1,42 @@
 %div
-  = render "ticket_menu"
-  %div
-    %ul= "Ticket Number: #{@ticket.id}"
-    %ul= "Service Area: #{@service_area_name}"
-    %ul= "Location: #{@location_name}"
-    %ul= "Title: #{@ticket.title}"
-    %ul
-      Opened: 
-      = readable_date(@ticket.opened_on)
-    %ul
-      - if @ticket.closed?
-        Closed: 
-        = readable_date(@ticket.closed_on)
-    %ul
-      Creator: 
-      - if !@ticket.creator.blank?
-        = link_to "#{@ticket.creator.name}", @ticket.creator
-    %ul
-      Service Provider: 
-      - if !@ticket.provider.blank?
-        = link_to "#{@ticket.provider.name}", @ticket.provider
-    %ul
-      Additional Users: 
-      - @ticket.additional_users.each do |user|
-        = link_to "#{user.name}", user_path(user)
-        = " "
-    %ul
-      Additional Providers: 
-      - @ticket.additional_providers.each do |user|
-        = link_to "#{user.name}", user_path(user)
-        = " "
-    %ul
-      Everyone (debug only):
-      - @ticket.users.each do |user|
-        = link_to "#{user.name}", user_path(user)
-        = " "
-    - if !@ticket.questions.blank?
-      - @ticket.questions.each do |q|
-        %ul= "#{q.question}: #{q.answer}"
-    %ul= "Description: #{@ticket.description}"
-  = render @notes
-  - if @ticket.open?
-    = render "shared/new_note_form"
+  = render "ticket_menu"   
+  %table{:cellpadding=>"5", :cellspacing=>"5", :overflow=>"hidden", :border => "0"}
+    %tr
+      %td= "Ticket Number: #{@ticket.id}"
+      %td= "Title: #{@ticket.title}"
+      %td= "Service Area: #{@service_area_name}"
+      %td= "Location: #{@location_name}"
+    %tr
+      %td
+        Creator: 
+        - if !@ticket.creator.blank?
+          = link_to "#{@ticket.creator.name}", @ticket.creator
+      %td= render "additional_users"        
+      %td= render "add_additional_user_form"
+      %td= render "remove_additional_user_form"
+    %tr
+      %td
+        Service Provider: 
+        - if !@ticket.provider.blank?
+          = link_to "#{@ticket.provider.name}", @ticket.provider
+      %td= render "additional_providers"        
+      %td= render "add_additional_provider_form"
+      %td= render "remove_additional_provider_form"
+  %table
+    %tr
+      %td= render "ticket_questions"
+    %tr
+      %td
+        Description: 
+        %br
+        = "#{@ticket.description.gsub(/\n/, '<br/>')}".html_safe
+    %tr
+      %td= render @notes
+    %tr
+      %td
+        - if @ticket.open?
+          = render "new_note_form"
+      
+      
+      
+      

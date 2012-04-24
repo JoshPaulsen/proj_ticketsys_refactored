@@ -1,4 +1,4 @@
-- if !current_user.user?
+- if !current_user.user? and !@ticket.additional_providers.blank? and @ticket.open?
   = form_tag remove_additional_provider_path(@ticket), :method => :delete do
     .actions
       = submit_tag "Remove Additional Provider"

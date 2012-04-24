@@ -10,6 +10,7 @@ class TicketsController < ApplicationController
     @ticket_id = params[:ticket_id]
     @title = params[:title]
     @description = params[:description]
+    @all_mine = params[:all_mine]
     @service_areas_list = service_area_id_list(params[:service_areas])
     
     if @service_areas_list.empty?
@@ -17,15 +18,24 @@ class TicketsController < ApplicationController
       flash.now[:error] = "No Search Results Found" 
       return
     end
-        
-    if @type == "all"
-      @tickets = current_user.accessible_tickets
-    elsif @type == "open"
-      @tickets = current_user.accessible_tickets.opened
-    else
-      @tickets = current_user.accessible_tickets.closed
-    end
     
+    if @all_mine and @all_mine == "all"    
+      if @type == "all"
+        @tickets = current_user.accessible_tickets
+      elsif @type == "open"
+        @tickets = current_user.accessible_tickets.opened
+      else
+        @tickets = current_user.accessible_tickets.closed
+      end
+    else
+      if @type == "all"
+        @tickets = current_user.tickets
+      elsif @type == "open"
+        @tickets = current_user.tickets.opened
+      else
+        @tickets = current_user.tickets.closed
+      end
+    end
     #if @type == "all"
     #  @tickets = Ticket.search_all
     #elsif @type == "open"
@@ -153,7 +163,7 @@ class TicketsController < ApplicationController
       @ticket.remove_user(prov)
       flash[:success] = "#{prov.name} was removed from the ticket"      
     else      
-      flash[:error] = "Error: Plese select a user first."
+      flash[:error] = "Error: Plese select a provider first."
     end
     redirect_to @ticket
   end
@@ -236,19 +246,19 @@ class TicketsController < ApplicationController
     
     if provider_id.blank?
       flash[:error] = "Error: Provider cannot be blank."
-      redirect_to edit_ticket_path @ticket and return
+      redirect_to @ticket and return
     end
     
     if provider_id == @ticket.creator_id.to_s
       flash[:error] = "Error: The provider and the creator cannot be the same person."
-      redirect_to edit_ticket_path @ticket and return
+      redirect_to @ticket and return
     end
     
     if provider_id != @ticket.provider_id.to_s
       @ticket.set_provider_by_id provider_id
       flash[:notice] = "Provider Updated"
     end
-    redirect_to edit_ticket_path @ticket
+    redirect_to @ticket
     
   end
 
@@ -291,26 +301,15 @@ class TicketsController < ApplicationController
   
   def index
     
+    @tickets = current_user.tickets
+    return
+    
     if current_user.user?
       redirect_to my_tickets_path and return
     else
       @tickets = current_user.accessible_tickets
       return
     end
-    
-    
-    #@service_areas = ServiceArea.all
-    if current_user.admin?      
-      @tickets = Ticket.all
-    elsif current_user.service_provider?
-      @tickets = current_user.tickets
-      current_user.service_areas.each do |sa|
-        @tickets += sa.tickets
-      end
-      @tickets = @tickets.uniq
-    else
-      redirect_to my_tickets_path
-    end    
   end
   
   def my_tickets    

@@ -1,5 +1,6 @@
-%div{:leftmargin=>"10%", :topmargin=>"5%", :marginwidth=>"10%", :marginheight=>"5%"}
-  %h2 All Users
+%div
+  %h4= button_to "Create a new User", new_user_path, :method => :get
+  %h3 All Users
   %center
     %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
       = render "user_header"

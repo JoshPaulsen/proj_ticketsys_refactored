@@ -1,0 +1,7 @@
+- if !@ticket.additional_providers.blank?
+  Additional Providers: 
+  - @ticket.additional_providers.each do |user|
+    = link_to "#{user.name}", user_path(user)
+    = " "
+- else
+  Additional Providers: None

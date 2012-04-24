@@ -1,12 +1,11 @@
-%ul
-  .user
-    .note-date= readable_date(note.created_at)
-    - if !note.user.blank?
-      .note-name
-        Added by
-        = link_to "#{note.user.name}", user_path(note.user)
-  .user
-    %p= note.body
-    -if note.attachment.url != '/attachments/original/missing.png'
-      %p
-        = link_to "#{note.attachment}", note.attachment.url
+.user
+  .note-date= readable_date(note.created_at)
+  - if !note.user.blank?
+    .note-name
+      Added by
+      = link_to "#{note.user.name}", user_path(note.user)
+.user
+  %p= note.body.gsub(/\n/, '<br/>').html_safe
+  -if note.attachment.url != '/attachments/original/missing.png'
+    %p
+      = link_to "#{note.attachment}", note.attachment.url

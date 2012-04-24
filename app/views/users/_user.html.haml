@@ -1,7 +1,6 @@
 %tbody
   %tr
-    %td= user.id
-    %td= user.name
+    %td= link_to "#{user.name}", user
     %td= user.email
     %td= user.list_service_areas
     %td= user.privilege  
@@ -10,4 +9,3 @@
         Yes
       - else
         No
-    %td= link_to "View User", user

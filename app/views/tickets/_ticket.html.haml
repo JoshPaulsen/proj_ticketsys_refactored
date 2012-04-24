@@ -1,7 +1,7 @@
 %tbody
   %tr
-    %td= ticket.id
-    %td= ticket.title    
+    %td= link_to "#{ticket.id}", ticket
+    %td= link_to "#{ticket.title}", ticket
     -if ticket.service_area
       %td= ticket.service_area.name
     -else
@@ -14,4 +14,3 @@
         = link_to "#{ticket.provider.name}", ticket.provider
     %td= readable_date ticket.opened_on
     %td= readable_date ticket.closed_on
-    %td= link_to "View Ticket", ticket

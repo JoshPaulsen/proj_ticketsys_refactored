@@ -16,7 +16,14 @@
     = label_tag :open_closed, "Closed Tickets"
   .field      
     = radio_button_tag :open_closed, :all, checked = type_checked?("all")
-    = label_tag :open_closed, "All Tickets"
+    = label_tag :open_closed, "Open and Closed"  
+  - if !current_user.user?  
+    .field      
+      = radio_button_tag :all_mine, :mine, checked = true
+      = label_tag :all_mine, "My Tickets"
+    .field
+      = radio_button_tag :all_mine, :all, checked = all_mine_checked?("all")
+      = label_tag :all_mine, "All Tickets"
   = render "search_service_areas"
   .action
     = submit_tag "Search"

@@ -1,3 +1,22 @@
+- if @ticket.open?
+  %br
+  %table{:cellpadding=>"1", :cellspacing=>"1", :width=>"50%", :overflow=>"hidden"}  
+    %tr
+      %td
+        = render "add_additional_user_form"
+      %td
+        = render "add_additional_provider_form"
+    %tr
+      %td
+        - if !@ticket.additional_users.blank?
+          = render "remove_additional_user_form"   
+      %td
+        - if !@ticket.additional_providers.blank?
+          = render "remove_additional_provider_form"
+    %tr
+      %td= render "set_primary_provider"
+%br
+%br
 %table{:cellpadding=>"1", :cellspacing=>"5", :overflow=>"hidden"}
   %tr
     %td
