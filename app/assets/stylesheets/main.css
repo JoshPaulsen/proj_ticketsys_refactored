@@ -109,11 +109,136 @@ a:active {
   text-align: right;
 }	
 	
-	
+.ticket-body{
+  background-color: #99ff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  
+  outline-width: thick;
+  padding: 5px;
+}
 	
 .user {
 	background-color: #99ff99;
-	border-style: solid;
+	//border-style: solid;
+	border-radius: 15px;
+	border-width: 3px;
+	width: 400px;	
+	outline-width: thick;
+	padding: 5px;
+}
+
+
+.title-text {
+  font-family: sans-serif
+}
+
+.body-text {
+  font-family: serif
+}
+.description {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+.questions {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+.number {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  min-width: 140px; 
+  outline-width: thick;
+  padding: 5px;
+}
+.edit-ticket {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  //min-width: 150px; 
+  outline-width: thick;
+  padding: 5px;
+}
+.o-c-ticket {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  //min-width: 150px; 
+  outline-width: thick;
+  padding: 5px;
+}
+.delete-ticket {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  //min-width: 150px; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+.set-provider {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  //min-width: 150px; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+
+.title {
+  background-color: #ffff99;
+  //border-style: dashed;
+  border-radius: 15px;
+  border-width: 3px;
+  min-width: 180px; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+
+.service-area {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  min-width: 100px; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+.location {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  min-width: 275px; 
+  outline-width: thick;
+  padding: 5px;
+}
+
+.admin {
+	background-color: #ffff99;
+	//border-style: solid;
 	border-radius: 15px;
 	border-width: 3px;
 	//width: 30%;	
@@ -122,30 +247,71 @@ a:active {
 }
 
 
-
-
-
-.admin {
-	background-color: #ffff99;
-	border-style: solid;
-	border-radius: 15px;
-	border-width: 3px;
-	width: 30%;	
-	outline-width: thick;
-	padding: 5px;
+.add-users {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
+.add-add-user {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
+.rm-add-user {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
 }
 
+.add-provs {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
+.add-add-prov {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  
+  outline-width: thick;
+  padding: 5px;
+}
 
-
+.rm-add-prov {
+  background-color: #ffff99;
+  //border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  //width: 30%; 
+  outline-width: thick;
+  padding: 5px;
+}
 
 
 
 .service_provider {
 	background-color: #99ffff;
-	border-style: solid;
+	//border-style: solid;
 	border-radius: 15px;
 	border-width: 3px;
-	width: 30%;
+	//width: 30%;
 	height: 150px;
 	outline-width: thick;
 	padding: 5px;
