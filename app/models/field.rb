@@ -49,37 +49,41 @@ class Field < ActiveRecord::Base
   end
   
   def render_text
-    q = self.question
+    q = question.gsub("\"", "'")
     
     text =  ".form-field-text\n"
-    text += "  = label :answers, :field_#{self.id}, \"#{self.question}\" \n"
+    text += "  = label :answers, :field_#{self.id}, \"#{q}\" \n"
     text += "  %br\n"
     text += "  = text_field :answers, :field_#{self.id}\n"
     text    
   end
   
   def render_radio
+    q = question.gsub("\"", "'")
     text =  ".form-field-radio\n"
-    text += "  = label :answers, :field_#{self.id}, \"#{self.question}\"\n"
+    text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"
     self.options.each do |option|
+      option = option.gsub("\"", "'")
       text += ".form-field-radio-options\n"
-      text += "  = radio_button :answers, :field_#{self.id}, '#{option}'\n"
-      text += "  = label :answers, :field_#{self.id}, '#{option}'\n"
+      text += "  = radio_button :answers, :field_#{self.id}, \"#{option}\"\n"
+      text += "  = label :answers, :field_#{self.id}, \"#{option}\"\n"
     end
     text
   end
-  # = select :test, :id, options_38"
+  
   def render_select    
+    q = question.gsub("\"", "'")
     text =  ".form-field-select\n"
-    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"    
+    text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"    
     text += "  = select :answers, :field_#{self.id}, options_#{self.id}, :include_blank => true\n"
     text
   end
   
   def render_check_box
+    q = question.gsub("\"", "'")
     text =  ".form-field-check-box\n"    
     text += "  = check_box :answers, :field_#{self.id}\n"
-    text += "  = label :answers, :field_#{self.id}, '#{self.question}'\n"    
+    text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"    
     text
   end
       

@@ -5,13 +5,48 @@ class TicketsController < ApplicationController
   before_filter :deny_user, :only => [:update, :edit]
   before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket, :search ]  
   
+  
+
+  
+  
   def search
     @type = params[:open_closed]
+    @everything = params[:everything]
     @ticket_id = params[:ticket_id]
     @title = params[:title]
     @description = params[:description]
     @all_mine = params[:all_mine]
+    @location_id = params[:location_id]
     @service_areas_list = service_area_id_list(params[:service_areas])
+    @opened_start_text = params[:opened_start_text]
+    @opened_end_text = params[:opened_end_text]
+    
+    if @opened_start_text
+      @opened_start_text_date = string_to_date(@opened_start_text)
+    end
+    
+    if @opened_end_text
+      @opened_end_text_date = string_to_date(@opened_end_text)
+    end
+    
+    if params[:opened_start]      
+      @opened_start = parse_to_date(params[:opened_start])      
+    end
+    
+    if params[:opened_end]      
+      @opened_end = parse_to_date(params[:opened_end])      
+    end
+    
+    
+    
+    
+    @debug_value = [ @opened_start_text_date, @opened_end_text_date]
+    
+    #@ticket_type = params[:ticket_type]
+    #puts "here"
+    #puts @ticket_type
+    
+    
     
     if @service_areas_list.empty?
       @tickets = []
@@ -36,27 +71,46 @@ class TicketsController < ApplicationController
         @tickets = current_user.tickets.closed
       end
     end
-    #if @type == "all"
-    #  @tickets = Ticket.search_all
-    #elsif @type == "open"
-    #  @tickets = Ticket.opened
-    #else
-    #  @tickets = Ticket.closed
-    #end
+        
+    
+    if !@opened_start.blank?
+      @tickets = @tickets.where("opened_on >= ?", @opened_start)
+    elsif !@opened_start_text_date.blank?  
+      @tickets = @tickets.where("opened_on >= ?", @opened_start_text_date)    
+    end
+    
+    if !@opened_end.blank?
+      @tickets = @tickets.where("opened_on <= ?", @opened_end)
+    elsif !@opened_end_text_date.blank?
+      @tickets = @tickets.where("opened_on <= ?", @opened_end_text_date+=1)
+    end 
     
     @tickets = @tickets.where(:service_area_id => @service_areas_list )
     
     if !@ticket_id.blank?
-      @tickets = @tickets.where(:id => @ticket_id)
+      @tickets = @tickets.where(:id => @ticket_id)     
     end
     
-    if !@title.blank?
-      @tickets = @tickets.where("title like ?", "%"+@title+"%")
+    if !@location_id.blank?
+      @tickets = @tickets.where(:location_id => @location_id)
+    end 
+       
+    #if !@title.blank?
+      #@tickets = @tickets.where("title like ?", "%"+@title+"%")
+    #end
+    
+    #if !@description.blank?
+      #@tickets = @tickets.where("description like ?", "%"+@description+"%")
+    #end    
+    
+   if !@everything.blank?
+      title_tickets = @tickets.where("title like ?", "%"+@everything+"%")
+      des_tickets = @tickets.where("description like ?", "%"+@everything+"%")
+      note_tickets = @tickets.joins(:notes).where("notes.body like ?", "%"+@everything+"%")
+      @tickets = (title_tickets | des_tickets | note_tickets).uniq
     end
     
-    if !@description.blank?
-      @tickets = @tickets.where("description like ?", "%"+@description+"%")
-    end
+    
     
     if @tickets.count == 0
       flash.now[:error] = "No Search Results Found"  
@@ -86,7 +140,7 @@ class TicketsController < ApplicationController
     @ticket.closed_on = Time.now
     @ticket.save
     flash[:success] = "Ticket successfully closed."
-    redirect_to my_tickets_path
+    redirect_to tickets_path
   end
   
   def open
@@ -222,7 +276,7 @@ class TicketsController < ApplicationController
     if !@ticket.set_creator current_user    
       @ticket.destroy
       flash[:error] = "Error: Could not set creator."      
-      redirect_to my_tickets_path and return          
+      redirect_to tickets_path and return          
     end
     
     provider_id = params[:provider_id]
@@ -301,11 +355,11 @@ class TicketsController < ApplicationController
   
   def index
     
-    @tickets = current_user.tickets
+    @tickets = current_user.tickets.opened
     return
     
     if current_user.user?
-      redirect_to my_tickets_path and return
+      redirect_to tickets_path and return
     else
       @tickets = current_user.accessible_tickets
       return

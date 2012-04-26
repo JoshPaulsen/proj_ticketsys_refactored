@@ -13,3 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery-ui
+
+$(function() {
+  $("#opened_start_text").datepicker({maxDate: new Date()});
+});
+
+$(function() {
+  $("#opened_end_text").datepicker({maxDate: new Date()});
+});
+

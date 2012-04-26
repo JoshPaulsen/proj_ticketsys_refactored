@@ -22,9 +22,28 @@ module TicketsHelper
       ticket = Ticket.find_by_id(params[:id])
       if !ticket.users.include?(current_user) or !ticket
         flash[:error] = "Error: You don't have permission to access that"
-        redirect_to my_tickets_path
+        redirect_to tickets_path
       end    
     end  
+  end
+  
+  def parse_to_date(date)
+    year = date[:year].to_i
+    month = date[:month].to_i
+    day = date[:day].to_i
+    begin
+      Date.new(year, month, day)
+    rescue ArgumentError
+      nil
+    end
+  end
+  
+  def string_to_date(date)    
+    begin
+      Date.strptime(date, "%m/%d/%Y")
+    rescue ArgumentError
+      nil
+    end
   end
   
 end

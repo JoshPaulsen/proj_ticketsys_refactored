@@ -39,14 +39,14 @@ module SessionsHelper
   def check_if_admin
     if !current_user.admin?   
       flash[:error] = "Error: You don't have permission to access that"
-      redirect_to my_tickets_path
+      redirect_to tickets_path
     end    
   end
   
   def deny_user
     if current_user.user?   
       flash[:error] = "Error: You don't have permission to access that"
-      redirect_to my_tickets_path
+      redirect_to tickets_path
     end
   end
   
@@ -70,7 +70,7 @@ module SessionsHelper
       if !ids.include?(params[:id])
         flash[:error] = "Error: You don't have permission to access that"
         if current_user.user?
-          redirect_to my_tickets_path
+          redirect_to tickets_path
         else
           redirect_to tickets_path
         end

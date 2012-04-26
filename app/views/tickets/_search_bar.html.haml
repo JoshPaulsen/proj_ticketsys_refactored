@@ -8,6 +8,9 @@
   .field
     = label_tag :description, "Description: "
     = text_field_tag :description, @description
+  .field
+    = label_tag :everything, "Everything: "
+    = text_field_tag :everything, @everything
   .field      
     = radio_button_tag :open_closed, :open, checked = true
     = label_tag :open_closed, "Open Tickets"
@@ -25,5 +28,24 @@
       = radio_button_tag :all_mine, :all, checked = all_mine_checked?("all")
       = label_tag :all_mine, "All Tickets"
   = render "search_service_areas"
+  
+  .select
+    = label_tag :location_id, "Location: "
+    = select_tag :location_id, options_for_select(get_locations, selected = @location_id), :include_blank => true
+  .select
+    -#= label :opened, :start, "Start: "
+    -#= select_date @opened_start, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_start"
+  .select
+    -#= label :opened, :end, "End: "
+    -#= select_date @opened_end, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_end"
+  .select
+    = label_tag :location_id, "Start Date: "
+    = text_field_tag :opened_start_text, @opened_start_text, :class => "date-text"
+  .select
+    = label_tag :location_id, "End Date: "
+    = text_field_tag :opened_end_text, @opened_end_text, :class => "date-text"
+  
   .action
     = submit_tag "Search"
+  -#= render "date_picker_hack"
+

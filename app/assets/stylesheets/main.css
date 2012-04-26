@@ -99,6 +99,15 @@ a:active {
 
 */
 
+.ui-datepicker{
+  
+  font-size: 10pt;
+}
+
+
+.date-text{
+  width: 100px;
+}
 
 .note-name {
   text-align: left; 

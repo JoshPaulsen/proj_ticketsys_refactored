@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   
   def accessible_tickets
     if admin?
-      Ticket.search_all
+      Ticket.scoped
     elsif service_provider?
       if service_areas.blank?
         tickets

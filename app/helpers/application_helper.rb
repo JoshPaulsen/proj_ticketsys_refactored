@@ -41,6 +41,12 @@ module ApplicationHelper
     end
   end
   
+  def get_all_types_for_search
+    types = ServiceAreaForm.all.collect do |saf|
+      [saf.title, saf.id]
+    end
+  end
+  
   def readable_date(time)
     if time
       #time_ago_in_words(time)
@@ -128,5 +134,7 @@ module ApplicationHelper
       true
     end
   end
+  
+  
   
 end
