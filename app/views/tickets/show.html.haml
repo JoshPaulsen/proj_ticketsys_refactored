@@ -1,44 +1,44 @@
-%div.ticket-body
-  %table{:cellpadding=>"5", :cellspacing=>"5", :overflow=>"hidden", :border => "0"}
-    %tr
-      %td.number
-        .title-text= "Ticket #: "
-        .body-text= "#{@ticket.id}"
-      %td.title= "Title: #{@ticket.title}"
-      %td.service-area= "Service Area: #{@service_area_name}"
-      %td.location= "Location: #{@location_name}"
-    %tr
-      %td.creator
-        Creator: 
-        - if !@ticket.creator.blank?
-          = link_to "#{@ticket.creator.name}", @ticket.creator
-      %td.add-users= render "additional_users"        
-      %td.add-add-user= render "add_additional_user_form"
-      %td.rm-add-user= render "remove_additional_user_form"
-    %tr
-      %td.provider
-        Service Provider: 
-        - if !@ticket.provider.blank?
-          = link_to "#{@ticket.provider.name}", @ticket.provider
-      %td.add-provs= render "additional_providers"        
-      %td.add-add-prov= render "add_additional_provider_form"
-      %td.rm-add-prov= render "remove_additional_provider_form"
-  = render "ticket_menu"   
-  %table
-    %tr
-      %td.questions= render "ticket_questions"
-    %tr
-      %td.description
-        Description: 
-        %br
-        = "#{@ticket.description.gsub(/\n/, '<br/>')}".html_safe
-    %tr
-      %td= render @notes
-    %tr
-      %td
-        - if @ticket.open?
-          = render "new_note_form"
-      
-      
-      
-      
+%div
+  = render "ticket_menu"
+  %div
+    %ul= "Ticket Number: #{@ticket.id}"
+    %ul= "Service Area: #{@service_area_name}"
+    %ul= "Location: #{@location_name}"
+    %ul= "Title: #{@ticket.title}"
+    %ul
+      Opened: 
+      = readable_date(@ticket.opened_on)
+    %ul
+      - if @ticket.closed?
+        Closed: 
+        = readable_date(@ticket.closed_on)
+    %ul
+      Creator: 
+      - if !@ticket.creator.blank?
+        = link_to "#{@ticket.creator.name}", @ticket.creator
+    %ul
+      Service Provider: 
+      - if !@ticket.provider.blank?
+        = link_to "#{@ticket.provider.name}", @ticket.provider
+    %ul
+      Additional Users: 
+      - @ticket.additional_users.each do |user|
+        = link_to "#{user.name}", user_path(user)
+        = " "
+    %ul
+      Additional Providers: 
+      - @ticket.additional_providers.each do |user|
+        = link_to "#{user.name}", user_path(user)
+        = " "
+    %ul
+      Everyone (debug only):
+      - @ticket.users.each do |user|
+        = link_to "#{user.name}", user_path(user)
+        = " "
+    - if !@ticket.questions.blank?
+      - @ticket.questions.each do |q|
+        %ul= "#{q.question}: #{q.answer}"
+    %ul= "Description: #{@ticket.description}"
+  = render @notes
+  - if @ticket.open?
+    = render "new_note_form"

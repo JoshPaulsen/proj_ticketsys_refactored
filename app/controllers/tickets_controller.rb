@@ -80,7 +80,7 @@ class TicketsController < ApplicationController
     end
     
     if !@opened_end.blank?
-      @tickets = @tickets.where("opened_on <= ?", @opened_end)
+      @tickets = @tickets.where("opened_on <= ?", @opened_end+=1)
     elsif !@opened_end_text_date.blank?
       @tickets = @tickets.where("opened_on <= ?", @opened_end_text_date+=1)
     end 

@@ -33,19 +33,12 @@
     = label_tag :location_id, "Location: "
     = select_tag :location_id, options_for_select(get_locations, selected = @location_id), :include_blank => true
   .select
-    -#= label :opened, :start, "Start: "
-    -#= select_date @opened_start, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_start"
+    = label :opened, :start, "Start: "
+    = select_date @opened_start, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_start"
   .select
-    -#= label :opened, :end, "End: "
-    -#= select_date @opened_end, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_end"
-  .select
-    = label_tag :location_id, "Start Date: "
-    = text_field_tag :opened_start_text, @opened_start_text, :class => "date-text"
-  .select
-    = label_tag :location_id, "End Date: "
-    = text_field_tag :opened_end_text, @opened_end_text, :class => "date-text"
+    = label :opened, :end, "End: "
+    = select_date @opened_end, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_end"
+  
   
   .action
     = submit_tag "Search"
-  -#= render "date_picker_hack"
-

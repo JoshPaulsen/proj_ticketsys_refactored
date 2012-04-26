@@ -1,13 +1,30 @@
+- if @ticket.open?
+  %br
+  %table{:cellpadding=>"1", :cellspacing=>"1", :width=>"50%", :overflow=>"hidden"}  
+    %tr
+      %td
+        = render "add_additional_user_form"
+      %td
+        = render "add_additional_provider_form"
+    %tr
+      %td
+        - if !@ticket.additional_users.blank?
+          = render "remove_additional_user_form"   
+      %td
+        - if !@ticket.additional_providers.blank?
+          = render "remove_additional_provider_form"
+%br
 %table{:cellpadding=>"1", :cellspacing=>"5", :overflow=>"hidden"}
   %tr
-    -if @ticket.open?
-      %td.set-provider= render "set_primary_provider"    
-    -if !current_user.user? and @ticket.open?
-      %td.edit-ticket= button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
-    -if @ticket.open?
-      %td.o-c-ticket= button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
-    -else
-      %td.o-c-ticket= button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
-    -if current_user.admin?
-      %td.delete-ticket= button_to "Delete Ticket", @ticket, :method => :delete
-
+    %td
+      - if !current_user.user? and @ticket.open?
+        = button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
+    %td
+      - if @ticket.open?
+        = button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
+      - else
+        = button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
+    %td
+      - if current_user.admin?
+        = button_to "Delete Ticket", @ticket, :method => :delete
+%hr
