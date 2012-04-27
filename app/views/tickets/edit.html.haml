@@ -1,7 +1,4 @@
 %div
-  = render "set_primary_provider"
-%br
-%div
   = form_tag ticket_path(@ticket), :method => :put do
     %table
       = render "ticket_form_fields"

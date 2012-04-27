@@ -1,0 +1,21 @@
+%div
+  Create An Account
+  = form_tag user_signup_path, :method => :post do
+    %table
+      %tr
+        %td= label :user, :first_name, "First Name"
+        %td.field= text_field :user, :first_name, :value => @first_name
+      %tr
+        %td= label :user, :last_name, "Last Name"
+        %td.field= text_field :user, :last_name, :value => @last_name
+      %tr
+        %td= label :user, :email, "Email"
+        %td.field= text_field :user, :email, :value => @email
+      %tr
+        %td= label :user, :password, "Password"
+        %td.field= text_field :user, :password ,{:type => "password"}
+      %tr
+        %td= label :user, :password_confirmation, "Confirm"
+        %td.field= text_field :user, :password_confirmation ,{:type => "password"}
+      %tr
+        %td.action= submit_tag "Create!"
