@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :encrypted_password, :presence => true
   validates :salt, :presence => true
   validates :privilege, :presence => true
-  validates :email, :presence => true, :uniqueness => true
+  validates :email, :presence => true #, :uniqueness => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
   # At some point privilege should be removed from this.
@@ -58,6 +58,10 @@ class User < ActiveRecord::Base
   def last_first_initial
     last_name + ", " + first_name[0]
   end  
+  
+  def first_initial_last
+    first_name[0] + ". " + last_name
+  end
   
   def self.authenticate(email, submitted_password)
     user = find_by_email email

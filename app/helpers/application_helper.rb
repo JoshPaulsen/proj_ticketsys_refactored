@@ -61,7 +61,7 @@ module ApplicationHelper
   def get_providers_in(service_area)
     if !service_area.blank?
       p = service_area.users.collect do |prov|
-        [prov.name, prov.id]
+        [prov.last_first_initial, prov.id]
       end
     end
   end 

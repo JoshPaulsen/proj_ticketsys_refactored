@@ -28,7 +28,7 @@ class Ticket < ActiveRecord::Base
   has_many :notes, :dependent => :destroy, :order => 'created_at ASC'
   has_many :questions, :dependent => :destroy, :order => 'position ASC'
   
-  validates :title, :presence => true
+  #validates :title, :presence => true
   validates :opened_on, :presence => true  
   validates :service_area_id, :presence => true
   
