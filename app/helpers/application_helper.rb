@@ -69,53 +69,26 @@ module ApplicationHelper
   def get_providers_for(ticket)
     if !ticket.service_area.blank?
       p = ticket.service_area.users.collect do |prov|
-        [prov.name, prov.id]
+        [prov.last_first_initial, prov.id]
       end
     end
   end 
   
-  def get_add_providers_in(service_area)
-    if !service_area.blank?
-      p = service_area.users.collect do |prov|
-        [prov.name, prov.id,{:class => "Add Additional Provider"}]
-      end
-    end
-  end
-  
   def get_all_users
     User.all.collect do |user|
-      [user.name, user.id]
+      [user.last_first_initial, user.id]
     end
-  end
-  
-  def get_all_add_users
-    User.all.collect do |user|
-      [user.name, user.id,{:class => "Add Additional User"}]
-    end
-  end
-  
-  
-  def get_additional_users_for(ticket)
-    u = ticket.additional_users.collect do |user|
-      [user.name, user.id,{:class => "Add Additional User"}]
-    end
-  end
+  end 
   
   def get_remove_users_for(ticket)
     u = ticket.additional_users.collect do |user|
-      [user.name, user.id,{:class => "Remove Additional User"}]
+      [user.last_first_initial, user.id]
     end
-  end
-    
-  def get_additional_providers_for(ticket)
-    u = ticket.additional_providers.collect do |user|
-      [user.name, user.id,{:class => "Add Additional Provider"}]
-    end
-  end
+  end 
   
   def get_remove_providers_for(ticket)
     u = ticket.additional_providers.collect do |user|
-      [user.name, user.id,{:class => "Remove Additional Provider"}]
+      [user.last_first_initial, user.id]
     end
   end
   

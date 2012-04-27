@@ -1,10 +1,19 @@
 %div{:align => "center"}
+  Sign In
   = form_tag sessions_path, :method => :post do
     .field
-      = label_tag :name, "Username: "
-      = text_field_tag :name, nil, :placeholder=>"Enter your name"
+      = label_tag :email, "Email: "
+      = text_field_tag :email
     .field
       = label_tag :password, "Password: "
-      = text_field_tag :password, nil, :type=>"password", :placeholder=>"Enter your password"
+      = password_field_tag :password
     .field
       = submit_tag "Sign in"
+      
+%div{:align => "center"}
+  Create An Account
+  = form_tag user_signup_path, :method => :post do
+    = render "user_signup_form_fields"
+    .field
+      = submit_tag "Create!"
+           

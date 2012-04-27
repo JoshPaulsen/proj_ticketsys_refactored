@@ -1,8 +1,11 @@
 %tbody
   %tr
+    %td= link_to "#{user.last_first}", user
     %td= link_to "#{user.name}", user
     %td= user.email
     %td= user.list_service_areas
+    %td= user.encrypted_password
+    %td= user.salt
     %td= user.privilege  
     %td
       - if user.active?

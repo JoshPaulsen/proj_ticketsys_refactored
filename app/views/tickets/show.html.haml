@@ -15,25 +15,25 @@
     %ul
       Creator: 
       - if !@ticket.creator.blank?
-        = link_to "#{@ticket.creator.name}", @ticket.creator
+        = link_to "#{@ticket.creator.first_name}", @ticket.creator
     %ul
       Service Provider: 
       - if !@ticket.provider.blank?
-        = link_to "#{@ticket.provider.name}", @ticket.provider
+        = link_to "#{@ticket.provider.first_name}", @ticket.provider
     %ul
       Additional Users: 
       - @ticket.additional_users.each do |user|
-        = link_to "#{user.name}", user_path(user)
+        = link_to "#{user.first_name}", user_path(user)
         = " "
     %ul
       Additional Providers: 
       - @ticket.additional_providers.each do |user|
-        = link_to "#{user.name}", user_path(user)
+        = link_to "#{user.first_name}", user_path(user)
         = " "
     %ul
       Everyone (debug only):
       - @ticket.users.each do |user|
-        = link_to "#{user.name}", user_path(user)
+        = link_to "#{user.first_name}", user_path(user)
         = " "
     - if !@ticket.questions.blank?
       - @ticket.questions.each do |q|

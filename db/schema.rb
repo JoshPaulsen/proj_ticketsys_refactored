@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120421004316) do
+ActiveRecord::Schema.define(:version => 20120427044445) do
 
   create_table "fields", :force => true do |t|
     t.integer  "form_id"
@@ -118,10 +118,16 @@ ActiveRecord::Schema.define(:version => 20120421004316) do
     t.string   "name"
     t.string   "email"
     t.string   "privilege"
-    t.string   "password"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.boolean  "active"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.boolean  "verified"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

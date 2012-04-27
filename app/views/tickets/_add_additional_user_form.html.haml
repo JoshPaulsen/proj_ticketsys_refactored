@@ -1,4 +1,4 @@
 = form_tag add_additional_user_path(@ticket), :method => :put do
   .add-user
     = submit_tag "Add Additional User"
-    = select :add_user, :id, get_all_add_users, :include_blank => true
+    = select :add_user, :id, get_all_users, :include_blank => true
