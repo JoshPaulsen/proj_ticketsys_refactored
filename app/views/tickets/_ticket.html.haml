@@ -8,10 +8,10 @@
       %td= "No Service Area"
     %td
       - if !ticket.creator.blank?
-        = link_to "#{ticket.creator.name}", ticket.creator
+        = link_to "#{ticket.creator.full_name}", ticket.creator
     %td
       - if !ticket.provider.blank?
-        = link_to "#{ticket.provider.name}", ticket.provider
+        = link_to "#{ticket.provider.full_name}", ticket.provider
     %td= readable_date ticket.opened_on
     %td= readable_date ticket.closed_on
     %td= link_to "View Ticket", ticket

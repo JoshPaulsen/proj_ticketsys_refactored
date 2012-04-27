@@ -11,7 +11,11 @@
     |
     = link_to "Settings", settings_path
     |
-    - elsif current_user.service_provider?
+    - if signed_in?
+      Sign out 
+      = link_to "#{current_user.first_name}", signout_path, :method => :delete, :id => "signout"  
+      | 
+  - elsif current_user.service_provider?
     |
     = link_to "Tickets", tickets_path
     |
@@ -21,7 +25,11 @@
     |
     = link_to "Settings", settings_path
     |
-    - elsif current_user.user?
+    - if signed_in?
+      Sign out 
+      = link_to "#{current_user.first_name}", signout_path, :method => :delete, :id => "signout"  
+      | 
+  - elsif current_user.user?
     |
     = link_to "Tickets", tickets_path
     |
@@ -29,7 +37,9 @@
     |
     = link_to "My Profile", current_user
     |
+    - if signed_in?
+      Sign out 
+      = link_to "#{current_user.first_name}", signout_path, :method => :delete, :id => "signout"  
+      | 
   - else
-    |
-    MENU - There isn't a current user!
-    |
+    

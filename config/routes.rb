@@ -19,6 +19,10 @@ ProjTicketsysRefactored::Application.routes.draw do
   put 'tickets/:id/close', :to => 'tickets#close', :as => 'close_ticket'
   put 'tickets/:id/open', :to => 'tickets#open', :as => 'open_ticket'
   
+  put 'users/:id/change_password', :to => 'users#change_password', :as => 'change_password'
+  post 'users/user_signup', :to => 'users#user_signup', :as => 'user_signup'
+  put 'users/:id/verify', :to => 'users#verify', :as => 'verify_user'
+  get 'users/:id/unverified_user', :to => 'users#unverified_user', :as => 'unverified_user'
   put 'users/:id/deactivate', :to => 'users#deactivate', :as => 'deactivate_user'
   put 'users/:id/reactivate', :to => 'users#reactivate', :as => 'reactivate_user'  
   

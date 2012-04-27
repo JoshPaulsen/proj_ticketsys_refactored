@@ -4,7 +4,7 @@ module SessionsHelper
   # various forms of validation
   
   def sign_in (user)    
-    session[:user_id] = user.id
+    cookies.permanent.signed[:token] = [user.id, user.salt]
     self.current_user = user    
   end
   
@@ -22,12 +22,16 @@ module SessionsHelper
   
   def sign_out    
     self.current_user = nil    
-    session[:user_id] = nil
+    cookies.delete(:token)
   end
   
   def user_from_session   
-    User.find_by_id(session[:user_id])
+    User.authenticate_with_salt(*token)
   end 
+  
+  def token
+    cookies.signed[:token] || [nil, nil]
+  end
   
   def check_if_signed_in
     if !signed_in?   

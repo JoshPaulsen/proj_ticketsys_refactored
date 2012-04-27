@@ -3,11 +3,7 @@ class TicketsController < ApplicationController
   before_filter :check_if_signed_in
   before_filter :check_if_admin, :only => :destroy
   before_filter :deny_user, :only => [:update, :edit]
-  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket, :search ]  
-  
-  
-
-  
+  before_filter :check_ticket_access_rights, :except => [:new, :create, :index, :my_tickets, :new_ticket, :search ] 
   
   def search
     @type = params[:open_closed]
@@ -37,17 +33,6 @@ class TicketsController < ApplicationController
       @opened_end = parse_to_date(params[:opened_end])      
     end
     
-    
-    
-    
-    @debug_value = [ @opened_start_text_date, @opened_end_text_date]
-    
-    #@ticket_type = params[:ticket_type]
-    #puts "here"
-    #puts @ticket_type
-    
-    
-    
     if @service_areas_list.empty?
       @tickets = []
       flash.now[:error] = "No Search Results Found" 
@@ -71,7 +56,6 @@ class TicketsController < ApplicationController
         @tickets = current_user.tickets.closed
       end
     end
-        
     
     if !@opened_start.blank?
       @tickets = @tickets.where("opened_on >= ?", @opened_start)
@@ -109,8 +93,6 @@ class TicketsController < ApplicationController
       note_tickets = @tickets.joins(:notes).where("notes.body like ?", "%"+@everything+"%")
       @tickets = (title_tickets | des_tickets | note_tickets).uniq
     end
-    
-    
     
     if @tickets.count == 0
       flash.now[:error] = "No Search Results Found"  
@@ -203,7 +185,7 @@ class TicketsController < ApplicationController
     user = User.find_by_id(params[:rm_user][:id])
     if user
       @ticket.remove_user(user)
-      flash[:success] = "#{user.name} was removed from the ticket"      
+      flash[:success] = "#{user.first_name} was removed from the ticket"      
     else      
       flash[:error] = "Error: Plese select a user first."
     end
@@ -215,7 +197,7 @@ class TicketsController < ApplicationController
     prov = User.find_by_id(params[:rm_prov][:id])
     if prov
       @ticket.remove_user(prov)
-      flash[:success] = "#{prov.name} was removed from the ticket"      
+      flash[:success] = "#{prov.first_name} was removed from the ticket"      
     else      
       flash[:error] = "Error: Plese select a provider first."
     end
@@ -224,7 +206,7 @@ class TicketsController < ApplicationController
   
 
   def new_ticket
-    @debug_value = params
+    
     location = Location.find_by_id params[:ticket][:location_id]
     if !location
       flash[:error] = "Please select a Location"
@@ -266,10 +248,10 @@ class TicketsController < ApplicationController
 
   def create     
     @ticket = Ticket.new(params[:ticket])
-    if @ticket.title.blank?
-      flash[:error] = "Error: Incomplete Ticket"
-      redirect_to new_ticket_path and return
-    end
+    #if @ticket.title.blank?
+    #  flash[:error] = "Error: Incomplete Ticket"
+    #  redirect_to continue_new_ticket_path and return
+    #end
 
     @ticket.opened_on = Time.now
     

@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
   # name:string
   # email:string
-  # privilege:string
-  # password:string  
+  # privilege:string  
   # active:boolean
+  # encrypted_password:string
+  # salt:string
+  # first_name:string
+  # last_name:string
   
+  
+  default_scope :order => 'last_name ASC'
   scope :active, where(:active => true)
   scope :inactive, where(:active => false)
   
@@ -13,19 +18,22 @@ class User < ActiveRecord::Base
   has_many :user_service_areas
   has_many :service_areas, :through => :user_service_areas, :uniq => true
   
-  validates :name, :presence => true, :uniqueness => true
-  validates :password, :presence => true
+  #validates :name, :uniqueness => true
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :encrypted_password, :presence => true
+  validates :salt, :presence => true
   validates :privilege, :presence => true
-  validates :email, :presence => true, :uniqueness => true
+  validates :email, :presence => true #, :uniqueness => true
   validates_inclusion_of :privilege, :in => ["user", "service provider", "admin"]
   
   # At some point privilege should be removed from this.
   # That will require changing how we create and update users.
-  attr_accessible :name, :password, :email, :privilege
+  attr_accessible :email, :privilege, :first_name, :last_name, :name
   
   def admin?
     privilege == "admin"
-  end
+  end  
   
   def service_provider?
     privilege == "service provider"
@@ -33,10 +41,46 @@ class User < ActiveRecord::Base
   
   def user?
     privilege == "user"
-  end
+  end  
   
   def inactive?
     active == false
+  end
+  
+  def full_name
+    first_name + " " + last_name
+  end
+  
+  def last_first
+    last_name + ", " + first_name
+  end
+  
+  def last_first_initial
+    last_name + ", " + first_name[0]
+  end  
+  
+  def first_initial_last
+    first_name[0] + ". " + last_name
+  end
+  
+  def self.authenticate(email, submitted_password)
+    user = find_by_email email
+    if !user
+      return nil
+    end
+    
+    if user.has_password?(submitted_password)
+      return user
+    end
+  end
+  
+  def self.authenticate_with_salt(id, salt)
+    user = User.find_by_id id
+    if user and user.salt == salt
+      user
+    else
+      nil
+    end
   end
   
   def list_service_areas
@@ -80,6 +124,32 @@ class User < ActiveRecord::Base
     else
       tickets
     end
+  end
+  
+  def has_password?(password)
+    encrypted_password == encrypt(password)
+  end
+  
+  
+ 
+ 
+  def set_encrypted_password(password)
+    self.salt = make_salt(password) if new_record?
+    self.encrypted_password = encrypt(password)
+  end
+  
+  private
+  
+  def encrypt(password)
+    secure_hash("#{salt}--#{password}")
+  end
+  
+  def make_salt(password)
+    secure_hash("#{Time.now.utc}--#{password}")
+  end
+  
+  def secure_hash(string)
+    Digest::SHA2.hexdigest(string)
   end
   
   def get_str(list)

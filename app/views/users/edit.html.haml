@@ -3,3 +3,9 @@
     = render "user_form_fields"
     .actions
       = submit_tag "Update User"
+      
+%div
+  = form_tag change_password_path(@user), :method => :put do
+    = render "password_fields"
+    .actions
+      = submit_tag "Change Password"

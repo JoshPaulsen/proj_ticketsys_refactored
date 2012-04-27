@@ -3,11 +3,13 @@
     = render "user_menu"
   - if !@user.active?
     %h3= "Deactivated User"
-  %ul
-    %p= "User ID: #{@user.id}"
-    %p= "Name: #{@user.name}"
+  %ul 
+    
+    %p= "Name: #{@user.full_name}"    
     %p= "Email: #{@user.email}"
+    %p= "User Name: #{@user.name}"
     %p= "Active: #{@user.active?}"  
+    %p= "Verified: #{@user.verified?}"  
     %p= "Privilege: #{@user.privilege}"
     %p
       Service Areas: 

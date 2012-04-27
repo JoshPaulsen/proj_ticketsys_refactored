@@ -7,9 +7,9 @@
 .field
   = label :user, :email, "Email"
   = text_field :user, :email, :value => @email
-- if current_user.admin?
-  .select
-    = label :user, :privilege, "Privileges: "
-    = select :user, :privilege, get_privileges
-  = render "service_area_fields"
-      
+.field
+  = label :user, :password, "Password"
+  = text_field :user, :password ,{:type => "password"}
+.field
+  = label :user, :password_confirmation, "Password Confirmation"
+  = text_field :user, :password_confirmation ,{:type => "password"}

@@ -1,8 +1,8 @@
 %tbody
   %tr
-    %td= link_to "#{user.name}", user
+    %td= link_to "#{user.last_first}", user
     %td= user.email
-    %td= user.list_service_areas
+    %td= user.list_service_areas    
     %td= user.privilege  
     %td
       - if user.active?
