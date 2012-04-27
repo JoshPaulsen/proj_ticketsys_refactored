@@ -25,7 +25,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :location
   has_many :user_tickets, :dependent => :destroy
   has_many :users, :through => :user_tickets, :uniq => true
-  has_many :notes, :dependent => :destroy, :order => 'created_at ASC'
+  has_many :notes, :dependent => :destroy, :order => 'created_at DESC'
   has_many :questions, :dependent => :destroy, :order => 'position ASC'
   
   validates :title, :presence => true

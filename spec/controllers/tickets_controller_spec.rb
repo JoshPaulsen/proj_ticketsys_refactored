@@ -129,7 +129,7 @@ describe TicketsController do
       it "should find the ticket notes so they can be rendered" do
         Ticket.should_receive(:find_by_id).with(@ticket.id.to_s).and_return @ticket
         get :show, :id => @ticket.id
-        assigns(:notes).should == @notes            
+        assigns(:notes).should == @notes.reverse
       end
       
     end
