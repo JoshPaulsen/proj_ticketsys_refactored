@@ -13,9 +13,9 @@ Scenario: close the ticket
   Then I should see "Broken Stapler"
   When I press "Close Ticket"  
 #  And I confirm popup
-  Then I should be on the My Tickets page
+  Then I should be on the Tickets page
   And I should see "Ticket successfully closed"
-  And I should see "Broken Stapler"  
+  And I should not see "Broken Stapler"  
   
 #@javascript
 #Scenario: start to close the ticket and then change my mind
@@ -28,8 +28,7 @@ Scenario: close the ticket
 Scenario: closing the ticket should disable adding a note
   Then I should see "Add a New Note"
   When I press "Close Ticket"
-  Then I should be on the My Tickets page
-  And I should see "Broken Stapler"
-  When I follow "View Ticket"
-  Then I should be viewing the "Broken Stapler" ticket
+  Then I should be on the Tickets page
+  And I should not see "Broken Stapler"
+  When I am viewing the "Broken Stapler" ticket  
   And I should not see "Add a New Note"

@@ -19,6 +19,8 @@ module NavigationHelpers
     when /^the Ticket View page$/
       '/tickets'    
     
+    when /^the tickets page$/i
+      tickets_path
       
     when /^the new ticket page$/i
       new_ticket_path

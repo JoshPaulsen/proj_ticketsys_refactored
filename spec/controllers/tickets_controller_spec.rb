@@ -24,7 +24,7 @@ describe TicketsController do
       it "should display a success message and redirect to the my tickets path" do
         put :close, :id => @ticket.id
         flash[:success].should == "Ticket successfully closed."
-        response.should redirect_to my_tickets_path
+        response.should redirect_to tickets_path
       end    
     end
     
@@ -95,8 +95,10 @@ describe TicketsController do
   describe "index action" do
     it "should should show an admin all of the tickets" do
       user = Factory(:user, :privilege=>"admin")
+      ticket = Factory(:ticket)
+      ticket.stub(:opened).and_return ticket
       test_sign_in(user)   
-      user.should_receive(:accessible_tickets).and_return Factory(:ticket)      
+      user.should_receive(:tickets).and_return ticket    
       get :index      
     end
     
@@ -106,12 +108,6 @@ describe TicketsController do
       
     end
     
-    it "should should redirect a user to the my tickets page" do
-      user = Factory(:user, :privilege=>"user")
-      test_sign_in(user)        
-      get :index   
-      response.should redirect_to my_tickets_path   
-    end    
   end
   
   describe "show action" do

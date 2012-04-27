@@ -32,7 +32,7 @@ Scenario: change the service provider
   When I press "Edit Ticket"
   And I select "Billy Joel" from "Primary Provider"
   And I press "Set Provider"
-  Then I should be viewing the edit page for the "Broken Computer" ticket
+  Then I should be viewing the "Broken Computer" ticket
   And I should see "Provider Updated"
   
   
