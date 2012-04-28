@@ -5,14 +5,33 @@
     %h3= "Deactivated User"
   %ul 
     
-    %p= "Name: #{@user.full_name}"    
-    %p= "Email: #{@user.email}"
-    %p= "User Name: #{@user.name}"
-    %p= "Active: #{@user.active?}"  
-    %p= "Verified: #{@user.verified?}"  
-    %p= "Privilege: #{@user.privilege}"
     %p
-      Service Areas: 
+      %b
+        Name: 
+      = @user.full_name    
+    %p
+      %b
+        Email:
+      = @user.email
+    %p
+      %b
+        User Name:
+      = @user.name
+    %p
+      %b
+        Active:
+      = @user.active?  
+    %p
+      %b
+        Verified:
+      = @user.verified?  
+    %p
+      %b
+        Privilege:
+      = @user.privilege
+    %p
+      %b
+        Service Areas: 
       - if !@service_areas.blank?
         - @service_areas.each do |sa|
           - if sa.inactive?

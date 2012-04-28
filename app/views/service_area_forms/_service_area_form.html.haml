@@ -1,5 +1,5 @@
 %tbody
-  %tr
+  %tr{:class=>cycle("even","odd")}
     %td= service_area_form.id
     %td= service_area_form.title
     %td= service_area_form.service_area.name

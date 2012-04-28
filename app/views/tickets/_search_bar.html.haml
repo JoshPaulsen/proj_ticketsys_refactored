@@ -1,44 +1,78 @@
+:javascript
+  function toggle(id) {
+    var e = document.getElementById(id);
+ 
+    if (e.style.display == '')
+      e.style.display = 'none';
+    else
+      e.style.display = '';
+  }
+
+ 
 = form_tag search_path, :method => :get do
-  .field
-    = label_tag :ticket_id, "Ticket Number: "
-    = text_field_tag :ticket_id, @ticket_id
-  -#.field
-  -#  = label_tag :title, "Title: "
-  -#  = text_field_tag :title, @title
-  -#.field
-  -#  = label_tag :description, "Description: "
-  -#  = text_field_tag :description, @description
-  .field
-    = label_tag :everything, "Everything: "
-    = text_field_tag :everything, @everything
-  .field      
-    = radio_button_tag :open_closed, :open, checked = true
-    = label_tag :open_closed, "Open Tickets"
-  .field
-    = radio_button_tag :open_closed, :closed, checked = type_checked?("closed")
-    = label_tag :open_closed, "Closed Tickets"
-  .field      
-    = radio_button_tag :open_closed, :all, checked = type_checked?("all")
-    = label_tag :open_closed, "Open and Closed"  
-  - if !current_user.user?  
-    .field      
-      = radio_button_tag :all_mine, :mine, checked = true
-      = label_tag :all_mine, "My Tickets"
-    .field
-      = radio_button_tag :all_mine, :all, checked = all_mine_checked?("all")
-      = label_tag :all_mine, "All Tickets"
-  = render "search_service_areas"
+  %table{:margin=>"0px, 0px", :padding=>"0px,0px", :cellpadding=>"10px"}
+    %tr
+      %td
+        .field
+          = label_tag :ticket_id, "Ticket Number: "
+          = text_field_tag :ticket_id, @ticket_id
+      -# %td
+        -#.field
+        -#  = label_tag :title, "Title: "
+        -#  = text_field_tag :title, @title
+        -#.field
+        -#  = label_tag :description, "Description: "
+        -#  = text_field_tag :description, @description
+      %td
+        .field
+          = label_tag :everything, "Everything: "
+          = text_field_tag :everything, @everything
+      %td
+        .field      
+          = radio_button_tag :open_closed, :open, checked = true
+          = label_tag :open_closed, "Open"
+      %td
+        .field
+          = radio_button_tag :open_closed, :closed, checked = type_checked?("closed")
+          = label_tag :open_closed, "Closed"
+      %td
+        .field      
+          = radio_button_tag :open_closed, :all, checked = type_checked?("all")
+          = label_tag :open_closed, "Open and Closed"   
+      - if !current_user.user?
+        %td  
+          .field      
+            = radio_button_tag :all_mine, :mine, checked = true
+            = label_tag :all_mine, "My Tickets"
+        %td  
+          .field
+            = radio_button_tag :all_mine, :all, checked = all_mine_checked?("all")
+            = label_tag :all_mine, "All Tickets"
+        %td
+          .action
+            = submit_tag "Search"
+        %td
+          %a{:href=>"javascript:toggle('tbl')", :style=>"font-size: 150%;"}
+            +         
+  %div{:id=>"tbl", :name=>"tbl", :style=>"overflow:hidden;display:none"}
+    %table{:margin=>"0px, 0px", :padding=>"0px,0px", :cellpadding=>"10px"}
+      %tr
+        %td
+          = render "search_service_areas"
+    %table{:margin=>"0px, 0px", :padding=>"0px,0px", :cellpadding=>"10px"}
+      %tr        
+        %td
+          .select
+            = label_tag :location_id, "Location: "
+            = select_tag :location_id, options_for_select(get_locations, selected = @location_id), :include_blank => true
+        %td
+          .select
+            = label_tag :location_id, "Start Date: "
+            = text_field_tag :opened_start_text, @opened_start_text, :class => "date-text"
+        %td
+          .select
+            = label_tag :location_id, "End Date: "
+            = text_field_tag :opened_end_text, @opened_end_text, :class => "date-text"
+
   
-  .select
-    = label_tag :location_id, "Location: "
-    = select_tag :location_id, options_for_select(get_locations, selected = @location_id), :include_blank => true
-  .select
-    = label :opened, :start, "Start: "
-    = select_date @opened_start, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_start"
-  .select
-    = label :opened, :end, "End: "
-    = select_date @opened_end, :include_blank => true, :order => [:month,:day,:year], :prefix => "opened_end"
-  
-  
-  .action
-    = submit_tag "Search"
+

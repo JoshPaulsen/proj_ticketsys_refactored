@@ -1,5 +1,5 @@
 %tbody
-  %tr
+  %tr{:class=>cycle("even","odd")}
     %td= link_to "#{user.last_first}", user
     %td= user.email
     %td= user.list_service_areas    

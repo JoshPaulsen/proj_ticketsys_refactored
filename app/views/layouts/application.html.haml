@@ -1,8 +1,7 @@
-!!! 5
 %html
   %head
     %title
-      TSS - New
+      STS - New
     -#= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css", "application"
     -#= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application"
 
@@ -14,14 +13,26 @@
     = stylesheet_link_tag    "application", :media => "all"    
     = csrf_meta_tags
   %body
-    = link_to image_tag("tss-small.png", :alt => "Title Image"), tickets_path
-    %hr
-    - if signed_in?
-      = render "shared/menu_bar"
-      %hr
+    %div{:id=>"header"}
+      %h1{:id=>"logo-text"}
+        %a{:herf => "index.html"}
+          = link_to "STS", tickets_path
+      %p{:id=>"slogan"}
+        Service Ticketing System
+      %h3{:align => "right"}
+        %br
+        - if signed_in?
+          Sign out 
+          = link_to "#{current_user.name}", signout_path, :method => :delete, :id => "signout"
+        - else
+          = readable_date(Time.now)
+    %div{:id=>"menu"}
+      - if signed_in?
+        = render "shared/menu_bar"
+
     = render "shared/the_flash"
     = yield
-    %hr
+    %div{:id=>"footer"}
     = debug(params) if Rails.env.development?
     %div
       set @debug_value in any controller and see the value here:

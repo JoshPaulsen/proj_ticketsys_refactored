@@ -1,44 +1,69 @@
 %div
   = render "ticket_menu"
   %div
-    %ul= "Ticket Number: #{@ticket.id}"
-    %ul= "Service Area: #{@service_area_name}"
-    %ul= "Location: #{@location_name}"
-    %ul= "Title: #{@ticket.title}"
     %ul
-      Opened: 
+      %b
+        Ticket Number: 
+      = @ticket.id
+    %ul
+      %b
+        Service Area: 
+      = @service_area_name
+    %ul
+      %b
+        Location: 
+      = @location_name
+    %ul
+      %b
+        Title: 
+      = @ticket.title
+    %ul
+      %b
+        Opened: 
       = readable_date(@ticket.opened_on)
     %ul
       - if @ticket.closed?
-        Closed: 
+        %b
+          Closed: 
         = readable_date(@ticket.closed_on)
     %ul
-      Creator: 
+      %b
+        Creator: 
       - if !@ticket.creator.blank?
         = link_to "#{@ticket.creator.first_initial_last}", @ticket.creator
     %ul
-      Service Provider: 
+      %b
+        Service Provider: 
       - if !@ticket.provider.blank?
         = link_to "#{@ticket.provider.first_initial_last}", @ticket.provider
     %ul
-      Additional Users: 
+      %b
+        Additional Users: 
       - @ticket.additional_users.each do |user|
         = link_to "#{user.first_initial_last}", user_path(user)
         = " "
     %ul
-      Additional Providers: 
+      %b
+        Additional Providers: 
       - @ticket.additional_providers.each do |user|
         = link_to "#{user.first_initial_last}", user_path(user)
         = " "
     %ul
-      Everyone (debug only):
+      %b
+        Everyone (debug only):
       - @ticket.users.each do |user|
         = link_to "#{user.first_initial_last}", user_path(user)
         = " "
     - if !@ticket.questions.blank?
       - @ticket.questions.each do |q|
-        %ul= "#{q.question}: #{q.answer}"
-    %ul= "Description: #{@ticket.description}"
+        %ul
+          %b
+            = "#{q.question}:"
+          = q.answer
+    %ul
+      %b
+        Description:
+      = @ticket.description
   = render @notes
   - if @ticket.open?
     = render "new_note_form"

@@ -1,13 +1,233 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
-*/
+/* ---------------------------------------------------
+   HTML ELEMENTS
+---------------------------------------------------- */
+
+/* top elements */
+
+body {
+	background: #ffffff;
+	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+	color: #585958;
+	text-align: left;
+}
+
+/* links */
+a, a:visited {
+	text-decoration: none;
+	background: inherit;
+	color: #FB9233; 
+}
+a:hover {
+	text-decoration: underline;
+	background: inherit;
+	color: #93C600;
+}
+
+/* headers */
+h1, h2, h3 { font-family: 'Trebuchet MS', Tahoma, Sans-serif;  }
+h1 {
+	font-size: 180%;	
+	font-weight: normal;	
+	color: #555;
+}
+h2 {
+	font-size: 160%;
+	color: #88ac0b;
+	font-weight: normal;
+}
+h3 {
+	font-size: 135%;	 
+	color: #ffffff;
+}
+
+/* images */
+img {
+	background: #fff;
+    border: 1px solid #E5E5E5;
+	padding: 7px;
+}
+img.float-right { margin: 5px 0px 10px 10px;  }
+img.float-left { margin: 5px 10px 10px 0px; }
+
+h1, h2, h3, p {
+	margin: 10px 15px;
+	padding: 0;
+}
+ul, ol {
+	margin: 5px 15px;
+	padding: 0 25px;
+}
+
+blockquote {
+  width: 600px;
+  margin: 10px 15px;
+  padding: 0 0 0 50px;  
+  border-radius: 15px;
+  font: bold 1.1em/1.4em "Trebuchet MS", Tahoma, arial, Sans-serif; 
+  color: #2361BA;   
+  background: #F4F8FD url(quote.jpg) no-repeat 8px 6px;
+}
+
+/* start - table */
+table {
+	border-collapse: collapse;
+	margin: 10px 15px;
+	font-size: 120%;	
+}
+th strong {
+	color: #fff;
+}
+th {
+	background: #ffffff url(button-bg.jpg) repeat-x 0 0; 
+	height: 35px;
+	padding-left: 12px;
+	padding-right: 12px;
+	color: #fff;
+	text-align: left;
+	border: 1px solid #015289;
+	border-bottom-width: 2px;
+}
+
+tr.even {
+  background: #ffffff;
+}
+
+tr.odd {
+  background: #ebebeb;
+}
+
+/* end - table */
+
+/********************************************
+   LAYOUT
+********************************************/ 
+#header {
+	position: relative;
+	height: 60px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px; 
+	background: #ffffff url(header.jpg);
+	padding: 0;	
+	color: #fff;	
+}
+#header h1#logo-text a {
+	position: absolute;
+	margin: 0; padding: 0;
+	font: bolder 30px 'Trebuchet MS', Arial, Sans-serif;
+	letter-spacing: -3px;
+	color: #fff;
+	text-transform: none;
+	text-decoration: none;
+	background: transparent;
+	
+	/* change the values of top and left to adjust the position of the logo*/
+	top: 12px; left: 35px;	
+}
+#header p#slogan {
+	position: absolute;
+	margin: 0; padding: 0;
+	font: bold 12px 'Trebuchet MS', Arial, Sans-serif;
+	text-transform: none;
+	color: #FFF;
+	
+	/* change the values of top and left to adjust the position of the slogan*/
+	top: 45px; left: 50px;		
+}
+
+/* header links */
+#header #header-links {
+	position: absolute;
+	color: #C6DDEE;
+	font: bold 14px"Trebuchet MS", Arial, Tahoma, Sans-serif;
+	top: 20px; right: 20px;	
+}
+#header #header-links a {	
+	color: #fff;
+	text-decoration: none;	
+}
+#header #header-links a:hover {
+	color: #D4FF55;	
+}
+
+/* navigation */
+#menu {
+	clear: both;	
+	margin: 0 auto; padding: 0;
+	background: #ffffff url(menu.jpg);	
+	font: bold 14px/40px "trebuchet MS", Arial, Tahoma, Sans-serif;
+	height: 35px;
+}
+#menu ul {
+	float: center;
+	list-style: none;
+	margin:0; padding: 0 0 0 20px;
+}
+#menu ul li {
+	display: inline;
+}
+#menu ul li a {
+	display: block;
+	float: left;
+	padding: 0 12px;
+	color: #585958;	
+	text-decoration: none;
+	background: url(sep.jpg) no-repeat 100% 100%;
+	height: 35px;
+}
+#menu ul li a:hover {
+	color: #000000;	
+}
+
+/* Footer */	
+#footer {
+	color: #ffffff;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+	background: #ffffff url(footer.jpg);
+	clear: both;
+	height: 57px;
+	text-align: center;	
+	font-size: 90%;	
+}
+#footer p { 
+	padding: 10px 0;
+	margin: 0;
+}
+#footer a { 
+	color: #fff;
+	text-decoration: none; 
+}
+
+/* post footer */
+.post-footer {
+	background: #ffffff;
+	padding: 5px; margin: 20px 25px 0 25px; 
+	font-size: 95%;	
+}
+
+.post-by { font-size: .95em;	margin-top: 0;	}
+
+/* alignment classes */
+.float-left  { float: left; }
+.float-right { float: right; }
+.align-left  { text-align: left; }
+.align-right { text-align: right; }
+
+/* clearing */
+.fix {
+	clear: both;
+	height: 1px;
+	margin: -1px 0 0;
+	overflow: hidden;
+}
+.clear { display:inline-block; }
+.clear:after {
+	display:block;
+	visibility:hidden;
+	clear:both;
+	height:0;
+	content: " ";
+}
+
+
+
