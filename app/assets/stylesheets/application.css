@@ -245,7 +245,7 @@ tr.odd {
 }
 
 .error {
-  border-style: solid;
+  border-style: dotted;
   border-color: red;
   border-width: 1px;
   margin-top: 3px;
@@ -255,7 +255,7 @@ tr.odd {
 }
 
 .success {
-  border-style: solid;
+  border-style: dotted;
   border-color: green;
   border-width: 1px;
   margin-top: 3px;
@@ -265,7 +265,7 @@ tr.odd {
 }
 
 .notice {
-  border-style: solid;
+  border-style: dotted;
   border-color: green;
   border-width: 1px;
   margin-top: 3px;
@@ -314,7 +314,22 @@ tr.odd {
   min-width: 100px;
 }
 
+.red {
+  color: red;
+}
+
+.unverified {
+  background-color: #ffd9e2;
+  //border-style: dashed;
+  //border-color: #DD1144;
+  //border-width: 1px;
+}
 
 
-
-
+.inactive {
+  //text-decoration: line-through;
+  background-color: #faf6a8;
+  //border-style: dashed;
+  //border-color: #DD1144;
+  //border-width: 1px;
+}

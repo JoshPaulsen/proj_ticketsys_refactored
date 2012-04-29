@@ -1,11 +1,10 @@
-%tbody
-  %tr{:class=>cycle("even","odd")}
-    %td= link_to "#{user.last_first}", user
-    %td= user.email
-    %td= user.list_service_areas    
-    %td= user.privilege  
-    %td
-      - if user.active?
-        Yes
-      - else
-        No
+%tr{:class=>cycle("even","odd")}
+  %td{:class => user.status}= link_to "#{user.last_first}", user
+  %td{:class => user.status}= user.email
+  %td{:class => user.status}= user.list_service_areas    
+  %td{:class => user.status}= user.privilege  
+  %td{:class => user.status}
+    - if user.active?
+      Yes
+    - else
+      No

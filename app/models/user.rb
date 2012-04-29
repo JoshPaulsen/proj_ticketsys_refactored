@@ -47,6 +47,16 @@ class User < ActiveRecord::Base
     active == false
   end
   
+  def status   
+    if !verified?
+      "unverified"
+    elsif inactive?
+      "inactive"
+    else
+      "active"
+    end
+  end
+  
   def full_name
     first_name + " " + last_name
   end

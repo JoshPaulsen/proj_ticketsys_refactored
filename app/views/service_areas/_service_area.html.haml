@@ -13,8 +13,8 @@
     %td
       - if current_user.admin?
         - if service_area.active?
-          = button_to "Deactivate", deactivate_service_area_path(service_area), :method => :put , |
-                                        :confirm => "Are you sure you want to deactivate this service area?"
+          = button_to "Deactivate", deactivate_service_area_path(service_area), |
+                                    :method => :put , :confirm => "Are you sure?"
         - else
-          = button_to "Reactivate", reactivate_service_area_path(service_area), :method => :put , :confirm => "Are you sure you want to reactivate this Service Area?"
-
+          = button_to "Reactivate", reactivate_service_area_path(service_area), |
+                                    :method => :put , :confirm => "Are you sure?"

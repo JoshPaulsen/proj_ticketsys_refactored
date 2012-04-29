@@ -68,7 +68,7 @@ module ApplicationHelper
   
   def get_providers_for(ticket)
     if !ticket.service_area.blank?
-      p = ticket.service_area.users.collect do |prov|
+      p = ticket.service_area.users.active.collect do |prov|
         [prov.last_first_initial, prov.id]
       end
     end
@@ -76,6 +76,12 @@ module ApplicationHelper
   
   def get_all_users
     User.all.collect do |user|
+      [user.last_first_initial, user.id]
+    end
+  end 
+  
+  def get_all_active_users
+    User.active.collect do |user|
       [user.last_first_initial, user.id]
     end
   end 

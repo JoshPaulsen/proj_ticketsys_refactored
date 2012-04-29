@@ -119,6 +119,7 @@ class UsersController < ApplicationController
       redirect_to user and return
     end
     
+    user.active = true
     user.verified = true
     user.save
     flash[:notice] = "User Verified"
@@ -181,7 +182,7 @@ class UsersController < ApplicationController
     @user.email = @email
     @user.set_encrypted_password password
     @user.privilege = "user"
-    @user.active = true
+    @user.active = false
     @user.verified = false
     
     if !@user.save
