@@ -2,68 +2,38 @@
   = render "ticket_menu"
   %div
     %ul
-      %b
-        Ticket Number: 
+      %b= "Ticket Number: " 
       = @ticket.id
     %ul
-      %b
-        Service Area: 
+      %b= "Service Area: " 
       = @service_area_name
     %ul
-      %b
-        Location: 
+      %b= "Location: "
       = @location_name
     %ul
-      %b
-        Title: 
+      %b= "Title: "
       = @ticket.title
     %ul
-      %b
-        Opened: 
+      %b= "Opened: " 
       = readable_date(@ticket.opened_on)
     %ul
       - if @ticket.closed?
-        %b
-          Closed: 
+        %b= "Closed: " 
         = readable_date(@ticket.closed_on)
     %ul
-      %b
-        Creator: 
+      %b= "Creator: " 
       - if !@ticket.creator.blank?
         = link_to "#{@ticket.creator.first_initial_last}", @ticket.creator
     %ul
-      %b
-        Service Provider: 
+      %b= "Service Provider: " 
       - if !@ticket.provider.blank?
         = link_to "#{@ticket.provider.first_initial_last}", @ticket.provider
+    %ul= render "additional_users"      
+    %ul= render "additional_providers"     
+    %ul= render "everyone"      
+    = render "ticket_questions"
     %ul
-      %b
-        Additional Users: 
-      - @ticket.additional_users.each do |user|
-        = link_to "#{user.first_initial_last}", user_path(user)
-        = " "
-    %ul
-      %b
-        Additional Providers: 
-      - @ticket.additional_providers.each do |user|
-        = link_to "#{user.first_initial_last}", user_path(user)
-        = " "
-    %ul
-      %b
-        Everyone (debug only):
-      - @ticket.users.each do |user|
-        = link_to "#{user.first_initial_last}", user_path(user)
-        = " "
-    - if !@ticket.questions.blank?
-      - @ticket.questions.each do |q|
-        %ul
-          %b
-            = "#{q.question}:"
-          = q.answer
-    %ul
-      %b
-        Description:
+      %b= "Description: "
       = @ticket.description
-  = render @notes
-  - if @ticket.open?
-    = render "new_note_form"
+  = render @notes  
+  = render "new_note_form"

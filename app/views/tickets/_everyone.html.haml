@@ -1,0 +1,4 @@
+%b= "Everyone (debug only): "
+- @ticket.users.each do |user|
+  = link_to "#{user.first_initial_last}", user_path(user)
+  = " "

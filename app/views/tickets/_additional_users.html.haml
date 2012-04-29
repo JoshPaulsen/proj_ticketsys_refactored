@@ -1,0 +1,7 @@
+%b= "Additional Users: "
+-if !@ticket.additional_users.blank? 
+  - @ticket.additional_users.each do |user|
+    = link_to "#{user.first_initial_last}", user_path(user)
+    = " "
+-else
+  None

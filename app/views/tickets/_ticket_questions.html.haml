@@ -1,0 +1,5 @@
+- if !@ticket.questions.blank?
+  - @ticket.questions.each do |q|
+    %ul
+      %b= "#{q.question}:"
+      = q.answer
