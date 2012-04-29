@@ -1,9 +1,8 @@
-%div
-  %table
-    %tr
-      %td=  button_to "Add New Field", new_form_field_path(@form), :method => :get
-      %td
-        - if current_user.admin?
-          = button_to "Delete Entire Form", @form, :method => :delete , |
-                        :confirm => "Are you sure you want to delete this form?"
+%table
+  %tr
+    %td=  button_to "Add New Field", new_form_field_path(@form), :method => :get
+    %td
+      - if current_user.admin?
+        = button_to "Delete Entire Form", @form, :method => :delete , |
+                      :confirm => "Are you sure you want to delete this form?"
 %hr

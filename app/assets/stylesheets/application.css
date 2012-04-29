@@ -70,22 +70,29 @@ blockquote {
 
 /* start - table */
 table {
-	border-collapse: collapse;
-	margin: 10px 8px;
-	font-size: 100%;	
+  border-collapse: collapse;
+  margin: 10px 8px;
+  font-size: 100%;  
 }
 th strong {
 	color: #fff;
 }
 th {
-	background: #ffffff url(button-bg.jpg) repeat-x 0 0; 
-	height: 35px;
-	padding-left: 12px;
-	padding-right: 12px;
-	color: #fff;
-	text-align: left;
-	border: 1px solid #015289;
-	border-bottom-width: 2px;
+  background: #ffffff url(button-bg.jpg) repeat-x 0 0; 
+  height: 35px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #fff;
+  text-align: left;
+  border: 1px solid #015289;
+  border-bottom-width: 2px;
+}
+
+td {  
+  padding-left: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 2px;  
 }
 
 tr.even {
@@ -158,7 +165,7 @@ tr.odd {
 	height: 35px;
 }
 #menu ul {
-	float: center;
+	//float: center;
 	list-style: none;
 	margin:0; padding: 0 0 0 20px;
 }
@@ -228,6 +235,86 @@ tr.odd {
 	height:0;
 	content: " ";
 }
+
+
+/********************************************
+   New Stuff
+********************************************/ 
+.button_to {
+  height: 10px;
+}
+
+.error {
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+  margin-top: 3px;
+  //margin-bottom: -25px;
+  color: red;
+  width: 25%;
+}
+
+.success {
+  border-style: solid;
+  border-color: green;
+  border-width: 1px;
+  margin-top: 3px;
+  //margin-bottom: -25px;
+  color: green;
+  width: 25%;
+}
+
+.notice {
+  border-style: solid;
+  border-color: green;
+  border-width: 1px;
+  margin-top: 3px;
+  //margin-bottom: -25px;
+  color: green;
+  width: 25%;
+}
+
+.no-flash {  
+  margin-top: 3px;
+  //margin-bottom: -25px;
+  height: 26px; 
+  //width: 25%;
+}
+
+.ui-datepicker {
+  font-size: 13px;
+  display: none;
+}
+
+.t-number {
+  min-width: 15px;
+}
+
+.t-title {
+  min-width: 200px;
+}
+
+.t-sa {
+  min-width: 100px;
+}
+
+.t-creator {
+  min-width: 100px;
+}
+
+.t-provider {
+  min-width: 130px;
+}
+
+.t-opened {
+  min-width: 100px;
+}
+
+.t-closed {
+  min-width: 100px;
+}
+
+
 
 
 

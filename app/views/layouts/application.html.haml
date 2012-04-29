@@ -23,7 +23,7 @@
         %br
         - if signed_in?
           Sign out 
-          = link_to "#{current_user.name}", signout_path, :method => :delete, :id => "signout"
+          = link_to "#{current_user.first_name}", signout_path, :method => :delete, :id => "signout"
         - else
           = readable_date(Time.now)
     %div{:id=>"menu"}

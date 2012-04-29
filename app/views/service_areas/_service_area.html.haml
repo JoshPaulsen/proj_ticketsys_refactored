@@ -1,6 +1,5 @@
 %tbody
   %tr{:class=>cycle("even","odd")}
-    %td= service_area.id
     %td= service_area.name
     %td= service_area.description
     %td
@@ -17,6 +16,5 @@
           = button_to "Deactivate", deactivate_service_area_path(service_area), :method => :put , |
                                         :confirm => "Are you sure you want to deactivate this service area?"
         - else
-          = button_to "Reactivate", reactivate_service_area_path(service_area), :method => :put , |
-                                        :confirm => "Are you sure you want to reactivate this Service Area?"
+          = button_to "Reactivate", reactivate_service_area_path(service_area), :method => :put , :confirm => "Are you sure you want to reactivate this Service Area?"
 

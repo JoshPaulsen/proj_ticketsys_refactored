@@ -1,6 +1,6 @@
-%div{:align => "center"}
+%div{:align => "center"}  
   - if !flash.empty?
     - flash.each do |key, value|
-      %div= value
+      %div{:class => key}= value
   - else
-    %br
+    %div{:class => "no-flash"}

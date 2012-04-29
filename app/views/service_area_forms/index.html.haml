@@ -1,18 +1,17 @@
-%div
-  %h3 Create a New Blank Form
-  = form_for(@ticket_form) do |f|    
-    = f.label :service_area_id, "Select a Service Area"
-    - if current_user.admin?
-      = f.select :service_area_id, get_service_areas, :include_blank => true
-    - else
-      = f.select :service_area_id, get_service_areas_for(current_user), :include_blank => true
-    .field
-      = f.label :title, "Enter a ticket type for this form (e.g. 'Software Upgrade Issue')"
-      %p
-      = f.text_field :title
-    .actions
-      = f.submit "Create"
-  %h3 All Ticket Forms
-  %table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden"}
-    = render "service_area_forms_header"
-    = render @ticket_forms
+%h4 Create a New Blank Form
+= form_for(@ticket_form) do |f|    
+  = f.label :service_area_id, "Select a Service Area"
+  - if current_user.admin?
+    = f.select :service_area_id, get_service_areas, :include_blank => true
+  - else
+    = f.select :service_area_id, get_service_areas_for(current_user), :include_blank => true
+  .field
+    = f.label :title, "Enter a ticket type for this form (e.g. 'Software Upgrade Issue')"
+    %p
+    = f.text_field :title
+  .actions
+    = f.submit "Create"
+%h3 All Ticket Forms
+%table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"99%", :overflow=>"hidden"}
+  = render "service_area_forms_header"
+  = render @ticket_forms

@@ -3,11 +3,5 @@
   %div
     %ul= "Service Area: #{@form.service_area.name}"
     %ul= "Ticket Type: #{@form.title}"
-    - if !@form.fields.blank?
-      %ul
-        %table{:border=> "0", :cellpadding=>"10", :cellspacing=>"1", :overflow=>"hidden"}
-          - @form.fields.each do |field|
-            = render field
-    - else
-      %ul= "This Form Has no Fields yet."
+    = render "form_fields"
   = render "locations_form"

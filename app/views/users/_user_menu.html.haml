@@ -1,20 +1,19 @@
-%div
-  %table
-    %tr
-      %td
+%table
+  %tr
+    %td
+      - if @user.active? and @user.verified?
+        = button_to 'Edit User', edit_user_path(@user), :method => :get
+    %td
+      - if current_user.admin? and @user.verified?
         - if @user.active?
-          = button_to 'Edit User', edit_user_path(@user), :method => :get
-      %td
-        - if current_user.admin?
-          - if @user.active?
-            = button_to "Deactivate User", deactivate_user_path, :method => :put , |
-                                          :confirm => "Are you sure you want to deactivate this user?"
-          - else
-            = button_to "Reactivate User", reactivate_user_path, :method => :put , |
-                                          :confirm => "Are you sure you want to reactivate this user?"
-      %td
-        = button_to 'Delete User (Debug Only)', @user, :method => :delete
-      %td
-        -if !@user.verified?
-          = button_to "Verify User", verify_user_path, :method => :put                           
+          = button_to "Deactivate User", deactivate_user_path, :method => :put , |
+                                        :confirm => "Are you sure you want to deactivate this user?"
+        - else
+          = button_to "Reactivate User", reactivate_user_path, :method => :put , |
+                                        :confirm => "Are you sure you want to reactivate this user?"
+    %td
+      = button_to 'Delete User (Debug Only)', @user, :method => :delete
+    %td
+      -if !@user.verified?
+        = button_to "Verify User", verify_user_path, :method => :put                           
 %hr

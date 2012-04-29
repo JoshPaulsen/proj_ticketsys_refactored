@@ -5,12 +5,6 @@
                   :confirm => "Are you sure?" 
   %td
     - if field.need_up?
-      = form_tag move_up_path, :method => :put do
-        .up-button
-          = hidden_field_tag :field_id, field.id
-          = submit_tag 'Up'
+      = button_to "Up", move_up_path(:field_id => field.id), :method => :put
     - if field.need_down?
-      = form_tag move_down_path, :method => :put do
-        .down-button
-          = hidden_field_tag :field_id, field.id
-          = submit_tag 'Down'
+      = button_to "Down", move_down_path(:field_id => field.id), :method => :put
