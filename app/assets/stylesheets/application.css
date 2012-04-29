@@ -6,7 +6,7 @@
 
 body {
 	background: #ffffff;
-	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+	font: 100%/1.5em Verdana, Tahoma, arial, sans-serif;
 	color: #585958;
 	text-align: left;
 }
@@ -43,7 +43,7 @@ h3 {
 /* images */
 img {
 	background: #fff;
-    border: 1px solid #E5E5E5;
+  border: 1px solid #E5E5E5;
 	padding: 7px;
 }
 img.float-right { margin: 5px 0px 10px 10px;  }
@@ -71,8 +71,8 @@ blockquote {
 /* start - table */
 table {
 	border-collapse: collapse;
-	margin: 10px 15px;
-	font-size: 120%;	
+	margin: 10px 8px;
+	font-size: 100%;	
 }
 th strong {
 	color: #fff;

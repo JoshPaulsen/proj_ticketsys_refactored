@@ -1,11 +1,11 @@
-%div
-  %h4 Add New Service Area
-  %div
-    = form_tag service_areas_path, :method => :post do
-      = render "service_area_form_fields"
-      .actions
-        = submit_tag "Create Service Area"
-  %h4 All Service Areas
-  %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
-    = render "service_area_header"
-    = render @service_areas
+%h4 Add New Service Area
+-#%div
+= form_tag service_areas_path, :method => :post do
+  = render "service_area_form_fields"
+  .actions
+    = submit_tag "Create Service Area"
+%h4 All Service Areas
+%Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"99%", :overflow=>"hidden" }
+  = render "service_area_header"
+  = render @service_areas
+  
