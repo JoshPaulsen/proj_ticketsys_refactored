@@ -40,7 +40,7 @@ Scenario: add ticket without a title
   And I fill in "Title" with ""
   And I press "Create Ticket"
   Then I should be on the New Ticket page
-  And I should see "Error: Incomplete Ticket"
+  And I should see "Incomplete Ticket"
   
 Scenario: try to create a ticket without selecting a location
   Then I should see "New Ticket"  

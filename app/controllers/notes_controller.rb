@@ -9,7 +9,7 @@ class NotesController < ApplicationController
   def create
     ticket = Ticket.find_by_id(params[:ticket_id])
     if ticket.closed?
-      flash[:error] = "Error: A note cannot be added to a closed ticket"
+      flash[:error] = "A note cannot be added to a closed ticket"
       redirect_to ticket_path ticket and return      
     end
     @note = Note.new(params[:note])
@@ -19,7 +19,7 @@ class NotesController < ApplicationController
     if @note.save
       redirect_to ticket_path ticket
     else
-      flash[:error] = "Error: Note cannot be blank"
+      flash[:error] = "Note cannot be blank"
       redirect_to ticket_path ticket
     end
   end

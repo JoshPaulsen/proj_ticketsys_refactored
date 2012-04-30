@@ -1,7 +1,6 @@
 - if @ticket and current_user.admin?
-  = form_tag set_primary_provider_path(@ticket), :method => :put do
-    .select
-      = label :ticket, :provider_id, "Set or Change the Primary Provider: "
-      = select :ticket, :provider_id, get_providers_for(@ticket)
-    .actions
-      = submit_tag "Set Provider"
+  = form_tag set_primary_provider_path(@ticket), {:method => :put, :class => "set-provider"} do    
+    = select :ticket, :provider_id, get_providers_for(@ticket)
+    = submit_tag "Set Primary Provider"
+ 
+     

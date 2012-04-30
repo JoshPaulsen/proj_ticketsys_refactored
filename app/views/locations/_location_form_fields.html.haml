@@ -1,7 +1,8 @@
 .field
   = label :location, :name, "Name: "
-  = text_field :location, :name
+  = text_field :location, :name, {:size => "18"}
 .field
   = label :location, :address, "Address:"
   %br
-  = text_area :location, :address, {:size=>"50x5"}
+  #address-box= text_area :location, :address, {:size=>"35x5"}
+  

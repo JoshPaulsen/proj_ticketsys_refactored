@@ -21,7 +21,7 @@ module TicketsHelper
     else
       ticket = Ticket.find_by_id(params[:id])
       if !ticket.users.include?(current_user) or !ticket
-        flash[:error] = "Error: You don't have permission to access that"
+        flash[:error] = "You don't have permission to access that"
         redirect_to tickets_path
       end    
     end  

@@ -19,7 +19,12 @@ class ServiceAreasController < ApplicationController
     puts params[:service_area]
     @service_area = ServiceArea.new(params[:service_area])
     @service_area.active = true
-    if @service_area.save
+    
+    if @service_area.name.blank?
+      @service_area.destroy
+      flash[:error] = "A Service Area Must Have A Name"
+      redirect_to service_areas_path
+    elsif @service_area.save
       flash[:notice] = "New Service Area Added"
       redirect_to service_areas_path
     else

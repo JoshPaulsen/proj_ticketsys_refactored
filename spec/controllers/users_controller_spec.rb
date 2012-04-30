@@ -23,7 +23,7 @@ describe UsersController do
       user.stub(:save).and_return false
       User.stub(:new).and_return user
       post :create
-      flash[:error].should == "Error: User could not be created!"
+      flash[:error].should == "User could not be created!"
       response.should redirect_to new_user_path
     end       
   end

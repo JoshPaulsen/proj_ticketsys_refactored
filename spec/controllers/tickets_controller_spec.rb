@@ -37,7 +37,7 @@ describe TicketsController do
       
       it "should display an error" do
         put :close, :id => @ticket.id
-        flash[:error].should == "Error: That ticket is already closed."
+        flash[:error].should == "That ticket is already closed."
       end
       
       it "should redirect back to the ticket" do
@@ -81,7 +81,7 @@ describe TicketsController do
       
       it "should display an error" do
         put :open, :id => @ticket.id
-        flash[:error].should == "Error: That ticket is already open."
+        flash[:error].should == "That ticket is already open."
       end
       
       it "should redirect back to the ticket" do

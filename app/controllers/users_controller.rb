@@ -129,7 +129,7 @@ class UsersController < ApplicationController
   def user_signup
     user = params[:user]
     if !user
-      flash[:error] = "Error: New Account could not be created!"
+      flash[:error] = "New Account could not be created!"
       redirect_to signin_path and return
     end
     
@@ -186,7 +186,7 @@ class UsersController < ApplicationController
     @user.verified = false
     
     if !@user.save
-      flash[:error] = "Error: New Account could not be created!"
+      flash[:error] = "New Account could not be created!"
       redirect_to signin_path and return
     else
       redirect_to unverified_user_path @user

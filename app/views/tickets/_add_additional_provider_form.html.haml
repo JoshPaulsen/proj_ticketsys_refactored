@@ -1,5 +1,4 @@
-- if !current_user.user?
-  = form_tag add_additional_provider_path(@ticket), :method => :put do
-    .field
-      = submit_tag "Add Additional Provider"      
-      = select :add_prov, :id, get_providers_for(@ticket), :include_blank => true
+- if !current_user.user? and @ticket.open?
+  = form_tag add_additional_provider_path(@ticket), {:method => :put, :class => "add-provider"} do
+    = select :add_prov, :id, get_providers_for(@ticket), :include_blank => true
+    = submit_tag "Add Provider"

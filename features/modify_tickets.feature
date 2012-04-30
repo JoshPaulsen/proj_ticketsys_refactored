@@ -26,7 +26,7 @@ Scenario: change the title to nothing
   And I fill in "Title" with ""
   And I press "Update Ticket"
   Then I should be viewing the edit page for the "Broken Computer" ticket
-  Then I should see "Error: The title cannot be blank"   
+  Then I should see "The title cannot be blank"   
   
 Scenario: change the service provider
   When I press "Edit Ticket"

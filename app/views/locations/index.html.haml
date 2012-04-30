@@ -1,11 +1,10 @@
-%div
-  %h4 Add New Location
-  %div
-    = form_tag locations_path, :method => :post do
-      = render "location_form_fields"
-      .actions
-        = submit_tag "Create Location"
-  %h4 All Locations
-  %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
-    = render "locations/location_header"
-    = render @locations
+%h4 Add New Location 
+#new-location.ticket-field
+  = form_tag locations_path, :method => :post do
+    = render "location_form_fields"
+    .actions
+      = submit_tag "Create Location"
+%h4 All Locations
+%Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"99%", :overflow=>"hidden" }
+  = render "locations/location_header"
+  = render @locations

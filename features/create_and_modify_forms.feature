@@ -56,7 +56,7 @@ Scenario: add a text field to a form with an option
   And I fill in "options_option_1" with "bananas"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "Error: A text field does not need options" 
+  And I should see "A text field does not need options" 
   
 Scenario: add a radio button field to a form
   Given a form with the title "Installation Issue" for "IT" exists
@@ -86,7 +86,7 @@ Scenario: add a radio button field with only one selection
   And I fill in "options_option_1" with "one"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "Error: A radio button field needs at least two options" 
+  And I should see "A radio button field needs at least two options" 
   
   
 Scenario: add a select field to a form
@@ -117,7 +117,7 @@ Scenario: add a select field with only one selection
   And I fill in "options_option_1" with "one"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "Error: A select field needs at least two options" 
+  And I should see "A select field needs at least two options" 
 
 Scenario: add a check box field to a form
   Given a form with the title "Installation Issue" for "IT" exists
@@ -141,5 +141,5 @@ Scenario: add a check box field to a form with an option
   And I fill in "options_option_1" with "bananas"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "Error: A check box field does not need options" 
+  And I should see "A check box field does not need options" 
   

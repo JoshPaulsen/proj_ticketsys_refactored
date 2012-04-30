@@ -104,7 +104,7 @@ class ServiceAreaFormsController < ApplicationController
     @question = session[:field_question]
     @type = session[:field_type]
     if !@ticket_form
-      flash[:error] = "Error: That form does not exist"
+      flash[:error] = "That form does not exist"
       redirect_to service_area_forms_path 
     end
   end
@@ -154,12 +154,12 @@ class ServiceAreaFormsController < ApplicationController
     @debug_value = @options_list  
     @type = params[:field_type]
     if !ticket_form
-      flash[:error] = "Error: That Ticket Form does not exist"         
+      flash[:error] = "That Ticket Form does not exist"         
       redirect_to new_form_field_path and return
     elsif question.blank?
       session[:options_list] = @options_list   
       session[:field_type] = @type  
-      flash[:error] = "Error: All forms fields need a question"      
+      flash[:error] = "All forms fields need a question"      
       redirect_to new_form_field_path and return        
     end
     
@@ -172,7 +172,7 @@ class ServiceAreaFormsController < ApplicationController
     elsif @type == "check_box"
       add_check_box_field(ticket_form, question, @options_list)
     else
-      flash[:error] = "Error: Unknown Field Type"      
+      flash[:error] = "Unknown Field Type"      
       redirect_to new_form_field_path and return        
     end
     
@@ -200,7 +200,7 @@ class ServiceAreaFormsController < ApplicationController
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
-        flash[:error] = "Error: A text field does not need options"    
+        flash[:error] = "A text field does not need options"    
         session[:field_question] = question
         session[:options_list] = @options_list
         session[:field_type] = @type
@@ -210,7 +210,7 @@ class ServiceAreaFormsController < ApplicationController
     
     def add_radio_field(ticket_form, question, options)
       if options.length < 2
-        flash[:error] = "Error: A radio button field needs at least two options."    
+        flash[:error] = "A radio button field needs at least two options."    
         session[:field_question] = question 
         session[:options_list] = @options_list 
         session[:field_type] = @type
@@ -228,7 +228,7 @@ class ServiceAreaFormsController < ApplicationController
     
     def add_select_field(ticket_form, question, options)
       if options.length < 2
-        flash[:error] = "Error: A select field needs at least two options."    
+        flash[:error] = "A select field needs at least two options."    
         session[:field_question] = question  
         session[:options_list] = @options_list
         session[:field_type] = @type
@@ -254,7 +254,7 @@ class ServiceAreaFormsController < ApplicationController
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
-        flash[:error] = "Error: A check box field does not need options"    
+        flash[:error] = "A check box field does not need options"    
         session[:field_question] = question  
         session[:options_list] = @options_list
         session[:field_type] = @type

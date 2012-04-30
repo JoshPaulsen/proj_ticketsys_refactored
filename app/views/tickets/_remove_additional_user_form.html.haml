@@ -1,5 +1,5 @@
-= form_tag remove_additional_user_path(@ticket), :method => :delete do
-  .field
-    = submit_tag "Remove Additional User"
+-if @ticket.open? and !@ticket.additional_users.blank?
+  = form_tag remove_additional_user_path(@ticket), {:method => :delete, :class => "remove-user"} do    
     = select :rm_user, :id, get_remove_users_for(@ticket), :include_blank => true
+    = submit_tag "Remove User"
   

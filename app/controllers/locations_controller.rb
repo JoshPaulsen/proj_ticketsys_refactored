@@ -18,7 +18,11 @@ class LocationsController < ApplicationController
     
     @location = Location.new(params[:location])
     @location.active = true
-    if @location.save
+    if @location.name.blank?
+      @location.destroy
+      flash[:error] = "A Location Must Have A Name"
+      redirect_to locations_path
+    elsif @location.save
       flash[:notice] = "New Location Added"
       redirect_to locations_path
     else
