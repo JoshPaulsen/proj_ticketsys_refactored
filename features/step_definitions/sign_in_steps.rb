@@ -11,7 +11,8 @@ end
 
 
 When /^I am (logged|signed) (o|i)n as a[n]? "(.*)"$/ do |x,y,privilege|
-  u = User.create!(:name => privilege + "x", :privilege => privilege, :password => "xxxx", :email=>privilege + "x")
+  u = User.create!(:name => privilege + "x", :privilege => privilege, :email=>privilege + "x")
+  u.password = "xxxx"
   visit signin_path
   step "I fill in \"Username\" with \"#{u.name}\""
   step "I fill in \"Password\" with \"#{u.password}\""
