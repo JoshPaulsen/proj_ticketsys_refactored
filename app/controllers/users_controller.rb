@@ -225,13 +225,20 @@ class UsersController < ApplicationController
     end
     
   end
+  
+  
 
   def update
     @user = User.find_by_id(params[:id])
+    
+    if !@user
+      flash[:error] = "That user does not exist"
+      redirect_to users_path and return
+    end
+    
     @user.update_attributes(params[:user])    
     service_areas = params[:service_area]
-    puts "-------"
-    puts params[:user]
+    
     if service_areas
       service_areas.each do |sa_id, checked|
         if checked == "1"        

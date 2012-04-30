@@ -1,10 +1,11 @@
 %tr
-  %td= "#{field.position}"
-  %td= field.engine.render(@form_helper, field.render_options)
-  %td= button_to "Delete Field", remove_field_path(field), :method => :delete , |
-                  :confirm => "Are you sure?" 
+  %td.field-table= "#{field.position}"
   %td
+    .field-table= field.engine.render(@form_helper, field.render_options)  
+  %td.field-table
     - if field.need_up?
       = button_to "Up", move_up_path(:field_id => field.id), :method => :put
     - if field.need_down?
-      = button_to "Down", move_down_path(:field_id => field.id), :method => :put
+      = button_to "Down", move_down_path(:field_id => field.id), :method => :put      
+  %td.field-table= button_to "Delete Field", remove_field_path(field), :method => :delete , |
+                  :confirm => "Are you sure?" 

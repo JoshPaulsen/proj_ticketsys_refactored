@@ -1,8 +1,7 @@
-%div{:style=>"padding:0 0 50px 50px;"}
-  %h3 Settings
-  %div
-    = link_to "Service Area Settings", service_areas_path
-  %div
-    = link_to "Location Settings", locations_path
-  %div
-    = link_to "Form Settings", service_area_forms_path
+%div{:align => "center"}
+  #settings.ticket-field
+    %h4{:align => "center"}= "Settings"
+    %h4= link_to "Location Settings", locations_path
+    %h4= link_to "Service Area Settings", service_areas_path    
+    %h4= link_to "Service Area Forms", service_area_forms_path
+%br

@@ -1,40 +1,53 @@
-%div
-  - if current_user.admin? or current_user.id == @user.id
-    = render "user_menu"
-  - if !@user.active?
-    %h3= "Deactivated User"
-  %ul 
-    
-    %p
-      %b
-        Name: 
-      = @user.full_name    
-    %p
-      %b
-        Email:
-      = @user.email
-    %p
-      %b
-        User Name:
-      = @user.name
-    %p
-      %b
-        Active:
-      = @user.active?  
-    %p
-      %b
-        Verified:
-      = @user.verified?  
-    %p
-      %b
-        Privilege:
-      = @user.privilege
-    %p
-      %b
-        Service Areas: 
-      - if !@service_areas.blank?
-        - @service_areas.each do |sa|
-          - if sa.inactive?
-            = "#{sa.name}(Deactivated) "
-          - else
-            = "#{sa.name} "
+%div{:align => "center"}
+  #show-user.ticket-field
+    - if current_user.admin? or current_user.id == @user.id
+      = render "user_menu"
+    -if !@user.verified?
+      %h4.red= "Unverified User"
+    -elsif !@user.active?
+      %h4.red= "Deactivated User"
+    %ul 
+    %table
+      %tr
+        %td.right-just
+          %b= "Name: " 
+        %td= @user.full_name    
+      %tr
+        %td.right-just
+          %b= "Email: "
+        %td= @user.email
+      %tr
+        %td.right-just
+          %b= "User Name: "
+        %td= @user.name
+      %tr
+        %td.right-just
+          %b= "Active: "        
+        -if @user.active?  
+          %td= "Yes"
+        -else
+          %td= "No"
+      %tr
+        %td.right-just
+          %b= "Verified: "
+        -if @user.verified?  
+          %td= "Yes"
+        -else
+          %td= "No"
+      %tr
+        %td.right-just
+          %b= "Privilege: "
+        %td= @user.privilege
+      %tr
+        %td.right-just
+          %b= "Service Areas: " 
+        -if !@service_areas.blank?
+          %td
+            - @service_areas.each do |sa|
+              - if sa.inactive?
+                = "#{sa.name}(Deactivated) "
+              - else
+                = "#{sa.name} "
+        -else
+          %td= "None"
+%br

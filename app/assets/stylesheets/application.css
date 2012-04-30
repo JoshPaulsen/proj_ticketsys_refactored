@@ -328,7 +328,7 @@ tr.odd {
 
 .inactive {
   //text-decoration: line-through;
-  background-color: #faf6a8;
+  //background-color: #faf6a8;
   //border-style: dashed;
   //border-color: #DD1144;
   //border-width: 1px;
@@ -389,11 +389,18 @@ tr.odd {
 
 .ticket-field {
   padding: 5px;  
-  background-color: #dedede;
+  //background-color: #dedede;
+  background-color: #eeeeee;
   border-style: solid;
   border-radius: 7px;
   border-color: #ababab; //#ababab
   border-width: 5px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
 
 #the-yield {
@@ -408,7 +415,7 @@ tr.odd {
 #new-location {
   text-align: left;
   position: relative;
-  left: 20px;
+  //left: 20px;
   top: 0px;
   //border-color: black;
   //border-style: solid;
@@ -418,7 +425,7 @@ tr.odd {
 #new-service-area {
   text-align: left;
   position: relative;
-  left: 20px;
+  //left: 20px;
   top: 0px;
   //border-color: black;
   //border-style: solid;
@@ -428,11 +435,51 @@ tr.odd {
 #new-service-area-form {
   text-align: left;
   position: relative;
-  left: 20px;
+  //left: 20px;
   top: 0px;
   //border-color: black;
   //border-style: solid;
   width: 450px;
+}
+
+#service-area-form {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 600px;
+}
+
+#show-user {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 500px;
+}
+
+#edit-user {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 850px;
+}
+
+#new-form-field {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;
+  width: 750px;
 }
 
 #address-box {
@@ -472,6 +519,16 @@ tr.odd {
   //float: left;
 }
 
+#settings {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;
+  width: 250px;
+}
+
 .note-list {
   position: absolute;
   top: 0px;
@@ -485,12 +542,26 @@ tr.odd {
   //float: right;
 }
 
+.shift-right {
+  position: relative;
+  left: 15px;
+}
 
+.right-just {
+  text-align: right;
+}
 
+.vert-align {
+  vertical-align: top;
+}
 
+.middle-align {
+  vertical-align: middle;
+}
 
-
-
+.field-table {
+  padding: 5px;  
+}
   /*
 .user {
   //background-color: #99ff99;

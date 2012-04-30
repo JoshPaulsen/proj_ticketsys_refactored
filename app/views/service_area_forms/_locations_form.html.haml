@@ -3,10 +3,12 @@
     %ul
       %table
         %tr
-          %td= label :default_provider, :id, "Default Provider: "
+          %td
+            %b= label :default_provider, :id, "Default Provider: "
           %td= select :default_provider, :id, get_providers_in(@service_area), :include_blank => true
         %tr
-          %td= "Provider for:"
+          %td
+            %b= "Provider for:"
         - @locations.each do |location|
           %tr
             .select

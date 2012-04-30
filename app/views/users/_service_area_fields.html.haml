@@ -1,11 +1,13 @@
 .select
   - if !@service_areas.blank?
-    Service Provider in:
-    %br
-    - @service_areas.each do |sa|
-      - if @user.service_areas.include? sa
-        = check_box(:service_area, sa.id, :checked => true)
-      - else
-        = check_box(:service_area, sa.id)
-      = label :service_area, :id, "#{sa.name}"
-      %br
+    %tr
+      %td.vert-align
+        %b.right-just= "Service Provider in:"
+      %td
+        - @service_areas.each do |sa|
+          - if @user.service_areas.include? sa
+            = check_box(:service_area, sa.id, :checked => true)
+          - else
+            = check_box(:service_area, sa.id)
+          = label :service_area, :id, "#{sa.name}"
+          %br

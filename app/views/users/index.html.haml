@@ -1,7 +1,7 @@
 %div
   %h4= button_to "Create a new User", new_user_path, :method => :get
-  %h3 All Users
+  %h4 All Users
   %center
-    %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"100%", :overflow=>"hidden" }
+    %Table{:border=> "1", :cellpadding=>"1", :cellspacing=>"1", :width=>"99%", :overflow=>"hidden" }
       = render "user_header"
       = render @users

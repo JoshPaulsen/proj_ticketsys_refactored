@@ -1,6 +1,6 @@
 - if !@form.fields.blank?
   %ul
-    %table{:border=> "0", :cellpadding=>"10", :cellspacing=>"1", :overflow=>"hidden"}
+    %table
       - @form.fields.each do |field|
         = render field
 - else

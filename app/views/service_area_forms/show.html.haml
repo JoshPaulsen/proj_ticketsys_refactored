@@ -1,7 +1,13 @@
-%div
-  = render "service_area_form_menu"
-  %div
-    %ul= "Service Area: #{@form.service_area.name}"
-    %ul= "Ticket Type: #{@form.title}"
-    = render "form_fields"
-  = render "locations_form"
+%div{:align => "center"}  
+  #service-area-form.ticket-field
+    = render "service_area_form_menu"
+    %div
+      %ul
+        %b= "Service Area: "
+        ="#{@form.service_area.name}"
+      %ul
+        %b= "Ticket Type: "
+        ="#{@form.title}"
+      = render "form_fields"
+    = render "locations_form"
+%br

@@ -1,15 +1,23 @@
-.field
-  = label :user, :first_name, "First Name:"
-  = text_field :user, :first_name, :value => @first_name
-.field
-  = label :user, :last_name, "Last Name:"
-  = text_field :user, :last_name, :value => @last_name
-.field
-  = label :user, :email, "Email"
-  = text_field :user, :email, :value => @email
-- if current_user.admin?
-  .select
-    = label :user, :privilege, "Privileges: "
-    = select :user, :privilege, get_privileges
-  = render "service_area_fields"
-      
+= form_tag user_path(@user), :method => :put do
+  %table    
+    %tr
+      %td.right-just
+        %b= label :user, :first_name, "First Name:"
+      %td= text_field :user, :first_name, :value => @first_name
+    %tr
+      %td.right-just
+        %b= label :user, :last_name, "Last Name:"
+      %td= text_field :user, :last_name, :value => @last_name
+    %tr
+      %td.right-just
+        %b= label :user, :email, "Email:"
+      %td= text_field :user, :email, :value => @email
+    - if current_user.admin?
+      %tr
+        %td.right-just
+          %b= label :user, :privilege, "Privileges:"
+        %td= select :user, :privilege, get_privileges
+      = render "service_area_fields"      
+    %tr
+      %td
+      %td= submit_tag "Update User"

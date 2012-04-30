@@ -55,6 +55,7 @@ class Field < ActiveRecord::Base
     text += "  = label :answers, :field_#{self.id}, \"#{q}\" \n"
     text += "  %br\n"
     text += "  = text_field :answers, :field_#{self.id}\n"
+    #text += "%br"
     text    
   end
   
@@ -68,6 +69,7 @@ class Field < ActiveRecord::Base
       text += "  = radio_button :answers, :field_#{self.id}, \"#{option}\"\n"
       text += "  = label :answers, :field_#{self.id}, \"#{option}\"\n"
     end
+    #text += "%br"
     text
   end
   
@@ -76,6 +78,7 @@ class Field < ActiveRecord::Base
     text =  ".form-field-select\n"
     text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"    
     text += "  = select :answers, :field_#{self.id}, options_#{self.id}, :include_blank => true\n"
+    #text += "%br"
     text
   end
   
@@ -83,7 +86,8 @@ class Field < ActiveRecord::Base
     q = question.gsub("\"", "'")
     text =  ".form-field-check-box\n"    
     text += "  = check_box :answers, :field_#{self.id}\n"
-    text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"    
+    text += "  = label :answers, :field_#{self.id}, \"#{q}\"\n"  
+    #text += "%br"  
     text
   end
       

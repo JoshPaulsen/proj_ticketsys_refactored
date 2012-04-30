@@ -1,11 +1,9 @@
-%div
-  = form_tag user_path(@user), :method => :put do
-    = render "user_form_fields"
-    .actions
-      = submit_tag "Update User"
-      
-%div
-  = form_tag change_password_path(@user), :method => :put do
-    = render "password_fields"
-    .actions
-      = submit_tag "Change Password"
+%div{:align => "center"}
+  #edit-user.ticket-field
+    %h4= "Edit User"
+    %table{:width => "850px"}
+      %tr
+        %td= render "user_form_fields"        
+        -#%td{:width => "30px"}
+        %td.vert-align= render "password_fields"
+%br
