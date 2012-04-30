@@ -1,5 +1,5 @@
 #ticket-menu  
-  %table
+  %table{:width => "100%"}
     %tr
       -if @ticket.open?
         %td.ticket-field= render "set_primary_provider"    

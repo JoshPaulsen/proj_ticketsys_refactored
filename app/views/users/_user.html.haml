@@ -1,7 +1,7 @@
 %tr{:class=>cycle("even","odd")}
   %td{:class => user.status}= link_to "#{user.last_first}", user
   %td{:class => user.status}= user.email
-  %td{:class => user.status}= user.list_service_areas    
+  %td{:class => user.status}= user.service_areas_to_s    
   %td{:class => user.status}= user.privilege  
   %td{:class => user.status}
     - if user.active?

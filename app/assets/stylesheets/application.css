@@ -368,11 +368,14 @@ tr.odd {
 
 #ticket-info {
   position: relative;
+  width: 99%;
+  
 }
 
 
 #ticket-menu {
   position: relative;
+  width: 99%;
   //border-style: solid;
   top: -23px;
   left: 0px;
@@ -384,7 +387,43 @@ tr.odd {
   //padding: 5px;
   //display: inline;
   //argin: 1px 1px;
-  //font-size: 100%;  
+  //font-size: 100%; 
+  
+}
+
+#ticket-des-note {
+  color: red;
+  position: relative;
+  width: 99%;
+  border-style; solid;
+  border-color: green;
+  //overflow: auto;
+  top: -46px;
+  left: 0px;
+}
+
+#ticket-des {
+  position: relative;
+  left: -11px;
+  top: -58px;
+  width: 99%;
+  //border-style: dashed;
+  //border-color: black;
+  //border-width: 3px;
+  //width: 380px;
+  //float: left;
+}
+
+#notes-section {
+  position: relative;
+  left: -50px;
+  top: -400px;
+  //width: 99%;
+  border-style: dashed;
+  border-color: black;
+  //border-width: 3px;
+  //width: 380px;
+  //float: left;
 }
 
 .ticket-field {
@@ -500,24 +539,6 @@ tr.odd {
   resize: none;  
 }
 
-#ticket-des-and-note {
-  position: relative;
-  width: 99%;
-  overflow: auto;
-  top: -46px;
-  left: 0px;
-}
-
-#ticket-description {
-  position: absolute;
-  left: 0px;
-  top: 600px;
-  //border-style: dashed;
-  //border-color: black;
-  //border-width: 3px;
-  //width: 380px;
-  //float: left;
-}
 
 #settings {
   text-align: left;

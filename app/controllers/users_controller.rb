@@ -324,7 +324,7 @@ class UsersController < ApplicationController
       flash[:error] = "That user does not exist"
       redirect_to users_path and return
     end  
-    @service_areas = @user.service_areas  
+    @service_areas = @user.service_areas_to_s 
   end  
   
 end

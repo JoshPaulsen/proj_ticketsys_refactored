@@ -1,7 +1,8 @@
 %b= "Additional Providers: " 
 -if !@ticket.additional_providers.blank?
-  - @ticket.additional_providers.each do |user|
+  - @ticket.additional_providers[0..-2].each do |user|
     = link_to "#{user.first_initial_last}", user_path(user)
-    = " "
+    = ", " 
+  = link_to "#{@ticket.additional_providers[-1].first_initial_last}", user_path(@ticket.additional_providers[-1])
 -else
   None

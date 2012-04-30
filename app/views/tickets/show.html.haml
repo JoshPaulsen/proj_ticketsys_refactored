@@ -1,7 +1,10 @@
 #ticket-body
   = render "ticket_info"  
   = render "ticket_menu"
-  #ticket-des-and-note
-    = render "ticket_description"
-    -#-if !@notes.blank?
-    -#  .note-list.ticket-field= render @notes
+  -#= render "ticket_description"
+  %table
+    %tr
+      %td= render "ticket_description"
+      %td.vert-align= render @notes
+    
+%br

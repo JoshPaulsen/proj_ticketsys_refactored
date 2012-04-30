@@ -41,13 +41,5 @@
       %tr
         %td.right-just
           %b= "Service Areas: " 
-        -if !@service_areas.blank?
-          %td
-            - @service_areas.each do |sa|
-              - if sa.inactive?
-                = "#{sa.name}(Deactivated) "
-              - else
-                = "#{sa.name} "
-        -else
-          %td= "None"
+        %td= "#{@service_areas}"
 %br

@@ -57,6 +57,23 @@ class User < ActiveRecord::Base
     end
   end
   
+  def service_areas_to_s
+    
+    if service_areas.blank?
+      return "None"
+    end
+    
+    str = ""
+    service_areas.each do |sa|
+      if sa.inactive?
+        str += "#{sa.name}(Deactivated), "
+      else
+        str +="#{sa.name}, "
+      end
+    end
+    str[0..-3]
+  end
+  
   def full_name
     first_name + " " + last_name
   end
