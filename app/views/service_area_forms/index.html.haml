@@ -1,13 +1,13 @@
 %h4 Create a New Blank Form
-#new-service-area-form.ticket-field
+#new-service-area-form.boxed-up
   = form_for(@ticket_form) do |f|    
-    = f.label :service_area_id, "Select a Service Area"
+    %b= f.label :service_area_id, "Select a Service Area"
     - if current_user.admin?
       = f.select :service_area_id, get_service_areas, :include_blank => true
     - else
       = f.select :service_area_id, get_service_areas_for(current_user), :include_blank => true
     .field
-      = f.label :title, "Enter a ticket type for this form (e.g. 'Software Upgrade Issue')"
+      %b= f.label :title, "Enter a ticket type for this form (e.g. 'Software Upgrade Issue')"
       %p
       = f.text_field :title
     .actions

@@ -1,6 +1,12 @@
-%div
-  = form_tag users_path, :method => :post do
-    = render "user_form_fields"
-    = render "password_fields"
-    .actions
-      = submit_tag "Create User"
+%div{:align => "center"}
+  #new-user.boxed-up
+    %h4= "Create New User"  
+    %table
+      = form_tag users_path, :method => :post do
+        = render "user_form_fields"
+        = render "service_area_fields"      
+        = render "password_fields"
+        %tr
+          %td
+          %td= submit_tag "Create User"
+%br

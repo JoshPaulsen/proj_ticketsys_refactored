@@ -1,0 +1,8 @@
+= form_tag user_path(@user), :method => :put do
+  %table 
+    = render "user_form_fields"   
+    - if current_user.admin?
+      = render "service_area_fields"
+    %tr
+      %td
+      %td= submit_tag "Update User"

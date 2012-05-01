@@ -1,7 +1,7 @@
 .field
-  = label :service_area, :name, "Name: "
+  %b= label :service_area, :name, "Name: "
   = text_field :service_area, :name, {:size=>"18"}
 .field
-  = label :service_area, :description, "Description:"
+  %b= label :service_area, :description, "Description:"
   %br
   #description-box= text_area :service_area, :description, {:size=>"35x5"}

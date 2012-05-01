@@ -1,5 +1,5 @@
 %div{:align => "center"}
-  #new-form-field.ticket-field
+  #new-form-field.boxed-up
     %h4= "Add a new Field for the '#{@ticket_form.title}' Form in '#{@ticket_form.service_area.name}'"
     = form_tag create_form_field_path, :method => :post do
       .field.shift-right

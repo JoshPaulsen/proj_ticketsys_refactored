@@ -1,5 +1,5 @@
 %div{:align => "center"}
-  #show-user.ticket-field
+  #show-user.boxed-up
     - if current_user.admin? or current_user.id == @user.id
       = render "user_menu"
     -if !@user.verified?

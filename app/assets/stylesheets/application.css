@@ -20,7 +20,9 @@ a, a:visited {
 a:hover {
 	text-decoration: underline;
 	background: inherit;
-	color: #93C600;
+	//color: #93C600;
+	//color: #169E1B;
+	color: #323232;
 }
 
 /* headers */
@@ -442,6 +444,49 @@ tr.odd {
   width: 70%;
 }
 
+
+.boxed-up {
+  padding: 8px;  
+  border-width: 2px;
+  //background-color: #dedede;
+  background-color: #eeeeee;
+  border-style: solid;
+  //border-radius: 7px;
+  border-color: #4958F5;//#ababab
+ 
+}
+
+#settings {
+  text-align: left;
+  position: relative;  
+  top: 0px;
+  width: 250px;
+  //border-width: 10px;
+}
+
+#new-ticket {
+  //text-align: left;
+  //position: relative;  
+  //top: 0px;
+  width: 400px;
+  //border-width: 10px;
+  //padding: 10px;
+  //margin: 20px;
+  //height: 100px;
+}
+
+#new-ticket-form {
+  text-align: left;
+  //position: relative;  
+  //top: 0px;
+  width: 475px;
+  //border-width: 10px;
+  padding: 20px;
+  //margin: 20px;
+  //height: 100px;
+}
+
+
 #the-yield {
   position: relative;
   overflow: hidden;
@@ -478,7 +523,7 @@ tr.odd {
   top: 0px;
   //border-color: black;
   //border-style: solid;
-  width: 450px;
+  width: 485px;
 }
 
 #service-area-form {
@@ -539,16 +584,17 @@ tr.odd {
   resize: none;  
 }
 
-
-#settings {
+#new-user {
   text-align: left;
   position: relative;
   //left: 20px;
   top: 0px;
   //border-color: black;
-  //border-style: solid;
-  width: 250px;
+  //border-style: solid;  
+  width: 450px;
 }
+
+
 
 .note-list {
   position: absolute;

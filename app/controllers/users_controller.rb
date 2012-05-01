@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    
     user = params[:user]
+    
     if !user
       flash[:error] = "New User could not be created"
       redirect_to new_user_path and return
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @last_name = user[:last_name]
     @email = user[:email]
     
-    password = user[:password]
+    password = params[:password]
     
     if @first_name.blank?
       flash[:error] = "Please enter a first name."
@@ -55,13 +55,14 @@ class UsersController < ApplicationController
       redirect_to new_user_path and return
     end
     
+
     if !valid_password? password
-      flash[:error] = "Password must be 6 characters long"
+      flash[:error] = "Password must be 6 characters long, dog"
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
     end
     
-    if password != user[:password_confirmation]     
+    if password != params[:password_confirmation]     
       flash[:error] = "Passwords don't match"
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
