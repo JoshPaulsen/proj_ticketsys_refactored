@@ -917,7 +917,7 @@ td.ticket-field-n {
   position: relative;
   top: -49px;
   //overflow: auto;
-  
+  width: 100%;
   //border-style: solid;
   //border-width: 2px;
   //border-color: red;
@@ -1009,7 +1009,7 @@ td.ticket-field-n {
   //border-color:red;
   padding: 0px;
   //margin: 5px;
-  //width: 100%;
+  //width: 50%;
   vertical-align: top;
 }
 
