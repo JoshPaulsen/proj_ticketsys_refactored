@@ -3,7 +3,7 @@
     .field
       = hidden_field_tag :ticket_id , @ticket.id
       = hidden_field_tag :user_id , current_user.id
-      = label :note, :body, "Add a New Note"
+      %b= label :note, :body, "Add a New Note"
       %br
       = text_area :note, :body , :size => "50x5"
       %br

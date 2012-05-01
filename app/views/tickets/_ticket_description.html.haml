@@ -1,12 +1,12 @@
-#ticket-des
-  %table{:width => "99%"}
-    = render "ticket_questions"
-    %tr
-      %td.description.ticket-field
-        %b= "Description: " 
-        %br
-        = "#{@ticket.description.gsub(/\n/, '<br/>')}".html_safe
-    %tr
-      -if @ticket.open?
-        %td.ticket-field= render "new_note_form"
-      
+
+%table#ticket-des-n
+  = render "ticket_questions"
+  %tr
+    %td.description.ticket-field-n
+      %b= "Description: " 
+      %br
+      = "#{@ticket.description.gsub(/\n/, '<br/>')}".html_safe
+  %tr
+    -if @ticket.open?
+      %td.ticket-field-n= render "new_note_form"
+    

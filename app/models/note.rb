@@ -15,4 +15,14 @@ class Note < ActiveRecord::Base
   
   has_attached_file :attachment
   
+  def made_by
+    if user.admin?
+      "admin"
+    elsif user.provider?
+      "provider"
+    else
+      "user"
+    end
+  end
+  
 end

@@ -487,14 +487,7 @@ tr.odd {
 }
 
 
-#the-yield {
-  position: relative;
-  overflow: hidden;
-  //border-color: black;
-  //border-style: dotted;
-  //border-width: 2px;
-  //width: 100%;
-}
+
 
 #new-location {
   text-align: left;
@@ -810,6 +803,269 @@ tr.odd {
   outline-width: thick;
   padding: 5px;
 }
+
+
+
+
+
+#the-yield {
+  position: relative;
+  //overflow: hidden;
+  //border-color: black;
+  //border-style: dotted;
+  //border-width: 2px;
+  //width: 100%;
+  //outline-color: red;
+  //outline-style: dashed;
+  //outline-width: 2px;
+  //background-color: gray;
+}
+
+#ticket-body-n{  
+  width: 99%;
+  
+  //position:relative;
+  //background-color: #ababab;
+  //border-style: solid;
+  //border-radius: 15px;
+  //border-width: 2px;
+  //border-color: #4958F5;  
+  //outline-width: thick;
+  //padding: 1px;
+  //display: inline;
+  //width: 75%;
+  //overflow: auto;
+  margin-left: 8px;
+  //margin-right: 26px;
+  background-color: lightgrey;
+  outline-style: solid;
+  outline-color: blue;
+  outline-width: 2px;
+  
+}
+
+table#ticket-info-n {
+  position: relative;
+  width: 99%;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: black;
+}
+
+table#ticket-menu-n {
+  position: relative;
+  width: 99%;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  top: -26px;
+}
+
+table#ticket-des-n {
+  // this contains the description  
+}
+
+table#bottom-table {
+  // this is the table containing the description and notes
+}
+
+/*
+td.ticket-field-n {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+*/
+
+#ticket-menu-n {
+  
+  //width: 99%;
+  //border-style: solid;
+  //top: -23px;
+  //left: 0px;
+  //border-radius: 15px;
+  //border-width: 3px;  
+  //outline-width: thick;
+  //border-color: #ababab;
+  //width: 99%;
+  //padding: 5px;
+  //display: inline;
+  //argin: 1px 1px;
+  //font-size: 100%; 
+  
+  
+  position: relative;
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: purple;
+  */
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: purple;
+  
+}
+
+#ticket-bottom-n {
+  //height: 600px;
+  position: relative;
+  top: -49px;
+  //overflow: auto;
+  
+  //border-style: solid;
+  //border-width: 2px;
+  //border-color: red;
+  
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: red;
+  //z-index: 100;
+  
+}
+
+#ticket-des-note-n {
+  color: red;
+  position: relative;
+  //width: 97%;
+  border-style; solid;
+  border-color: green;
+  //overflow: auto;
+  top: -46px;
+  left: 0px;
+}
+
+#ticket-des-n {
+  //position: relative;
+  //left: -11px;
+  //top: -58px;
+  //width: 99%;
+  //border-style: dashed;
+  //border-color: black;
+  //border-width: 3px;
+  //width: 380px;
+  //float: left;
+  position: relative;
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: green;
+  */
+  width: 98%;
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: green;
+}
+
+#notes-section-n {
+  position: relative;
+  //left: -50px;
+  //top: -400px;
+  //width: 99%;
+  //border-style: dashed;
+  //border-color: black;
+  //border-width: 3px;
+  //width: 380px;
+  //float: left;
+  max-height: 1500px;
+  //height: 400px;
+  overflow:auto;
+  position: relative;
+  width: 98%;
+  top: 20px;
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: yellow;
+  */
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: yellow;
+}
+
+
+
+#bottom-table {
+  margin: 0px;
+  //padding: 20px;
+  //border-style: solid;
+  //border-width: px;
+  //border-color: black;
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: black;
+  //height: 25%;
+  //height: 200px;
+}
+
+.pad-test {
+  //border-style: solid;
+  //border-width: 5px;
+  //border-color:red;
+  padding: 0px;
+  //margin: 5px;
+  //width: 100%;
+  vertical-align: top;
+}
+
+.user-note {
+   padding: 8px;  
+  //background-color: #dedede;
+  background-color: #D9DEFA;
+  border-style: solid;
+  border-radius: 15px;
+  //border-color: #ababab; //#ababab
+  border-width: 2px;
+  border-color: black;
+}
+
+.admin-note {
+  padding: 8px;  
+  //background-color: #dedede;
+  background-color: #D9FADA;
+  border-style: solid;
+  border-radius: 15px;
+  //border-color: #ababab; //#ababab
+  border-width: 2px;
+  border-color: black;
+  
+}
+
+.provider-note {
+  padding: 8px;  
+  //background-color: #dedede;
+  background-color: #D9FADA;
+  border-style: solid;
+  border-radius: 15px;
+  //border-color: #ababab; //#ababab
+  border-width: 2px;
+  border-color: black;
+  
+}
+
+.ticket-field-n {
+  padding: 8px;  
+  //background-color: #dedede;
+  background-color: #eeeeee;
+  border-style: solid;
+  //border-radius: 7px;
+  //border-color: #ababab; //#ababab
+  border-width: 2px;
+  border-color: lightgrey;
+}
+
+
+
+
+
+
+
+
 
 div#searchdiv * {
   margin : 0px 2px;

@@ -1,0 +1,36 @@
+#ticket-info
+  %table{:width => "100%"}
+    %tr
+      %td.number.ticket-field
+        %b= "Ticket #: "
+        = "#{@ticket.id}"
+      %td.title.ticket-field
+        %b= "Title: "
+        = "#{@ticket.title}"
+      %td.service-area.ticket-field
+        %b= "Service Area: "
+        = "#{@service_area_name}"
+      %td.location.ticket-field
+        %b= "Location: "
+        ="#{@location_name}"
+    %tr
+      %td.creator.ticket-field
+        %b= "Creator: " 
+        -if !@ticket.creator.blank?
+          = link_to "#{@ticket.creator.first_initial_last}", @ticket.creator
+        -else
+          = "None"
+      %td.ticket-field= render "additional_users"        
+      %td.ticket-field= render "add_additional_user_form"
+      %td.ticket-field= render "remove_additional_user_form"
+    %tr
+      %td.provider.ticket-field
+        %b= "Service Provider: " 
+        -if !@ticket.provider.blank?
+          = link_to "#{@ticket.provider.first_initial_last}", @ticket.provider
+        -else
+          = "None"
+      %td.ticket-field= render "additional_providers"        
+      %td.ticket-field= render "add_additional_provider_form"
+      %td.ticket-field= render "remove_additional_provider_form" 
+      
