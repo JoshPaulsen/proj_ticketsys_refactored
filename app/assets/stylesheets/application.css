@@ -811,3 +811,7 @@ tr.odd {
   padding: 5px;
 }
 
+div#searchdiv * {
+  margin : 0px 2px;
+  padding : 0px;
+}
