@@ -162,7 +162,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_id(params[:id])
     provider = User.find_by_id(params[:add_prov][:id])
     if provider
-      if @ticket.users.include?(provider)
+      if @ticket.users.uniq.include?(provider)
         flash[:error] = "That person is already attached to this ticket"
         redirect_to @ticket
       elsif @ticket.add_additional_provider(provider)
