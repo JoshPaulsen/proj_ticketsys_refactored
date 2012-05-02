@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     privilege == "service provider"
   end
   
+  def provider?
+    privilege == "service provider"
+  end
+  
   def user?
     privilege == "user"
   end  
