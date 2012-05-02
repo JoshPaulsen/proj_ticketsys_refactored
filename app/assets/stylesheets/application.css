@@ -253,7 +253,7 @@ tr.odd {
   margin-top: 3px;
   margin-bottom: 3px;
   color: red;
-  width: 25%;
+  width: 600px;
 }
 
 .success {
@@ -263,7 +263,7 @@ tr.odd {
   margin-top: 3px;
   margin-bottom: 3px;
   color: green;
-  width: 25%;
+  width: 600px;
 }
 
 .notice {
@@ -273,7 +273,7 @@ tr.odd {
   margin-top: 3px;
   margin-bottom: 3px;
   color: green;
-  width: 25%;
+  width: 600px;
 }
 
 .no-flash {  
