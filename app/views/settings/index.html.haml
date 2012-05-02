@@ -1,7 +1,8 @@
 %div{:align => "center"}
   #settings.boxed-up
     %h4{:align => "center"}= "Settings"
-    %h4= link_to "Location Settings", locations_path
-    %h4= link_to "Service Area Settings", service_areas_path    
+    -if current_user.admin?
+      %h4= link_to "Location Settings", locations_path
+      %h4= link_to "Service Area Settings", service_areas_path    
     %h4= link_to "Service Area Forms", service_area_forms_path
 %br

@@ -6,7 +6,7 @@ class LocationsController < ApplicationController
   def destroy
     @locations = Location.find_by_id(params[:id])
     @locations.destroy
-    flash[:notice] = "Location was deleted"
+    flash[:notice] = "Location Was Deleted"
     redirect_to locations_path
   end  
   
@@ -27,7 +27,7 @@ class LocationsController < ApplicationController
       redirect_to locations_path
     else
       @location.destroy
-      flash[:error] = "A Location with that name already exists"
+      flash[:error] = "A Location With That Name Already Exists"
       redirect_to locations_path
     end    
     
@@ -37,7 +37,7 @@ class LocationsController < ApplicationController
     @location = Location.find_by_id params[:id]
     
     if !@location
-      flash[:error] = "That location does not exist"
+      flash[:error] = "That Location Does Not Exist"
       redirect_to locations_path
     end    
   end
@@ -50,7 +50,7 @@ class LocationsController < ApplicationController
     if location.save
       flash[:notice] = "Location Updated"      
     else
-      flash[:notice] = "Location could not be updated"    
+      flash[:notice] = "Location Could Not Be Updated"    
     end
     redirect_to locations_path
   end
@@ -59,7 +59,7 @@ class LocationsController < ApplicationController
   def deactivate
     location = Location.find_by_id(params[:id])    
     if !location
-      flash[:error] = "That location does not exist"
+      flash[:error] = "That Location Does Not Exist"
       redirect_to locations_path and return
     end
     
@@ -78,12 +78,12 @@ class LocationsController < ApplicationController
     location = Location.find_by_id(params[:id])
     
     if !location
-      flash[:error] = "That location does not exist"
+      flash[:error] = "That Location Does Not Exist"
       redirect_to locations_path and return
     end
     
     if location.active?
-      flash[:error] = "That location is currently active"
+      flash[:error] = "That Location Is Currently Active"
       redirect_to locations_path and return
     end
     

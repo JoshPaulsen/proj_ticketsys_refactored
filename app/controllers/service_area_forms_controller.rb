@@ -8,17 +8,17 @@ class ServiceAreaFormsController < ApplicationController
     field = Field.find_by_id params[:field_id]
     
     if !form
-      flash[:error] = "That form does not exist"
+      flash[:error] = "That Form Does Not Exist"
       redirect_to service_area_forms_path and return
     end
     
     if !field
-      flash[:error] = "A field that does not exist cannot be moved up"
+      flash[:error] = "A Field That Does Not Exist Cannot Be Moved Up"
       redirect_to form and return
     end
     
     if !form.move_up field      
-      flash[:error] = "Couldn't move field"      
+      flash[:error] = "Could Not Move Field"      
     end
     redirect_to form
   end
@@ -28,17 +28,17 @@ class ServiceAreaFormsController < ApplicationController
     field = Field.find_by_id params[:field_id]
     
     if !form
-      flash[:error] = "That form does not exist"
+      flash[:error] = "That Form Does Not Exist"
       redirect_to service_area_forms_path and return
     end
     
     if !field
-      flash[:error] = "A field that does not exist cannot be moved up"
+      flash[:error] = "A Field That Does Not Exist Cannot Be Moved Down"
       redirect_to form and return
     end
     
     if !form.move_down field
-      flash[:error] = "Couldn't move field"      
+      flash[:error] = "Could Not Move Field"      
     end
     redirect_to form
   end  
@@ -53,7 +53,7 @@ class ServiceAreaFormsController < ApplicationController
       flash[:notice] = "Field Removed"
       redirect_to form
     else
-      flash[:error] = "That field does not exist"
+      flash[:error] = "That Field Does Not Exist"
       redirect_to service_area_forms_path
     end
   end
@@ -70,7 +70,7 @@ class ServiceAreaFormsController < ApplicationController
     end
     @form.default_provider_id = default_provider_id
     if !@form.save
-      flash[:error] = "Couldn't set providers."
+      flash[:error] = "Could Not Set Providers"
       redirect_to @form and return
     end
     flash[:notice] = "Providers Updated"
@@ -82,12 +82,12 @@ class ServiceAreaFormsController < ApplicationController
     title = params[:service_area_form][:title]
     
     if service_area_id.blank?
-      flash[:error] = "Please choose a Service Area"
+      flash[:error] = "Please Choose A Service Area"
       redirect_to service_area_forms_path and return
     end
     
     if title.blank?
-      flash[:error] = "All forms need a type"
+      flash[:error] = "All Forms Need A Type"
       redirect_to service_area_forms_path and return
     end
     
@@ -104,7 +104,7 @@ class ServiceAreaFormsController < ApplicationController
     @question = session[:field_question]
     @type = session[:field_type]
     if !@ticket_form
-      flash[:error] = "That form does not exist"
+      flash[:error] = "That Form Does Not Exist"
       redirect_to service_area_forms_path 
     end
   end
@@ -112,7 +112,7 @@ class ServiceAreaFormsController < ApplicationController
   def destroy
     form = ServiceAreaForm.find_by_id(params[:id])
     form.destroy
-    flash[:notice] = "Form was deleted"
+    flash[:notice] = "Form Was Deleted"
     redirect_to service_area_forms_path    
   end
   
@@ -121,7 +121,7 @@ class ServiceAreaFormsController < ApplicationController
     if current_user.admin?
       @ticket_forms = ServiceAreaForm.all
     else
-      @ticket_forms = ServiceAreaForm.where :service_area_id => current_user.service_area_ids 
+      @ticket_forms = ServiceAreaForm.where("service_area_id IN #{current_user.service_area_ids_to_s}") 
     end
   end
   
@@ -154,12 +154,12 @@ class ServiceAreaFormsController < ApplicationController
     @debug_value = @options_list  
     @type = params[:field_type]
     if !ticket_form
-      flash[:error] = "That Ticket Form does not exist"         
+      flash[:error] = "That Ticket Form Does Not Exist"         
       redirect_to new_form_field_path and return
     elsif question.blank?
       session[:options_list] = @options_list   
       session[:field_type] = @type  
-      flash[:error] = "All forms fields need a question"      
+      flash[:error] = "All Forms Fields Need A Question"      
       redirect_to new_form_field_path and return        
     end
     
@@ -200,7 +200,7 @@ class ServiceAreaFormsController < ApplicationController
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
-        flash[:error] = "A text field does not need options"    
+        flash[:error] = "A Text Field Does Not Need Options"    
         session[:field_question] = question
         session[:options_list] = @options_list
         session[:field_type] = @type
@@ -210,7 +210,7 @@ class ServiceAreaFormsController < ApplicationController
     
     def add_radio_field(ticket_form, question, options)
       if options.length < 2
-        flash[:error] = "A radio button field needs at least two options."    
+        flash[:error] = "A Radio Button Field Needs At Least Two Options."    
         session[:field_question] = question 
         session[:options_list] = @options_list 
         session[:field_type] = @type

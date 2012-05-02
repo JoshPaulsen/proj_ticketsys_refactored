@@ -116,24 +116,24 @@ class TicketsController < ApplicationController
   def close    
     @ticket = Ticket.find_by_id(params[:id])
     if @ticket.closed?
-      flash[:error] = "That ticket is already closed"
+      flash[:error] = "That Ticket Is Already Closed"
       redirect_to @ticket and return      
     end
     @ticket.closed_on = Time.now
     @ticket.save
-    flash[:success] = "Ticket successfully closed"
+    flash[:success] = "Ticket Closed"
     redirect_to tickets_path
   end
   
   def open
     @ticket = Ticket.find_by_id(params[:id])
     if @ticket.open?
-      flash[:error] = "That ticket is already open"
+      flash[:error] = "That Ticket Is Already Open"
       redirect_to @ticket and return      
     end
     @ticket.closed_on = nil
     @ticket.save
-    flash[:success] = "Ticket successfully reopened"
+    flash[:success] = "Ticket Reopened"
     redirect_to @ticket
   end
   
@@ -142,18 +142,18 @@ class TicketsController < ApplicationController
     user = User.find_by_id(params[:add_user][:id])
     if user
       if @ticket.users.uniq.include?(user)
-        flash[:error] = "That person is already attached to this ticket"
+        flash[:error] = "#{user.full_name} Is Already Attached"
         redirect_to @ticket
       elsif @ticket.add_additional_user(user)
         flash[:success] = "Additional User Added to Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
-        flash[:error] = "Couldn't add user"         
+        flash[:error] = "Could Not Add User"         
         redirect_to @ticket
       end  
       
     else
-      flash[:error] = "Please select a user first"       
+      flash[:error] = "Please Select A User First"       
       redirect_to @ticket
     end    
   end
@@ -163,18 +163,18 @@ class TicketsController < ApplicationController
     provider = User.find_by_id(params[:add_prov][:id])
     if provider
       if @ticket.users.uniq.include?(provider)
-        flash[:error] = "That person is already attached to this ticket"
+        flash[:error] = "#{provider.full_name} Is Already Attached"
         redirect_to @ticket
       elsif @ticket.add_additional_provider(provider)
-        flash[:success] = "Additional Provider Added to Ticket"
+        flash[:success] = "Additional Provider Added To Ticket"
         redirect_to @ticket
       else # Do we need this?  I don't see a way adding a watcher would fail
-        flash[:error] = "Couldn't add user"         
+        flash[:error] = "Could Not Add User"         
         redirect_to @ticket
       end  
       
     else
-      flash[:error] = "Please select a provider first"       
+      flash[:error] = "Please Select A Provider First"       
       redirect_to edit_ticket_path @ticket
     end    
   end
@@ -185,9 +185,9 @@ class TicketsController < ApplicationController
     user = User.find_by_id(params[:rm_user][:id])
     if user
       @ticket.remove_user(user)
-      flash[:success] = "#{user.full_name} was removed from the ticket"      
+      flash[:success] = "#{user.full_name} Was Removed From The Ticket"      
     else      
-      flash[:error] = "Plese select a user first"
+      flash[:error] = "Please Select A User First"
     end
     redirect_to @ticket
   end
@@ -197,9 +197,9 @@ class TicketsController < ApplicationController
     prov = User.find_by_id(params[:rm_prov][:id])
     if prov
       @ticket.remove_user(prov)
-      flash[:success] = "#{prov.full_name} was removed from the ticket"      
+      flash[:success] = "#{prov.full_name} Was Removed From The Ticket"      
     else      
-      flash[:error] = "Plese select a provider first"
+      flash[:error] = "Please Select A Provider First"
     end
     redirect_to @ticket
   end
@@ -209,19 +209,19 @@ class TicketsController < ApplicationController
     
     location = Location.find_by_id params[:ticket][:location_id]
     if !location
-      flash[:error] = "Please select a Location"
+      flash[:error] = "Please Select A Location"
       redirect_to new_ticket_path and return
     end
     
     service_area = ServiceArea.find_by_id params[:ticket][:service_area_id]
     if !service_area
-      flash[:error] = "Please select a Service Area"
+      flash[:error] = "Please Select A Service Area"
       redirect_to new_ticket_path and return
     end
 
     sa_form = ServiceAreaForm.find_by_id params[:ticket][:form_id]
     if !sa_form
-      flash[:error] = "Please select a Ticket Type"
+      flash[:error] = "Please Select A Ticket Type"
       redirect_to new_ticket_path and return
     end
 
@@ -254,7 +254,7 @@ class TicketsController < ApplicationController
     
     if !@ticket.set_creator current_user    
       @ticket.destroy
-      flash[:error] = "Could not set creator"      
+      flash[:error] = "Could Not Set Creator"      
       redirect_to tickets_path and return          
     end
     
@@ -268,7 +268,7 @@ class TicketsController < ApplicationController
       redirect_to @ticket
     else
       @ticket.destroy
-      flash[:error] = "Ticket could not be created"
+      flash[:error] = "Ticket Could Not Be Created"
       redirect_to new_ticket_path
     end
   end
@@ -278,12 +278,12 @@ class TicketsController < ApplicationController
     provider_id = params[:ticket][:provider_id]
     
     if provider_id.blank?
-      flash[:error] = "Provider cannot be blank"
+      flash[:error] = "Provider Can Not Be Blank"
       redirect_to @ticket and return
     end
     
     if provider_id == @ticket.creator_id.to_s
-      flash[:error] = "The provider and the creator cannot be the same person"
+      flash[:error] = "The Provider And The Creator Must Be Different"
       redirect_to @ticket and return
     end
     
@@ -300,7 +300,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find_by_id(params[:id])
     
     if params[:ticket][:title].blank?
-      flash[:error] = "The title cannot be blank" 
+      flash[:error] = "The Title Cannot Be Blank" 
       redirect_to edit_ticket_path @ticket and return
     end
     
@@ -312,7 +312,7 @@ class TicketsController < ApplicationController
       flash[:success] = "Ticket Updated"
       redirect_to @ticket
     else
-      flash[:error] = "Ticket could not be updated" 
+      flash[:error] = "Ticket Could Not Be Updated" 
       redirect_to @ticket
     end 
   end  
@@ -327,7 +327,7 @@ class TicketsController < ApplicationController
   def destroy
     @ticket = Ticket.find_by_id(params[:id])
     @ticket.destroy
-    flash[:success] = "Ticket was deleted"
+    flash[:success] = "Ticket Was Deleted"
     redirect_to tickets_path
   end
 
@@ -352,7 +352,7 @@ class TicketsController < ApplicationController
   def show  
     @ticket = Ticket.find_by_id(params[:id])    
     if !@ticket
-      flash[:error] = "That ticket does not exist: " + params[:id]
+      flash[:error] = "That Ticket Does Not Exist: " + params[:id]
       redirect_to tickets_path   
     else      
       @notes = @ticket.notes

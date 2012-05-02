@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     user = params[:user]
     
     if !user
-      flash[:error] = "New User could not be created"
+      flash[:error] = "New User Could Not Be Created"
       redirect_to new_user_path and return
     end
     
@@ -31,39 +31,39 @@ class UsersController < ApplicationController
     password = params[:password]
     
     if @first_name.blank?
-      flash[:error] = "Please enter a first name."
+      flash[:error] = "Please Enter A First Name."
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
     end
     
     if @last_name.blank?
-      flash[:error] = "Please enter a last name."
+      flash[:error] = "Please Enter A Last Name."
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
     end
     
     if !valid_email? @email
-      flash[:error] = "That is not a valid email."
+      flash[:error] = "That Is Not A Valid Email."
       session[:new_user] = [@first_name, @last_name, nil]
       redirect_to new_user_path and return
       @email = nil
     end
     
     if User.find_by_email @email
-      flash[:error] = "A user with that email already exists."
+      flash[:error] = "A User With That Email Already Exists."
       session[:new_user] = [@first_name, @last_name, nil]
       redirect_to new_user_path and return
     end
     
 
     if !valid_password? password
-      flash[:error] = "Password must be 6 characters long, dog"
+      flash[:error] = "Password Must Be At Least 6 Characters Long"
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
     end
     
     if password != params[:password_confirmation]     
-      flash[:error] = "Passwords don't match"
+      flash[:error] = "Passwords Do Not Match"
       session[:new_user] = [@first_name, @last_name, @email]
       redirect_to new_user_path and return
     end
@@ -87,11 +87,11 @@ class UsersController < ApplicationController
     end
     
     if @user.save
-      flash[:notice] = "New user successfully created"
+      flash[:notice] = "New User Created"
       redirect_to user_path @user
     else
       @user.destroy
-      flash[:error] = "User could not be created!"
+      flash[:error] = "User Could Not Be Created!"
       redirect_to new_user_path
     end      
   end
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   def unverified_user
     @user = User.find_by_id params[:id]
     if !@user
-      flash[:error] = "User does not exist"
+      flash[:error] = "User Does Not Exist"
       redirect_to signin_path and return
     end
     if @user.verified?   
@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     end
     
     if user.verified?
-      flash[:error] = "That user has already been verified"
+      flash[:error] = "That User Has Already Been Verified"
       redirect_to user and return
     end
     
@@ -141,38 +141,38 @@ class UsersController < ApplicationController
     password = user[:password]
     
     if @first_name.blank?
-      flash[:error] = "Please enter a first name."
+      flash[:error] = "Please Enter A First Name."
       session[:user_signup] = [@first_name, @last_name, @email]
       redirect_to signin_path and return
     end
     
     if @last_name.blank?
-      flash[:error] = "Please enter a last name."
+      flash[:error] = "Please Enter A Last Name."
       session[:user_signup] = [@first_name, @last_name, @email]
       redirect_to signin_path and return
     end
     
     if !valid_email? @email
-      flash[:error] = "That is not a valid email."
+      flash[:error] = "That Is Not A Valid Email."
       session[:user_signup] = [@first_name, @last_name, nil]
       redirect_to signin_path and return
       @email = nil
     end
     
     if User.find_by_email @email
-      flash[:error] = "A user with that email already exists."
+      flash[:error] = "A User With That Email Already Exists."
       session[:user_signup] = [@first_name, @last_name, nil]
       redirect_to signin_path and return
     end
     
     if !valid_password? password
-      flash[:error] = "Password must be 6 characters long"
+      flash[:error] = "Password Must Be At Least 6 Characters Long"
       session[:user_signup] = [@first_name, @last_name, @email]
       redirect_to signin_path and return
     end
     
     if password != user[:password_confirmation]     
-      flash[:error] = "Passwords don't match"
+      flash[:error] = "Passwords Do Not Match"
       session[:user_signup] = [@first_name, @last_name, @email]
       redirect_to signin_path and return
     end
@@ -187,7 +187,7 @@ class UsersController < ApplicationController
     @user.verified = false
     
     if !@user.save
-      flash[:error] = "New Account could not be created!"
+      flash[:error] = "New Account Could Not Be Created"
       redirect_to signin_path and return
     else
       redirect_to unverified_user_path @user
@@ -199,26 +199,26 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     
     if !@user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end
     
     password = params[:password]
   
     if !valid_password? password
-      flash[:error] = "Password must be 6 characters long"      
+      flash[:error] = "Password Must Be At Least 6 Characters Long"      
       redirect_to edit_user_path @user and return
     end
     
     if password != params[:password_confirmation]     
-      flash[:error] = "Passwords don't match"      
+      flash[:error] = "Passwords Do Not Match"      
       redirect_to edit_user_path @user and return
     end
     
     @user.set_encrypted_password password
     
     if !@user.save
-      flash[:error] = "Password could not be changed"
+      flash[:error] = "Password Could Not Be Changed"
       redirect_to edit_user_path @user and return
     else
       flash[:notice] = "Password Changed"
@@ -233,7 +233,7 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     
     if !@user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end
     
@@ -253,7 +253,7 @@ class UsersController < ApplicationController
     if @user.save
       flash[:notice] = "User Profile Updated"  
     else
-      flash[:error] = "User Profile could not be updated"      
+      flash[:error] = "User Profile Could Not Be Updated"      
     end 
     redirect_to @user
   end
@@ -261,7 +261,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find_by_id(params[:id])
     if !@user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end
     @first_name = @user.first_name
@@ -273,7 +273,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by_id(params[:id])
     @user.destroy
-    flash[:notice] = "User was deleted"
+    flash[:notice] = "User Was Deleted"
     redirect_to users_path
   end
   
@@ -281,12 +281,12 @@ class UsersController < ApplicationController
     user = User.find_by_id(params[:id])
     
     if !user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end
     
     if user.inactive?
-      flash[:error] = "That user was already deactivated"
+      flash[:error] = "That User Was Already Deactivated"
       redirect_to users_path and return
     end
     
@@ -300,12 +300,12 @@ class UsersController < ApplicationController
     user = User.find_by_id(params[:id])
     
     if !user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end
     
     if user.active?
-      flash[:error] = "That user is currently active"
+      flash[:error] = "That User Is Currently Active"
       redirect_to user and return
     end
     
@@ -322,7 +322,7 @@ class UsersController < ApplicationController
   def show    
     @user = User.find_by_id(params[:id])    
     if !@user
-      flash[:error] = "That user does not exist"
+      flash[:error] = "That User Does Not Exist"
       redirect_to users_path and return
     end  
     @service_areas = @user.service_areas_to_s 

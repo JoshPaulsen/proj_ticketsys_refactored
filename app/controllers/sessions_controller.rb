@@ -53,7 +53,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    flash[:notice] = "Successfully signed out"
+    flash[:notice] = "Signed Out"
     redirect_to signin_path
   end
   

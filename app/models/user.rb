@@ -138,18 +138,25 @@ class User < ActiveRecord::Base
     end
   end
   
+  def service_area_ids_to_s
+    all_sa = service_areas.collect do |sa|
+      sa.id
+    end
+    get_str(all_sa)
+  end
+  
   def accessible_tickets
     if admin?
       Ticket.scoped
     elsif service_provider?
       if service_areas.blank?
-        tickets
+        tickets.uniq
       else        
-        sa_ids = get_str(service_area_ids)
+        sa_ids = service_area_ids_to_s
         Ticket.joins(:user_tickets).where("user_tickets.user_id = ? OR service_area_id IN  #{sa_ids}", self.id).uniq 
       end
     else
-      tickets
+      tickets.uniq
     end
   end
   

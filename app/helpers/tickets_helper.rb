@@ -5,25 +5,34 @@ module TicketsHelper
     
     if current_user.admin?
       return
-    elsif current_user.service_provider?
+    #elsif current_user.service_provider?
+      #ticket = Ticket.find_by_id(params[:id])
+    else  
       ticket = Ticket.find_by_id(params[:id])
-      
-      if ticket      
-        if current_user.service_areas.include?(ticket.service_area) or 
-           ticket.users.include?(current_user) 
-           return
-        end
+      if ticket and  current_user.accessible_tickets.include?(ticket)
+        return
       end
       
-      flash[:error] = "You do not have permission to access that"
+      flash[:error] = "You Do Not Have Permission To Access That"
       redirect_to tickets_path and return
       
-    else
-      ticket = Ticket.find_by_id(params[:id])
-      if !ticket.users.include?(current_user) or !ticket
-        flash[:error] = "You don't have permission to access that"
-        redirect_to tickets_path
-      end    
+      #if ticket      
+      #  if current_user.service_areas.include?(ticket.service_area) or 
+      #     ticket.users.include?(current_user) 
+      #     return
+      #  end
+      #end
+      
+      
+      
+    #else
+    #  ticket = Ticket.find_by_id(params[:id])
+      
+      
+     # if !ticket.users.include?(current_user) or !ticket
+     #   flash[:error] = "You don't have permission to access that"
+     #   redirect_to tickets_path
+     # end    
     end  
   end
   
