@@ -48,12 +48,12 @@
             .field
               = radio_button_tag :all_mine, :all, checked = all_mine_checked?("all")
               = label_tag :all_mine, "All Tickets"
-          %td
-            .action
-              = submit_tag "Search"
-          %td
-            %a{:href=>"javascript:toggle('tbl')", :style=>"font-size: 150%;"}
-              +         
+        %td
+          .action
+            = submit_tag "Search"
+        %td
+          %a{:href=>"javascript:toggle('tbl')", :style=>"font-size: 150%;"}
+            +         
     %div{:id=>"tbl", :name=>"tbl", :style=>"overflow:hidden;display:none"}
       %table{:margin=>"0px, 0px", :padding=>"0px,0px", :cellpadding=>"10px"}
         %tr
