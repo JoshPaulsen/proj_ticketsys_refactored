@@ -21,8 +21,8 @@
       = link_to "My Profile", current_user
     %li
       = link_to "Settings", settings_path 
-    %li
-      %a{:href=>"javascript:toggle('tbl')"}= "Search"
+    %li      
+      %a{:href=>"javascript:toggle('tbl')"}= "Search"     
   - elsif current_user.user?
     %li
       = link_to "Tickets", tickets_path
@@ -30,7 +30,7 @@
       = link_to "New Ticket", new_ticket_path
     %li
       = link_to "My Profile", current_user
-    %li
+    %li     
       %a{:href=>"javascript:toggle('tbl')"}= "Search"
   - else
     

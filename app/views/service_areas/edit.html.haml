@@ -1,6 +1,6 @@
 %div{:align => "center"}
   #new-service-area.boxed-up
-    = button_to 'Delete Service Area (Debug Only)', @service_area, :method => :delete
+    -#= button_to 'Delete Service Area (Debug Only)', @service_area, :method => :delete
     = form_tag service_area_path(@service_area), :method => :put do
       = render "service_area_form_fields"
       .actions

@@ -96,17 +96,19 @@ class TicketsController < ApplicationController
     
     
     
-    count = @tickets.count
+    #count = @tickets.count
     # I know there is a ruby method for this somewhere...
-    if count > 1
-      result = "Results"
-    else
-      result = "Result"
-    end
     
-    if count == 0
+    
+    if @tickets.blank?
       flash.now[:error] = "No Search Results Found"  
     else
+      count = @tickets.uniq.all.count      
+      if count > 1
+        result = "Results"
+      else
+        result = "Result"
+      end      
       flash.now[:notice] = "#{count} Search #{result} Found"  
     end
 

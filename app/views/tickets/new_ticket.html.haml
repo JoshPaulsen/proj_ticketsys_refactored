@@ -1,6 +1,9 @@
 %div{:align => "center"}
-  #new-ticket-form.boxed-up
-    %b= "New #{@service_area_name} Ticket at #{@location_name} - #{@ticket_type}"
+  #new-ticket-form.boxed-up    
+    %div{:align => "center"}
+      %b= "New #{@service_area_name} Ticket at #{@location_name}"
+      %p
+      %b= "#{@ticket_type}"
     %p
     = form_tag tickets_path, :method => :post do
       .field

@@ -9,9 +9,9 @@
   }
 - if current_page?(search_path)
   %div{:id=>"tbl", :name=>"tbl"}
-    = render "search_fields"
+    = render "shared/search_fields"
 -else
   %div{:id=>"tbl", :name=>"tbl", :style=>"overflow:hidden;display:none"}
-    = render "search_fields"
+    = render "shared/search_fields"
 %br
 

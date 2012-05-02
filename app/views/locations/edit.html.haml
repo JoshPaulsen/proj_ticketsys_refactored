@@ -1,6 +1,6 @@
 %div{:align => "center"}
   #new-location.boxed-up
-    = button_to 'Delete Location (Debug Only)', @location, :method => :delete
+    -#= button_to 'Delete Location (Debug Only)', @location, :method => :delete
     = form_tag location_path(@location), :method => :put do
       = render "location_form_fields"
       .actions

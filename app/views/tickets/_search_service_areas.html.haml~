@@ -1,0 +1,4 @@
+- get_service_areas.each do |name, id|
+  = check_box :service_areas, id, :checked => service_area_checked?(id)
+  = label :service_areas, :id, "#{name}"
+  .hide-me.show-inline= "x"
