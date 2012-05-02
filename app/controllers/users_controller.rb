@@ -232,12 +232,47 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     
-    if !@user
-      flash[:error] = "That User Does Not Exist"
+    user = params[:user]
+    
+    if !user
+      flash[:error] = "Something Went Wrong"
       redirect_to users_path and return
     end
     
-    @user.update_attributes(params[:user])    
+    if !@user
+      flash[:error] = "That User Does Not Exist"
+      redirect_to users_path and return
+    end   
+    
+    @first_name = user[:first_name]
+    @last_name = user[:last_name]
+    @email = user[:email]    
+    puts "------------------------"
+    puts @email
+    if @first_name.blank?
+      flash[:error] = "First Name Can Not Be Blank"
+      redirect_to edit_user_path @user and return
+    end
+    
+    if @last_name.blank?
+      flash[:error] = "Last Name Can Not Be Blank."
+      session[:user_signup] = [@first_name, @last_name, @email]
+      redirect_to edit_user_path @user and return
+    end
+    
+    if !valid_email? @email
+      flash[:error] = "That Is Not A Valid Email."      
+      redirect_to edit_user_path @user and return
+    end
+    
+    if User.find_by_email @email and @email != @user.email
+      flash[:error] = "A User With That Email Already Exists."      
+      redirect_to edit_user_path @user and return
+    end
+    @user.first_name = @first_name
+    @user.last_name = @last_name
+    @user.email = @email
+    
     service_areas = params[:service_area]
     
     if service_areas

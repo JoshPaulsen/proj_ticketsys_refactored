@@ -1,10 +1,13 @@
 = form_tag sessions_path, :method => :post do
   %table
     %tr
-      %td.field= label_tag :email, "Email "
-      %td.field= text_field_tag :email
+      %td.right-just
+        %b= label_tag :email, "Email "
+      %td= text_field_tag :email, nil, :size => "15"
     %tr
-      %td.field= label_tag :password, "Password "
-      %td.field= password_field_tag :password
+      %td.right-just
+        %b= label_tag :password, "Password "
+      %td= password_field_tag :password, nil, :size => "15"
     %tr
-      %td.field= submit_tag "Sign in"      
+      %td
+      %td.right-just= submit_tag "Sign In"

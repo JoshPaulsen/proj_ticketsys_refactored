@@ -19,11 +19,12 @@ class SessionsController < ApplicationController
     
     user = User.authenticate(email, password)
     
-    if user and user.inactive?
-      flash[:error] = "Deactivated Account"
-      redirect_to signin_path 
-    elsif user and !user.verified?
+    
+    if user and !user.verified?
       flash[:error] = "Account Still Pending Verification"
+      redirect_to signin_path 
+    elsif user and user.inactive?
+      flash[:error] = "Deactivated Account"
       redirect_to signin_path 
     elsif user
       sign_in(user)        

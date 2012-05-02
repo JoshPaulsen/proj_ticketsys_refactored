@@ -11,15 +11,11 @@
       %tr
         %td.right-just
           %b= "Name: " 
-        %td= @user.full_name    
+        %td= @user.full_name
       %tr
         %td.right-just
           %b= "Email: "
         %td= @user.email
-      %tr
-        %td.right-just
-          %b= "User Name: "
-        %td= @user.name
       %tr
         %td.right-just
           %b= "Active: "        
@@ -30,7 +26,7 @@
       %tr
         %td.right-just
           %b= "Verified: "
-        -if @user.verified?  
+        -if @user.verified?
           %td= "Yes"
         -else
           %td= "No"

@@ -1,21 +1,32 @@
 %div
-  Create An Account
+  -#%b= "Create An Account"
   = form_tag user_signup_path, :method => :post do
     %table
       %tr
-        %td= label :user, :first_name, "First Name"
-        %td.field= text_field :user, :first_name, :value => @first_name
+        %td
+        %td
+          %b= "Create An Account"
       %tr
-        %td= label :user, :last_name, "Last Name"
-        %td.field= text_field :user, :last_name, :value => @last_name
+        %td.right-just
+          %b= label :user, :first_name, "First Name"
+        %td= text_field :user, :first_name, :value => @first_name, :size => "15"
       %tr
-        %td= label :user, :email, "Email"
-        %td.field= text_field :user, :email, :value => @email
+        %td.right-just
+          %b= label :user, :last_name, "Last Name"
+        %td= text_field :user, :last_name, :value => @last_name, :size => "15"
       %tr
-        %td= label :user, :password, "Password"
-        %td.field= text_field :user, :password ,{:type => "password"}
+        %td.right-just
+          %b= label :user, :email, "Email"
+        %td= text_field :user, :email, :value => @email, :size => "15"
       %tr
-        %td= label :user, :password_confirmation, "Confirm"
-        %td.field= text_field :user, :password_confirmation ,{:type => "password"}
+        %td.right-just
+          %b= label :user, :password, "Password"
+        %td= text_field :user, :password ,{:type => "password", :size => "15"}
       %tr
-        %td.action= submit_tag "Create!"
+        %td.right-just
+          %b= label :user, :password_confirmation, "Confirm"
+        %td= text_field :user, :password_confirmation ,{:type => "password", :size => "15"}
+      %tr
+        %td
+        %td.right-just= submit_tag "Create"
+        

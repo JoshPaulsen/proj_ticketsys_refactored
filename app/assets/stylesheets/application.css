@@ -587,7 +587,15 @@ tr.odd {
   width: 450px;
 }
 
-
+#unverified-user {
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 300px;
+}
 
 .note-list {
   position: absolute;

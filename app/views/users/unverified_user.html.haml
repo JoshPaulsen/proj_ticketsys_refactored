@@ -1,7 +1,15 @@
 %div{:align => "center"}  
-  %h4.red= "Unverified Account - Your Account is Still Under Review"
-  %ul   
-    %p= "Name: #{@user.full_name}"
-    %p= "Email: #{@user.email}"
-    
-    
+  %b.red= "Unverified Account - Your Account Is Still Under Review"
+  %p
+  #unverified-user.boxed-up
+    %table
+      %tr
+        %td.right-just
+          %b= "Name: " 
+        %td= @user.full_name    
+      %tr
+        %td.right-just
+          %b= "Email: "
+        %td= @user.email
+%br
+
