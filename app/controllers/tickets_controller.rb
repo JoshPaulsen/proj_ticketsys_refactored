@@ -39,18 +39,18 @@ class TicketsController < ApplicationController
       return
     end
     
-    if @all_mine and @all_mine == "all"    
-      if @type == "all"
+    if @all_mine and @all_mine == "All Tickets"    
+      if @type == "Both"
         @tickets = current_user.accessible_tickets
-      elsif @type == "open"
+      elsif @type == "Opened"
         @tickets = current_user.accessible_tickets.opened
       else
         @tickets = current_user.accessible_tickets.closed
       end
     else
-      if @type == "all"
+      if @type == "Both"
         @tickets = current_user.tickets
-      elsif @type == "open"
+      elsif @type == "Opened"
         @tickets = current_user.tickets.opened
       else
         @tickets = current_user.tickets.closed
@@ -94,8 +94,20 @@ class TicketsController < ApplicationController
       @tickets = (title_tickets | des_tickets | note_tickets).uniq
     end
     
-    if @tickets.count == 0
+    
+    
+    count = @tickets.count
+    # I know there is a ruby method for this somewhere...
+    if count > 1
+      result = "Results"
+    else
+      result = "Result"
+    end
+    
+    if count == 0
       flash.now[:error] = "No Search Results Found"  
+    else
+      flash.now[:notice] = "#{count} Search #{result} Found"  
     end
 
   end

@@ -1,0 +1,31 @@
+%div{:align => "center"}
+  #search-bar.boxed-up
+    = form_tag search_path, :method => :get do
+      %table#search-formatting
+        %tr
+          %td
+            %table
+              %tr
+                %td
+                  %b.show-inline= label_tag :ticket_id, "Ticket Number: "
+                  = text_field_tag :ticket_id, @ticket_id, :size => "1"
+                %td
+                  %b.show-inline= label_tag :everything, "All Fields: "
+                  = text_field_tag :everything, @everything
+                - if !current_user.user?
+                  %td= select_tag :all_mine, options_for_select(["My Tickets", "All Tickets"], selected = @all_mine) 
+                %td= select_tag :open_closed, options_for_select(["Opened", "Closed", "Both"], selected = @type) 
+                %td= select_tag :location_id, options_for_select(get_locations, selected = @location_id), :prompt => " -- Location -- "
+                %td= submit_tag "Search", :class => "search-button"
+        %tr
+          %td= render "search_service_areas"  
+        %tr
+          %td        
+            %table
+              %tr
+                %td
+                  %b= label_tag :opened_start_text, "Opened Between "
+                  = text_field_tag :opened_start_text, @opened_start_text, :class => "date-text"
+                %td
+                  %b= label_tag :opened_end_text, " And "
+                  = text_field_tag :opened_end_text, @opened_end_text, :class => "date-text"

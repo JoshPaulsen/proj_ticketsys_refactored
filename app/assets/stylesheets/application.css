@@ -1067,15 +1067,54 @@ td.ticket-field-n {
   border-color: lightgrey;
 }
 
+#search-bar {
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 925px;
+  
+  height: 90px;
+  
+}
 
-
-
-
-
-
-
-
-div#searchdiv * {
+#search-formatting * {
+  
+  //border-style: solid;
+  //border-color: red;
   margin : 0px 2px;
   padding : 0px;
+  //width: 700px;
 }
+
+
+.search-button {
+  font-weight: bold;  
+}
+
+
+.show-inline {
+  display: inline;
+}
+
+.add-pad {
+  //padding-right: 10px;
+}
+
+.hide-me {
+  visibility: hidden;
+}
+
+.search-display {
+  display: inline;
+  font-weight:bold;
+  border-width: 1px;
+  border-style: solid;
+  border-color:#0000FF;
+  background-color: lightgrey;
+  padding: 2px;
+  color: black;
+  margin: 5px;
+}
+

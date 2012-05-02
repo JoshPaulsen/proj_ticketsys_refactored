@@ -1,5 +1,5 @@
 %div{:align => "center"}
-  #show-user.boxed-up
+  #show-user.boxed-up{:width => "700px"}
     - if current_user.admin? or current_user.id == @user.id
       = render "user_menu"
     -if !@user.verified?

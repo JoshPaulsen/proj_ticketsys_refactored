@@ -9,6 +9,10 @@
       %td= ticket.service_area.name
     -else
       %td= "No Service Area"
+    -if ticket.location
+      %td= ticket.location.name
+    -else
+      %td= "No Location"
     %td
       -if !ticket.creator.blank?
         = link_to "#{ticket.creator.full_name}", ticket.creator
