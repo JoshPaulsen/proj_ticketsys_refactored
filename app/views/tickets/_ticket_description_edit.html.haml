@@ -1,0 +1,11 @@
+
+%table#ticket-des-n
+  = render "ticket_questions_edit"
+  %tr
+    %td.description.ticket-field-n
+      %b= "Description: " 
+      %br
+      = text_area :ticket, :description, :size=>"50x5"
+  %tr
+
+    

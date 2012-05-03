@@ -336,6 +336,10 @@ class TicketsController < ApplicationController
     if @ticket.service_area
       @service_area_name = @ticket.service_area.name
     end
+    if @ticket.location
+      @location_name = @ticket.location.name
+    end
+    @notes = @ticket.notes
   end
 
   def destroy

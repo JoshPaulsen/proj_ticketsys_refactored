@@ -830,9 +830,6 @@ tr.odd {
 }
 
 
-
-
-
 #ticket-body-n{  
   text-align: left;
   position: relative;
@@ -1055,76 +1052,24 @@ td.ticket-field-n {
   left: 0px;
 }
 
-#ticket-des-n {
-  //position: relative;
+#ticket-des-n {  
   left: -10px;
-  top: -14px;
-  //width: 99%;
-  //border-style: dashed;
-  //border-color: black;
-  //border-width: 3px;
-  //width: 380px;
-  //float: left;
-  position: relative;
-  /*
-  border-style: solid;
-  border-width: 2px;
-  border-color: green;
-  */
-  width: 100%;
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: green;
+  top: -14px; 
+  position: relative;  
+  width: 100%; 
 }
 
 #notes-section-n {
-  position: relative;
-  //left: -50px;
-  //top: -400px;
-  //width: 99%;
-  //border-style: dashed;
-  //border-color: black;
-  //border-width: 3px;
-  //width: 380px;
-  //float: left;
-  max-height: 1500px;
-  //height: 400px;
+  position: relative; 
+  max-height: 1500px; 
   overflow:auto;
   position: relative;
   width: 98%;
-  top: 20px;
-  /*
-  border-style: solid;
-  border-width: 2px;
-  border-color: yellow;
-  */
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: yellow;
+  top: 20px;  
 }
 
-
-
-#bottom-table {
-  margin: 0px;
-  //padding: 20px;
-  //border-style: solid;
-  //border-width: px;
-  //border-color: black;
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: black;
-  //height: 25%;
-  //height: 200px;
-}
-
-.pad-test {
-  //border-style: solid;
-  //border-width: 5px;
-  //border-color:red;
+.vert-align-top {  
   padding: 0px;
-  //margin: 5px;
-  //width: 50%;
   vertical-align: top;
 }
 
@@ -1165,31 +1110,21 @@ td.ticket-field-n {
 
 
 #search-bar {
-  position: relative;
-  //left: 20px;
-  top: 0px;
-  //border-color: black;
-  //border-style: solid;  
-  width: 925px;
-  
+  position: relative;  
+  top: 0px;  
+  width: 925px;  
   height: 90px;
   
 }
 
-#search-formatting * {
-  
-  //border-style: solid;
-  //border-color: red;
+#search-formatting * {  
   margin : 0px 2px;
-  padding : 0px;
-  //width: 700px;
+  padding : 0px;  
 }
-
 
 .search-button {
   font-weight: bold;  
 }
-
 
 .show-inline {
   display: inline;
@@ -1202,7 +1137,7 @@ td.ticket-field-n {
 .hide-me {
   visibility: hidden;
 }
-
+/*
 .search-display {
   display: inline;
   font-weight:bold;
@@ -1215,3 +1150,4 @@ td.ticket-field-n {
   margin: 5px;
 }
 
+*/

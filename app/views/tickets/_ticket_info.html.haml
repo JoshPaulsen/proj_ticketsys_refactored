@@ -1,4 +1,3 @@
-
 %table#ticket-info-n
   %tr
     %td.number.ticket-field-n
@@ -14,30 +13,30 @@
       %b= "Location: "
       ="#{@location_name}"
   %tr
-    %td.creator.location.ticket-field-n
+    %td.creator.ticket-field-n
       %b= "Creator: " 
       -if !@ticket.creator.blank?
         = link_to "#{@ticket.creator.first_initial_last}", @ticket.creator
       -else
         = "None"
-    %td.location.ticket-field-n= render "additional_users"        
-    %td.location.ticket-field-n= render "add_additional_user_form"
-    %td.location.ticket-field-n= render "remove_additional_user_form"
+    %td.ticket-field-n= render "additional_users"        
+    %td.ticket-field-n= render "add_additional_user_form"
+    %td.ticket-field-n= render "remove_additional_user_form"
   %tr
-    %td.provider.location.ticket-field-n
+    %td.provider.ticket-field-n
       %b= "Service Provider: " 
       -if !@ticket.provider.blank?
         = link_to "#{@ticket.provider.first_initial_last}", @ticket.provider
       -else
         = "None"
-    %td.location.ticket-field-n= render "additional_providers"        
-    %td.location.ticket-field-n= render "add_additional_provider_form"
-    %td.location.ticket-field-n= render "remove_additional_provider_form" 
+    %td.ticket-field-n= render "additional_providers"        
+    %td.ticket-field-n= render "add_additional_provider_form"
+    %td.ticket-field-n= render "remove_additional_provider_form" 
   %tr
-    %td.pad-test.ticket-field-n{:colspan => "4"}= render "ticket_menu"
+    %td.vert-align-top.ticket-field-n{:colspan => "4"}= render "ticket_menu"
   %tr
-    %td.pad-test{:colspan => "2"}= render "ticket_description"
-    %td.pad-test{:colspan => "2"}
+    %td.vert-align-top{:colspan => "2"}= render "ticket_description"
+    %td.vert-align-top{:colspan => "2"}
       #notes-section-new= render @notes
             
     
