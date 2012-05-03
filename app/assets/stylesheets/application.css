@@ -877,17 +877,17 @@ tr.odd {
 }
 
 .ticket-field-n {
-  /*
+  
   padding: 8px;  
   border-width: 4px;
   background-color: #dedede;  
   border-style: solid; 
   border-color: #eeeeee;//#ababab
-  */
-  border-width: 4px;
   
-  border-style: solid; 
-  border-color: black;//#ababab
+  //border-width: 4px;
+  
+  //border-style: solid; 
+  //border-color: black;//#ababab
 }
 
 #ticket-menu-n {
@@ -897,19 +897,28 @@ tr.odd {
   border-style: solid;
   border-color: red;
   vertical-align:top;
-  height: 30px;
+  
 }
 
 .yes {
   position: relative;
   padding: 0px;
-  border-width: 4px;
-  border-style: solid;
-  border-color: red;
-  vertical-align:top;
+  //border-width: 4px;
+  ///border-style: solid;
+  //border-color: red;
+  //vertical-align:top;
 }
 
-#test table * {
+
+td#ticket-menu-n  {
+  //height: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+}
+
+
+table#test {
   padding: 0px;
 }
 
@@ -935,6 +944,38 @@ table#ticket-menu-n {
   border-color: black;
   //top: -26px;
 }
+
+
+
+#notes-section-n {
+  position: relative;
+  //left: -50px;
+  //top: -400px;
+  //width: 99%;
+  //border-style: dashed;
+  //border-color: black;
+  //border-width: 3px;
+  //width: 380px;
+  //float: left;
+  max-height: 1500px;
+  //height: 400px;
+  overflow:auto;
+  position: relative;
+  width: 98%;
+  top: 20px;
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: yellow;
+  */
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: yellow;
+}
+
+
+
+
 */
 table#ticket-des-n {
   // this contains the description  

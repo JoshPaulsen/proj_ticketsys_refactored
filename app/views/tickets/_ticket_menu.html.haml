@@ -1,15 +1,15 @@
 %table
   %tr
     -if @ticket.open?
-      %td.yes= render "set_primary_provider"    
+      %td= render "set_primary_provider"    
     -if !current_user.user? and @ticket.open?
-      %td.yes= button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
+      %td= button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
     -if @ticket.open?
-      %td.yes= button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
+      %td= button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
     -else
-      %td.yes= button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
+      %td= button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
     -if current_user.admin?
-      %td.yes= button_to "Delete Ticket", @ticket, :method => :delete
+      %td= button_to "Delete Ticket", @ticket, :method => :delete
 
 
 
