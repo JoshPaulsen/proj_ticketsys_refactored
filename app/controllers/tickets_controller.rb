@@ -78,14 +78,6 @@ class TicketsController < ApplicationController
     if !@location_id.blank?
       @tickets = @tickets.where(:location_id => @location_id)
     end 
-       
-    #if !@title.blank?
-      #@tickets = @tickets.where("title like ?", "%"+@title+"%")
-    #end
-    
-    #if !@description.blank?
-      #@tickets = @tickets.where("description like ?", "%"+@description+"%")
-    #end    
     
    if !@everything.blank?
       title_tickets = @tickets.where("title like ?", "%"+@everything+"%")
@@ -94,15 +86,10 @@ class TicketsController < ApplicationController
       @tickets = (title_tickets | des_tickets | note_tickets).uniq
     end
     
-    
-    
-    #count = @tickets.count
-    # I know there is a ruby method for this somewhere...
-    
-    
     if @tickets.blank?
       flash.now[:error] = "No Search Results Found"  
     else
+      # I know there is a ruby method for this somewhere...
       count = @tickets.length     
       if count > 1
         result = "Results"
