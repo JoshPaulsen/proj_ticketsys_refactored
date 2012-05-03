@@ -1,0 +1,7 @@
+- if !@ticket.questions.blank?
+  - @ticket.questions.each do |q|
+    %tr
+      %td.ticket-field-n
+        %b= "#{q.question}:"
+        = text_field :answers, "#{q.position}", :value => q.answer
+        %br

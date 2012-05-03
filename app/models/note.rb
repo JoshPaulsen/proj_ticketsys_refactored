@@ -4,7 +4,7 @@ class Note < ActiveRecord::Base
   # ticket_id:integer
   # hidden:boolean
   
-  default_scope :order => 'created_at ASC'
+  default_scope :order => 'created_at DESC'
   
   belongs_to :user
   belongs_to :ticket

@@ -829,7 +829,17 @@ tr.odd {
   //background-color: gray;
 }
 
+
 #ticket-body-n{  
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 99%;
+  
+  /*
   width: 99%;
   
   //position:relative;
@@ -849,16 +859,73 @@ tr.odd {
   outline-style: solid;
   outline-color: blue;
   outline-width: 2px;
+  */
   
+}
+
+.boxed-up-n {
+  
+  padding: 8px;  
+  border-width: 2px;  
+  background-color: #eeeeee;
+  border-style: solid;
+  border-color: #4958F5;//#ababab
+ 
+}
+
+.ticket-field-n {
+  
+  padding: 8px;  
+  border-width: 4px;
+  background-color: #dedede;  
+  border-style: solid; 
+  border-color: #eeeeee;//#ababab
+  
+  //border-width: 4px;
+  
+  //border-style: solid; 
+  //border-color: black;//#ababab
+}
+
+#ticket-menu-n {
+  position: relative;
+  padding: 0px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: red;
+  vertical-align:top;
+  
+}
+
+.yes {
+  position: relative;
+  padding: 0px;
+  //border-width: 4px;
+  ///border-style: solid;
+  //border-color: red;
+  //vertical-align:top;
+}
+
+
+td#ticket-menu-n  {
+  //height: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: green;
+}
+
+
+table#test {
+  padding: 0px;
 }
 
 table#ticket-info-n {
   position: relative;
   width: 99%;
   
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-color: black;
   
   //outline-style: solid;
   //outline-width: 5px;
@@ -872,102 +939,13 @@ table#ticket-menu-n {
   border-style: solid;
   border-width: 2px;
   border-color: black;
-  top: -26px;
+  //top: -26px;
 }
 
-table#ticket-des-n {
-  // this contains the description  
-}
-
-table#bottom-table {
-  // this is the table containing the description and notes
-}
-
-/*
-td.ticket-field-n {
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-}
-*/
-
-#ticket-menu-n {
-  
+#notes-section-new {
+  position: relative;
+  top: 10px;
   //width: 99%;
-  //border-style: solid;
-  //top: -23px;
-  //left: 0px;
-  //border-radius: 15px;
-  //border-width: 3px;  
-  //outline-width: thick;
-  //border-color: #ababab;
-  //width: 99%;
-  //padding: 5px;
-  //display: inline;
-  //argin: 1px 1px;
-  //font-size: 100%; 
-  
-  
-  position: relative;
-  /*
-  border-style: solid;
-  border-width: 2px;
-  border-color: purple;
-  */
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: purple;
-  
-}
-
-#ticket-bottom-n {
-  //height: 600px;
-  position: relative;
-  top: -49px;
-  //overflow: auto;
-  width: 100%;
-  //border-style: solid;
-  //border-width: 2px;
-  //border-color: red;
-  
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: red;
-  //z-index: 100;
-  
-}
-
-#ticket-des-note-n {
-  color: red;
-  position: relative;
-  //width: 97%;
-  border-style; solid;
-  border-color: green;
-  //overflow: auto;
-  top: -46px;
-  left: 0px;
-}
-
-#ticket-des-n {
-  //position: relative;
-  //left: -11px;
-  //top: -58px;
-  //width: 99%;
-  //border-style: dashed;
-  //border-color: black;
-  //border-width: 3px;
-  //width: 380px;
-  //float: left;
-  position: relative;
-  /*
-  border-style: solid;
-  border-width: 2px;
-  border-color: green;
-  */
-  width: 98%;
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: green;
 }
 
 #notes-section-n {
@@ -998,26 +976,100 @@ td.ticket-field-n {
 
 
 
-#bottom-table {
-  margin: 0px;
-  //padding: 20px;
-  //border-style: solid;
-  //border-width: px;
-  //border-color: black;
-  //outline-style: solid;
-  //outline-width: 5px;
-  //outline-color: black;
-  //height: 25%;
-  //height: 200px;
+
+*/
+table#ticket-des-n {
+  // this contains the description  
 }
 
-.pad-test {
+table#bottom-table {
+  // this is the table containing the description and notes
+}
+
+/*
+td.ticket-field-n {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+}
+*/
+/*
+#ticket-menu-n {
+  
+  //width: 99%;
   //border-style: solid;
-  //border-width: 5px;
-  //border-color:red;
+  //top: -23px;
+  //left: 0px;
+  //border-radius: 15px;
+  //border-width: 3px;  
+  //outline-width: thick;
+  //border-color: #ababab;
+  //width: 99%;
+  //padding: 5px;
+  //display: inline;
+  //argin: 1px 1px;
+  //font-size: 100%; 
+  
+  
+  position: relative;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: purple;
+  
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: purple;
+  
+}
+*/
+
+#ticket-bottom-n {
+  //height: 600px;
+  position: relative;
+  top: -49px;
+  //overflow: auto;
+  width: 100%;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-color: red;
+  
+  //outline-style: solid;
+  //outline-width: 5px;
+  //outline-color: red;
+  //z-index: 100;
+  
+}
+
+#ticket-des-note-n {
+  color: red;
+  position: relative;
+  //width: 97%;
+  border-style; solid;
+  border-color: green;
+  //overflow: auto;
+  top: -46px;
+  left: 0px;
+}
+
+#ticket-des-n {  
+  left: -10px;
+  top: -14px; 
+  position: relative;  
+  width: 100%; 
+}
+
+#notes-section-n {
+  position: relative; 
+  max-height: 1500px; 
+  overflow:auto;
+  position: relative;
+  width: 98%;
+  top: 20px;  
+}
+
+.vert-align-top {  
   padding: 0px;
-  //margin: 5px;
-  //width: 50%;
   vertical-align: top;
 }
 
@@ -1056,43 +1108,23 @@ td.ticket-field-n {
   
 }
 
-.ticket-field-n {
-  padding: 8px;  
-  //background-color: #dedede;
-  background-color: #eeeeee;
-  border-style: solid;
-  //border-radius: 7px;
-  //border-color: #ababab; //#ababab
-  border-width: 2px;
-  border-color: lightgrey;
-}
 
 #search-bar {
-  position: relative;
-  //left: 20px;
-  top: 0px;
-  //border-color: black;
-  //border-style: solid;  
-  width: 925px;
-  
+  position: relative;  
+  top: 0px;  
+  width: 925px;  
   height: 90px;
   
 }
 
-#search-formatting * {
-  
-  //border-style: solid;
-  //border-color: red;
+#search-formatting * {  
   margin : 0px 2px;
-  padding : 0px;
-  //width: 700px;
+  padding : 0px;  
 }
-
 
 .search-button {
   font-weight: bold;  
 }
-
 
 .show-inline {
   display: inline;
@@ -1105,7 +1137,7 @@ td.ticket-field-n {
 .hide-me {
   visibility: hidden;
 }
-
+/*
 .search-display {
   display: inline;
   font-weight:bold;
@@ -1118,3 +1150,4 @@ td.ticket-field-n {
   margin: 5px;
 }
 
+*/
