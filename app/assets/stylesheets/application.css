@@ -1045,7 +1045,7 @@ td.ticket-field-n {
   color: red;
   position: relative;
   //width: 97%;
-  border-style; solid;
+  border-style: solid;
   border-color: green;
   //overflow: auto;
   top: -46px;
