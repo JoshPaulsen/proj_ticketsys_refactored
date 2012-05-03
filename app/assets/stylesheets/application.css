@@ -945,7 +945,11 @@ table#ticket-menu-n {
   //top: -26px;
 }
 
-
+#notes-section-new {
+  position: relative;
+  top: 10px;
+  //width: 99%;
+}
 
 #notes-section-n {
   position: relative;
@@ -1053,8 +1057,8 @@ td.ticket-field-n {
 
 #ticket-des-n {
   //position: relative;
-  //left: -11px;
-  //top: -58px;
+  left: -10px;
+  top: -14px;
   //width: 99%;
   //border-style: dashed;
   //border-color: black;
@@ -1067,7 +1071,7 @@ td.ticket-field-n {
   border-width: 2px;
   border-color: green;
   */
-  width: 98%;
+  width: 100%;
   //outline-style: solid;
   //outline-width: 5px;
   //outline-color: green;
