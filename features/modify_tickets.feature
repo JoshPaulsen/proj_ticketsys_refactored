@@ -16,22 +16,15 @@ Background: tickets in system
 
 Scenario: change the title 
   When I press "Edit Ticket"
-  And I fill in "Title" with "Not Broken"
+  And I fill in "ticket_title" with "Not Broken"
   And I press "Update Ticket"
   Then I should see "Ticket Updated"
   And I should see "Not Broken"  
 
-Scenario: change the title to nothing
-  When I press "Edit Ticket"
-  And I fill in "Title" with ""
-  And I press "Update Ticket"
-  Then I should be viewing the edit page for the "Broken Computer" ticket
-  Then I should see "The title cannot be blank"   
   
 Scenario: change the service provider
-  When I press "Edit Ticket"
-  And I select "Billy Joel" from "Primary Provider"
-  And I press "Set Provider"
+  And I select "Billy Joel" from "ticket_provider_id"
+  And I press "Set Primary Provider"
   Then I should be viewing the "Broken Computer" ticket
   And I should see "Provider Updated"
   

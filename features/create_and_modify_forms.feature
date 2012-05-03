@@ -22,7 +22,7 @@ Scenario: create new blank form for IT with out a type
   And I fill in "Enter a ticket type" with ""
   And I press "Create"
   Then I should be on the service area forms page
-  And I should see "All forms need a type"  
+  And I should see "All Forms Need A Type"  
 
 Scenario: add a field to a form
   Given a form with the title "Installation Issue" for "IT" exists
@@ -45,7 +45,7 @@ Scenario: add a field to a form with out a question
   And I choose "field_type_text"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "All forms fields need a question" 
+  And I should see "All Forms Fields Need A Question" 
   
 Scenario: add a text field to a form with an option
   Given a form with the title "Installation Issue" for "IT" exists
@@ -56,7 +56,7 @@ Scenario: add a text field to a form with an option
   And I fill in "options_option_1" with "bananas"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "A text field does not need options" 
+  And I should see "A Text Field Does Not Need Options" 
   
 Scenario: add a radio button field to a form
   Given a form with the title "Installation Issue" for "IT" exists
@@ -86,7 +86,7 @@ Scenario: add a radio button field with only one selection
   And I fill in "options_option_1" with "one"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "A radio button field needs at least two options" 
+  And I should see "A Radio Button Field Needs At Least Two Options" 
   
   
 Scenario: add a select field to a form
@@ -117,7 +117,7 @@ Scenario: add a select field with only one selection
   And I fill in "options_option_1" with "one"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "A select field needs at least two options" 
+  And I should see "A Select Field Needs At Least Two Options" 
 
 Scenario: add a check box field to a form
   Given a form with the title "Installation Issue" for "IT" exists
@@ -141,5 +141,5 @@ Scenario: add a check box field to a form with an option
   And I fill in "options_option_1" with "bananas"
   And I press "Add New Field"
   Then I should be viewing the new field page for the "Installation Issue" form
-  And I should see "A check box field does not need options" 
+  And I should see "A Check Box Field Does Not Need Options" 
   

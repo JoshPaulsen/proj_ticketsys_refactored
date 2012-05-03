@@ -20,27 +20,14 @@ Scenario: add ticket
   And I select "Fix Me" from "Ticket Type"
   And I press "Next"
   Then I should be on the Continue New Ticket page
-  And I should see "New IT Ticket at Main Office - Fix Me"
+  And I should see "New IT Ticket at Main Office"
+  And I should see "Fix Me"
   And I fill in "Title" with "Broken Computer"
   And I press "Create Ticket"  
   And I should see "Service Area: IT"
   And I should see "Location: Main Office"
   And I should see "Title: Broken Computer"
 
-Scenario: add ticket without a title
-  Then I should see "New Ticket"  
-  When I follow "New Ticket"
-  Then I should be on the New Ticket page
-  When I select "Main Office" from "Location"
-  And I select "IT" from "Service Area"
-  And I select "Fix Me" from "Ticket Type"
-  And I press "Next"
-  Then I should be on the Continue New Ticket page
-  And I should see "New IT Ticket at Main Office - Fix Me"
-  And I fill in "Title" with ""
-  And I press "Create Ticket"
-  Then I should be on the New Ticket page
-  And I should see "Incomplete Ticket"
   
 Scenario: try to create a ticket without selecting a location
   Then I should see "New Ticket"  
@@ -50,7 +37,7 @@ Scenario: try to create a ticket without selecting a location
   And I select "Fix Me" from "Ticket Type"
   And I press "Next"
   Then I should be on the New Ticket page
-  And I should see "Please select a Location"
+  And I should see "Please Select A Location"
   
 Scenario: try to create a ticket without selecting a service area
   Then I should see "New Ticket"  
@@ -60,7 +47,7 @@ Scenario: try to create a ticket without selecting a service area
   And I select "Fix Me" from "Ticket Type"
   And I press "Next"
   Then I should be on the New Ticket page
-  And I should see "Please select a Service Area"
+  And I should see "Please Select A Service Area"
   
 Scenario: try to create a ticket without selecting a type
   Then I should see "New Ticket"  
@@ -70,5 +57,5 @@ Scenario: try to create a ticket without selecting a type
   And I select "IT" from "Service Area"  
   And I press "Next"
   Then I should be on the New Ticket page
-  And I should see "Please select a Ticket Type"
+  And I should see "Please Select A Ticket Type"
 

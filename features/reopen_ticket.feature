@@ -17,6 +17,6 @@ Scenario: reopen the ticket
   #And I press "OK"
   Then I should be viewing the "Broken Stapler" ticket
   And I should see "Broken Stapler"  
-  And I should not see "Closed"
+  #And I should not see "Closed"
   And I should see "Add a New Note"
   

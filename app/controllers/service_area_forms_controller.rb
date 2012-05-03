@@ -228,7 +228,7 @@ class ServiceAreaFormsController < ApplicationController
     
     def add_select_field(ticket_form, question, options)
       if options.length < 2
-        flash[:error] = "A select field needs at least two options."    
+        flash[:error] = "A Select Field Needs At Least Two Options."    
         session[:field_question] = question  
         session[:options_list] = @options_list
         session[:field_type] = @type
@@ -254,7 +254,7 @@ class ServiceAreaFormsController < ApplicationController
         flash[:notice] = "New Field Added"
         redirect_to ticket_form
       else
-        flash[:error] = "A check box field does not need options"    
+        flash[:error] = "A Check Box Field Does Not Need Options"    
         session[:field_question] = question  
         session[:options_list] = @options_list
         session[:field_type] = @type

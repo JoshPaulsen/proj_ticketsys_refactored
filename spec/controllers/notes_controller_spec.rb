@@ -15,7 +15,7 @@ describe NotesController do
         ticket = Factory(:ticket, :closed_on => Time.now)      
         Ticket.stub(:find_by_id).with(ticket.id.to_s).and_return ticket
         post :create, :ticket_id => ticket.id
-        flash[:error].should == "A note cannot be added to a closed ticket"
+        flash[:error].should == "A Note Cannot Be Added To A Closed Ticket"
         response.should redirect_to ticket_path(ticket)
       end
     end  
@@ -25,7 +25,7 @@ describe NotesController do
         ticket = Factory(:ticket, :closed_on => nil)      
         Ticket.stub(:find_by_id).with(ticket.id.to_s).and_return ticket
         post :create, :ticket_id => ticket.id, :user_id=>1
-        flash[:error].should == "Note cannot be blank"
+        flash[:error].should == "Note Can Not Be Blank"
         response.should redirect_to ticket_path(ticket)
       end      
     end 

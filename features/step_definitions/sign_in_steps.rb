@@ -1,29 +1,29 @@
 
 
 When /^"([^"]*)" is (logged|signed) (o|i)n as a[n]? "(.*)"/ do |name, x, y, privilege|
-  user = User.create!(:name => name, :privilege => privilege, :password => privilege, :email => name)  
+  user = User.new(:first_name => name, :last_name => name, :privilege => privilege, :email => name)
+  user.active = true
+  user.verified = true
+  user.set_encrypted_password privilege
+  user.save!
   visit signin_path
-  step "I fill in \"Username\" with \"#{name}\""
+  step "I fill in \"Email\" with \"#{name}\""
   step "I fill in \"Password\" with \"#{privilege}\""
-  step "I press \"Sign in\""
+  step "I press \"Sign In\""
 end
 
 
 
 When /^I am (logged|signed) (o|i)n as a[n]? "(.*)"$/ do |x,y,privilege|
-  u = User.create!(:name => privilege + "x", :privilege => privilege, :password => "xxxx", :email=>privilege + "x")
+  u = User.new(:first_name => privilege + "x", :last_name => privilege, :privilege => privilege, :email=>privilege + "x")
+  u.active = true
+  u.verified = true
+  u.set_encrypted_password "xxx"
+  u.save!
   visit signin_path
-  step "I fill in \"Username\" with \"#{u.name}\""
-  step "I fill in \"Password\" with \"#{u.password}\""
-  step "I press \"Sign in\""
-end
-
-When /^I am (logged|signed) (o|i)n as a[n]? "(.*)" in the "([^"]*)" service area$/ do |x,y,privilege, s_area|
-  u = User.create!(:name => privilge+"1", :privilege => privilege, :password => "1", :email=>privilege+"1", :department => s_area)
-  visit signin_path
-  step "I fill in \"Username\" with \"#{user.name}\""
-  step "I fill in \"Password\" with \"#{user.password}\""
-  step "I press \"Sign in\""
+  step "I fill in \"Email\" with \"#{u.email}\""
+  step "I fill in \"Password\" with \"xxx\""
+  step "I press \"Sign In\""
 end
 
 When /^"([^"]*)" (logs|signs) out$/ do |name,x|

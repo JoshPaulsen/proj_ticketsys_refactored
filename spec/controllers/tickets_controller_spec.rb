@@ -23,7 +23,7 @@ describe TicketsController do
       
       it "should display a success message and redirect to the my tickets path" do
         put :close, :id => @ticket.id
-        flash[:success].should == "Ticket successfully closed."
+        flash[:success].should == "Ticket Closed"
         response.should redirect_to tickets_path
       end    
     end
@@ -37,7 +37,7 @@ describe TicketsController do
       
       it "should display an error" do
         put :close, :id => @ticket.id
-        flash[:error].should == "That ticket is already closed."
+        flash[:error].should == "That Ticket Is Already Closed"
       end
       
       it "should redirect back to the ticket" do
@@ -67,7 +67,7 @@ describe TicketsController do
       
       it "should display a success message and redirect to the ticket" do
         put :open, :id => @ticket.id
-        flash[:success].should == "Ticket successfully reopened."
+        flash[:success].should == "Ticket Reopened"
         response.should redirect_to @ticket
       end    
     end
@@ -81,7 +81,7 @@ describe TicketsController do
       
       it "should display an error" do
         put :open, :id => @ticket.id
-        flash[:error].should == "That ticket is already open."
+        flash[:error].should == "That Ticket Is Already Open"
       end
       
       it "should redirect back to the ticket" do
@@ -135,7 +135,7 @@ describe TicketsController do
       it "should display and error and redirect to the tickets path" do
         Ticket.should_receive(:find_by_id).with("3").and_return nil
         get :show, :id => 3      
-        flash[:error].should == "That ticket does not exist: 3"
+        flash[:error].should == "That Ticket Does Not Exist: 3"
         response.should redirect_to tickets_path 
       end      
     end

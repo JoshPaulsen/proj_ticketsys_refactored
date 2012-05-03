@@ -22,7 +22,7 @@ describe ServiceAreasController do
       fake_service_area.stub(:save).and_return false
       ServiceArea.stub(:new).and_return fake_service_area
       post :create, :service_area => fake_service_area
-      flash[:error].should == "A Service Area with that name already exists"
+      flash[:error].should == "A Service Area With That Name Already Exists"
       response.should redirect_to service_areas_path
     end
   end
@@ -38,7 +38,7 @@ describe ServiceAreasController do
       fake_area.stub(:destroy)
       ServiceArea.stub(:fine_by_id).with(fake_area.id).and_return fake_area
       post :destroy, :id => fake_area.id
-      flash[:notice].should == "Service Area was deleted"
+      flash[:notice].should == "Service Area Was Deleted"
       response.should redirect_to service_areas_path
     end
   end
@@ -59,7 +59,7 @@ describe ServiceAreasController do
     it "should return an error and redirect to service area" do
       ServiceArea.stub(:find_by_id).with('1').and_return false
       post :edit, :id => '1'
-      flash[:error] = "That service area does not exist"
+      flash[:error] = "That Service Area Does Not Exist"
       response.should redirect_to service_areas_path
     end
   end
@@ -86,7 +86,7 @@ describe ServiceAreasController do
       fake_area.stub(:save).and_return false
       ServiceArea.stub(:find_by_id).and_return fake_area
       post :update, :id => fake_area.id, :service_area => fake_area
-      flash[:notice].should == "Service Area could not be updated"
+      flash[:notice].should == "Service Area Could Not Be Updated"
       response.should redirect_to service_areas_path
     end
   end
@@ -100,7 +100,7 @@ describe ServiceAreasController do
     it "should Error if no service can be found" do
       ServiceArea.stub(:find_by_id).and_return nil
       post :deactivate, :id => '1'
-      flash[:error].should == "That service area does not exist"
+      flash[:error].should == "That Service Area Does Not Exist"
       response.should redirect_to service_areas_path
     end
     
@@ -109,7 +109,7 @@ describe ServiceAreasController do
       ServiceArea.stub(:find_by_id).and_return fake_area
       fake_area.stub(:inactive?).and_return true
       post :deactivate, :id => fake_area.id
-      flash[:error].should == "That service area was already deactivated"
+      flash[:error].should == "That Service Area Was Already Deactivated"
       response.should redirect_to service_areas_path
     end
     
@@ -132,7 +132,7 @@ describe ServiceAreasController do
     it "should Error if no service can be found" do
       ServiceArea.stub(:find_by_id).and_return nil
       post :reactivate, :id => '1'
-      flash[:error].should == "That service area does not exist"
+      flash[:error].should == "That Service Area Does Not Exist"
       response.should redirect_to service_areas_path
     end
     
@@ -141,7 +141,7 @@ describe ServiceAreasController do
       ServiceArea.stub(:find_by_id).and_return fake_area
       fake_area.stub(:active?).and_return true
       post :reactivate, :id => fake_area.id
-      flash[:error].should == "That service area is currently active"
+      flash[:error].should == "That Service Area Is Currently Active"
       response.should redirect_to service_areas_path
     end
     

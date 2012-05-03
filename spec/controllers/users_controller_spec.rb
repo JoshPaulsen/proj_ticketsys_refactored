@@ -8,24 +8,10 @@ describe UsersController do
     test_sign_in(user)   
   end
     
-  describe "creating a new user" do    
-    it "should display a success message and redirect to that user if successful" do
-      user = Factory :user
-      user.stub(:save).and_return true
-      User.stub(:new).and_return user
-      post :create
-      flash[:notice].should == "New user successfully created"      
-      response.should redirect_to user_path user
-    end 
+  describe "creating a new user" do
     
-    it "should display an error if the user can not be created" do
-      user = Factory :user
-      user.stub(:save).and_return false
-      User.stub(:new).and_return user
-      post :create
-      flash[:error].should == "User could not be created!"
-      response.should redirect_to new_user_path
-    end       
+    
+    
   end
   
   describe "updating a user" do
@@ -34,19 +20,6 @@ describe UsersController do
       User.stub(:find).and_return @user
     end
     
-    it "should display a success message and redirect back to the user if update succeeds" do      
-      @user.stub(:save).and_return true      
-      put :update, :id => @user.id      
-      flash[:notice].should == "User Profile Updated"  
-      response.should redirect_to user_path @user      
-    end
-    
-    it "should display an error message and redirect back to the user if update fails" do     
-      @user.stub(:save).and_return false
-      put :update, :id => @user.id
-      #flash[:error].should == "User Profile could not be updated"      
-      response.should redirect_to user_path @user      
-    end    
   end
   
   describe "edit method" do
@@ -86,7 +59,7 @@ describe UsersController do
     
     it "should display a message" do
       delete :destroy, :id => @user.id
-      flash[:notice].should eq "User was deleted"
+      flash[:notice].should eq "User Was Deleted"
     end 
   end  
   
@@ -102,7 +75,7 @@ describe UsersController do
     it "should redirect to the main users path and display an error if the user does not exist" do
       User.stub(:find_by_id).and_return nil
       get :show, :id => ""
-      flash[:error].should eq "That user does not exist"
+      flash[:error].should eq "That User Does Not Exist"
       response.should redirect_to users_path    
     end
   end
@@ -111,7 +84,7 @@ describe UsersController do
     it "should return error if no user can be found" do
       User.stub(:find_by_id).and_return nil
       post :deactivate, :id => '1'
-      flash[:error].should == "That user does not exist"
+      flash[:error].should == "That User Does Not Exist"
       response.should redirect_to users_path
     end
     
@@ -120,7 +93,7 @@ describe UsersController do
       User.stub(:find_by_id).and_return user
       user.stub(:inactive?).and_return true
       post :deactivate, :id => user.id
-      flash[:error].should == "That user was already deactivated"
+      flash[:error].should == "That User Was Already Deactivated"
       response.should redirect_to users_path
     end
     
@@ -138,7 +111,7 @@ describe UsersController do
     it "should return error if no user can be found" do
       User.stub(:find_by_id).and_return nil
       post :reactivate, :id => '1'
-      flash[:error].should == "That user does not exist"
+      flash[:error].should == "That User Does Not Exist"
       response.should redirect_to users_path
     end
     
@@ -147,7 +120,7 @@ describe UsersController do
       User.stub(:find_by_id).and_return user
       user.stub(:active?).and_return true
       post :reactivate, :id => user.id
-      flash[:error].should == "That user is currently active"
+      flash[:error].should == "That User Is Currently Active"
       response.should redirect_to user
     end
     

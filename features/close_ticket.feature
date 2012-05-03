@@ -14,7 +14,7 @@ Scenario: close the ticket
   When I press "Close Ticket"  
 #  And I confirm popup
   Then I should be on the Tickets page
-  And I should see "Ticket successfully closed"
+  And I should see "Ticket Closed"
   And I should not see "Broken Stapler"  
   
 #@javascript

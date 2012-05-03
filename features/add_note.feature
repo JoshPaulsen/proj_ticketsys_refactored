@@ -19,4 +19,4 @@ Scenario: add ticket
   Then I should see "Add a New Note"    
   When I press "New Note"
   Then I should be viewing the "Test" ticket
-  And I should see "Note cannot be blank"
+  And I should see "Note Can Not Be Blank"

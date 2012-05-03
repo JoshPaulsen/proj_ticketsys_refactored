@@ -64,7 +64,7 @@ class LocationsController < ApplicationController
     end
     
     if location.inactive?
-      flash[:error] = "That location was already deactivated"
+      flash[:error] = "That Location Was Already Deactivated"
       redirect_to locations_path and return
     end
     

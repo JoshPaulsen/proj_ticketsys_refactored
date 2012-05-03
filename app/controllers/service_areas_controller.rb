@@ -6,7 +6,7 @@ class ServiceAreasController < ApplicationController
   def destroy
     @service_areas = ServiceArea.find_by_id(params[:id])
     @service_areas.destroy
-    flash[:notice] = "Service Area was deleted"
+    flash[:notice] = "Service Area Was Deleted"
     redirect_to service_areas_path
   end  
   
@@ -29,7 +29,7 @@ class ServiceAreasController < ApplicationController
       redirect_to service_areas_path
     else
       @service_area.destroy
-      flash[:error] = "A Service Area with that name already exists"
+      flash[:error] = "A Service Area With That Name Already Exists"
       redirect_to service_areas_path
     end    
     
@@ -39,7 +39,7 @@ class ServiceAreasController < ApplicationController
     @service_area = ServiceArea.find_by_id params[:id]
     puts "here I am"
     if !@service_area
-      flash[:error] = "That service area does not exist"
+      flash[:error] = "That Service Area Does Not Exist"
       redirect_to service_areas_path
     end    
   end
@@ -52,7 +52,7 @@ class ServiceAreasController < ApplicationController
     if service_area.save
       flash[:notice] = "Service Area Updated"      
     else
-      flash[:notice] = "Service Area could not be updated"    
+      flash[:notice] = "Service Area Could Not Be Updated"    
     end
     redirect_to service_areas_path
   end
@@ -61,12 +61,12 @@ class ServiceAreasController < ApplicationController
   def deactivate
     service_area = ServiceArea.find_by_id(params[:id])    
     if !service_area
-      flash[:error] = "That service area does not exist"
+      flash[:error] = "That Service Area Does Not Exist"
       redirect_to service_areas_path and return
     end
     
     if service_area.inactive?
-      flash[:error] = "That service area was already deactivated"
+      flash[:error] = "That Service Area Was Already Deactivated"
       redirect_to service_areas_path and return
     end
     
@@ -80,12 +80,12 @@ class ServiceAreasController < ApplicationController
     service_area = ServiceArea.find_by_id(params[:id])
     
     if !service_area
-      flash[:error] = "That service area does not exist"
+      flash[:error] = "That Service Area Does Not Exist"
       redirect_to service_areas_path and return
     end
     
     if service_area.active?
-      flash[:error] = "That service area is currently active"
+      flash[:error] = "That Service Area Is Currently Active"
       redirect_to service_areas_path and return
     end
     

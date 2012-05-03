@@ -14,7 +14,7 @@ Scenario: edit the email and name
   And I should see "Email: josh@josh.com"
   When I press "Edit User"  
   And I fill in "Email" with "different@d.com"
-  And I fill in "Name" with "diff"
+  And I fill in "First Name" with "diff"
   And I press "Update User"
   Then I should see "User Profile Updated"
   And I should see "Name: diff"
@@ -26,6 +26,6 @@ Scenario: edit the privilege
   And I select "admin" from "Privilege"
   And I press "Update User"
   Then I should see "User Profile Updated"
-  And I should see "Privilege: admin"  
+  And I should see "admin"  
 
  

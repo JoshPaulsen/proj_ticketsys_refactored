@@ -3,8 +3,8 @@ require 'spec_helper'
 describe User do
   
   before(:each) do
-    @attr = {:name => "Josh", :password => "pw", :privilege => "admin",
-              :email => "j@j.com"  }  
+    @attr = {:first_name => "Josh", :last_name => "Josh",:privilege => "admin",
+              :email => "j@j.com", :active => true,  :verified => true}  
   end
   
   it "should create a new user" do

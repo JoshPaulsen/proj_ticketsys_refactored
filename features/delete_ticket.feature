@@ -17,5 +17,5 @@ Scenario: admin can delete a ticket
   And I have a ticket with the title "Fix me"
   When I am viewing the "Fix me" ticket  
   When I press "Delete Ticket"
-  Then I should see "Ticket was deleted"
+  Then I should see "Ticket Was Deleted"
   

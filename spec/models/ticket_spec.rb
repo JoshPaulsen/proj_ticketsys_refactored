@@ -11,10 +11,6 @@ describe Ticket do
     Ticket.create!(@attr)
   end
   
-  it "should require a title" do
-    ticket = Ticket.new(@attr.merge(:title =>""))
-    ticket.should_not be_valid
-  end
   
   it "should require an opened at time" do
     ticket = Ticket.new(@attr.merge(:opened_on =>nil))
