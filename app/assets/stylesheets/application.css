@@ -867,13 +867,13 @@ tr.odd {
 }
 
 .boxed-up-n {
-  /*
+  
   padding: 8px;  
   border-width: 2px;  
   background-color: #eeeeee;
   border-style: solid;
   border-color: #4958F5;//#ababab
- */
+ 
 }
 
 .ticket-field-n {
@@ -893,12 +893,25 @@ tr.odd {
 #ticket-menu-n {
   position: relative;
   padding: 0px;
-  //border-width: 4px;
-  //border-style: solid;
-  //border-color: red;
+  border-width: 4px;
+  border-style: solid;
+  border-color: red;
+  vertical-align:top;
+  height: 30px;
 }
 
+.yes {
+  position: relative;
+  padding: 0px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: red;
+  vertical-align:top;
+}
 
+#test table * {
+  padding: 0px;
+}
 
 table#ticket-info-n {
   position: relative;
