@@ -1,11 +1,5 @@
-
-#ticket-body-n
-  = render "ticket_info"  
-  = render "ticket_menu" 
-  %div#ticket-bottom-n
-    %table#bottom-table
-      %tr
-        %td.pad-test{:width => "50%"}= render "ticket_description"
-        %td.pad-test{:width => "50%"}
-          #notes-section-n= render @notes
+%div{:align => "center"}
+  #ticket-body-n.boxed-up-n
+    = render "ticket_info"  
+    -#= render "ticket_menu" 
 %br

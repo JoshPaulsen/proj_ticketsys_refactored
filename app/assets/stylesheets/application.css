@@ -829,7 +829,20 @@ tr.odd {
   //background-color: gray;
 }
 
+
+
+
+
 #ticket-body-n{  
+  text-align: left;
+  position: relative;
+  //left: 20px;
+  top: 0px;
+  //border-color: black;
+  //border-style: solid;  
+  width: 99%;
+  
+  /*
   width: 99%;
   
   //position:relative;
@@ -849,16 +862,51 @@ tr.odd {
   outline-style: solid;
   outline-color: blue;
   outline-width: 2px;
+  */
   
 }
+
+.boxed-up-n {
+  /*
+  padding: 8px;  
+  border-width: 2px;  
+  background-color: #eeeeee;
+  border-style: solid;
+  border-color: #4958F5;//#ababab
+ */
+}
+
+.ticket-field-n {
+  /*
+  padding: 8px;  
+  border-width: 4px;
+  background-color: #dedede;  
+  border-style: solid; 
+  border-color: #eeeeee;//#ababab
+  */
+  border-width: 4px;
+  
+  border-style: solid; 
+  border-color: black;//#ababab
+}
+
+#ticket-menu-n {
+  position: relative;
+  padding: 0px;
+  //border-width: 4px;
+  //border-style: solid;
+  //border-color: red;
+}
+
+
 
 table#ticket-info-n {
   position: relative;
   width: 99%;
   
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-color: black;
   
   //outline-style: solid;
   //outline-width: 5px;
@@ -872,9 +920,9 @@ table#ticket-menu-n {
   border-style: solid;
   border-width: 2px;
   border-color: black;
-  top: -26px;
+  //top: -26px;
 }
-
+*/
 table#ticket-des-n {
   // this contains the description  
 }
@@ -890,7 +938,7 @@ td.ticket-field-n {
   border-color: black;
 }
 */
-
+/*
 #ticket-menu-n {
   
   //width: 99%;
@@ -909,16 +957,17 @@ td.ticket-field-n {
   
   
   position: relative;
-  /*
+  
   border-style: solid;
   border-width: 2px;
   border-color: purple;
-  */
+  
   //outline-style: solid;
   //outline-width: 5px;
   //outline-color: purple;
   
 }
+*/
 
 #ticket-bottom-n {
   //height: 600px;
@@ -1056,16 +1105,6 @@ td.ticket-field-n {
   
 }
 
-.ticket-field-n {
-  padding: 8px;  
-  //background-color: #dedede;
-  background-color: #eeeeee;
-  border-style: solid;
-  //border-radius: 7px;
-  //border-color: #ababab; //#ababab
-  border-width: 2px;
-  border-color: lightgrey;
-}
 
 #search-bar {
   position: relative;

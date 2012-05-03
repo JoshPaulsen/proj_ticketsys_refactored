@@ -1,13 +1,12 @@
 
-%table#ticket-menu-n
-  %tr
-    -if @ticket.open?
-      %td.ticket-field-n= render "set_primary_provider"    
-    -if !current_user.user? and @ticket.open?
-      %td.ticket-field-n= button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
-    -if @ticket.open?
-      %td.ticket-field-n= button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
-    -else
-      %td.ticket-field-n= button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
-    -if current_user.admin?
-      %td.ticket-field-n= button_to "Delete Ticket", @ticket, :method => :delete
+
+-if @ticket.open?
+  .show-inline= render "set_primary_provider"    
+-if !current_user.user? and @ticket.open?
+  .show-inline= button_to 'Edit Ticket', edit_ticket_path(@ticket), :method => :get
+-if @ticket.open?
+  .show-inline= button_to "Close Ticket", close_ticket_path(@ticket), :method=> :put
+-else
+  .show-inline= button_to "Reopen Ticket", open_ticket_path(@ticket), :method=> :put
+-if current_user.admin?
+  .show-inline= button_to "Delete Ticket", @ticket, :method => :delete
