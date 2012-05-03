@@ -103,7 +103,7 @@ class TicketsController < ApplicationController
     if @tickets.blank?
       flash.now[:error] = "No Search Results Found"  
     else
-      count = @tickets.uniq.count      
+      count = @tickets.length     
       if count > 1
         result = "Results"
       else
